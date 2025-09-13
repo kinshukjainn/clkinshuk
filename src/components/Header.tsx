@@ -119,7 +119,8 @@ const Header = () => {
                     whileHover={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
-                    Cloudkinshuk {"/"} {getPathText()}
+                    Cloudkinshuk {"/"}  <span className="font-mono p-1.5 bg-[#252525] border border-[#444444] rounded">{getPathText()}</span>
+                    
                   </motion.h1>
                 </Link>
               </motion.div>

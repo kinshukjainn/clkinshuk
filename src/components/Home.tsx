@@ -167,25 +167,6 @@ const CONFIG = {
   },
   projects: [
     {
-      title: "Tech Blog Platform",
-      year: "2024",
-      status: "Live",
-      type: "Web Platform",
-      description: [
-        "A content-focused blogging platform showcasing my technical writing and cloud engineering insights, built using Hashnode's CMS with custom domain configuration via AWS.",
-        "The platform serves as a hub for sharing knowledge on cloud tech, DevOps, and software engineering with the developer community.",
-      ],
-      technologies: [
-        "Hashnode CMS",
-        "AWS Route 53",
-        "DNS Management",
-        "CDN",
-        "SSL/TLS",
-      ],
-      links: { live: "https://blog.cloudkinshuk.in", repo: null },
-      dockerCommand: "docker command doesnt exist for this project",
-    },
-    {
       title: "Zeroleaks",
       year: "2024",
       status: "Live",
@@ -206,6 +187,29 @@ const CONFIG = {
         repo: "https://github.com/kinshukjainn/zeroleaks",
       },
       dockerCommand: "docker pull kinshukdev/zeroleaksproduct:latest",
+    },
+    {
+      title: "Comming Soon",
+      year: "2025",
+      status: "Development Stage",
+      type: "Not known",
+      description: [
+        "A modern AI Based Platform",
+      ],
+      technologies: [
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Vite",
+        "Open AI API",
+        "AWS Lambda",
+        "AWS Amplify"
+      ],
+      links: {
+        live: null,
+        repo: null,
+      },
+      dockerCommand: "Image is not available",
     },
   ],
   education: {
@@ -352,7 +356,7 @@ export default function Home() {
 
   // A small reusable component for tech tags
   const TechTag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <span className="inline-block py-1 px-2  rounded-sm  text-white  bg-[#303030] font-mono    text-sm font-semibold ">
+    <span className="inline-block py-1 px-2  rounded border border-[#444444]  text-white  bg-[#252525]  text-sm ">
       {children}
     </span>
   );
