@@ -106,12 +106,6 @@ const Header = () => {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="flex items-center gap-3 sm:gap-4"
               >
-                <motion.div
-                  className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-sm overflow-hidden shadow-sm"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                </motion.div>
                 
                 <Link to="/" onClick={closeMenu}>
                   <motion.h1 
