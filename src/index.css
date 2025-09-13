@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+body { 
+    font-family: "Verdana" ,sans-serif ;
+    background-color: black;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+
+@layer base {
+  html {
+    font-family: 'Verdana', sans-serif;
+  }
+}
