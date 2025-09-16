@@ -362,7 +362,7 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-[#191919] text-neutral-900">
+    <div className="min-h-screen bg-neutral-950 text-neutral-900">
       <main className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="space-y-12 md:space-y-32">
           {/* --- Hero Section --- */}
@@ -386,7 +386,7 @@ export default function Home() {
               </div>
              
             </div>
-            <div className="mt-12  text-white space-y-4 text-lg md:text-sm max-w-4xl -l-2  pl-6">
+            <div className="mt-12  text-white space-y-4 text-lg md:text-md max-w-4xl -l-2  pl-6">
               {CONFIG.personal.bio.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}

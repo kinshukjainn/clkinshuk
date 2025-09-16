@@ -56,7 +56,7 @@ const Header = () => {
 
   const getPathText = (): string => {
     const { pathname } = location
-    if (pathname.startsWith("/gears")) return "Gears I Use"
+    if (pathname.startsWith("/gears")) return "DevTools"
     if (pathname.startsWith("/blogs")) return "Blogs"
     if (pathname.startsWith("/sources")) return "Learning"
     if (pathname.startsWith("/sign-in")) return "Verify"
