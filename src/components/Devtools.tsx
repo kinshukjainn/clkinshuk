@@ -181,7 +181,7 @@ export default function Devtools() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center bg-yellow-500 rounded-full  p-2 gap-2 mb-4">
+          <div className="inline-flex items-center bg-yellow-200 rounded-md  p-2 gap-2 mb-4 ">
             <Monitor className="w-6 h-6 text-black" />
             <span className="text-sm  font-normal text-black uppercase tracking-wider">
               My Digital Workspace

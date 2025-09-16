@@ -90,7 +90,7 @@ const NewsignIn: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen pt-10 bg-neutral-900 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen pt-20 bg-neutral-900 flex items-center justify-center relative overflow-hidden">
       
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

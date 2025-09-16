@@ -109,11 +109,11 @@ const Header = () => {
                 
                 <Link to="/" onClick={closeMenu}>
                   <motion.h1 
-                    className="text-xl sm:text-2xl lg:text-3xl font-medium text-white"
+                    className="text-xl sm:text-2xl lg:text-3xl headline-kinshuk font-medium text-white"
                     whileHover={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
-                    Cloudkinshuk {"/"}  <span className="font-mono p-1.5 bg-[#252525] border border-[#444444] rounded">{getPathText()}</span>
+                    CloudKinshuk {"/"}  <span className=" special-font text-[25px]">{getPathText()}</span>
                     
                   </motion.h1>
                 </Link>

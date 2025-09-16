@@ -64,7 +64,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
   if (isSignedIn && user) {
     return (
       <motion.div
-        className={`w-full pt-10 max-w-md mx-auto p-8 bg-neutral-900 backdrop-blur-xl rounded-sm shadow-lg shadow-black/5 ${className}`}
+        className={`w-full pt-10 max-w-md mx-auto p-8 bg-neutral-900 backdrop-blur-xl rounded-md shadow-lg shadow-black/5 ${className}`}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -73,7 +73,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         }}
       >
         <motion.div className="text-center mb-8" variants={itemVariants}>
-          <div className="w-20 h-20 mx-auto mb-4 bg-[#181818] rounded-sm flex items-center justify-center shadow-sm">
+          <div className="w-20 h-20 mx-auto mb-4 bg-[#181818] rounded-md flex items-center justify-center shadow-sm">
             {user.imageUrl ? (
               <img
                 src={user.imageUrl || "/placeholder.svg"}
@@ -109,31 +109,31 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
 
   return (
     <motion.div
-      className={`w-full max-w-md mx-auto p-8 bg-neutral-900 backdrop-blur-xl rounded-sm shadow-lg shadow-black/5 ${className}`}
+      className={`w-full max-w-md mx-auto p-8   rounded-md  ${className}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.div className="flex mb-6 rounded-sm p-1 backdrop-blur-sm" variants={itemVariants}>
+      <motion.div className="flex mb-6 bg-[#121212] rounded-full border-2 border-[#444444] p-1 backdrop-blur-sm" variants={itemVariants}>
         <button
           onClick={() => setIsSignUp(false)}
-          className={`flex-1 py-2.5 px-4 rounded-sm text-xl font-medium transition-all outline-none duration-200 ${
+          className={`flex-1 py-1 px-2 rounded-l-full text-md font-medium transition-all outline-none duration-200 ${
             !isSignUp
-              ? "underline text-yellow-500 shadow-sm"
-              : "text-gray-100 cursor-pointer hover:text-gray-100"
+              ? "shadow-sm bg-[#ff9100] "
+              : "text-gray-200 cursor-pointer hover:text-gray-100"
           }`}
         >
-            LOGIN
+            Log in
         </button>
         <button
           onClick={() => setIsSignUp(true)}
-          className={`flex-1 py-2.5 px-4 rounded-sm text-xl font-medium transition-all outline-none duration-200 outline-0 ${
+          className={`flex-1 py-1 px-2 rounded-r-full text-md font-medium transition-all outline-none duration-200 outline-0 ${
             isSignUp
-              ? "underline text-yellow-500 shadow-sm"
+              ? "shadow-sm bg-[#ff9100]"
               : "text-gray-100 cursor-pointer hover:text-gray-100"
           }`}
         >
-          SIGN UP
+          Sign up
         </button>
       </motion.div>
 
@@ -148,7 +148,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_github")}
           disabled={isLoading === "oauth_github" || !isLoaded}
-          className="w-full bg-[#303030] text-white font-medium py-2 px-2 rounded-sm transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer backdrop-blur-sm"
+          className="w-full bg-black text-white font-medium py-2 px-2 rounded-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer backdrop-blur-sm"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
@@ -164,7 +164,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_linkedin")}
           disabled={isLoading === "oauth_linkedin" || !isLoaded}
-          className="w-full bg-[#303030] text-white font-medium py-2 px-2 rounded-sm transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer "
+          className="w-full bg-blue-800 text-white font-medium py-2 px-2 rounded-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer "
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
@@ -180,7 +180,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_huggingface")}
           disabled={isLoading === "oauth_huggingface" || !isLoaded}
-          className="w-full bg-[#303030] text-white font-medium py-2 px-2 rounded-sm transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer backdrop-blur-sm"
+          className="w-full bg-purple-900/50 text-white font-medium py-2 px-2 rounded-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer backdrop-blur-sm"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"

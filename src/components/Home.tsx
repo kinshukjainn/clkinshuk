@@ -288,7 +288,7 @@ const CopyButton: React.FC<{ text: string }> = ({ text }) => {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-medium text-white bg-blue-800  rounded-sm transition-all duration-200"
+      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-medium text-black bg-[#ff9100]  rounded-sm transition-all duration-200"
       title="Copy Docker command"
     >
       {copied ? (
@@ -448,7 +448,7 @@ export default function Home() {
                         <span
                           className={`px-2 py-0.5 text-sm rounded-sm font-medium  ${
                             cert.status === "Completed"
-                              ? "bg-white text-black "
+                              ? "bg-[#ff9100] text-black "
                               : "bg-blue-900 text-blue-100  -blue-800"
                           }`}
                         >
@@ -477,7 +477,7 @@ export default function Home() {
                         href={cert.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-shrink-0 inline-flex items-center       text-black bg-white  gap-2 px-2 py-2  text-sm font-medium rounded-sm w-max   transition-colors"
+                        className="flex-shrink-0 inline-flex items-center       text-black bg-[#ff9100]  gap-2 px-2 py-2  text-sm font-medium rounded-sm w-max   transition-colors"
                       >
                         View Credential{" "}
                         <FaExternalLinkAlt className="w-4 h-4" />
@@ -536,8 +536,8 @@ export default function Home() {
                       <span
                         className={`px-4 py-1 text-md  rounded  ${
                           project.status === "Live"
-                            ? "bg-blue-900/50  text-white font-medium rounded-sm  "
-                            : "bg-neutral-800 text-neutral-900  -neutral-700"
+                            ? "bg-blue-500  text-black font-medium rounded-sm  "
+                            : "bg-[#ff9100] rounded-md text-neutral-900  -neutral-700"
                         }`}
                       >
                         {project.status}
@@ -579,7 +579,7 @@ export default function Home() {
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-sm bg-blue-700  text-white  p-1.5  gap-2 text-sm  transition-colors"
+                        className="inline-flex items-center rounded-sm bg-[#ff9100]  text-black  p-1.5  gap-2 text-sm  transition-colors"
                       >
                         <FaGlobe /> Live Demo
                       </a>
@@ -620,7 +620,7 @@ export default function Home() {
                   <p className="text-md font-medium  text-white ">
                     {CONFIG.education.period}
                   </p>
-                  <p className="inline-block px-2 py-1 text-md font-medium rounded bg-blue-700  text-neutral-100  ">
+                  <p className="inline-block px-2 py-1 text-md font-medium rounded bg-[#ff9100]  text-neutral-900  ">
                     {CONFIG.education.status}
                   </p>
                 </div>
