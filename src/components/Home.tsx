@@ -100,7 +100,7 @@ const CONFIG = {
       url: "https://www.credly.com/badges/a4406a81-77da-4003-b153-9e36582f7877/public_url",
       description:
         "Digital badge covering storage services concepts and AWS storage solutions",
-      skills: ["S3", "EBS", "EFS", "Storage Gateway"],
+      skills: ["Amazon S3", "Amazon EBS", "Amazon EFS", "AWS Storage Gateway"],
     },
     {
       title: "AWS Solutions Architect - Associate",
@@ -120,7 +120,7 @@ const CONFIG = {
       url: "https://www.credly.com/badges/0bcd1190-2d68-45ff-91d9-32b65aa93ed8/public_url",
       description:
         "Digital badge demonstrating serverless architecture knowledge and implementation",
-      skills: ["Lambda", "API Gateway", "DynamoDB", "Serverless Framework"],
+      skills: ["Amazon Lambda", "API Gateway", "DynamoDB", "Serverless Framework"],
     },
     {
       title: "AWS Machine Learning Badge",
@@ -131,7 +131,7 @@ const CONFIG = {
       description:
         "Digital badge covering machine learning concepts and AWS ML services",
       skills: [
-        "SageMaker",
+        "Amazon SageMaker",
         "ML Algorithms",
         "Data Processing",
         "Model Deployment",
@@ -288,7 +288,7 @@ const CopyButton: React.FC<{ text: string }> = ({ text }) => {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-medium text-black bg-[#ff9100]  rounded-sm transition-all duration-200"
+      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-semibold text-white border border-[#444444] bg-[#252525]  rounded-md transition-all duration-200"
       title="Copy Docker command"
     >
       {copied ? (
@@ -348,8 +348,8 @@ export default function Home() {
     icon: Icon,
     title,
   }) => (
-    <h3 className="text-2xl sm:text-3xl font-medium flex items-center gap-2 text-white mb-4">
-      <Icon className="w-7 h-7 text-white " />
+    <h3 className="text-2xl sm:text-3xl font-medium flex items-center gap-2 headline-kinshuk text-yellow-200 mb-4">
+      <Icon className="w-7 h-7 text-yellow-200 " />
       {title}
     </h3>
   );
@@ -362,7 +362,7 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-900">
+    <div className="min-h-screen bg-neutral-900 text-neutral-900">
       <main className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="space-y-12 md:space-y-32">
           {/* --- Hero Section --- */}
@@ -373,7 +373,7 @@ export default function Home() {
                   {typedText}
                   <span className="animate-pulse">_</span>
                 </div>
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl   font-bold tracking-tighter text-white">
+                <h1 className="text-5xl headline-kinshuk sm:text-6xl lg:text-7xl   font-bold tracking-tighter text-green-400">
                   {CONFIG.personal.name}
                 </h1>
                 <h2 className="text-2xl lg:text-2xl text-white max-w-2xl">
@@ -405,7 +405,7 @@ export default function Home() {
                   <button
                     key={social.platform}
                     onClick={() => handleSocialClick(social)}
-                    className="group flex w-max gap-3 items-center justify-between    p-1 transition"
+                    className="group flex  gap-3 items-center justify-between    p-1.5 transition"
                   >
                     {/* Left side: icon + platform */}
                     <div className="flex items-center gap-3">
@@ -437,19 +437,19 @@ export default function Home() {
               {CONFIG.certifications.map((cert) => (
                 <div
                   key={cert.title}
-                  className="p-3 transition-all  rounded-sm     duration-300 "
+                  className="p-3 transition-all  rounded-md     duration-300 "
                 >
                   <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
                     <div className="flex-1 space-y-2">
                       <div className="flex items-center gap-3 flex-wrap">
-                        <h4 className="text-lg font-medium  text-white">
+                        <h4 className="text-xl font-bold  text-white">
                           {cert.title}
                         </h4>
                         <span
-                          className={`px-2 py-0.5 text-sm rounded-sm font-medium  ${
+                          className={`px-2 py-0.5 text-sm rounded-md font-medium  ${
                             cert.status === "Completed"
-                              ? "bg-[#ff9100] text-black "
-                              : "bg-blue-900 text-blue-100  -blue-800"
+                              ? "bg-blue-400 font-semibold text-black "
+                              : "bg-blue-900 font-semibold text-blue-100  -blue-800"
                           }`}
                         >
                           {cert.status}
@@ -477,7 +477,7 @@ export default function Home() {
                         href={cert.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-shrink-0 inline-flex items-center       text-black bg-[#ff9100]  gap-2 px-2 py-2  text-sm font-medium rounded-sm w-max   transition-colors"
+                        className="flex-shrink-0 inline-flex items-center       text-white border border-[#444444] bg-[#252525]  gap-2 px-2 py-2  text-sm font-semibold rounded-md w-max   transition-colors"
                       >
                         View Credential{" "}
                         <FaExternalLinkAlt className="w-4 h-4" />
@@ -504,7 +504,7 @@ export default function Home() {
                       return (
                         <div
                           key={skill.name}
-                          className="flex items-center    rounded-sm    gap-3  p-2 "
+                          className="flex items-center    rounded-md    gap-3  p-2 "
                         >
                           <Icon className="w-6 h-6 text-white flex-shrink-0" />
                           <span className="text-lg font-normal text-white truncate">
@@ -526,7 +526,7 @@ export default function Home() {
               {CONFIG.projects.map((project) => (
                 <div
                   key={project.title}
-                  className="flex flex-col p-4  rounded-sm   transition-all duration-300"
+                  className="flex flex-col p-4  rounded-md   transition-all duration-300"
                 >
                   <div className="flex-grow space-y-4">
                     <div className="flex justify-between items-start">
@@ -536,11 +536,11 @@ export default function Home() {
                       <span
                         className={`px-4 py-1 text-md  rounded  ${
                           project.status === "Live"
-                            ? "bg-blue-500  text-black font-medium rounded-sm  "
-                            : "bg-[#ff9100] rounded-md text-neutral-900  -neutral-700"
+                            ? "bg-blue-500  text-black font-medium rounded-md  "
+                            : "bg-yellow-200 rounded-md text-neutral-900  font-medium"
                         }`}
                       >
-                        {project.status}
+                        {project.status}:
                       </span>
                     </div>
                     <p className="text-md font-normal text-white">
@@ -566,7 +566,7 @@ export default function Home() {
                         </span>
                       </div>
                       <div className="flex items-center justify-between gap-3">
-                        <code className="text-sm text-gray-300 font-semibold  bg-[#303030] px-2 py-2 rounded-sm  flex-1 overflow-x-auto">
+                        <code className="text-sm text-gray-300 font-semibold  bg-[#121212] px-2 py-2 rounded-md  flex-1 overflow-x-auto">
                           {project.dockerCommand}
                         </code>
                         <CopyButton text={project.dockerCommand} />
@@ -579,7 +579,7 @@ export default function Home() {
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-sm bg-[#ff9100]  text-black  p-1.5  gap-2 text-sm  transition-colors"
+                        className="inline-flex items-center rounded-md bg-[#252525]  text-white border border-[#444444]  p-1.5  gap-2 text-sm  transition-colors"
                       >
                         <FaGlobe /> Live Demo
                       </a>
@@ -589,7 +589,7 @@ export default function Home() {
                         href={project.links.repo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2  p-1.5 rounded-sm text-white text-sm   bg-[#303030]  transition-colors"
+                        className="inline-flex items-center gap-2  p-1.5 rounded-md text-white text-sm   bg-[#303030]  transition-colors"
                       >
                         <FaGithub /> Source Code
                       </a>
@@ -603,7 +603,7 @@ export default function Home() {
           {/* --- Education Section --- */}
           <AnimatedSection>
             <SectionHeader icon={FaGraduationCap} title="Education" />
-            <div className=" p-3 rounded-sm  ">
+            <div className=" p-3 rounded-md  ">
               <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
                 <div className="space-y-1">
                   <h4 className="text-2xl   text-white font-medium">

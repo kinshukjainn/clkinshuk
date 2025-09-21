@@ -283,7 +283,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
       const parts = text.split(regex);
       return parts.map((part, i) =>
         regex.test(part) ? (
-          <mark key={i} className="bg-yellow-400 text-black px-1 rounded-sm">
+          <mark key={i} className="bg-yellow-400 text-black px-1 rounded-md">
             {part}
           </mark>
         ) : (
@@ -293,9 +293,9 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
     }, []);
 
     return (
-      <article className="group  text-neutral-900   rounded-sm  transition-all duration-200">
+      <article className="group  text-neutral-900   rounded-md  transition-all duration-200">
         {/* Cover Image */}
-        <div className="relative h-32 sm:h-36 overflow-hidden  rounded-sm">
+        <div className="relative h-32 sm:h-36 overflow-hidden  rounded-md">
           {post.coverImage && !imageError ? (
             <>
               <img
@@ -368,7 +368,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2 py-1 bg-[#303030]   text-white hover:text-gray-200 text-lg font-normal rounded-sm transition-all duration-200"
+              className="inline-flex items-center gap-1 px-2 py-1 bg-[#303030]   text-white hover:text-gray-200 text-lg font-normal rounded-md transition-all duration-200"
             >
               Read
               <FaExternalLinkAlt className="w-3 h-3" />
@@ -499,7 +499,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setSearchInput(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-10 pr-10 bg-black py-2 border-2 border-[#444444]   rounded-sm  text-white outline-none placeholder-neutral-200 text-md"
+          className="w-full pl-10 pr-10 bg-[#121212] py-2 border-2 border-[#444444]   rounded-md  text-white outline-none placeholder-neutral-200 text-md"
         />
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
           {searchInput && (
@@ -514,7 +514,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               <FaTimes className="w-3 h-3" />
             </button>
           )}
-          <div className="hidden sm:flex items-center gap-1 text-sm w-max text-white font-semibold bg-[#303030] px-2 py-1 rounded-sm  ">
+          <div className="hidden sm:flex items-center gap-1 text-sm w-max text-white font-semibold bg-[#303030] px-2 py-1 rounded-md  ">
             <FaKeyboard className="w-3 h-3" />
             ⌘K
           </div>
@@ -523,16 +523,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Suggestions */}
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-4   rounded-sm  z-50 max-h-60 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-4   rounded-2xl  z-50 max-h-60 overflow-y-auto">
           {suggestions.map((suggestion, index) => (
             <button
               key={`${suggestion.type}-${suggestion.value}`}
               onClick={() => handleSuggestionClick(suggestion)}
-              className={`w-full flex items-center gap-2 px-3 py-2 cursor pointer text-left bg-neutral-800 rounded-sm hover:bg-gray-900 transition-colors duration-150 ${
+              className={`w-full flex items-center gap-2 px-3 py-2 cursor pointer text-left bg-neutral-800  rounded-md hover:bg-gray-900 transition-colors duration-150 ${
                 index === selectedIndex ? "bg-neutral-900" : ""
               } border-b border-neutral-800 last:border-b-0`}
             >
-              <div className="p-2 bg-neutral-200 rounded-sm text-black">
+              <div className="p-2 bg-neutral-200 rounded-md text-black">
                 {getSuggestionIcon(suggestion.type)}
               </div>
               <div className="flex-1 min-w-0">
@@ -609,7 +609,7 @@ const BlogPageContent: React.FC = () => {
           </p>
           <button
             onClick={() => refetch()}
-            className="px-4 py-2 bg-white text-black font-medium hover:bg-neutral-200 transition-colors duration-200 rounded-sm"
+            className="px-4 py-2 bg-white text-black font-medium hover:bg-neutral-200 transition-colors duration-200 rounded-md"
           >
             Try Again
           </button>
@@ -669,7 +669,7 @@ const BlogPageContent: React.FC = () => {
             </p>
             <button
               onClick={() => setSearchInput("")}
-              className="px-4 py-2 bg-[#303030] text-white font-medium transition-colors duration-200 rounded-sm"
+              className="px-4 py-2 bg-[#303030] text-white font-medium transition-colors duration-200 rounded-md"
             >
               Clear Search
             </button>

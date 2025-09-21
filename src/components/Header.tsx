@@ -23,10 +23,10 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-3 py-1 rounded-sm transition-all duration-200 ${
+      className={`relative px-3 py-1 rounded-md transition-all duration-200 ${
         isActive
-          ? " text-yellow-500 underline font-bold  "
-          : "text-gray-100 hover:text-yellow-500 hover:"
+          ? " text-black font-semibold bg-blue-400"
+          : "text-gray-100  hover:bg-blue-200 hover:text-black font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -58,7 +58,6 @@ const Header = () => {
     const { pathname } = location
     if (pathname.startsWith("/gears")) return "DevTools"
     if (pathname.startsWith("/blogs")) return "Blogs"
-    if (pathname.startsWith("/sources")) return "Learning"
     if (pathname.startsWith("/sign-in")) return "Verify"
     return "Home"
   }
@@ -77,9 +76,8 @@ const Header = () => {
   }, [isMenuOpen])
 
   const navItems: NavItem[] = [
-    { path: "/blogs", label: "Blogs" },
+    { path: "/blogs", label: "Blogs"},
     { path: "/gears", label: "Dev Setup" },
-    { path: "/sources", label: "Learning Sources" },
   ]
 
   return (
@@ -156,7 +154,7 @@ const Header = () => {
                         />
                         <SignOutButton>
                           <motion.button 
-                            className="px-2 py-1   text-white text-lg  rounded-sm bg-blue-600 transition-all cursor-pointer duration-200 shadow-sm"
+                            className="px-2 py-1   text-white text-lg  rounded-md bg-blue-600 transition-all cursor-pointer duration-200 shadow-sm"
                             whileHover={{ scale: 1.02, y: -1 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -183,7 +181,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-2 text-white   rounded-sm outline-none transition-all cursor-pointer duration-200"
+                  className="relative p-2  bg-yellow-200 text-black   rounded-md outline-none transition-all cursor-pointer duration-200"
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
@@ -275,7 +273,7 @@ const Header = () => {
                     </div>
                     <SignOutButton>
                       <motion.button 
-                        className="w-full px-6 py-3  text-white text-sm font-medium rounded-sm bg-blue-600  hover:bg-blue-700 transition-all cursor-pointer duration-200 shadow-sm"
+                        className="w-full px-3 py-2  text-white text-md font-medium rounded-md bg-blue-600  hover:bg-blue-700 transition-all cursor-pointer duration-200 shadow-sm"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={closeMenu}

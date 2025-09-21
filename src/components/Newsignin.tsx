@@ -127,8 +127,8 @@ const NewsignIn: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-neutral-900 rounded-sm" />
-                <div className="relative p-8 bg-neutral-900/80 backdrop-blur-xl  rounded-sm">
+                <div className="absolute inset-0 bg-neutral-900 rounded-md" />
+                <div className="relative p-8 bg-neutral-900/80 backdrop-blur-xl  rounded-md">
                   <Customauth redirectTo={getRedirectUrl} />
                 </div>
               </div>
@@ -171,7 +171,7 @@ const NewsignIn: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className={` p-2.5 rounded-sm shadow-md`}>
+                  <div className={` p-2.5 rounded-md shadow-md`}>
                     <feature.icon className="w-5 h-5 text-white" />
                   </div>
                   <span className="text-base font-medium">{feature.text}</span>
