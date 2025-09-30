@@ -42,7 +42,7 @@ const NewsignIn: React.FC = () => {
   const routeInfo = useMemo((): RouteInfo => {
     if (getRedirectUrl.startsWith("/blog")) {
       return {
-        title: isSignUp ? "Join Minimal Minds" : "Authenticate yourself to read my blogs",
+        title: isSignUp ? "Join Minimal Minds" : "Welcome to my Blogs",
         subtitle: isSignUp
           ? "Create your account to access normal blog content and insights"
           : "Sign in to continue reading  blog content and thought-provoking insights",
@@ -111,7 +111,7 @@ const NewsignIn: React.FC = () => {
 
               <div className="space-y-4">
                 <h1
-                  className="text-xl sm:text-2xl font-semibold  text-white leading-tight tracking-tight"
+                  className="text-3xl sm:text-2xl font-semibold   text-white headline-kinshuk leading-tight tracking-tight"
                 >
                   {routeInfo.title}
                 </h1>
@@ -127,8 +127,8 @@ const NewsignIn: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-neutral-900 rounded-md" />
-                <div className="relative p-8 bg-neutral-900/80 backdrop-blur-xl  rounded-md">
+                <div className="absolute inset-0 bg-neutral-900 rounded-full" />
+                <div className="relative p-8 bg-neutral-900/80 backdrop-blur-xl  rounded-full">
                   <Customauth redirectTo={getRedirectUrl} />
                 </div>
               </div>
@@ -148,7 +148,7 @@ const NewsignIn: React.FC = () => {
 
             <div className="space-y-6">
               <h1
-                className={`text-2xl xl:text-3xl font-semibold text-white  leading-tight tracking-tight`}
+                className={`text-5xl xl:text-4xl headline-kinshuk font-bold text-white  leading-tight tracking-tight`}
               >
                 {routeInfo.title}
               </h1>
@@ -171,8 +171,8 @@ const NewsignIn: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className={` p-2.5 rounded-md shadow-md`}>
-                    <feature.icon className="w-5 h-5 text-white" />
+                  <div className={` p-3 rounded-full bg-yellow-200 shadow-md`}>
+                    <feature.icon className="w-5 h-5 text-black" />
                   </div>
                   <span className="text-base font-medium">{feature.text}</span>
                 </motion.div>

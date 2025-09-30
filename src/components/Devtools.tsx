@@ -136,12 +136,12 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ scale: 1, y: -2 }}
-      className="  text-neutral-100  rounded-md p-4 h-full flex flex-col cursor-pointer"
+      className="  text-neutral-100  rounded-4xl bg-neutral-950  p-4 h-full flex flex-col cursor-pointer"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-2 bg-yellow-200 rounded-md ">
-          <section.icon className="w-5 h-5 text-black" />
+        <div className="p-4 bg-yellow-200 rounded-full ">
+          <section.icon className="w-7 h-7 text-black" />
         </div>
         <div>
           <h2 className="text-2xl font-normal text-neutral-100">{section.title}</h2>
@@ -181,13 +181,13 @@ export default function Devtools() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center bg-green-700 rounded-md  p-2 gap-2 mb-4 ">
+          <div className="inline-flex items-center bg-zinc-950 rounded-full  p-2 gap-2 mb-4 ">
             <Monitor className="w-6 h-6 text-white" />
-            <span className="text-sm  font-normal text-white uppercase tracking-wider">
+            <span className="text-sm  font-semibold text-white   uppercase tracking-wider">
               My Digital Workspace
             </span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal headline-kinshuk   text-green-500">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold headline-kinshuk text-white">
             Development Setup 
           </h1>
           <p className="mt-4 max-w-xl mx-auto text-lg text-neutral-100 ">
@@ -215,7 +215,7 @@ export default function Devtools() {
           className="mt-20 pt-10"
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-2xl mx-auto">
-            <div className="  rounded-md p-2 text-center">
+            <div className="  rounded-full p-2 text-center">
               <div className="text-2xl font-normal text-white ">
                 {setupData.reduce((acc, section) => acc + section.items.length, 0)}
               </div>
@@ -224,14 +224,14 @@ export default function Devtools() {
               </div>
             </div>
 
-            <div className="  rounded-md p-2 text-center">
+            <div className="  rounded-full p-2 text-center">
               <div className="text-2xl font-normal text-white ">{setupData.length}</div>
               <div className="text-sm text-white uppercase tracking-wider mt-1">
                 Categories
               </div>
             </div>
 
-            <div className="  rounded-md p-2 text-center col-span-2">
+            <div className="  rounded-full p-2 text-center col-span-2">
               <div className="text-2xl font-normal text-white ">
                 2025
               </div>

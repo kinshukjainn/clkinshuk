@@ -4,19 +4,22 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap');
 @import "tailwindcss";
 
 .headline-kinshuk { 
-  font-family : 'Mozilla Headline' , sans-serif ;
+ font-family: "Rowdies", sans-serif; 
 }
 
 
 .special-font { 
-  font-family : 'Roboto' , sans-serif ;
+  font-family : 'Ubuntu Sans Mono' , monospace ;
 }
 
 body {
-  font-family:  'Varela Round', sans-serif;
+  font-family:  'Inter', sans-serif;
   background-color: black;
 }
 

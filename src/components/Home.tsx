@@ -288,7 +288,7 @@ const CopyButton: React.FC<{ text: string }> = ({ text }) => {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-semibold text-white border border-[#444444] bg-[#252525]  rounded-md transition-all duration-200"
+      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-semibold text-white border border-[#444444] bg-blue-900  rounded-full transition-all duration-200"
       title="Copy Docker command"
     >
       {copied ? (
@@ -348,21 +348,22 @@ export default function Home() {
     icon: Icon,
     title,
   }) => (
-    <h3 className="text-2xl sm:text-3xl font-medium flex items-center gap-2 headline-kinshuk text-yellow-200 mb-4">
-      <Icon className="w-7 h-7 text-yellow-200 " />
+    <h3 className="text-2xl sm:text-3xl font-medium flex items-center gap-2  text-white mb-4">
+      <Icon className="w-7 h-7 text-white " />
       {title}
     </h3>
   );
 
+  
   // A small reusable component for tech tags
   const TechTag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <span className="inline-block py-1 px-2  rounded border border-[#444444]  text-white  bg-[#252525]  text-sm ">
+    <span className="inline-block py-1 px-2  rounded-full  text-white  bg-blue-900  text-sm ">
       {children}
     </span>
   );
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-neutral-900">
+    <div className="min-h-screen text-neutral-200 bg-neutral-900">
       <main className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
         <div className="space-y-12 md:space-y-32">
           {/* --- Hero Section --- */}
@@ -373,7 +374,7 @@ export default function Home() {
                   {typedText}
                   <span className="animate-pulse">_</span>
                 </div>
-                <h1 className="text-5xl headline-kinshuk sm:text-6xl lg:text-7xl   font-bold tracking-tighter text-green-400">
+                <h1 className="text-5xl headline-kinshuk sm:text-6xl lg:text-7xl   font-bold tracking-tighter text-white ">
                   {CONFIG.personal.name}
                 </h1>
                 <h2 className="text-2xl lg:text-2xl text-white max-w-2xl">
@@ -437,7 +438,7 @@ export default function Home() {
               {CONFIG.certifications.map((cert) => (
                 <div
                   key={cert.title}
-                  className="p-3 transition-all  rounded-md     duration-300 "
+                  className="p-3 transition-all  rounded-full     duration-300 "
                 >
                   <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
                     <div className="flex-1 space-y-2">
@@ -446,10 +447,10 @@ export default function Home() {
                           {cert.title}
                         </h4>
                         <span
-                          className={`px-2 py-0.5 text-sm rounded-md font-medium  ${
+                          className={`px-2 py-0.5 text-sm rounded-full font-medium  ${
                             cert.status === "Completed"
-                              ? "bg-blue-400 font-semibold text-black "
-                              : "bg-blue-900 font-semibold text-blue-100  -blue-800"
+                              ? "bg-blue-900 font-semibold  text-white "
+                              : "bg-red-500 font-semibold text-white"
                           }`}
                         >
                           {cert.status}
@@ -477,7 +478,7 @@ export default function Home() {
                         href={cert.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-shrink-0 inline-flex items-center       text-white border border-[#444444] bg-[#252525]  gap-2 px-2 py-2  text-sm font-semibold rounded-md w-max   transition-colors"
+                        className="flex-shrink-0 inline-flex items-center       text-black italic bg-yellow-200 gap-2 px-2 py-2  text-sm font-semibold rounded-full    transition-colors"
                       >
                         View Credential{" "}
                         <FaExternalLinkAlt className="w-4 h-4" />
@@ -504,7 +505,7 @@ export default function Home() {
                       return (
                         <div
                           key={skill.name}
-                          className="flex items-center    rounded-md    gap-3  p-2 "
+                          className="flex items-center    rounded-full    gap-3  p-2 "
                         >
                           <Icon className="w-6 h-6 text-white flex-shrink-0" />
                           <span className="text-lg font-normal text-white truncate">
@@ -526,7 +527,7 @@ export default function Home() {
               {CONFIG.projects.map((project) => (
                 <div
                   key={project.title}
-                  className="flex flex-col p-4  rounded-md   transition-all duration-300"
+                  className="flex flex-col p-4  rounded-full   transition-all duration-300"
                 >
                   <div className="flex-grow space-y-4">
                     <div className="flex justify-between items-start">
@@ -536,8 +537,8 @@ export default function Home() {
                       <span
                         className={`px-4 py-1 text-md  rounded  ${
                           project.status === "Live"
-                            ? "bg-blue-500  text-black font-medium rounded-md  "
-                            : "bg-yellow-200 rounded-md text-neutral-900  font-medium"
+                            ? "bg-blue-900  text-white font-medium rounded-full  "
+                            : "bg-white rounded-full text-neutral-900  font-medium"
                         }`}
                       >
                         {project.status}:
@@ -566,7 +567,7 @@ export default function Home() {
                         </span>
                       </div>
                       <div className="flex items-center justify-between gap-3">
-                        <code className="text-sm text-gray-300 font-semibold  bg-[#121212] px-2 py-2 rounded-md  flex-1 overflow-x-auto">
+                        <code className="text-sm text-gray-300 font-semibold  bg-[#121212] px-2 py-2 rounded-full  flex-1 overflow-x-auto">
                           {project.dockerCommand}
                         </code>
                         <CopyButton text={project.dockerCommand} />
@@ -579,7 +580,7 @@ export default function Home() {
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-md bg-[#252525]  text-white border border-[#444444]  p-1.5  gap-2 text-sm  transition-colors"
+                        className="inline-flex items-center rounded-full bg-[#252525]  text-white border border-[#444444]  p-1.5  gap-2 text-sm  transition-colors"
                       >
                         <FaGlobe /> Live Demo
                       </a>
@@ -589,7 +590,7 @@ export default function Home() {
                         href={project.links.repo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2  p-1.5 rounded-md text-white text-sm   bg-[#303030]  transition-colors"
+                        className="inline-flex items-center gap-2  p-1.5 rounded-full text-white text-sm   bg-[#303030]  transition-colors"
                       >
                         <FaGithub /> Source Code
                       </a>
@@ -603,7 +604,7 @@ export default function Home() {
           {/* --- Education Section --- */}
           <AnimatedSection>
             <SectionHeader icon={FaGraduationCap} title="Education" />
-            <div className=" p-3 rounded-md  ">
+            <div className=" p-3 rounded-full  ">
               <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
                 <div className="space-y-1">
                   <h4 className="text-2xl   text-white font-medium">
@@ -620,7 +621,7 @@ export default function Home() {
                   <p className="text-md font-medium  text-white ">
                     {CONFIG.education.period}
                   </p>
-                  <p className="inline-block px-2 py-1 text-md font-medium rounded bg-[#ff9100]  text-neutral-900  ">
+                  <p className="inline-block px-2 py-1 text-md font-medium rounded bg-blue-400  text-neutral-900  ">
                     {CONFIG.education.status}
                   </p>
                 </div>

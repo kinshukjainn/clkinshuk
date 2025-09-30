@@ -64,7 +64,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
   if (isSignedIn && user) {
     return (
       <motion.div
-        className={`w-full pt-10 max-w-md mx-auto p-8 bg-neutral-900 backdrop-blur-xl rounded-md shadow-lg shadow-black/5 ${className}`}
+        className={`w-full pt-10 max-w-md mx-auto p-8 bg-neutral-900  backdrop-blur-xl rounded-full shadow-lg shadow-black/5 ${className}`}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -73,12 +73,12 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         }}
       >
         <motion.div className="text-center mb-8" variants={itemVariants}>
-          <div className="w-20 h-20 mx-auto mb-4 bg-[#181818] rounded-md flex items-center justify-center shadow-sm">
+          <div className="w-20 h-20 mx-auto mb-4 bg-[#181818] rounded-full flex items-center justify-center shadow-sm">
             {user.imageUrl ? (
               <img
                 src={user.imageUrl || "/placeholder.svg"}
                 alt="Profile"
-                className="w-16 h-16 rounded-md object-cover"
+                className="w-16 h-16 rounded-full object-cover"
               />
             ) : (
               <FaUser className="text-gray-100 text-2xl" />
@@ -91,7 +91,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={handleSignOut}
           disabled={isLoading === "signout"}
-          className="w-full bg-white/70 hover:bg-white/90 text-gray-700 font-medium py-4 px-6 rounded-xl border border-gray-200/60 hover:border-gray-300/60 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-sm"
+          className="w-full bg-white/70 hover:bg-white/90 text-gray-700 font-medium py-4 px-6 rounded-full border border-gray-200/60 hover:border-gray-300/60 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-sm"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
@@ -109,17 +109,17 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
 
   return (
     <motion.div
-      className={`w-full max-w-md mx-auto p-8   rounded-md  ${className}`}
+      className={`w-full max-w-md mx-auto p-8   rounded-4xl bg-neutral-950  ${className}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.div className="flex mb-6 bg-[#121212] rounded-md border-2 border-[#444444] p-2 backdrop-blur-sm" variants={itemVariants}>
+      <motion.div className="flex mb-6 bg-[#121212] rounded-full  p-3 backdrop-blur-sm" variants={itemVariants}>
         <button
           onClick={() => setIsSignUp(false)}
-          className={`flex-1 py-2 px-2 rounded-md text-md font-medium transition-all outline-none duration-200 ${
+          className={`flex-1 py-2 px-2 rounded-full text-md font-medium  transition-all outline-none duration-200 ${
             !isSignUp
-              ? "text-white bg-blue-800 "
+              ? "text-black special-font font-semibold bg-green-300 "
               : "text-gray-200 cursor-pointer hover:text-gray-100"
           }`}
         >
@@ -127,9 +127,9 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         </button>
         <button
           onClick={() => setIsSignUp(true)}
-          className={`flex-1 py-2 px-2 rounded-md text-md font-medium transition-all outline-none duration-200 outline-0 ${
+          className={`flex-1 py-2 px-2 rounded-full  text-md font-medium transition-all outline-none duration-200 outline-0 ${
             isSignUp
-              ? "text-white bg-blue-800"
+              ? "text-black special-font font-semibold bg-green-300"
               : "text-gray-100 cursor-pointer hover:text-gray-100"
           }`}
         >
@@ -138,25 +138,25 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
       </motion.div>
 
       <motion.div className="text-center mb-8" variants={itemVariants}>
-        <h1 className="text-3xl font-semibold text-white mb-2">
+        <h1 className="text-3xl font-semibold text-blue-400  mb-2">
           {isSignUp ? "Create your Account" : "Welcome Back !"}
         </h1>
         <p className="text-gray-100">{isSignUp ? "Sign up to get started" : "Login to continue with your account"}</p>
       </motion.div>
 
-      <motion.div className="space-y-3" variants={itemVariants}>
+      <motion.div className="space-y-2" variants={itemVariants}>
         <motion.button
           onClick={() => handleSSOSignIn("oauth_github")}
           disabled={isLoading === "oauth_github" || !isLoaded}
-          className="w-full bg-yellow-200 text-black font-medium py-2 px-2 rounded-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
+          className="w-full bg-black text-white font-medium py-3 px-3 rounded-full transition-all  duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
         >
           {isLoading === "oauth_github" ? (
-            <FaSpinner className="animate-spin text-lg text-black" />
+            <FaSpinner className="animate-spin text-lg text-white" />
           ) : (
-            <FaGithub className="text-black text-lg" />
+            <FaGithub className="text-white text-lg" />
           )}
           {isLoading === "oauth_github" ? "Connecting..." : `${isSignUp ? "Sign up" : "Login"} via GitHub`}
         </motion.button>
@@ -164,15 +164,15 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_linkedin")}
           disabled={isLoading === "oauth_linkedin" || !isLoaded}
-          className="w-full bg-yellow-200 text-black font-medium py-2 px-2 rounded-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
+          className="w-full bg-blue-700 text-white font-medium py-3 px-3 rounded-full transition-all  duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
         >
           {isLoading === "oauth_linkedin" ? (
-            <FaSpinner className="animate-spin text-lg text-black" />
+            <FaSpinner className="animate-spin text-lg text-white" />
           ) : (
-            <FaLinkedin className="text-black text-lg" />
+            <FaLinkedin className="text-white text-lg" />
           )}
           {isLoading === "oauth_linkedin" ? "Connecting..." : `${isSignUp ? "Sign up" : "Login"} via LinkedIn`}
         </motion.button>
@@ -180,15 +180,15 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_huggingface")}
           disabled={isLoading === "oauth_huggingface" || !isLoaded}
-          className="w-full bg-yellow-200 text-black font-medium py-2 px-2 rounded-md transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
+          className="w-full bg-orange-900 text-white font-medium py-3 px-3 rounded-full transition-all duration-200 flex  items-center justify-center gap-3 disabled:opacity-50 cursor-pointer"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
         >
           {isLoading === "oauth_huggingface" ? (
-            <FaSpinner className="animate-spin text-lg text-black" />
+            <FaSpinner className="animate-spin text-lg text-white" />
           ) : (
-            <SiHuggingface className="text-lg text-black w-6 h-6" />
+            <SiHuggingface className="text-lg text-white w-6 h-6" />
           )}
           {isLoading === "oauth_huggingface"
             ? "Connecting..."

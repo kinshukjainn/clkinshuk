@@ -28,14 +28,14 @@ createRoot(document.getElementById('root')as HTMLElement).render(
           borderRadius : "0.75rem"
         },
         elements : { 
-          formButtonPrimary : "bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-medium rounded-xl transition-all duration-300",
+          formButtonPrimary : "bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-medium rounded-full transition-all duration-300",
           card: "bg-slate-900/95 backdrop-blur-xl border border-white/10 shadow-2xl",
           headerTitle: "text-white font-bold",
           headerSubtitle: "text-gray-300",
           socialButtonsBlockButton: 
-            "border border-white/20 hover:border-emerald-500/50 bg-slate-800/50 hover:bg-slate-700/50 text-white rounded-xl transition-all duration-300",
+            "border border-white/20 hover:border-emerald-500/50 bg-slate-800/50 hover:bg-slate-700/50 text-white rounded-full transition-all duration-300",
           formFieldInput: 
-            "bg-slate-800/50 border-white/20 text-white placeholder:text-gray-400 rounded-xl focus:border-emerald-500 focus:ring-emerald-500/20",
+            "bg-slate-800/50 border-white/20 text-white placeholder:text-gray-400 rounded-full focus:border-emerald-500 focus:ring-emerald-500/20",
           footerActionLink: "text-emerald-400 hover:text-emerald-300",
         }
       }

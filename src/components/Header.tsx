@@ -23,7 +23,7 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-3 py-1 rounded-md transition-all duration-200 ${
+      className={`relative px-3 py-2 rounded-full transition-all duration-200 ${
         isActive
           ? " text-black font-semibold bg-blue-400"
           : "text-gray-100  hover:bg-blue-200 hover:text-black font-semibold"
@@ -111,7 +111,7 @@ const Header = () => {
                     whileHover={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
-                    CloudKinshuk {"/"}  <span className=" special-font text-[25px]">{getPathText()}</span>
+                    CloudKinshuk {"/"}  <span className=" font-mono text-yellow-200  text-[25px]">{getPathText()}</span>
                     
                   </motion.h1>
                 </Link>
@@ -154,7 +154,7 @@ const Header = () => {
                         />
                         <SignOutButton>
                           <motion.button 
-                            className="px-2 py-1   text-white text-lg  rounded-md bg-blue-600 transition-all cursor-pointer duration-200 shadow-sm"
+                            className="px-4  py-2  text-white text-lg  rounded-full bg-blue-600 transition-al cursor-pointer duration-200 shadow-sm"
                             whileHover={{ scale: 1.02, y: -1 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -181,7 +181,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-2  bg-yellow-200 text-black   rounded-md outline-none transition-all cursor-pointer duration-200"
+                  className="relative p-3  bg-yellow-200 text-black rounded-full outline-none transition-all cursor-pointer duration-200"
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
@@ -216,7 +216,7 @@ const Header = () => {
 
         {/* Mobile Menu Content */}
         <motion.div
-          className="absolute top-16 sm:top-20 left-0 right-0 text-white bg-neutral-900 backdrop-blur-xl"
+          className="absolute top-16 sm:top-20 left-0 right-0 text-white  backdrop-blur-xl"
           initial={{ y: -50, opacity: 0 }}
           animate={{ 
             y: isMenuOpen ? 0 : -50, 
@@ -273,7 +273,7 @@ const Header = () => {
                     </div>
                     <SignOutButton>
                       <motion.button 
-                        className="w-full px-3 py-2  text-white text-md font-medium rounded-md bg-blue-600  hover:bg-blue-700 transition-all cursor-pointer duration-200 shadow-sm"
+                        className="w-full px-3 py-3  text-black text-md font-medium rounded-full  group-hover:rounded-3xl bg-green-300  transition-all cursor-pointer duration-200 shadow-sm"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={closeMenu}
@@ -289,7 +289,7 @@ const Header = () => {
                     className="block"
                   >
                     <motion.div
-                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center"
+                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-center"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
