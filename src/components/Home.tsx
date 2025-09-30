@@ -288,7 +288,7 @@ const CopyButton: React.FC<{ text: string }> = ({ text }) => {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-semibold text-white border border-[#444444] bg-blue-900  rounded-full transition-all duration-200"
+      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-semibold text-white border border-[#444444] bg-[#252525]  rounded-full transition-all duration-200"
       title="Copy Docker command"
     >
       {copied ? (
@@ -357,7 +357,7 @@ export default function Home() {
   
   // A small reusable component for tech tags
   const TechTag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <span className="inline-block py-1 px-2  rounded-full  text-white  bg-blue-900  text-sm ">
+    <span className="inline-block py-1 px-3  rounded-full  text-white  bg-[#252525]  text-sm ">
       {children}
     </span>
   );
@@ -527,7 +527,7 @@ export default function Home() {
               {CONFIG.projects.map((project) => (
                 <div
                   key={project.title}
-                  className="flex flex-col p-4  rounded-full   transition-all duration-300"
+                  className="flex flex-col p-4  rounded-3xl bg-neutral-950   transition-all duration-300"
                 >
                   <div className="flex-grow space-y-4">
                     <div className="flex justify-between items-start">
@@ -537,11 +537,11 @@ export default function Home() {
                       <span
                         className={`px-4 py-1 text-md  rounded  ${
                           project.status === "Live"
-                            ? "bg-blue-900  text-white font-medium rounded-full  "
-                            : "bg-white rounded-full text-neutral-900  font-medium"
+                            ? "  text-[#ff9100] text-lg  "
+                            : "  text-red-500  font-medium"
                         }`}
                       >
-                        {project.status}:
+                        {project.status}
                       </span>
                     </div>
                     <p className="text-md font-normal text-white">
@@ -567,7 +567,7 @@ export default function Home() {
                         </span>
                       </div>
                       <div className="flex items-center justify-between gap-3">
-                        <code className="text-sm text-gray-300 font-semibold  bg-[#121212] px-2 py-2 rounded-full  flex-1 overflow-x-auto">
+                        <code className="text-sm text-gray-300 font-semibold  bg-[#121212] px-2 py-2 rounded-lg  flex-1 overflow-x-auto">
                           {project.dockerCommand}
                         </code>
                         <CopyButton text={project.dockerCommand} />
@@ -580,7 +580,7 @@ export default function Home() {
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center rounded-full bg-[#252525]  text-white border border-[#444444]  p-1.5  gap-2 text-sm  transition-colors"
+                        className="inline-flex items-center font-semibold  italic  rounded-full bg-yellow-200  text-black border border-black  p-1.5  gap-2 text-sm  transition-colors"
                       >
                         <FaGlobe /> Live Demo
                       </a>
@@ -590,7 +590,7 @@ export default function Home() {
                         href={project.links.repo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2  p-1.5 rounded-full text-white text-sm   bg-[#303030]  transition-colors"
+                        className="inline-flex items-center gap-2  p-1.5 rounded-full text-white text-md font-semibold italic    bg-black  transition-colors"
                       >
                         <FaGithub /> Source Code
                       </a>
