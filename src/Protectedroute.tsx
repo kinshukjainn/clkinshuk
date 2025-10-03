@@ -19,7 +19,7 @@ const LoadingSpinner: React.FC = () => (
         animate={{ rotate: 360 }}
         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
       >
-        <div className="w-full h-full border-4 border-emerald-500/30 border-t-emerald-400 rounded-full"></div>
+        <div className="w-full h-full border-4 border-emerald-500/30 border-t-emerald-400 "></div>
       </motion.div>
       
       {/* Loading Text */}
@@ -40,7 +40,7 @@ const LoadingSpinner: React.FC = () => (
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
-            className="w-2 h-2 bg-emerald-400 rounded-full"
+            className="w-2 h-2 bg-emerald-400 "
             animate={{ opacity: [0.3, 1, 0.3] }}
             transition={{
               duration: 1.5,

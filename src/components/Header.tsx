@@ -2,11 +2,9 @@
 
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { motion} from "framer-motion"
+import { motion } from "framer-motion"
 import { FiMenu, FiX } from "react-icons/fi"
 import { UserButton, useUser, SignOutButton } from "@clerk/clerk-react"
-
-
 
 interface NavItem {
   path: string
@@ -23,17 +21,17 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-3 py-2 rounded-full transition-all duration-200 ${
+      className={`relative px-3 py-2 transition-all duration-200 ${
         isActive
-          ? " text-black font-semibold bg-blue-400"
-          : "text-gray-100  hover:bg-blue-200 hover:text-black font-semibold"
+          ? "text-black font-semibold bg-cyan-400"
+          : "text-zinc-100 hover:bg-cyan-400 hover:text-black font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
       {isActive && (
         <motion.div
-          className="absolute inset-0  rounded-lg text-white"
+          className="absolute inset-0"
           layoutId="activeBackground"
           transition={{ type: "spring", bounce: 0.1, duration: 0.3 }}
         />
@@ -49,10 +47,8 @@ const Header = () => {
   const { isSignedIn } = useUser()
 
   const protectedRoutes: string[] = ["/blogs", "/sources"]
-  
-  const isProtectedRoute: boolean = protectedRoutes.some((route: string) =>
-    location.pathname.startsWith(route)
-  )
+
+  const isProtectedRoute: boolean = protectedRoutes.some((route: string) => location.pathname.startsWith(route))
 
   const getPathText = (): string => {
     const { pathname } = location
@@ -62,8 +58,7 @@ const Header = () => {
     return "Home"
   }
 
-  const isActiveRoute = (path: string): boolean =>
-    location.pathname.startsWith(path) || location.pathname === path
+  const isActiveRoute = (path: string): boolean => location.pathname.startsWith(path) || location.pathname === path
 
   const toggleMenu = (): void => setIsMenuOpen(!isMenuOpen)
   const closeMenu = (): void => setIsMenuOpen(false)
@@ -76,7 +71,7 @@ const Header = () => {
   }, [isMenuOpen])
 
   const navItems: NavItem[] = [
-    { path: "/blogs", label: "Blogs"},
+    { path: "/blogs", label: "Blogs" },
     { path: "/gears", label: "Dev Setup" },
   ]
 
@@ -89,12 +84,7 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <motion.div
-          className="relative backdrop-blur-xl"
-        >
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0" />
-          
+        <motion.div className="relative backdrop-blur-xl bg-black/90 border-b border-zinc-800">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20">
               {/* Logo Section */}
@@ -104,15 +94,14 @@ const Header = () => {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="flex items-center gap-3 sm:gap-4"
               >
-                
                 <Link to="/" onClick={closeMenu}>
-                  <motion.h1 
-                    className="text-xl sm:text-2xl lg:text-3xl headline-kinshuk font-medium text-white"
+                  <motion.h1
+                    className="text-xl sm:text-2xl lg:text-3xl font-medium text-white"
                     whileHover={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
-                    CloudKinshuk {"/"}  <span className=" font-mono text-yellow-200  text-[25px]">{getPathText()}</span>
-                    
+                    CloudKinshuk <span className="text-zinc-500">/</span>{" "}
+                    <span className="font-mono text-yellow-400 text-[25px]">{getPathText()}</span>
                   </motion.h1>
                 </Link>
               </motion.div>
@@ -126,35 +115,31 @@ const Header = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                   >
-                    <NavLink
-                      to={item.path}
-                      isActive={isActiveRoute(item.path)}
-                      label={item.label}
-                    />
+                    <NavLink to={item.path} isActive={isActiveRoute(item.path)} label={item.label} />
                   </motion.div>
                 ))}
 
                 {/* Auth Section - Only on Protected Routes */}
                 {isProtectedRoute && (
                   <motion.div
-                    className="flex items-center gap-4 ml-6 pl-6 border-l border-gray-200/60"
+                    className="flex items-center gap-4 ml-6 pl-6 border-l border-zinc-800"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: 0.2 }}
                   >
                     {isSignedIn ? (
                       <>
-                        <UserButton 
+                        <UserButton
                           afterSignOutUrl="/"
                           appearance={{
                             elements: {
-                              avatarBox: "w-10 h-10 ring-1 ring-gray-200/60 shadow-sm",
-                            }
+                              avatarBox: "w-10 h-10 ring-1 ring-zinc-800",
+                            },
                           }}
                         />
                         <SignOutButton>
-                          <motion.button 
-                            className="px-4  py-2  text-white text-lg  rounded-full bg-blue-600 transition-al cursor-pointer duration-200 shadow-sm"
+                          <motion.button
+                            className="px-4 py-2 text-black text-lg bg-cyan-400 transition-all cursor-pointer duration-200 font-semibold hover:bg-cyan-300"
                             whileHover={{ scale: 1.02, y: -1 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -165,7 +150,7 @@ const Header = () => {
                     ) : (
                       <Link to="/sign-in">
                         <motion.div
-                          className="px-5 py-2.5 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-all duration-200 shadow-sm"
+                          className="px-5 py-2.5 bg-cyan-400 text-black text-sm font-semibold hover:bg-cyan-300 transition-all duration-200"
                           whileHover={{ scale: 1.02, y: -1 }}
                           whileTap={{ scale: 0.98 }}
                         >
@@ -181,13 +166,10 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-3  bg-yellow-200 text-black rounded-full outline-none transition-all cursor-pointer duration-200"
+                  className="relative p-3 bg-yellow-400 text-black outline-none transition-all cursor-pointer duration-200 hover:bg-yellow-300"
                   whileTap={{ scale: 0.95 }}
                 >
-                  <motion.div
-                    animate={{ rotate: isMenuOpen ? 90 : 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <motion.div animate={{ rotate: isMenuOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
                     {isMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
                   </motion.div>
                 </motion.button>
@@ -203,11 +185,11 @@ const Header = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: isMenuOpen ? 1 : 0 }}
         transition={{ duration: 0.2 }}
-        style={{ pointerEvents: isMenuOpen ? 'auto' : 'none' }}
+        style={{ pointerEvents: isMenuOpen ? "auto" : "none" }}
       >
         {/* Backdrop */}
         <motion.div
-          className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: isMenuOpen ? 1 : 0 }}
           transition={{ duration: 0.2 }}
@@ -216,11 +198,11 @@ const Header = () => {
 
         {/* Mobile Menu Content */}
         <motion.div
-          className="absolute top-16 sm:top-20 left-0 right-0 text-white  backdrop-blur-xl"
+          className="absolute top-16 sm:top-20 left-0 right-0 bg-zinc-950 text-white backdrop-blur-xl border-b border-zinc-800"
           initial={{ y: -50, opacity: 0 }}
-          animate={{ 
-            y: isMenuOpen ? 0 : -50, 
-            opacity: isMenuOpen ? 1 : 0 
+          animate={{
+            y: isMenuOpen ? 0 : -50,
+            opacity: isMenuOpen ? 1 : 0,
           }}
           transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
@@ -229,51 +211,46 @@ const Header = () => {
               <motion.div
                 key={item.path}
                 initial={{ opacity: 0, x: -20 }}
-                animate={{ 
-                  opacity: isMenuOpen ? 1 : 0, 
-                  x: isMenuOpen ? 0 : -20 
+                animate={{
+                  opacity: isMenuOpen ? 1 : 0,
+                  x: isMenuOpen ? 0 : -20,
                 }}
-                transition={{ 
-                  duration: 0.2, 
-                  delay: isMenuOpen ? index * 0.05 : 0 
+                transition={{
+                  duration: 0.2,
+                  delay: isMenuOpen ? index * 0.05 : 0,
                 }}
               >
-                <NavLink
-                  to={item.path}
-                  isActive={isActiveRoute(item.path)}
-                  label={item.label}
-                  onClick={closeMenu}
-                />
+                <NavLink to={item.path} isActive={isActiveRoute(item.path)} label={item.label} onClick={closeMenu} />
               </motion.div>
             ))}
 
             {/* Mobile Auth Section - Only on Protected Routes */}
             {isProtectedRoute && (
               <motion.div
-                className="pt-4 mt-4 border-t border-gray-200/60 space-y-3"
+                className="pt-4 mt-4 border-t border-zinc-800 space-y-3"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ 
-                  opacity: isMenuOpen ? 1 : 0, 
-                  y: isMenuOpen ? 0 : 20 
+                animate={{
+                  opacity: isMenuOpen ? 1 : 0,
+                  y: isMenuOpen ? 0 : 20,
                 }}
                 transition={{ duration: 0.25, delay: 0.15 }}
               >
                 {isSignedIn ? (
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-3">
-                      <UserButton 
+                      <UserButton
                         afterSignOutUrl="/"
                         appearance={{
                           elements: {
-                            avatarBox: "w-10 h-10 ring-1 ring-gray-200/60 shadow-sm",
-                          }
+                            avatarBox: "w-10 h-10 ring-1 ring-zinc-800",
+                          },
                         }}
                       />
-                      <span className="text-gray-100 text-sm">Signed in</span>
+                      <span className="text-zinc-100 text-sm">Signed in</span>
                     </div>
                     <SignOutButton>
-                      <motion.button 
-                        className="w-full px-3 py-3  text-black text-md font-medium rounded-full  group-hover:rounded-3xl bg-green-300  transition-all cursor-pointer duration-200 shadow-sm"
+                      <motion.button
+                        className="w-full px-3 py-3 text-black text-md font-semibold bg-cyan-400 hover:bg-cyan-300 transition-all cursor-pointer duration-200"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={closeMenu}
@@ -283,13 +260,9 @@ const Header = () => {
                     </SignOutButton>
                   </div>
                 ) : (
-                  <Link 
-                    to="/sign-in" 
-                    onClick={closeMenu}
-                    className="block"
-                  >
+                  <Link to="/sign-in" onClick={closeMenu} className="block">
                     <motion.div
-                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-center"
+                      className="w-full px-6 py-3 bg-cyan-400 text-black text-sm font-semibold hover:bg-cyan-300 transition-all duration-300 text-center"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -306,4 +279,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default Header

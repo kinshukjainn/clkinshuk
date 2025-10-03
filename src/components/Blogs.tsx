@@ -1,16 +1,6 @@
-"use client";
-import React, {
-  useState,
-  useMemo,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
-import {
-  useQuery,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+"use client"
+import React, { useState, useMemo, useCallback, useEffect, useRef } from "react"
+import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import {
   FaSearch,
   FaExternalLinkAlt,
@@ -23,120 +13,111 @@ import {
   FaTimes,
   FaKeyboard,
   FaHistory,
-} from "react-icons/fa";
+} from "react-icons/fa"
 
 // Types
 interface BlogPost {
-  id: string;
-  title: string;
-  brief: string;
-  slug: string;
-  publishedAt: string;
-  updatedAt: string;
-  readTimeInMinutes?: number;
-  views?: number;
-  reactionCount?: number;
+  id: string
+  title: string
+  brief: string
+  slug: string
+  publishedAt: string
+  updatedAt: string
+  readTimeInMinutes?: number
+  views?: number
+  reactionCount?: number
   coverImage?: {
-    url: string;
-  };
+    url: string
+  }
   tags: Array<{
-    id: string;
-    name: string;
-    slug: string;
-  }>;
+    id: string
+    name: string
+    slug: string
+  }>
   author: {
-    name: string;
-    profilePicture?: string;
-  };
-  url?: string;
+    name: string
+    profilePicture?: string
+  }
+  url?: string
 }
 
 interface SearchSuggestion {
-  type: "post" | "recent";
-  value: string;
-  label: string;
-  post?: BlogPost;
+  type: "post" | "recent"
+  value: string
+  label: string
+  post?: BlogPost
 }
 
-// Simplified Search Engine
 class SimpleSearchEngine {
-  private posts: BlogPost[] = [];
-  private recentSearches: string[] = [];
+  private posts: BlogPost[] = []
+  private recentSearches: string[] = []
 
   constructor(posts: BlogPost[]) {
-    this.posts = posts;
-    this.loadRecentSearches();
+    this.posts = posts
+    this.loadRecentSearches()
   }
 
   private loadRecentSearches() {
     try {
-      const stored = localStorage.getItem("blog-recent-searches");
+      const stored = localStorage.getItem("blog-recent-searches")
       if (stored) {
-        this.recentSearches = JSON.parse(stored);
+        this.recentSearches = JSON.parse(stored)
       }
     } catch (error) {
-      console.warn("Failed to load recent searches:", error);
+      console.warn("Failed to load recent searches:", error)
     }
   }
 
   private saveRecentSearches() {
     try {
-      localStorage.setItem(
-        "blog-recent-searches",
-        JSON.stringify(this.recentSearches)
-      );
+      localStorage.setItem("blog-recent-searches", JSON.stringify(this.recentSearches))
     } catch (error) {
-      console.warn("Failed to save recent searches:", error);
+      console.warn("Failed to save recent searches:", error)
     }
   }
 
   addRecentSearch(query: string) {
-    if (query.trim().length < 2) return;
-    const trimmedQuery = query.trim().toLowerCase();
-    this.recentSearches = [
-      trimmedQuery,
-      ...this.recentSearches.filter((s) => s !== trimmedQuery),
-    ].slice(0, 5);
-    this.saveRecentSearches();
+    if (query.trim().length < 2) return
+    const trimmedQuery = query.trim().toLowerCase()
+    this.recentSearches = [trimmedQuery, ...this.recentSearches.filter((s) => s !== trimmedQuery)].slice(0, 5)
+    this.saveRecentSearches()
   }
 
   getRecentSearches(): string[] {
-    return this.recentSearches;
+    return this.recentSearches
   }
 
   search(query: string): BlogPost[] {
-    if (!query.trim()) return this.posts;
-    
-    const queryLower = query.toLowerCase();
-    const queryWords = queryLower.split(/\s+/).filter((w) => w.length > 0);
-    
+    if (!query.trim()) return this.posts
+
+    const queryLower = query.toLowerCase()
+    const queryWords = queryLower.split(/\s+/).filter((w) => w.length > 0)
+
     return this.posts
       .map((post) => {
-        let score = 0;
-        const titleLower = post.title.toLowerCase();
-        const briefLower = post.brief.toLowerCase();
-        const authorLower = post.author.name.toLowerCase();
-        const tagsLower = post.tags.map((t) => t.name.toLowerCase()).join(" ");
+        let score = 0
+        const titleLower = post.title.toLowerCase()
+        const briefLower = post.brief.toLowerCase()
+        const authorLower = post.author.name.toLowerCase()
+        const tagsLower = post.tags.map((t) => t.name.toLowerCase()).join(" ")
 
-        // Exact phrase matches get highest score
-        if (titleLower.includes(queryLower)) score += 100;
-        if (briefLower.includes(queryLower)) score += 50;
-        if (authorLower.includes(queryLower)) score += 30;
-        if (tagsLower.includes(queryLower)) score += 20;
+        if (titleLower.includes(queryLower)) score += 100
+        if (briefLower.includes(queryLower)) score += 50
+        if (authorLower.includes(queryLower)) score += 30
+        if (tagsLower.includes(queryLower)) score += 20
 
-        // Individual word matches
         queryWords.forEach((word) => {
-          if (titleLower.includes(word)) score += 10;
-          if (briefLower.includes(word)) score += 5;
-          if (authorLower.includes(word)) score += 3;
-          if (tagsLower.includes(word)) score += 2;
-        });
+          if (titleLower.includes(word)) score += 10
+          if (briefLower.includes(word)) score += 5
+          if (authorLower.includes(word)) score += 3
+          if (tagsLower.includes(word)) score += 2
+        })
 
-        return { post, score };
+        return { post, score }
       })
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)
-      .map(({ post }) => post);
+      .map(({ post }) => post)
   }
 
   getSuggestions(query: string): SearchSuggestion[] {
@@ -145,13 +126,12 @@ class SimpleSearchEngine {
         type: "recent",
         value: search,
         label: search,
-      }));
+      }))
     }
 
-    const suggestions: SearchSuggestion[] = [];
-    const queryLower = query.toLowerCase();
+    const suggestions: SearchSuggestion[] = []
+    const queryLower = query.toLowerCase()
 
-    // Add matching post titles
     this.posts
       .filter((post) => post.title.toLowerCase().includes(queryLower))
       .slice(0, 5)
@@ -161,15 +141,14 @@ class SimpleSearchEngine {
           value: post.title,
           label: post.title,
           post,
-        });
-      });
+        })
+      })
 
-    return suggestions;
+    return suggestions
   }
 }
 
-// API
-const HASHNODE_API_URL = "https://gql.hashnode.com/";
+const HASHNODE_API_URL = "https://gql.hashnode.com/"
 const BLOG_POSTS_QUERY = `
   query GetUserPosts($host: String!) {
     publication(host: $host) {
@@ -204,7 +183,7 @@ const BLOG_POSTS_QUERY = `
       }
     }
   }
-`;
+`
 
 const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   try {
@@ -220,175 +199,164 @@ const fetchBlogPosts = async (): Promise<BlogPost[]> => {
           host: "blog.cloudkinshuk.in",
         },
       }),
-    });
+    })
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
+      const errorText = await response.text()
+      throw new Error(`HTTP error! status: ${response.status} - ${errorText}`)
     }
 
-    const data = await response.json();
+    const data = await response.json()
     if (data.errors) {
-      throw new Error(data.errors[0]?.message || "GraphQL error");
+      throw new Error(data.errors[0]?.message || "GraphQL error")
     }
 
     if (!data.data?.publication?.posts?.edges) {
-      throw new Error("No blog posts found");
+      throw new Error("No blog posts found")
     }
 
-    type Edge = { node: BlogPost };
+    type Edge = { node: BlogPost }
     const posts = (data.data.publication.posts.edges as Edge[]).map((edge) => ({
       ...edge.node,
       url: `https://blog.cloudkinshuk.in/${edge.node.slug}`,
-    }));
+    }))
 
-    return posts;
+    return posts
   } catch (error) {
-    console.error("Detailed error in fetchBlogPosts:", error);
-    throw error;
+    console.error("Detailed error in fetchBlogPosts:", error)
+    throw error
   }
-};
-
-// Blog Card Component
-interface BlogCardProps {
-  post: BlogPost;
-  searchQuery?: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = React.memo(
-  ({ post, searchQuery }) => {
-    const [imageLoaded, setImageLoaded] = useState(false);
-    const [imageError, setImageError] = useState(false);
+interface BlogCardProps {
+  post: BlogPost
+  searchQuery?: string
+}
 
-    const formatDate = useCallback((dateString: string): string => {
-      return new Date(dateString).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-    }, []);
+const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageError, setImageError] = useState(false)
 
-    const formatNumber = useCallback((num: number): string => {
-      if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-      if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
-      return num.toString();
-    }, []);
+  const formatDate = useCallback((dateString: string): string => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    })
+  }, [])
 
-    const highlightText = useCallback((text: string, query?: string) => {
-      if (!query || !query.trim()) return text;
-      const regex = new RegExp(
-        `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-        "gi"
-      );
-      const parts = text.split(regex);
-      return parts.map((part, i) =>
-        regex.test(part) ? (
-          <mark key={i} className="bg-yellow-400 text-black px-1 rounded-full">
-            {part}
-          </mark>
+  const formatNumber = useCallback((num: number): string => {
+    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`
+    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`
+    return num.toString()
+  }, [])
+
+  const highlightText = useCallback((text: string, query?: string) => {
+    if (!query || !query.trim()) return text
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi")
+    const parts = text.split(regex)
+    return parts.map((part, i) =>
+      regex.test(part) ? (
+        <mark key={i} className="bg-yellow-400 text-black px-1">
+          {part}
+        </mark>
+      ) : (
+        part
+      ),
+    )
+  }, [])
+
+  return (
+    <article className="group bg-zinc-950 border border-zinc-800 hover:border-cyan-500/50 transition-all duration-300">
+      {/* Cover Image */}
+      <div className="relative h-32 sm:h-36 overflow-hidden bg-black">
+        {post.coverImage && !imageError ? (
+          <>
+            <img
+              src={post.coverImage.url || "/placeholder.svg?height=144&width=256"}
+              alt={post.title}
+              className={`w-full h-full object-cover transition-all duration-300 ${
+                imageLoaded ? "opacity-100 group-hover:scale-105" : "opacity-0"
+              }`}
+              loading="lazy"
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageError(true)}
+            />
+            {!imageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-zinc-950">
+                <FaSpinner className="animate-spin text-cyan-500 text-lg" />
+              </div>
+            )}
+          </>
         ) : (
-          part
-        )
-      );
-    }, []);
+          <div className="w-full h-full flex items-center justify-center bg-zinc-950">
+            <FaExternalLinkAlt className="text-zinc-700 text-2xl" />
+          </div>
+        )}
+      </div>
 
-    return (
-      <article className="group  text-neutral-900 bg-neutral-950  rounded-2xl  transition-all duration-200">
-        {/* Cover Image */}
-        <div className="relative h-32 sm:h-36 overflow-hidden  rounded-xl">
-          {post.coverImage && !imageError ? (
-            <>
-              <img
-                src={
-                  post.coverImage.url || "/placeholder.svg?height=144&width=256"
-                }
-                alt={post.title}
-                className={`w-full h-full object-cover transition-opacity duration-300 ${
-                  imageLoaded ? "opacity-100" : "opacity-0"
-                }`}
-                loading="lazy"
-                onLoad={() => setImageLoaded(true)}
-                onError={() => setImageError(true)}
-              />
-              {!imageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <FaSpinner className="animate-spin text-white text-lg" />
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-neutral-900">
-              <FaExternalLinkAlt className="text-white text-2xl opacity-50" />
-            </div>
-          )}
+      {/* Content */}
+      <div className="p-4 border-t border-zinc-800">
+        {/* Title */}
+        <h2 className="text-base font-semibold text-white leading-tight mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors duration-200">
+          {highlightText(post.title, searchQuery)}
+        </h2>
+
+        {/* Author & Date */}
+        <div className="flex items-center gap-2 mb-3 text-xs">
+          <span className="font-medium text-cyan-500">{highlightText(post.author.name, searchQuery)}</span>
+          <span className="text-zinc-600">•</span>
+          <span className="flex items-center gap-1 text-zinc-400">
+            <FaCalendarAlt className="w-3 h-3" />
+            {formatDate(post.publishedAt)}
+          </span>
         </div>
 
-        {/* Content */}
-        <div className="p-3">
-          {/* Title */}
-          <h2 className="text-lg lg:text-base font-medium text-white leading-tight mb-2 line-clamp-2 group-hover:text-blue-200 transition-colors duration-200">
-            {highlightText(post.title, searchQuery)}
-          </h2>
-
-          {/* Author & Date */}
-          <div className="flex items-center gap-2 mb-2 text-xs text-blue-500">
-            <span className="font-medium  text-blue-500">
-              {highlightText(post.author.name, searchQuery)}
-            </span>
-            <span>•</span>
-            <span className="flex text-white font-medium items-center gap-1">
-              <FaCalendarAlt className="w-2 h-2 text-white" />
-              {formatDate(post.publishedAt)}
-            </span>
+        {/* Meta Info */}
+        <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
+          <div className="flex items-center gap-3 text-xs text-zinc-400">
+            {post.readTimeInMinutes && (
+              <span className="flex items-center gap-1">
+                <FaClock className="w-3 h-3" />
+                {post.readTimeInMinutes}m
+              </span>
+            )}
+            {post.views && (
+              <span className="flex items-center gap-1">
+                <FaEye className="w-3 h-3" />
+                {formatNumber(post.views)}
+              </span>
+            )}
+            {post.reactionCount && post.reactionCount > 0 && (
+              <span className="flex items-center gap-1">
+                <FaHeart className="w-3 h-3" />
+                {formatNumber(post.reactionCount)}
+              </span>
+            )}
           </div>
-
-          {/* Meta Info */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 text-sm font-medium text-neutral-100">
-              {post.readTimeInMinutes && (
-                <span className="flex items-center gap-1">
-                  <FaClock className="w-2 h-2 text-white" />
-                  {post.readTimeInMinutes}m
-                </span>
-              )}
-              {post.views && (
-                <span className="flex items-center gap-1">
-                  <FaEye className="w-2 h-2" />
-                  {formatNumber(post.views)}
-                </span>
-              )}
-              {post.reactionCount && post.reactionCount > 0 && (
-                <span className="flex items-center gap-1">
-                  <FaHeart className="w-2 h-2" />
-                  {formatNumber(post.reactionCount)}
-                </span>
-              )}
-            </div>
-            <a
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-2 py-1 bg-yellow-200   italic text-black hover:text-gray-900 text-md font-semibold  rounded-full transition-all duration-200"
-            >
-              Read
-              <FaExternalLinkAlt className="w-3 h-3" />
-            </a>
-          </div>
+          <a
+            href={post.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-400 text-black hover:bg-yellow-300 text-xs font-bold uppercase tracking-wide transition-all duration-200"
+          >
+            Read
+            <FaExternalLinkAlt className="w-3 h-3" />
+          </a>
         </div>
-      </article>
-    );
-  }
-);
+      </div>
+    </article>
+  )
+})
 
-BlogCard.displayName = "BlogCard";
+BlogCard.displayName = "BlogCard"
 
-// Simplified Search Bar Component
 interface SearchBarProps {
-  searchInput: string;
-  setSearchInput: (value: string) => void;
-  resultsCount: number;
-  totalCount: number;
-  searchEngine: SimpleSearchEngine | null;
+  searchInput: string
+  setSearchInput: (value: string) => void
+  resultsCount: number
+  totalCount: number
+  searchEngine: SimpleSearchEngine | null
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -398,99 +366,90 @@ const SearchBar: React.FC<SearchBarProps> = ({
   totalCount,
   searchEngine,
 }) => {
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false)
+  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([])
+  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (searchEngine) {
-      const newSuggestions = searchEngine.getSuggestions(searchInput);
-      setSuggestions(newSuggestions);
-      setSelectedIndex(-1);
+      const newSuggestions = searchEngine.getSuggestions(searchInput)
+      setSuggestions(newSuggestions)
+      setSelectedIndex(-1)
     }
-  }, [searchInput, searchEngine]);
+  }, [searchInput, searchEngine])
 
   const handleSearch = useCallback(() => {
     if (searchInput.trim() && searchEngine) {
-      searchEngine.addRecentSearch(searchInput);
-      setShowSuggestions(false);
+      searchEngine.addRecentSearch(searchInput)
+      setShowSuggestions(false)
     }
-  }, [searchInput, searchEngine]);
+  }, [searchInput, searchEngine])
 
   const handleSuggestionClick = useCallback(
     (suggestion: SearchSuggestion) => {
-      setSearchInput(suggestion.value);
-      setShowSuggestions(false);
+      setSearchInput(suggestion.value)
+      setShowSuggestions(false)
       if (searchEngine) {
-        searchEngine.addRecentSearch(suggestion.value);
+        searchEngine.addRecentSearch(suggestion.value)
       }
     },
-    [setSearchInput, searchEngine]
-  );
+    [setSearchInput, searchEngine],
+  )
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        inputRef.current?.focus();
-        setShowSuggestions(true);
+        e.preventDefault()
+        inputRef.current?.focus()
+        setShowSuggestions(true)
       }
 
       if (showSuggestions && suggestions.length > 0) {
         switch (e.key) {
           case "ArrowDown":
-            e.preventDefault();
-            setSelectedIndex((prev) =>
-              Math.min(prev + 1, suggestions.length - 1)
-            );
-            break;
+            e.preventDefault()
+            setSelectedIndex((prev) => Math.min(prev + 1, suggestions.length - 1))
+            break
           case "ArrowUp":
-            e.preventDefault();
-            setSelectedIndex((prev) => Math.max(prev - 1, -1));
-            break;
+            e.preventDefault()
+            setSelectedIndex((prev) => Math.max(prev - 1, -1))
+            break
           case "Enter":
-            e.preventDefault();
+            e.preventDefault()
             if (selectedIndex >= 0 && suggestions[selectedIndex]) {
-              handleSuggestionClick(suggestions[selectedIndex]);
+              handleSuggestionClick(suggestions[selectedIndex])
             } else if (searchInput.trim()) {
-              handleSearch();
+              handleSearch()
             }
-            break;
+            break
           case "Escape":
-            setShowSuggestions(false);
-            setSelectedIndex(-1);
-            break;
+            setShowSuggestions(false)
+            setSelectedIndex(-1)
+            break
         }
       }
-    };
+    }
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [
-    showSuggestions,
-    suggestions,
-    selectedIndex,
-    searchInput,
-    handleSearch,
-    handleSuggestionClick,
-  ]);
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [showSuggestions, suggestions, selectedIndex, searchInput, handleSearch, handleSuggestionClick])
 
   const getSuggestionIcon = (type: SearchSuggestion["type"]) => {
     switch (type) {
       case "post":
-        return <FaSearch className="w-3 h-3" />;
+        return <FaSearch className="w-3 h-3" />
       case "recent":
-        return <FaHistory className="w-3 h-3" />;
+        return <FaHistory className="w-3 h-3" />
       default:
-        return <FaSearch className="w-3 h-3" />;
+        return <FaSearch className="w-3 h-3" />
     }
-  };
+  }
 
   return (
     <div className="relative">
       <div className="relative">
-        <FaSearch className="absolute  left-3 top-1/2 transform -translate-y-1/2 text-white text-lg" />
+        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500 text-lg" />
         <input
           ref={inputRef}
           type="text"
@@ -499,22 +458,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setSearchInput(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-10 pr-10 bg-[#121212] py-4 border-2 border-[#444444]   rounded-full  text-white outline-none placeholder-neutral-200 text-lg"
+          className="w-full pl-12 pr-32 bg-zinc-950 py-4 border-2 border-zinc-800 focus:border-cyan-500 text-white outline-none placeholder-zinc-500 text-base transition-colors duration-200"
         />
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
           {searchInput && (
             <button
-            title="newbtn"
+              title="Clear search"
               onClick={() => {
-                setSearchInput("");
-                setShowSuggestions(false);
+                setSearchInput("")
+                setShowSuggestions(false)
               }}
-              className="text-neutral-200 hover:text-gray-100 transition-colors duration-200"
+              className="text-zinc-500 hover:text-cyan-400 transition-colors duration-200"
             >
-              <FaTimes className="w-3 h-3" />
+              <FaTimes className="w-4 h-4" />
             </button>
           )}
-          <div className="hidden sm:flex items-center gap-1 text-sm w-max text-white font-semibold bg-[#303030] px-2 py-1 rounded-full  ">
+          <div className="hidden sm:flex items-center gap-1.5 text-xs text-zinc-400 font-mono bg-zinc-900 px-2 py-1 border border-zinc-800">
             <FaKeyboard className="w-3 h-3" />
             ⌘K
           </div>
@@ -523,23 +482,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Suggestions */}
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-4 bg-black  rounded-xl  z-50 max-h-60 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-zinc-950 border border-zinc-800 z-50 max-h-60 overflow-y-auto">
           {suggestions.map((suggestion, index) => (
             <button
               key={`${suggestion.type}-${suggestion.value}`}
               onClick={() => handleSuggestionClick(suggestion)}
-              className={`w-full flex items-center gap-2 px-3 py-2 cursor-pointer text-left bg-neutral-800  rounded-2xl hover:bg-gray-900 transition-colors duration-150 ${
-                index === selectedIndex ? "bg-neutral-900" : ""
-              } border-b border-neutral-800 last:border-b-0`}
+              className={`w-full flex items-center gap-3 px-4 py-3 cursor-pointer text-left hover:bg-zinc-900 transition-colors duration-150 ${
+                index === selectedIndex ? "bg-zinc-900" : ""
+              } border-b border-zinc-800 last:border-b-0`}
             >
-              <div className="p-2 bg-neutral-200 rounded-full text-black">
+              <div className="p-2 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
                 {getSuggestionIcon(suggestion.type)}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-white text-sm font-medium truncate">
-                  {suggestion.label}
-                </div>
-                <div className="text-xs text-neutral-200 capitalize">
+                <div className="text-white text-sm font-medium truncate">{suggestion.label}</div>
+                <div className="text-xs text-zinc-500 capitalize">
                   {suggestion.type === "recent" ? "Recent search" : "Article"}
                 </div>
               </div>
@@ -550,18 +507,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Results indicator */}
       {searchInput && (
-        <div className="absolute -bottom-5 left-0 text-sm text-neutral-100">
+        <div className="absolute -bottom-6 left-0 text-sm text-zinc-400 font-mono">
           {resultsCount} of {totalCount} articles
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-// Main Blog Component
 const BlogPageContent: React.FC = () => {
-  const [searchInput, setSearchInput] = useState("");
-  const [searchEngine, setSearchEngine] = useState<SimpleSearchEngine | null>(null);
+  const [searchInput, setSearchInput] = useState("")
+  const [searchEngine, setSearchEngine] = useState<SimpleSearchEngine | null>(null)
 
   const {
     data: posts,
@@ -575,69 +531,61 @@ const BlogPageContent: React.FC = () => {
     gcTime: 30 * 60 * 1000,
     refetchOnWindowFocus: false,
     retry: 3,
-  });
+  })
 
   useEffect(() => {
     if (posts) {
-      setSearchEngine(new SimpleSearchEngine(posts));
+      setSearchEngine(new SimpleSearchEngine(posts))
     }
-  }, [posts]);
+  }, [posts])
 
   const filteredPosts = useMemo(() => {
-    if (!posts || !searchEngine) return [];
-    
+    if (!posts || !searchEngine) return []
+
     if (!searchInput.trim()) {
-      // Return all posts sorted by date when no search
-      return [...posts].sort((a, b) => 
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-      );
+      return [...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
     }
-    
-    return searchEngine.search(searchInput);
-  }, [posts, searchInput, searchEngine]);
+
+    return searchEngine.search(searchInput)
+  }, [posts, searchInput, searchEngine])
 
   if (error) {
     return (
-      <div className="min-h-screen bg-neutral-900 text-neutral-100 flex items-center justify-center p-4">
-        <div className="text-center max-w-md">
-          <FaExclamationTriangle className="text-neutral-100 text-4xl mx-auto mb-4" />
-          <h2 className="text-xl font-bold text-neutral-100 mb-2">
-            Failed to Load Blog Posts
-          </h2>
-          <p className="text-neutral-500 text-sm mb-4">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+        <div className="text-center max-w-md border border-zinc-800 p-8 bg-zinc-950">
+          <FaExclamationTriangle className="text-yellow-400 text-5xl mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-white mb-3">Failed to Load Blog Posts</h2>
+          <p className="text-zinc-400 text-sm mb-6">
             {error instanceof Error ? error.message : "Unknown error occurred"}
           </p>
           <button
             onClick={() => refetch()}
-            className="px-4 py-2 bg-white text-black font-medium hover:bg-neutral-200 transition-colors duration-200 rounded-full"
+            className="px-6 py-3 bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition-colors duration-200 uppercase tracking-wide"
           >
             Try Again
           </button>
         </div>
       </div>
-    );
+    )
   }
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-neutral-100 pt-20">
+    <div className="min-h-screen bg-black text-white pt-20">
       {/* Hero Section */}
-      <section className="bg-neutral-900 text-neutral-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <section className="bg-black border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl  font-bold headline-kinshuk text-white  mb-4 leading-loose">
-              Read my Blogs 
-            </h1>
-            <p className="text-base sm:text-lg text-neutral-100 leading-relaxed max-w-2xl font-medium mx-auto">
-              Exploring cloud computing, DevOps, and React development through
-              curiosity and real-world experience.
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 headline-kinshuk leading-tight">Read my Blogs</h1>
+            <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto">
+              Exploring cloud computing, DevOps, and React development through curiosity and real-world experience.
             </p>
           </div>
         </div>
       </section>
 
       {/* Search */}
-      <div className="sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="sticky top-0 z-40 bg-black border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <SearchBar
             searchInput={searchInput}
             setSearchInput={setSearchInput}
@@ -649,48 +597,37 @@ const BlogPageContent: React.FC = () => {
       </div>
 
       {/* Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-16">
-            <FaSpinner className="animate-spin text-white text-3xl mb-4" />
-            <h3 className="text-lg text-white mb-2">Loading articles...</h3>
-            <p className="text-neutral-100 text-sm">
-              Fetching the latest insights
-            </p>
+          <div className="flex flex-col items-center justify-center py-20">
+            <FaSpinner className="animate-spin text-cyan-500 text-4xl mb-4" />
+            <h3 className="text-xl text-white mb-2 font-semibold">Loading articles...</h3>
+            <p className="text-zinc-400 text-sm">Fetching the latest insights</p>
           </div>
         ) : filteredPosts.length === 0 ? (
-          <div className="text-center py-16">
-            <FaSearch className="text-white text-4xl mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">
-              No articles found
-            </h3>
-            <p className="text-neutral-100 mb-6 max-w-md mx-auto">
-              Try different search terms to discover more content
-            </p>
+          <div className="text-center py-20 border border-zinc-800 bg-zinc-950">
+            <FaSearch className="text-zinc-700 text-5xl mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-white mb-3">No articles found</h3>
+            <p className="text-zinc-400 mb-8 max-w-md mx-auto">Try different search terms to discover more content</p>
             <button
               onClick={() => setSearchInput("")}
-              className="px-4 py-2 bg-[#303030] text-white font-medium transition-colors duration-200 rounded-full"
+              className="px-6 py-3 bg-cyan-500 text-black font-bold hover:bg-cyan-400 transition-colors duration-200 uppercase tracking-wide"
             >
               Clear Search
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredPosts.map((post) => (
-              <BlogCard
-                key={post.id}
-                post={post}
-                searchQuery={searchInput}
-              />
+              <BlogCard key={post.id} post={post} searchQuery={searchInput} />
             ))}
           </div>
         )}
       </main>
     </div>
-  );
-};
+  )
+}
 
-// Query Client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -701,14 +638,14 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
     },
   },
-});
+})
 
 const Blogs: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BlogPageContent />
     </QueryClientProvider>
-  );
-};
+  )
+}
 
-export default Blogs;
+export default Blogs

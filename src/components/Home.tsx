@@ -1,5 +1,8 @@
-import type React from "react";
-import { useState, useEffect, useRef } from "react";
+"use client"
+
+import type React from "react"
+import { useState, useEffect, useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import {
   SiTerraform,
   SiKubernetes,
@@ -16,7 +19,7 @@ import {
   SiClerk,
   SiX,
   SiInstagram,
-} from "react-icons/si";
+} from "react-icons/si"
 import {
   FaGithub,
   FaMapMarkerAlt,
@@ -31,11 +34,10 @@ import {
   FaAws,
   FaCopy,
   FaCheck,
-} from "react-icons/fa";
-import { VscVscodeInsiders } from "react-icons/vsc";
+} from "react-icons/fa"
+import { VscVscodeInsiders } from "react-icons/vsc"
 
 // --- CONFIGURATION DATA ---
-// This object holds all the personal data, making it easy to update.
 const CONFIG = {
   personal: {
     name: " Kinshuk Jain",
@@ -49,8 +51,7 @@ const CONFIG = {
       "Always open to connecting with fellow developers, engineers, and anyone curious about technology and cloud computing.",
     ],
     availability: "Available for opportunities",
-    status:
-      "Currently Intern at UPPCL (Uttar Pradesh Power Corporation Limited)",
+    status: "Currently Intern at UPPCL (Uttar Pradesh Power Corporation Limited)",
   },
   social: [
     {
@@ -98,8 +99,7 @@ const CONFIG = {
       status: "Completed",
       year: "2025 July",
       url: "https://www.credly.com/badges/a4406a81-77da-4003-b153-9e36582f7877/public_url",
-      description:
-        "Digital badge covering storage services concepts and AWS storage solutions",
+      description: "Digital badge covering storage services concepts and AWS storage solutions",
       skills: ["Amazon S3", "Amazon EBS", "Amazon EFS", "AWS Storage Gateway"],
     },
     {
@@ -108,8 +108,7 @@ const CONFIG = {
       status: "Preparing",
       year: "2025",
       progress: "Not yet Attempted",
-      description:
-        "Comprehensive certification covering AWS architecture best practices and services",
+      description: "Comprehensive certification covering AWS architecture best practices and services",
       skills: ["Cloud Computing", "AWS Services", "Security", "Pricing Models"],
     },
     {
@@ -118,8 +117,7 @@ const CONFIG = {
       status: "Completed",
       year: "2024",
       url: "https://www.credly.com/badges/0bcd1190-2d68-45ff-91d9-32b65aa93ed8/public_url",
-      description:
-        "Digital badge demonstrating serverless architecture knowledge and implementation",
+      description: "Digital badge demonstrating serverless architecture knowledge and implementation",
       skills: ["Amazon Lambda", "API Gateway", "DynamoDB", "Serverless Framework"],
     },
     {
@@ -128,14 +126,8 @@ const CONFIG = {
       status: "Completed",
       year: "2025",
       url: "https://www.credly.com/badges/a0042ec2-cc6e-4a99-84de-a1516ee5775a/public_url",
-      description:
-        "Digital badge covering machine learning concepts and AWS ML services",
-      skills: [
-        "Amazon SageMaker",
-        "ML Algorithms",
-        "Data Processing",
-        "Model Deployment",
-      ],
+      description: "Digital badge covering machine learning concepts and AWS ML services",
+      skills: ["Amazon SageMaker", "ML Algorithms", "Data Processing", "Model Deployment"],
     },
   ],
   skills: {
@@ -175,13 +167,7 @@ const CONFIG = {
         "A modern, secure password generation tool built with React and TypeScript, focusing on creating cryptographically secure passwords with customizable parameters.",
         "Features include multiple generation algorithms, strength analysis, and secure clipboard integration.",
       ],
-      technologies: [
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Vite",
-        "Web Crypto API",
-      ],
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "Web Crypto API"],
       links: {
         live: "https://zeroleaks.cloudkinshuk.in",
         repo: "https://github.com/kinshukjainn/zeroleaks",
@@ -193,18 +179,8 @@ const CONFIG = {
       year: "2025",
       status: "Development Stage",
       type: "Not known",
-      description: [
-        "A modern AI Based Platform",
-      ],
-      technologies: [
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Vite",
-        "Open AI API",
-        "AWS Lambda",
-        "AWS Amplify"
-      ],
+      description: ["A modern AI Based Platform"],
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Vite", "Open AI API", "AWS Lambda", "AWS Amplify"],
       links: {
         live: null,
         repo: null,
@@ -222,78 +198,63 @@ const CONFIG = {
     description:
       "Pursuing electrical engineering while self-learning cloud technologies and software development. Focusing on the intersection of traditional engineering and modern cloud computing.",
   },
-};
-
-interface SocialConfig {
-  platform: string;
-  url: string;
-  icon: React.ElementType;
-  handle: string;
-  action?: string;
 }
 
-// Animated section where the animations are defined
+interface SocialConfig {
+  platform: string
+  url: string
+  icon: React.ElementType
+  handle: string
+  action?: string
+}
+
+// Animated section component with framer-motion
 const AnimatedSection: React.FC<{
-  children: React.ReactNode;
-  className?: string;
-}> = ({ children, className }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry && entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    const currentRef = ref.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
-  }, []);
+  children: React.ReactNode
+  className?: string
+  delay?: number
+}> = ({ children, className, delay = 0 }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
   return (
-    <section
+    <motion.section
       ref={ref}
-      className={`${className} transition-all duration-700 ease-out ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
     >
       {children}
-    </section>
-  );
-};
+    </motion.section>
+  )
+}
 
 // Copy Button Component
 const CopyButton: React.FC<{ text: string }> = ({ text }) => {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     } catch (err) {
-      console.error("Failed to copy text: ", err);
+      console.error("Failed to copy text: ", err)
     }
-  };
+  }
 
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 px-3 py-1.5 text-sm cursor-pointer font-semibold text-white border border-[#444444] bg-[#252525]  rounded-full transition-all duration-200"
+      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold cursor-pointer  bg-[#10b981] text-black border border-[#27272a] hover:bg-[#059669] transition-colors"
       title="Copy Docker command"
     >
       {copied ? (
         <>
-          <FaCheck className="w-3 h-3 text-white" />
+          <FaCheck className="w-3 h-3" />
           Copied!
         </>
       ) : (
@@ -302,217 +263,220 @@ const CopyButton: React.FC<{ text: string }> = ({ text }) => {
           Copy
         </>
       )}
-    </button>
-  );
-};
+    </motion.button>
+  )
+}
+
+// Section Header Component
+const SectionHeader: React.FC<{ icon: React.ElementType; title: string }> = ({ icon: Icon, title }) => (
+  <div className="flex items-center gap-4 mb-12 pb-6 border-b border-[#27272a]">
+    <Icon className="w-8 h-8 text-[#06b6d4]" />
+    <h3 className="text-3xl headline-kinshuk sm:text-4xl font-bold tracking-tight text-white uppercase">{title}</h3>
+  </div>
+)
+
+// Tech Tag Component
+const TechTag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="inline-block py-2 px-4 bg-[#18181b] border border-[#27272a] text-white text-sm font-mono">
+    {children}
+  </span>
+)
 
 // --- MAIN PORTFOLIO COMPONENT ---
 export default function Home() {
-  const [typedText, setTypedText] = useState("");
-  const fullText = "$ whoami";
+  const [typedText, setTypedText] = useState("")
+  const fullText = "$ whoami"
 
   useEffect(() => {
-    let i = 0;
+    let i = 0
     const typingTimer = setInterval(() => {
       if (i < fullText.length) {
-        setTypedText(fullText.slice(0, i + 1));
-        i++;
+        setTypedText(fullText.slice(0, i + 1))
+        i++
       } else {
-        clearInterval(typingTimer);
+        clearInterval(typingTimer)
       }
-    }, 120);
+    }, 120)
 
-    return () => clearInterval(typingTimer);
-  }, []);
+    return () => clearInterval(typingTimer)
+  }, [])
 
   const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(
-      "Hi Kinshuk, I saw your portfolio and wanted to connect."
-    );
-    window.open(
-      `https://wa.me/${CONFIG.personal.whatsappNumber}?text=${message}`,
-      "_blank"
-    );
-  };
+    const message = encodeURIComponent("Hi Kinshuk, I saw your portfolio and wanted to connect.")
+    window.open(`https://wa.me/${CONFIG.personal.whatsappNumber}?text=${message}`, "_blank")
+  }
 
   const handleSocialClick = (social: SocialConfig) => {
     if (social.action === "whatsapp") {
-      handleWhatsAppClick();
+      handleWhatsAppClick()
     } else {
-      window.open(social.url, "_blank");
+      window.open(social.url, "_blank")
     }
-  };
-
-  // A small reusable component for section headers
-  const SectionHeader: React.FC<{ icon: React.ElementType; title: string }> = ({
-    icon: Icon,
-    title,
-  }) => (
-    <h3 className="text-2xl sm:text-3xl font-medium flex items-center gap-2  text-white mb-4">
-      <Icon className="w-7 h-7 text-white " />
-      {title}
-    </h3>
-  );
-
-  
-  // A small reusable component for tech tags
-  const TechTag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <span className="inline-block py-1 px-3  rounded-full  text-white  bg-[#252525]  text-sm ">
-      {children}
-    </span>
-  );
+  }
 
   return (
-    <div className="min-h-screen text-neutral-200 bg-neutral-900">
-      <main className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <div className="space-y-12 md:space-y-32">
+    <div className="min-h-screen bg-black text-white">
+      {/* Grid overlay for visual interest */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.02]">
+        <div
+          className="absolute inset-0"
+        />
+      </div>
+
+      <main className="relative max-w-[1400px] mx-auto px-6 sm:px-12 lg:px-16">
+        <div className="space-y-32 py-20">
           {/* --- Hero Section --- */}
-          <AnimatedSection className="pt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-              <div className="lg:col-span-2 space-y-6">
-                <div className=" text-lg font-mono text-white">
-                  {typedText}
-                  <span className="animate-pulse">_</span>
-                </div>
-                <h1 className="text-5xl headline-kinshuk sm:text-6xl lg:text-7xl   font-bold tracking-tighter text-white ">
-                  {CONFIG.personal.name}
-                </h1>
-                <h2 className="text-2xl lg:text-2xl text-white max-w-2xl">
-                  {CONFIG.personal.title}
-                </h2>
-                <div className="flex items-center gap-2 p-2 text-lg  w-max    text-white ">
-                  <FaMapMarkerAlt />
-                  <span>{CONFIG.personal.location}</span>
-                </div>
+          <AnimatedSection className="min-h-[80vh] flex flex-col justify-center border-b border-[#27272a] pb-32">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="space-y-8"
+            >
+              <div className="text-lg font-mono text-[#06b6d4] mb-8">
+                {typedText}
+                <span className="animate-pulse-glow">_</span>
               </div>
-             
-            </div>
-            <div className="mt-12  text-white space-y-4 text-lg md:text-md max-w-4xl -l-2  pl-6">
+
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tighter headline-kinshuk text-white leading-none">
+                {CONFIG.personal.name}
+              </h1>
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-mono text-[#a1a1aa] max-w-3xl font-light leading-relaxed">
+                {CONFIG.personal.title}
+              </h2>
+
+              <div className="flex items-center gap-3 text-lg  text-blue-300 headline-kinshuk  pt-4">
+                <FaMapMarkerAlt className="text-[#06b6d4]" />
+                <span>{CONFIG.personal.location}</span>
+              </div>
+            </motion.div>
+
+            <div className="mt-16 space-y-6 text-lg text-[#a1a1aa] max-w-4xl border-l-2 border-[#27272a] pl-8">
               {CONFIG.personal.bio.map((p, i) => (
-                <p key={i}>{p}</p>
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 1 + i * 0.2 }}
+                  className="leading-relaxed"
+                >
+                  {p}
+                </motion.p>
               ))}
             </div>
           </AnimatedSection>
 
           {/* --- Social Links Section --- */}
-          <AnimatedSection>
+          <AnimatedSection delay={0.2}>
             <SectionHeader icon={FaGlobe} title="Digital Presence" />
-            <div className="grid grid-cols-1 gap-2">
-              {" "}
-              {/* single column list style */}
-              {CONFIG.social.map((social) => {
-                const Icon = social.icon;
+            <div className="grid grid-cols-1 gap-px bg-[#27272a]">
+              {CONFIG.social.map((social, index) => {
+                const Icon = social.icon
                 return (
-                  <button
+                  <motion.button
                     key={social.platform}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    whileHover={{ x: 8 }}
                     onClick={() => handleSocialClick(social)}
-                    className="group flex  gap-3 items-center justify-between    p-1.5 transition"
+                    className="group flex items-center justify-between bg-[#09090b] p-6 transition-colors hover:bg-[#18181b]"
                   >
-                    {/* Left side: icon + platform */}
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-3  transition group-hover:text-white cursor-pointer">
-                      <Icon className="w-6 h-6 text-white group-hover:text-yellow-200 " />
-                      <span className="text-lg  group-hover:text-yellow-200  underline font-medium text-white ">
+                    <div className="flex items-center gap-6">
+                      <Icon className="w-6 h-6 text-blue-400 group-hover:text-[#06b6d4] transition-colors" />
+                      <span className="text-xl font-medium text-white group-hover:text-[#06b6d4] transition-colors">
                         {social.platform}
                       </span>
-                      </div>
                     </div>
-
-                    {/* Right side: username/handle */}
-                    <span className="text-sm text-white ">
-                      {social.handle}
-                    </span>
-                  </button>
-                );
+                    <span className="text-sm font-mono text-grey-200">{social.handle}</span>
+                  </motion.button>
+                )
               })}
-
-             
-
             </div>
           </AnimatedSection>
 
           {/* --- Certifications Section --- */}
-          <AnimatedSection>
+          <AnimatedSection delay={0.3}>
             <SectionHeader icon={FaAward} title="Certifications & Badges" />
-            <div className="space-y-3">
-              {CONFIG.certifications.map((cert) => (
-                <div
+            <div className="space-y-px bg-[#27272a]">
+              {CONFIG.certifications.map((cert, index) => (
+                <motion.div
                   key={cert.title}
-                  className="p-3 transition-all  rounded-full     duration-300 "
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="bg-[#09090b] p-8 hover:bg-[#18181b] transition-colors"
                 >
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
-                    <div className="flex-1 space-y-2">
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <h4 className="text-xl font-bold  text-white">
-                          {cert.title}
-                        </h4>
+                  <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-6">
+                    <div className="flex-1 space-y-4">
+                      <div className="flex items-center gap-4 flex-wrap">
+                        <h4 className="text-2xl font-bold text-white">{cert.title}</h4>
                         <span
-                          className={`px-2 py-0.5 text-sm rounded-full font-medium  ${
+                          className={`px-3 py-1 text-xs font-bold uppercase tracking-wider border ${
                             cert.status === "Completed"
-                              ? "bg-blue-900 font-semibold  text-white "
-                              : "bg-red-500 font-semibold text-white"
+                              ? "bg-[#10b981] text-black border-[#10b981]"
+                              : "bg-transparent text-[#ef4444] border-[#ef4444]"
                           }`}
                         >
                           {cert.status}
                         </span>
                       </div>
-                      <p className="text-md font-medium text-white p-1 ">
+                      <p className="text-base text-[#71717a] font-mono">
                         {cert.organization} • {cert.year}
                       </p>
-                      <p className="text-white font-normal">
-                        {cert.description}
-                      </p>
-                      {cert.progress && (
-                        <p className="text-sm text-white font-medium">
-                          Progress: {cert.progress}
-                        </p>
-                      )}
-                      <div className="flex flex-wrap   gap-2 pt-2">
+                      <p className="text-[#a1a1aa] leading-relaxed">{cert.description}</p>
+                      {cert.progress && <p className="text-sm text-[#71717a] font-mono">Progress: {cert.progress}</p>}
+                      <div className="flex flex-wrap gap-2 pt-4">
                         {cert.skills.map((skill) => (
                           <TechTag key={skill}>{skill}</TechTag>
                         ))}
                       </div>
                     </div>
                     {cert.url && (
-                      <a
+                      <motion.a
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         href={cert.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-shrink-0 inline-flex items-center       text-black italic bg-yellow-200 gap-2 px-2 py-2  text-sm font-semibold rounded-full    transition-colors"
+                        className="flex-shrink-0 inline-flex items-center gap-3 px-6 py-3 bg-green-400 text-black text-sm font-bold uppercase tracking-wider cursor-pointer hover:bg-green-500 transition-colors"
                       >
-                        View Credential{" "}
+                        View Credential
                         <FaExternalLinkAlt className="w-4 h-4" />
-                      </a>
+                      </motion.a>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </AnimatedSection>
 
           {/* --- Skills Section --- */}
-          <AnimatedSection>
+          <AnimatedSection delay={0.4}>
             <SectionHeader icon={FaCode} title="Technologies" />
-            <div className="space-y-3">
-              {Object.entries(CONFIG.skills).map(([category, skills]) => (
+            <div className="space-y-12">
+              {Object.entries(CONFIG.skills).map(([category, skills], catIndex) => (
                 <div key={category}>
-                  <h4 className="text-xl font-medium text-white underline mb-2">
+                  <h4 className="text-xl font-bold text-[#06b6d4] mb-6 uppercase tracking-wider border-b border-[#27272a] pb-3">
                     {category}
                   </h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
-                    {skills.map((skill) => {
-                      const Icon = skill.icon;
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-[#27272a]">
+                    {skills.map((skill, index) => {
+                      const Icon = skill.icon
                       return (
-                        <div
+                        <motion.div
                           key={skill.name}
-                          className="flex items-center    rounded-full    gap-3  p-2 "
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.3, delay: catIndex * 0.1 + index * 0.05 }}
+                          whileHover={{ scale: 1.05 }}
+                          className="flex items-center gap-4 bg-[#09090b] p-6 hover:bg-[#18181b] transition-colors"
                         >
-                          <Icon className="w-6 h-6 text-white flex-shrink-0" />
-                          <span className="text-lg font-normal text-white truncate">
-                            {skill.name}
-                          </span>
-                        </div>
-                      );
+                          <Icon className="w-6 h-6 text-[#06b6d4] flex-shrink-0" />
+                          <span className="text-base font-medium text-white truncate">{skill.name}</span>
+                        </motion.div>
+                      )
                     })}
                   </div>
                 </div>
@@ -521,112 +485,115 @@ export default function Home() {
           </AnimatedSection>
 
           {/* --- Projects Section --- */}
-          <AnimatedSection>
+          <AnimatedSection delay={0.5}>
             <SectionHeader icon={FaCode} title="Featured Projects" />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {CONFIG.projects.map((project) => (
-                <div
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-[#27272a]">
+              {CONFIG.projects.map((project, index) => (
+                <motion.div
                   key={project.title}
-                  className="flex flex-col p-4  rounded-3xl bg-neutral-950   transition-all duration-300"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className="flex flex-col bg-[#09090b] p-8 hover:bg-[#18181b] transition-colors"
                 >
-                  <div className="flex-grow space-y-4">
-                    <div className="flex justify-between items-start">
-                      <h4 className="text-2xl font-medium text-white">
-                        {project.title}
-                      </h4>
+                  <div className="flex-grow space-y-6">
+                    <div className="flex justify-between items-start border-b border-[#27272a] pb-4">
+                      <h4 className="text-3xl font-bold text-white">{project.title}</h4>
                       <span
-                        className={`px-4 py-1 text-md  rounded  ${
+                        className={`px-3 py-1 text-xs font-bold uppercase tracking-wider ${
                           project.status === "Live"
-                            ? "  text-[#ff9100] text-lg  "
-                            : "  text-red-500  font-medium"
+                            ? "text-[#10b981] border border-[#10b981]"
+                            : "text-[#ef4444] border border-[#ef4444]"
                         }`}
                       >
                         {project.status}
                       </span>
                     </div>
-                    <p className="text-md font-normal text-white">
+
+                    <p className="text-sm font-mono text-[#71717a]">
                       {project.type} • {project.year}
                     </p>
-                    <div className="space-y-2 text-md font-normal text-white ">
+
+                    <div className="space-y-4 text-base text-[#a1a1aa] leading-relaxed">
                       {project.description.map((p, i) => (
                         <p key={i}>{p}</p>
                       ))}
                     </div>
-                    <div className="flex flex-wrap gap-2 pt-2">
+
+                    <div className="flex flex-wrap gap-2 pt-4">
                       {project.technologies.map((tech) => (
                         <TechTag key={tech}>{tech}</TechTag>
                       ))}
                     </div>
 
                     {/* Docker Command Section */}
-                    <div className="mt-4 p-3  ">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FaDocker className="w-4 h-4 text-blue-500" />
-                        <span className="text-sm font-mono  font-semibold text-white">
+                    <div className="mt-6 p-4 bg-[#18181b] border border-[#27272a]">
+                      <div className="flex items-center gap-3 mb-3">
+                        <FaDocker className="w-5 h-5 text-[#06b6d4]" />
+                        <span className="text-sm font-mono font-bold text-white uppercase tracking-wider">
                           Docker Command
                         </span>
                       </div>
-                      <div className="flex items-center justify-between gap-3">
-                        <code className="text-sm text-gray-300 font-semibold  bg-[#121212] px-2 py-2 rounded-lg  flex-1 overflow-x-auto">
+                      <div className="flex items-center gap-2">
+                        <code className="text-sm text-[#a1a1aa] font-mono bg-black px-4 py-3 flex-1 overflow-x-auto border border-[#27272a]">
                           {project.dockerCommand}
                         </code>
                         <CopyButton text={project.dockerCommand} />
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 mt-6 pt-4 -t ">
+
+                  <div className="flex items-center gap-4 mt-8 pt-6 border-t border-[#27272a]">
                     {project.links.live && (
-                      <a
+                      <motion.a
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center font-semibold  italic  rounded-full bg-yellow-200  text-black border border-black  p-1.5  gap-2 text-sm  transition-colors"
+                        className="inline-flex items-center gap-3 px-6 py-3 bg-[#10b981] text-black cursor-pointer text-sm font-bold uppercase tracking-wider hover:bg-[#059669] transition-colors"
                       >
                         <FaGlobe /> Live Demo
-                      </a>
+                      </motion.a>
                     )}
                     {project.links.repo && (
-                      <a
+                      <motion.a
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         href={project.links.repo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2  p-1.5 rounded-full text-white text-md font-semibold italic    bg-black  transition-colors"
+                        className="inline-flex items-center gap-3 px-6 py-3 bg-transparent border border-[#27272a] text-white text-sm font-bold uppercase tracking-wider hover:bg-[#18181b] transition-colors"
                       >
                         <FaGithub /> Source Code
-                      </a>
+                      </motion.a>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </AnimatedSection>
 
           {/* --- Education Section --- */}
-          <AnimatedSection>
+          <AnimatedSection delay={0.6} className="pb-32">
             <SectionHeader icon={FaGraduationCap} title="Education" />
-            <div className=" p-3 rounded-full  ">
-              <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-4">
-                <div className="space-y-1">
-                  <h4 className="text-2xl   text-white font-medium">
+            <div className="bg-[#09090b] p-8 border border-[#27272a]">
+              <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-8">
+                <div className="space-y-3">
+                  <h4 className="text-3xl font-bold text-white">
                     {CONFIG.education.degree} in {CONFIG.education.field}
                   </h4>
-                  <p className="text-white font-medium">
-                    {CONFIG.education.institution}
-                  </p>
-                  <p className="text-md text-white font-medium">
-                    {CONFIG.education.location}
-                  </p>
+                  <p className="text-lg text-[#a1a1aa] font-medium">{CONFIG.education.institution}</p>
+                  <p className="text-base text-[#71717a] font-mono">{CONFIG.education.location}</p>
                 </div>
-                <div className="text-left sm:text-right space-y-2 flex-shrink-0">
-                  <p className="text-md font-medium  text-white ">
-                    {CONFIG.education.period}
-                  </p>
-                  <p className="inline-block px-2 py-1 text-md font-medium rounded bg-blue-400  text-neutral-900  ">
+                <div className="text-left lg:text-right space-y-3 flex-shrink-0">
+                  <p className="text-base font-mono text-[#71717a]">{CONFIG.education.period}</p>
+                  <p className="inline-block px-4 py-2 text-sm font-bold uppercase tracking-wider bg-[#06b6d4] text-black">
                     {CONFIG.education.status}
                   </p>
                 </div>
               </div>
-              <p className="mt-4 pt-4 -t text-lg  text-neutral-100">
+              <p className="mt-8 pt-8 border-t border-[#27272a] text-lg text-[#a1a1aa] leading-relaxed">
                 {CONFIG.education.description}
               </p>
             </div>
@@ -634,5 +601,5 @@ export default function Home() {
         </div>
       </main>
     </div>
-  );
+  )
 }

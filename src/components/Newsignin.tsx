@@ -45,7 +45,7 @@ const NewsignIn: React.FC = () => {
         title: isSignUp ? "Join Minimal Minds" : "Welcome to my Blogs",
         subtitle: isSignUp
           ? "Create your account to access normal blog content and insights"
-          : "Sign in to continue reading  blog content and thought-provoking insights",
+          : "Sign in to continue reading blog content and thought-provoking insights",
         description: "Dive deep into thoughts, ideas, and explorations that shape the digital landscape.",
         icon: Newspaper,
         bgGradient: "from-blue-50 via-blue-100 to-indigo-50",
@@ -88,10 +88,12 @@ const NewsignIn: React.FC = () => {
     }
   }, [getRedirectUrl, isSignUp])
 
-
   return (
-    <div className="min-h-screen pt-20 bg-neutral-900 flex items-center justify-center relative overflow-hidden">
-      
+    <div className="min-h-screen pt-20 bg-black flex items-center justify-center relative overflow-hidden">
+      {/* Subtle grid overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+      />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile */}
@@ -108,15 +110,12 @@ const NewsignIn: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-
               <div className="space-y-4">
-                <h1
-                  className="text-3xl sm:text-2xl font-semibold   text-white headline-kinshuk leading-tight tracking-tight"
-                >
+                <h1 className="text-3xl sm:text-2xl headline-kinshuk font-semibold text-white leading-tight tracking-tight">
                   {routeInfo.title}
                 </h1>
-                <p className="text-base sm:text-lg text-white leading-relaxed font-medium">{routeInfo.subtitle}</p>
-                <p className="text-sm text-gray-100 leading-relaxed max-w-xs mx-auto">{routeInfo.description}</p>
+                <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-medium">{routeInfo.subtitle}</p>
+                <p className="text-sm text-zinc-400 leading-relaxed max-w-xs mx-auto">{routeInfo.description}</p>
               </div>
             </motion.div>
 
@@ -127,8 +126,8 @@ const NewsignIn: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-neutral-900 rounded-full" />
-                <div className="relative p-8 bg-neutral-900/80 backdrop-blur-xl  rounded-full">
+                <div className="absolute inset-0 bg-zinc-950 border border-zinc-800" />
+                <div className="relative p-8 bg-zinc-950/90 backdrop-blur-xl border border-zinc-800">
                   <Customauth redirectTo={getRedirectUrl} />
                 </div>
               </div>
@@ -144,37 +143,54 @@ const NewsignIn: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            
-
             <div className="space-y-6">
-              <h1
-                className={`text-5xl xl:text-4xl headline-kinshuk font-bold text-white  leading-tight tracking-tight`}
+              <motion.h1
+                className="text-5xl xl:text-6xl headline-kinshuk font-bold text-white leading-tight tracking-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
               >
                 {routeInfo.title}
-              </h1>
-              <p className="text-lg xl:text-xl text-white leading-relaxed font-normal">{routeInfo.subtitle}</p>
-              <p className="text-lg text-white leading-relaxed max-w-lg">{routeInfo.description}</p>
+              </motion.h1>
+              <motion.p
+                className="text-lg xl:text-xl text-zinc-300 leading-relaxed font-normal"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                {routeInfo.subtitle}
+              </motion.p>
+              <motion.p
+                className="text-base text-zinc-400 leading-relaxed max-w-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                {routeInfo.description}
+              </motion.p>
             </div>
 
             <motion.div
               className="space-y-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
               {routeInfo.features.map((feature, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center space-x-4 text-gray-100"
+                  className="flex items-center space-x-4 group cursor-default"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                  whileHover={{ x: 8 }}
                 >
-                  <div className={` p-3 rounded-full bg-yellow-200 shadow-md`}>
+                  <div className="p-3 bg-cyan-500 border border-cyan-400 transition-all duration-300 group-hover:bg-cyan-400 group-hover:border-cyan-300">
                     <feature.icon className="w-5 h-5 text-black" />
                   </div>
-                  <span className="text-base font-medium">{feature.text}</span>
+                  <span className="text-base font-medium text-zinc-200 group-hover:text-white transition-colors duration-300">
+                    {feature.text}
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
@@ -188,10 +204,20 @@ const NewsignIn: React.FC = () => {
           >
             <div className="w-full max-w-md xl:max-w-lg">
               <div className="relative">
-                <div className="absolute inset-0 bg-nuetral-900  scale-105" />
-                <motion.div 
-                  className="relative  p-10 xl:p-12"
-                  whileHover={{ y: -2 }}
+                <motion.div
+                  className="absolute inset-0 bg-cyan-500/10 border border-cyan-500/20"
+                  animate={{
+                    opacity: [0.5, 0.8, 0.5],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                />
+                <motion.div
+                  className="relative p-10 xl:p-12 bg-zinc-950 border border-zinc-800"
+                  whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   <Customauth redirectTo={getRedirectUrl} />
@@ -205,4 +231,4 @@ const NewsignIn: React.FC = () => {
   )
 }
 
-export default NewsignIn;
+export default NewsignIn

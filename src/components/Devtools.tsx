@@ -1,3 +1,5 @@
+"use client"
+
 import type React from "react"
 import { Laptop, Code, Palette, Type, Monitor } from "lucide-react"
 import { motion, useInView, type Variants } from "framer-motion"
@@ -85,7 +87,7 @@ const setupData: SetupSection[] = [
         description: "Monospace fonts with programming ligature support.",
         category: "Code Font",
       },
-       {
+      {
         name: "Rubik | IBM Plex Sans",
         description: "Modern sans-serif fonts optimized for UI readability.",
         category: "UI Font",
@@ -124,7 +126,6 @@ const itemVariants: Variants = {
 }
 
 // --- REUSABLE AnimatedCard COMPONENT ---
-// This component uses the `useInView` hook to trigger animations only when visible.
 const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
@@ -135,33 +136,34 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       variants={itemVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      whileHover={{ scale: 1, y: -2 }}
-      className="  text-neutral-100  rounded-4xl bg-neutral-950  p-4 h-full flex flex-col cursor-pointer"
+      whileHover={{ scale: 1.02, y: -4 }}
+      className="bg-zinc-950 border border-zinc-800 p-6 h-full flex flex-col cursor-pointer transition-all duration-300 hover:border-cyan-500 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] group"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-4 bg-yellow-200 rounded-full ">
-          <section.icon className="w-7 h-7 text-black" />
+        <div className="p-3 bg-cyan-500 border border-cyan-400 group-hover:bg-cyan-400 transition-colors duration-300">
+          <section.icon className="w-6 h-6 text-black" />
         </div>
         <div>
-          <h2 className="text-2xl font-normal text-neutral-100">{section.title}</h2>
-          <p className="text-sm text-neutral-100 ">
+          <h2 className="text-2xl font-semibold headline-kinshuk text-white">{section.title}</h2>
+          <p className="text-sm text-zinc-400 uppercase tracking-wider">
             {section.items.length} item{section.items.length !== 1 ? "s" : ""}
           </p>
         </div>
       </div>
 
       {/* Items List */}
-      <div className="space-y-5 flex-grow">
+      <div className="space-y-6 flex-grow">
         {section.items.map((item) => (
-          <div key={item.name}>
+          <div
+            key={item.name}
+            className="border-l-2 border-zinc-800 pl-4 group-hover:border-cyan-500 transition-colors duration-300"
+          >
             {item.category && (
-              <div className="text-lg  text-white font-medium uppercase tracking-wider mb-1.5">
-                {item.category}
-              </div>
+              <div className="text-xs text-cyan-500 font-semibold uppercase tracking-wider mb-1">{item.category}</div>
             )}
-            <h3 className="font-normal text-white">{item.name}</h3>
-            <p className="text-sm text-neutral-100 leading-relaxed">{item.description}</p>
+            <h3 className="font-semibold text-white text-lg mb-1">{item.name}</h3>
+            <p className="text-sm text-zinc-400 leading-relaxed">{item.description}</p>
           </div>
         ))}
       </div>
@@ -172,8 +174,11 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
 // --- MAIN COMPONENT ---
 export default function Devtools() {
   return (
-    <main className="min-h-screen bg-neutral-900 text-neutral-100 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+    <main className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Background grid pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#18181b_1px,transparent_1px),linear-gradient(to_bottom,#18181b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -181,16 +186,12 @@ export default function Devtools() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center bg-zinc-950 rounded-full  p-2 gap-2 mb-4 ">
-            <Monitor className="w-6 h-6 text-white" />
-            <span className="text-sm  font-semibold text-white   uppercase tracking-wider">
-              My Digital Workspace
-            </span>
+          <div className="inline-flex items-center bg-zinc-950 border border-zinc-800 px-4 py-2 gap-2 mb-6">
+            <Monitor className="w-5 h-5 text-cyan-500" />
+            <span className="text-sm font-semibold font-mono text-cyan-500 uppercase tracking-wider">My Digital Workspace</span>
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold headline-kinshuk text-white">
-            Development Setup 
-          </h1>
-          <p className="mt-4 max-w-xl mx-auto text-lg text-neutral-100 ">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl headline-kinshuk font-bold text-white mb-4">Development Setup</h1>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-zinc-400 leading-relaxed">
             The tools, software, and hardware I use daily to code and design.
           </p>
         </motion.div>
@@ -200,7 +201,7 @@ export default function Devtools() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-20"
         >
           {setupData.map((section) => (
             <AnimatedCard key={section.title} section={section} />
@@ -212,32 +213,24 @@ export default function Devtools() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
-          className="mt-20 pt-10"
+          className="mt-20 pt-10 border-t border-zinc-800"
         >
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-2xl mx-auto">
-            <div className="  rounded-full p-2 text-center">
-              <div className="text-2xl font-normal text-white ">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            <div className="bg-zinc-950 border border-zinc-800 p-6 text-center hover:border-cyan-500 transition-colors duration-300">
+              <div className="text-3xl font-bold text-cyan-500">
                 {setupData.reduce((acc, section) => acc + section.items.length, 0)}
               </div>
-              <div className="text-sm text-white uppercase tracking-wider mt-1">
-                Total Items
-              </div>
+              <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Total Items</div>
             </div>
 
-            <div className="  rounded-full p-2 text-center">
-              <div className="text-2xl font-normal text-white ">{setupData.length}</div>
-              <div className="text-sm text-white uppercase tracking-wider mt-1">
-                Categories
-              </div>
+            <div className="bg-zinc-950 border border-zinc-800 p-6 text-center hover:border-cyan-500 transition-colors duration-300">
+              <div className="text-3xl font-bold text-cyan-500">{setupData.length}</div>
+              <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Categories</div>
             </div>
 
-            <div className="  rounded-full p-2 text-center col-span-2">
-              <div className="text-2xl font-normal text-white ">
-                2025
-              </div>
-              <div className="text-sm text-white uppercase tracking-wider mt-1">
-                Last Updated
-              </div>
+            <div className="bg-zinc-950 border border-zinc-800 p-6 text-center col-span-2 hover:border-cyan-500 transition-colors duration-300">
+              <div className="text-3xl font-bold text-cyan-500">2025</div>
+              <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Last Updated</div>
             </div>
           </div>
         </motion.div>
