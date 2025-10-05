@@ -23,8 +23,8 @@ const NavLink = ({ to, isActive, label, onClick }: NavLinkProps) => (
     <motion.div
       className={`relative px-3 py-2 transition-all duration-200 ${
         isActive
-          ? "text-black font-semibold bg-cyan-400"
-          : "text-zinc-100 hover:bg-cyan-400 hover:text-black font-semibold"
+          ? "text-gray-900 rounded-md font-semibold hover:text-black bg-green-600"
+          : "text-white hover:bg-green-400 hover:text-black rounded-md  font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -36,7 +36,7 @@ const NavLink = ({ to, isActive, label, onClick }: NavLinkProps) => (
           transition={{ type: "spring", bounce: 0.1, duration: 0.3 }}
         />
       )}
-      <span className="relative z-10 font-medium text-sm">{label}</span>
+      <span className="relative z-10 font-medium text-lg">{label}</span>
     </motion.div>
   </Link>
 )
@@ -84,7 +84,7 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-black/90 border-b border-zinc-800">
+        <motion.div className="relative backdrop-blur-xl bg-[#121212] ">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20">
               {/* Logo Section */}
@@ -96,12 +96,12 @@ const Header = () => {
               >
                 <Link to="/" onClick={closeMenu}>
                   <motion.h1
-                    className="text-xl sm:text-2xl lg:text-3xl font-medium text-white"
+                    className="text-2xl sm:text-2xl lg:text-3xl font-medium text-white"
                     whileHover={{ scale: 1.01 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
                     CloudKinshuk <span className="text-zinc-500">/</span>{" "}
-                    <span className="font-mono text-yellow-400 text-[25px]">{getPathText()}</span>
+                    <span className=" text-green-400 text-md">{getPathText()}</span>
                   </motion.h1>
                 </Link>
               </motion.div>
@@ -139,7 +139,7 @@ const Header = () => {
                         />
                         <SignOutButton>
                           <motion.button
-                            className="px-4 py-2 text-black text-lg bg-cyan-400 transition-all cursor-pointer duration-200 font-semibold hover:bg-cyan-300"
+                            className="px-2 py-2 text-black text-lg bg-green-500 transition-all cursor-pointer rounded-md duration-200 font-semibold hover:bg-green-400"
                             whileHover={{ scale: 1.02, y: -1 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -166,7 +166,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-3 bg-yellow-400 text-black outline-none transition-all cursor-pointer duration-200 hover:bg-yellow-300"
+                  className="relative p-3 bg-[#212121] text-white border-2 border-[#444444] outline-none transition-all cursor-pointer rounded-md duration-200 hover:bg-[#242424]"
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div animate={{ rotate: isMenuOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
@@ -198,7 +198,7 @@ const Header = () => {
 
         {/* Mobile Menu Content */}
         <motion.div
-          className="absolute top-16 sm:top-20 left-0 right-0 bg-zinc-950 text-white backdrop-blur-xl border-b border-zinc-800"
+          className="absolute top-16 sm:top-20 left-0 right-0 bg-[#222222] text-white "
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
@@ -246,11 +246,11 @@ const Header = () => {
                           },
                         }}
                       />
-                      <span className="text-zinc-100 text-sm">Signed in</span>
+                      <span className="text-zinc-100 text-md font-semibold">Signed in</span>
                     </div>
                     <SignOutButton>
                       <motion.button
-                        className="w-full px-3 py-3 text-black text-md font-semibold bg-cyan-400 hover:bg-cyan-300 transition-all cursor-pointer duration-200"
+                        className="w-full px-3 py-3 text-black text-md font-semibold bg-green-500 hover:bg-green-400 transition-all cursor-pointer rounded-md duration-200"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={closeMenu}

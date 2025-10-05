@@ -126,24 +126,24 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
 
   return (
     <motion.div
-      className={`w-full max-w-md mx-auto p-8 bg-black border-2 border-zinc-800 shadow-2xl ${className}`}
+      className={`w-full max-w-md mx-auto p-8 bg-[#141414] rounded-md  border-2 border-[#444444] shadow-2xl ${className}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.div className="flex mb-8 bg-zinc-950 border-2 border-zinc-800 p-1" variants={itemVariants}>
+      <motion.div className="flex mb-8 bg-zinc-950 border-2 border-zinc-800 p-2 rounded-md" variants={itemVariants}>
         <button
           onClick={() => setIsSignUp(false)}
-          className={`flex-1 py-3 px-4 text-sm font-bold tracking-wide transition-all duration-300 ${
-            !isSignUp ? "bg-cyan-400 text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-900"
+          className={`flex-1 py-2 px-2 text-sm font-bold tracking-wide transition-all duration-300 ${
+            !isSignUp ? "bg-green-500 rounded-md text-black" : "text-gray-300 hover:text-white rounded-md hover:bg-zinc-900"
           }`}
         >
           LOG IN
         </button>
         <button
           onClick={() => setIsSignUp(true)}
-          className={`flex-1 py-3 px-4 text-sm font-bold tracking-wide transition-all duration-300 ${
-            isSignUp ? "bg-cyan-400 text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-900"
+          className={`flex-1 py-2 px-2 text-sm font-bold tracking-wide transition-all duration-300 ${
+            isSignUp ? "bg-green-500 rounded-md text-black" : "text-gray-300 hover:text-white rounded-md hover:bg-zinc-900"
           }`}
         >
           SIGN UP
@@ -163,7 +163,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_github")}
           disabled={isLoading === "oauth_github" || !isLoaded}
-          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 border-2 border-zinc-700 hover:border-zinc-600 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 rounded-md  border-2 border-zinc-700 hover:border-zinc-600 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
@@ -181,7 +181,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_linkedin")}
           disabled={isLoading === "oauth_linkedin" || !isLoaded}
-          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 border-2 border-zinc-700 hover:border-blue-500/50 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 border-2 border-zinc-700 rounded-md  hover:border-blue-500/50 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"
@@ -199,7 +199,7 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         <motion.button
           onClick={() => handleSSOSignIn("oauth_huggingface")}
           disabled={isLoading === "oauth_huggingface" || !isLoaded}
-          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 border-2 border-zinc-700 hover:border-yellow-500/50 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 border-2 border-zinc-700 rounded-md  hover:border-yellow-500/50 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover="hover"
           whileTap="tap"

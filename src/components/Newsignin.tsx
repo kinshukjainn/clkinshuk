@@ -89,7 +89,7 @@ const NewsignIn: React.FC = () => {
   }, [getRedirectUrl, isSignUp])
 
   return (
-    <div className="min-h-screen pt-20 bg-black flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen pt-20 bg-[#1e1f20]  flex items-center justify-center relative overflow-hidden">
       {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 opacity-[0.02]"
@@ -111,7 +111,7 @@ const NewsignIn: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <div className="space-y-4">
-                <h1 className="text-3xl sm:text-2xl headline-kinshuk font-semibold text-white leading-tight tracking-tight">
+                <h1 className="text-3xl sm:text-2xl  font-semibold text-green-500 leading-tight tracking-tight">
                   {routeInfo.title}
                 </h1>
                 <p className="text-base sm:text-lg text-zinc-300 leading-relaxed font-medium">{routeInfo.subtitle}</p>
@@ -145,7 +145,7 @@ const NewsignIn: React.FC = () => {
           >
             <div className="space-y-6">
               <motion.h1
-                className="text-5xl xl:text-6xl headline-kinshuk font-bold text-white leading-tight tracking-tight"
+                className="text-5xl xl:text-6xl  font-bold text-green-500 leading-tight tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -153,7 +153,7 @@ const NewsignIn: React.FC = () => {
                 {routeInfo.title}
               </motion.h1>
               <motion.p
-                className="text-lg xl:text-xl text-zinc-300 leading-relaxed font-normal"
+                className="text-lg xl:text-xl text-gray-200 leading-relaxed font-normal"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -161,7 +161,7 @@ const NewsignIn: React.FC = () => {
                 {routeInfo.subtitle}
               </motion.p>
               <motion.p
-                className="text-base text-zinc-400 leading-relaxed max-w-lg"
+                className="text-base text-zinc-200 leading-relaxed max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -185,8 +185,8 @@ const NewsignIn: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                   whileHover={{ x: 8 }}
                 >
-                  <div className="p-3 bg-cyan-500 border border-cyan-400 transition-all duration-300 group-hover:bg-cyan-400 group-hover:border-cyan-300">
-                    <feature.icon className="w-5 h-5 text-black" />
+                  <div className="  transition-all duration-300">
+                    <feature.icon className="w-5 h-5 text-white" />
                   </div>
                   <span className="text-base font-medium text-zinc-200 group-hover:text-white transition-colors duration-300">
                     {feature.text}
@@ -205,7 +205,7 @@ const NewsignIn: React.FC = () => {
             <div className="w-full max-w-md xl:max-w-lg">
               <div className="relative">
                 <motion.div
-                  className="absolute inset-0 bg-cyan-500/10 border border-cyan-500/20"
+                  className="absolute inset-0"
                   animate={{
                     opacity: [0.5, 0.8, 0.5],
                   }}
@@ -216,7 +216,7 @@ const NewsignIn: React.FC = () => {
                   }}
                 />
                 <motion.div
-                  className="relative p-10 xl:p-12 bg-zinc-950 border border-zinc-800"
+                  className="relative p-10 xl:p-12"
                   whileHover={{ y: -4 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
