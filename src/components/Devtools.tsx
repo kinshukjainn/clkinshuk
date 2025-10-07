@@ -137,15 +137,15 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ scale: 1.02, y: -4 }}
-      className="bg-zinc-950 border border-zinc-800 p-6 h-full flex flex-col cursor-pointer transition-all duration-300 hover:border-cyan-500 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)] group"
+      className="bg-[#161616] border border-zinc-800 p-6 h-full flex flex-col cursor-pointer transition-all rounded-md duration-300 hover:border-green-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] group"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-3 bg-cyan-500 border border-cyan-400 group-hover:bg-cyan-400 transition-colors duration-300">
-          <section.icon className="w-6 h-6 text-black" />
+        <div className="p-3 bg-green-700  rounded-md transition-colors duration-300">
+          <section.icon className="w-6 h-6 text-white" />
         </div>
         <div>
-          <h2 className="text-2xl font-semibold headline-kinshuk text-white">{section.title}</h2>
+          <h2 className="text-2xl font-semibold  text-white">{section.title}</h2>
           <p className="text-sm text-zinc-400 uppercase tracking-wider">
             {section.items.length} item{section.items.length !== 1 ? "s" : ""}
           </p>
@@ -157,7 +157,7 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
         {section.items.map((item) => (
           <div
             key={item.name}
-            className="border-l-2 border-zinc-800 pl-4 group-hover:border-cyan-500 transition-colors duration-300"
+            className="border-l-2 border-zinc-800 pl-4 group-hover:border-green-500 transition-colors duration-300"
           >
             {item.category && (
               <div className="text-xs text-cyan-500 font-semibold uppercase tracking-wider mb-1">{item.category}</div>
@@ -174,9 +174,9 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
 // --- MAIN COMPONENT ---
 export default function Devtools() {
   return (
-    <main className="min-h-screen bg-black text-white relative overflow-hidden">
+    <main className="min-h-screen bg-[#1e1f20] text-white relative overflow-hidden">
       {/* Background grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#18181b_1px,transparent_1px),linear-gradient(to_bottom,#18181b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
+      
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
         {/* Header Section */}
@@ -186,11 +186,11 @@ export default function Devtools() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center bg-zinc-950 border border-zinc-800 px-4 py-2 gap-2 mb-6">
-            <Monitor className="w-5 h-5 text-cyan-500" />
-            <span className="text-sm font-semibold font-mono text-cyan-500 uppercase tracking-wider">My Digital Workspace</span>
+          <div className="inline-flex items-center bg-yellow-200 rounded-md  px-4 py-2 gap-2 mb-6">
+            <Monitor className="w-5 h-5 text-black" />
+            <span className="text-md font-semibold  text-black uppercase tracking-wider">My Digital Workspace</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl headline-kinshuk font-bold text-white mb-4">Development Setup</h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold text-white mb-4">Development Setup</h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-zinc-400 leading-relaxed">
             The tools, software, and hardware I use daily to code and design.
           </p>
@@ -216,19 +216,19 @@ export default function Devtools() {
           className="mt-20 pt-10 border-t border-zinc-800"
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className="bg-zinc-950 border border-zinc-800 p-6 text-center hover:border-cyan-500 transition-colors duration-300">
+            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-md  transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">
                 {setupData.reduce((acc, section) => acc + section.items.length, 0)}
               </div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Total Items</div>
             </div>
 
-            <div className="bg-zinc-950 border border-zinc-800 p-6 text-center hover:border-cyan-500 transition-colors duration-300">
+            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-md transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">{setupData.length}</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Categories</div>
             </div>
 
-            <div className="bg-zinc-950 border border-zinc-800 p-6 text-center col-span-2 hover:border-cyan-500 transition-colors duration-300">
+            <div className="bg-[#161616] border  rounded-md border-zinc-800 p-6 text-center col-span-2 hover:border-cyan-500 transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">2025</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Last Updated</div>
             </div>

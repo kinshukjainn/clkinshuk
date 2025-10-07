@@ -267,15 +267,15 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
   }, [])
 
   return (
-    <article className="group bg-zinc-950 border border-zinc-800 hover:border-cyan-500/50 transition-all duration-300">
+    <article className="group bg-[#161616] rounded-md border-2 border-[#444444] hover:border-cyan-500/50 transition-all duration-300">
       {/* Cover Image */}
-      <div className="relative h-32 sm:h-36 overflow-hidden bg-black">
+      <div className="relative h-32 sm:h-36 overflow-hidden bg-black rounded-md">
         {post.coverImage && !imageError ? (
           <>
             <img
               src={post.coverImage.url || "/placeholder.svg?height=144&width=256"}
               alt={post.title}
-              className={`w-full h-full object-cover transition-all duration-300 ${
+              className={`w-full h-full  object-cover transition-all duration-300 ${
                 imageLoaded ? "opacity-100 group-hover:scale-105" : "opacity-0"
               }`}
               loading="lazy"
@@ -284,7 +284,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
             />
             {!imageLoaded && (
               <div className="absolute inset-0 flex items-center justify-center bg-zinc-950">
-                <FaSpinner className="animate-spin text-cyan-500 text-lg" />
+                <FaSpinner className="animate-spin text-white  text-lg" />
               </div>
             )}
           </>
@@ -338,7 +338,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
             href={post.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-yellow-400 text-black hover:bg-yellow-300 text-xs font-bold uppercase tracking-wide transition-all duration-200"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-700 text-white  rounded-md text-sm font-semibold  tracking-wide transition-all duration-200"
           >
             Read
             <FaExternalLinkAlt className="w-3 h-3" />
@@ -449,7 +449,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className="relative">
       <div className="relative">
-        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-zinc-500 text-lg" />
+        <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white  text-lg" />
         <input
           ref={inputRef}
           type="text"
@@ -458,7 +458,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setSearchInput(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-12 pr-32 bg-zinc-950 py-4 border-2 border-zinc-800 focus:border-cyan-500 text-white outline-none placeholder-zinc-500 text-base transition-colors duration-200"
+          className="w-full pl-12 pr-32 bg-[#161616] py-3   rounded-md border-2 border-[#444444]  text-white outline-none placeholder-zinc-500 text-lg transition-colors duration-200"
         />
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
           {searchInput && (
@@ -468,12 +468,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 setSearchInput("")
                 setShowSuggestions(false)
               }}
-              className="text-zinc-500 hover:text-cyan-400 transition-colors duration-200"
+              className="text-white  transition-colors duration-200"
             >
               <FaTimes className="w-4 h-4" />
             </button>
           )}
-          <div className="hidden sm:flex items-center gap-1.5 text-xs text-zinc-400 font-mono bg-zinc-900 px-2 py-1 border border-zinc-800">
+          <div className="hidden sm:flex items-center gap-1.5 rounded-md text-md text-white  bg-zinc-900 px-3 py-1.5  border border-zinc-800">
             <FaKeyboard className="w-3 h-3" />
             ⌘K
           </div>
@@ -482,16 +482,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Suggestions */}
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-zinc-950 border border-zinc-800 z-50 max-h-60 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 rounded-md bg-[#161616] border border-zinc-800 z-50 max-h-60 overflow-y-auto">
           {suggestions.map((suggestion, index) => (
             <button
               key={`${suggestion.type}-${suggestion.value}`}
               onClick={() => handleSuggestionClick(suggestion)}
-              className={`w-full flex items-center gap-3 px-4 py-3 cursor-pointer text-left hover:bg-zinc-900 transition-colors duration-150 ${
+              className={`w-full flex items-center gap-3 px-4 py-3 cursor-pointer text-left rounded-md hover:bg-zinc-900 transition-colors duration-150 ${
                 index === selectedIndex ? "bg-zinc-900" : ""
-              } border-b border-zinc-800 last:border-b-0`}
+              }  last:border-b-0`}
             >
-              <div className="p-2 bg-cyan-500/10 text-cyan-500 border border-cyan-500/20">
+              <div className="p-2  text-white ">
                 {getSuggestionIcon(suggestion.type)}
               </div>
               <div className="flex-1 min-w-0">
@@ -551,7 +551,7 @@ const BlogPageContent: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-[#1e1f20] text-white flex items-center justify-center p-4">
         <div className="text-center max-w-md border border-zinc-800 p-8 bg-zinc-950">
           <FaExclamationTriangle className="text-yellow-400 text-5xl mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-white mb-3">Failed to Load Blog Posts</h2>
@@ -570,12 +570,12 @@ const BlogPageContent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20">
+    <div className="min-h-screen bg-[#1e1f20] text-white pt-20">
       {/* Hero Section */}
-      <section className="bg-black border-b border-zinc-800">
+      <section className="bg-[#1e1f20] border-b border-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 headline-kinshuk leading-tight">Read my Blogs</h1>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">Read my <span className="text-green-500 special-font ">Blogs</span> </h1>
             <p className="text-lg sm:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto">
               Exploring cloud computing, DevOps, and React development through curiosity and real-world experience.
             </p>
@@ -584,7 +584,7 @@ const BlogPageContent: React.FC = () => {
       </section>
 
       {/* Search */}
-      <div className="sticky top-0 z-40 bg-black border-b border-zinc-800">
+      <div className="sticky top-0 z-40 bg-[#1e1f20] border-b border-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <SearchBar
             searchInput={searchInput}

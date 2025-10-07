@@ -126,8 +126,8 @@ const NewsignIn: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <div className="relative">
-                <div className="absolute inset-0 bg-zinc-950 border border-zinc-800" />
-                <div className="relative p-8 bg-zinc-950/90 backdrop-blur-xl border border-zinc-800">
+                <div className="absolute inset-0 " />
+                <div className="relative p-3">
                   <Customauth redirectTo={getRedirectUrl} />
                 </div>
               </div>

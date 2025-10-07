@@ -338,7 +338,7 @@ export default function Home() {
                 <span className="animate-pulse-glow">_</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tighter  text-green-500  leading-none">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl special-font font-bold tracking-tighter  text-green-500  leading-none">
                 {CONFIG.personal.name}
               </h1>
 
