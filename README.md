@@ -142,3 +142,6 @@ If you’re interested in collaborating, discussing cloud solutions, or just sha
 
 ---
 
+## License
+
+This project is licensed under the [MIT License](./LICENSE) © 2025 Kinshuk Jain.
