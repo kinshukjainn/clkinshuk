@@ -5,6 +5,19 @@ import { Laptop, Code, Palette, Type, Monitor } from "lucide-react"
 import { motion, useInView, type Variants } from "framer-motion"
 import { useRef } from "react"
 
+const styles = `
+  .noise-bg {
+    background: #000000;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
+      radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
+      radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0);
+    background-size: 20px 20px, 30px 30px, 25px 25px;
+    background-position: 0 0, 10px 10px, 15px 5px;
+  }
+`
+
+
 // --- TYPE DEFINITIONS ---
 interface SetupItem {
   name: string
@@ -137,11 +150,11 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ scale: 1.02, y: -4 }}
-      className="bg-[#161616] border border-zinc-800 p-6 h-full flex flex-col cursor-pointer transition-all rounded-md duration-300 hover:border-green-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] group"
+      className="bg-black border border-zinc-800 p-6 h-full flex flex-col cursor-pointer transition-all rounded-3xl duration-300 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] group"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-3 bg-green-700  rounded-md transition-colors duration-300">
+        <div className="p-3 bg-blue-700  rounded-full transition-colors duration-300">
           <section.icon className="w-6 h-6 text-white" />
         </div>
         <div>
@@ -157,7 +170,7 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
         {section.items.map((item) => (
           <div
             key={item.name}
-            className="border-l-2 border-zinc-800 pl-4 group-hover:border-green-500 transition-colors duration-300"
+            className="border-l-2 border-zinc-800 pl-4 group-hover:border-blue-500 transition-colors duration-300"
           >
             {item.category && (
               <div className="text-xs text-cyan-500 font-semibold uppercase tracking-wider mb-1">{item.category}</div>
@@ -174,9 +187,17 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
 // --- MAIN COMPONENT ---
 export default function Devtools() {
   return (
+<>
+
+    <style>{styles}</style>
     <main className="min-h-screen bg-[#1e1f20] text-white relative overflow-hidden">
       {/* Background grid pattern */}
-      
+       <div className="absolute inset-0 z-0 noise-bg" />
+
+        {/* Grid overlay for visual interest */}
+        <div className="fixed inset-0 pointer-events-none opacity-[0.02] z-0">
+          <div className="absolute inset-0" />
+        </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
         {/* Header Section */}
@@ -186,9 +207,9 @@ export default function Devtools() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center bg-yellow-200 rounded-md  px-4 py-2 gap-2 mb-6">
-            <Monitor className="w-5 h-5 text-black" />
-            <span className="text-md font-semibold  text-black uppercase tracking-wider">My Digital Workspace</span>
+          <div className="inline-flex items-center border-blue-500 border-2  rounded-full  px-4 py-2 gap-2 mb-6">
+            <Monitor className="w-5 h-5 text-blue-500" />
+            <span className="text-md font-medium  text-white  tracking-wider">My Digital Workspace</span>
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold text-white mb-4">Development Setup</h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-zinc-400 leading-relaxed">
@@ -236,5 +257,6 @@ export default function Devtools() {
         </motion.div>
       </div>
     </main>
+</>
   )
 }

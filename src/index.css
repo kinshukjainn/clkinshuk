@@ -11,6 +11,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import "tailwindcss";
 
 .headline-kinshuk { 
@@ -19,11 +20,11 @@
 
 
 .special-font { 
-  font-family : 'Mozilla Headline' , monospace ;
+  font-family : 'Google Sans Code' , monospace ;
 }
 
 body {
-  font-family:  'Karla', sans-serif;
+  font-family:  'Inter', sans-serif;
   background-color: black;
 }
 
@@ -36,6 +37,8 @@ html {
 
 @layer base {
   html {
-    font-family: 'Karla', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 }
+
+

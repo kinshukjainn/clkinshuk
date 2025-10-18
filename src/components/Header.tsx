@@ -84,7 +84,7 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-[#121212] ">
+        <motion.div className="relative backdrop-blur-xl bg-black ">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20">
               {/* Logo Section */}
@@ -101,7 +101,7 @@ const Header = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
                     CloudKinshuk <span className="text-zinc-500">/</span>{" "}
-                    <span className=" text-green-400 text-md">{getPathText()}</span>
+                    <span className=" text-blue-400 text-md">{getPathText()}</span>
                   </motion.h1>
                 </Link>
               </motion.div>
