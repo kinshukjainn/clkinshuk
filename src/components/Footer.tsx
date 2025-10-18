@@ -18,15 +18,9 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-neutral-900 text-gray-100 relative overflow-hidden  backdrop-blur-xl">
+    <footer className="bg-black text-gray-100 relative overflow-hidden  backdrop-blur-xl">
       {/* Windows 11 style background blur overlay */}
       
-      {/* Subtle floating elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white  animate-pulse animation-delay-1000"></div>
-        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-white  animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-white  animate-pulse animation-delay-3000"></div>
-      </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Main content */}
@@ -34,7 +28,7 @@ const Footer = () => {
           {/* Logo and brand section */}
           <div className="text-center space-y-6">
             <div className="flex items-center justify-center gap-3 sm:gap-4">
-              <div className="relative p-3  bg-white/60 backdrop-blur-sm border border-white/20 shadow-lg">
+              <div className="relative p-3  bg-black backdrop-blur-sm  shadow-lg">
                 <span className="text-blue-600">
                   <FaCloud size={40} className="sm:w-12 sm:h-12 lg:w-14 lg:h-14 drop-shadow-sm" />
                 </span>

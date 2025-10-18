@@ -23,8 +23,8 @@ const NavLink = ({ to, isActive, label, onClick }: NavLinkProps) => (
     <motion.div
       className={`relative px-3 py-2 transition-all duration-200 ${
         isActive
-          ? "text-gray-900 rounded-md font-semibold hover:text-black bg-green-600"
-          : "text-white hover:bg-green-400 hover:text-black rounded-md  font-semibold"
+          ? "text-gray-900 rounded-full font-semibold hover:text-black bg-blue-400"
+          : "text-white hover:bg-blue-400 hover:text-black rounded-full font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -166,7 +166,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-3 bg-[#212121] text-white border-2 border-[#444444] outline-none transition-all cursor-pointer rounded-md duration-200 hover:bg-[#242424]"
+                  className="relative p-3 bg-blue-900 text-white  outline-none transition-all cursor-pointer rounded-full duration-200 "
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div animate={{ rotate: isMenuOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
@@ -198,7 +198,7 @@ const Header = () => {
 
         {/* Mobile Menu Content */}
         <motion.div
-          className="absolute top-16 sm:top-20 left-0 right-0 bg-[#222222] text-white "
+          className="absolute backdrop-blur-xl top-16 sm:top-20 left-0 right-0 bg-neutral-950 text-white "
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,

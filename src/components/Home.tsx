@@ -291,7 +291,7 @@ const SectionHeader: React.FC<{ icon: React.ElementType; title: string }> = ({ i
 
 // Tech Tag Component
 const TechTag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="inline-block py-1 px-2 border border-blue-500 text-white text-md font-mono rounded-full">
+  <span className="inline-block py-1 px-2 bg-neutral-900 text-white text-md  rounded-full">
     {children}
   </span>
 )
@@ -401,7 +401,7 @@ export default function Home() {
                       className="group flex items-center justify-between p-2 md:p-2  transition-colors hover:bg-neutral-800 cursor-pointer  rounded-full"
                     >
                       <div className="flex items-center gap-4 md:gap-6">
-                        <div className="flex items-center justify-center p-3 md:p-3 bg-neutral-900  rounded-l-full">
+                        <div className="flex items-center justify-center p-3 md:p-3 bg-neutral-900  rounded-full">
                           <Icon className="w-5 h-5 md:w-6 md:h-6 text-blue-300 group-hover:text-blue-500 transition-colors" />
                         </div>
                         <span className="text-lg md:text-xl font-medium text-white group-hover:text-blue-500  transition-colors">
@@ -427,7 +427,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="p-6 md:p-8 transition-colors border border-gray-700  rounded-3xl"
+                    className="p-6 md:p-8 transition-colors  bg-black rounded-3xl"
                   >
                     <div className="flex flex-col lg:flex-row justify-between lg:items-start gap-6">
                       <div className="flex-1 space-y-4">
@@ -494,9 +494,9 @@ export default function Home() {
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.3, delay: catIndex * 0.1 + index * 0.05 }}
                             whileHover={{ scale: 1.05 }}
-                            className="flex items-center gap-4 md:gap-4 p-2 md:p-6 rounded-full hover:bg-black hover:border-2 border-blue-500  transition-colors "
+                            className="flex items-center gap-4 md:gap-4 p-2 md:p-3 rounded-full bg-black  transition-colors "
                           >
-                            <div className="flex items-center justify-center p-3 md:p-3 bg-neutral-900  rounded-l-full">
+                            <div className="flex items-center justify-center p-3 md:p-3 bg-neutral-900  rounded-full">
                             <Icon className="w-6 h-6 md:w-6 md:h-6 text-blue-500 flex-shrink-0" />
                             </div>
                             <span className="text-md md:text-base font-medium text-white truncate">{skill.name}</span>
@@ -519,7 +519,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.2 }}
-                    className="flex flex-col p-6 md:p-8 transition-colors border border-blue-500 rounded-3xl"
+                    className="flex flex-col p-6 md:p-8 transition-colors bg-black rounded-3xl"
                   >
                     <div className="flex-grow space-y-4 md:space-y-6">
                       <div className="flex justify-between items-start pb-4 rounded-full">
@@ -558,7 +558,7 @@ export default function Home() {
                           <span className="text-md font-bold text-white uppercase tracking-wider">Docker Command</span>
                         </div>
                         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-1">
-                          <code className="text-sm md:text-md font-semibold text-green-400 font-mono  px-3 md:px-4 py-2 md:py-3 flex-1 overflow-x-auto border border-blue-500 roundedfull">
+                          <code className="text-sm md:text-md font-semibold text-green-400 font-mono  px-3 md:px-4 py-2 md:py-3 flex-1 overflow-x-auto bg-neutral-900 rounded-full">
                             {project.dockerCommand}
                           </code>
                           <CopyButton text={project.dockerCommand} />
@@ -574,7 +574,7 @@ export default function Home() {
             <AnimatedSection delay={0.6}>
               <SectionHeader icon={FaGraduationCap} title="Education" />
               <div className="space-y-6">
-                <div className="p-6 md:p-8 transition-colors border border-blue-500 rounded-3xl">
+                <div className="p-6 md:p-8 transition-colors bg-black rounded-3xl">
                   <div className="flex flex-col md:flex-row justify-between gap-6">
                     <div className="flex-1 space-y-4">
                       <div className="flex items-center gap-4">
