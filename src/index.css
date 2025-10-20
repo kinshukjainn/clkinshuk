@@ -15,17 +15,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
-.headline-kinshuk { 
- font-family: "IBM Plex Sans Condensed", sans-serif; 
-}
-
-
-.special-font { 
-  font-family : 'Google Sans Code' , monospace ;
-}
-
 body {
-  font-family:  'Segoe UI', sans-serif;
+  font-family:  'Verdana', sans-serif;
   background-color: black;
 }
 
@@ -38,8 +29,7 @@ html {
 
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Verdana', sans-serif;
   }
 }
-
 

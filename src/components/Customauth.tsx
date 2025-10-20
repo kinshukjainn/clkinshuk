@@ -1,51 +1,121 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { motion, type Variants } from "framer-motion"
-import { FaGithub, FaSignOutAlt, FaUser, FaSpinner, FaLinkedin } from "react-icons/fa"
+import { FaGithub, FaSignOutAlt, FaUser, FaSpinner, FaLinkedin, FaExclamationTriangle } from "react-icons/fa"
 import { SiHuggingface } from "react-icons/si"
-import { useAuth, useSignIn, useUser } from "@clerk/clerk-react"
+import { useAuth, useSignIn, useUser, useClerk } from "@clerk/clerk-react"
+import type { OAuthStrategy } from "@clerk/types"
 
 interface AuthComponentProps {
   className?: string
   redirectTo?: string
+  onSuccess?: () => void
+  onError?: (error: Error) => void
 }
 
-const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo = "/" }) => {
-  const { isSignedIn, signOut } = useAuth()
-  const { signIn, isLoaded } = useSignIn()
-  const { user } = useUser()
-  const [isLoading, setIsLoading] = useState<string | null>(null)
-  const [isSignUp, setIsSignUp] = useState(false)
+type LoadingState = OAuthStrategy | "signout" | null
 
-  const handleSSOSignIn = async (
-    provider: "oauth_github" | "oauth_gitlab" | "oauth_huggingface" | "oauth_linkedin",
-  ) => {
-    if (!isLoaded) return
+interface AuthError {
+  message: string
+  code?: string
+}
+
+const Customauth: React.FC<AuthComponentProps> = ({ 
+  className = "", 
+  redirectTo = "/",
+  onSuccess,
+  onError 
+}) => {
+  const { isSignedIn, isLoaded: authLoaded } = useAuth()
+  const { signIn, isLoaded: signInLoaded } = useSignIn()
+  const { user } = useUser()
+  const { signOut } = useClerk()
+  
+  const [isLoading, setIsLoading] = useState<LoadingState>(null)
+  const [isSignUp, setIsSignUp] = useState<boolean>(false)
+  const [error, setError] = useState<AuthError | null>(null)
+  const [mounted, setMounted] = useState<boolean>(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const isComponentLoaded = authLoaded && signInLoaded && mounted
+
+  const clearError = useCallback(() => {
+    setError(null)
+  }, [])
+
+  const handleSSOSignIn = useCallback(async (
+    provider: OAuthStrategy
+  ): Promise<void> => {
+    if (!signInLoaded || !signIn) {
+      setError({ message: "Authentication service is not ready. Please try again." })
+      return
+    }
+
     setIsLoading(provider)
+    clearError()
+
     try {
+      const redirectUrl = `${window.location.origin}/sso-callback`
+      const redirectUrlComplete = redirectTo.startsWith('http') 
+        ? redirectTo 
+        : `${window.location.origin}${redirectTo}`
+
       await signIn.authenticateWithRedirect({
         strategy: provider,
-        redirectUrl: "/sso-callback",
-        redirectUrlComplete: redirectTo,
+        redirectUrl,
+        redirectUrlComplete,
       })
-    } catch (error) {
-      console.error("Sign in error:", error)
+
+      onSuccess?.()
+    } catch (err) {
+      const error = err as Error & { errors?: Array<{ code: string; message: string }> }
+      const errorMessage = error.errors?.[0]?.message || error.message || "Authentication failed. Please try again."
+      const errorCode = error.errors?.[0]?.code
+      
+      setError({ 
+        message: errorMessage,
+        code: errorCode 
+      })
+      
+      onError?.(new Error(errorMessage))
+      console.error(`SSO Sign in error (${provider}):`, error)
+    } finally {
       setIsLoading(null)
     }
-  }
+  }, [signInLoaded, signIn, redirectTo, onSuccess, onError, clearError])
 
-  const handleSignOut = async () => {
+  const handleSignOut = useCallback(async (): Promise<void> => {
     setIsLoading("signout")
+    clearError()
+
     try {
       await signOut()
-    } catch (error) {
+      onSuccess?.()
+    } catch (err) {
+      const error = err as Error
+      const errorMessage = error.message || "Sign out failed. Please try again."
+      
+      setError({ message: errorMessage })
+      onError?.(new Error(errorMessage))
       console.error("Sign out error:", error)
     } finally {
       setIsLoading(null)
     }
-  }
+  }, [signOut, onSuccess, onError, clearError])
+
+  const handleGitHubAuth = useCallback(() => handleSSOSignIn("oauth_github"), [handleSSOSignIn])
+  const handleLinkedInAuth = useCallback(() => handleSSOSignIn("oauth_linkedin"), [handleSSOSignIn])
+  const handleHuggingFaceAuth = useCallback(() => handleSSOSignIn("oauth_huggingface"), [handleSSOSignIn])
+
+  const toggleAuthMode = useCallback(() => {
+    setIsSignUp(prev => !prev)
+    clearError()
+  }, [clearError])
 
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -83,7 +153,22 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
     },
   }
 
+  if (!isComponentLoaded) {
+    return (
+      <div className={`w-full max-w-md mx-auto p-8 bg-black border-2 border-zinc-800 shadow-2xl ${className}`}>
+        <div className="flex items-center justify-center py-12">
+          <FaSpinner className="animate-spin text-4xl text-cyan-400" />
+        </div>
+      </div>
+    )
+  }
+
   if (isSignedIn && user) {
+    const displayName = user.fullName || user.username || user.firstName || "User"
+    const displayEmail = user.primaryEmailAddress?.emailAddress || 
+                        user.emailAddresses[0]?.emailAddress || 
+                        "No email available"
+
     return (
       <motion.div
         className={`w-full max-w-md mx-auto p-8 bg-black border-2 border-zinc-800 shadow-2xl ${className}`}
@@ -92,26 +177,53 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         animate="visible"
       >
         <motion.div className="text-center mb-8" variants={itemVariants}>
-          <div className="w-20 h-20 mx-auto mb-6 bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center">
+          <div className="w-20 h-20 mx-auto mb-6 bg-zinc-900 border-2 border-zinc-700 flex items-center justify-center overflow-hidden">
             {user.imageUrl ? (
-              <img src={user.imageUrl || "/placeholder.svg"} alt="Profile" className="w-full h-full object-cover" />
+              <img 
+                src={user.imageUrl} 
+                alt={`${displayName}'s profile`} 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement
+                  target.style.display = 'none'
+                  const parent = target.parentElement
+                  if (parent) {
+                    parent.innerHTML = '<svg class="text-cyan-400 text-3xl w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>'
+                  }
+                }}
+              />
             ) : (
               <FaUser className="text-cyan-400 text-3xl" />
             )}
           </div>
           <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">Welcome back!</h2>
-          <p className="text-zinc-400 text-sm font-mono">
-            {user.emailAddresses[0]?.emailAddress || user.username || "User"}
+          <p className="text-zinc-400 text-sm font-mono break-all px-2">
+            {displayName}
+          </p>
+          <p className="text-zinc-500 text-xs font-mono mt-1 break-all px-2">
+            {displayEmail}
           </p>
         </motion.div>
+
+        {error && (
+          <motion.div 
+            className="mb-6 p-4 bg-red-950/50 border border-red-500/50 rounded text-sm text-red-300 flex items-start gap-2"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <FaExclamationTriangle className="text-red-400 mt-0.5 flex-shrink-0" />
+            <span>{error.message}</span>
+          </motion.div>
+        )}
 
         <motion.button
           onClick={handleSignOut}
           disabled={isLoading === "signout"}
           className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 border-2 border-zinc-700 hover:border-red-500/50 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
-          whileHover="hover"
-          whileTap="tap"
+          whileHover={isLoading === "signout" ? undefined : "hover"}
+          whileTap={isLoading === "signout" ? undefined : "tap"}
+          aria-label="Sign out"
         >
           {isLoading === "signout" ? (
             <FaSpinner className="animate-spin text-lg text-cyan-400" />
@@ -126,25 +238,33 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
 
   return (
     <motion.div
-      className={`w-full max-w-md  mx-auto p-8   ${className}`}
+      className={`w-full max-w-md mx-auto p-8 ${className}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <motion.div className="flex mb-8 bg-zinc-950  p-2 rounded-full" variants={itemVariants}>
+      <motion.div className="flex mb-8 bg-zinc-950 p-2 rounded-full" variants={itemVariants}>
         <button
-          onClick={() => setIsSignUp(false)}
+          aria-label="Switch to sign in"
+          onClick={toggleAuthMode}
+          disabled={!!isLoading}
           className={`flex-1 py-2 px-2 text-sm font-bold tracking-wide transition-all duration-300 ${
-            !isSignUp ? "bg-blue-500 rounded-full cursor-pointer text-black" : "text-gray-300 hover:text-white cursor-pointer rounded-full hover:bg-zinc-900"
+            !isSignUp 
+              ? "bg-blue-500 rounded-full cursor-pointer text-black" 
+              : "text-gray-300 hover:text-white cursor-pointer rounded-full hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50"
           }`}
         >
           LOG IN
         </button>
         <button
-          onClick={() => setIsSignUp(true)}
-          className={`flex-1 py-2 px-2 text-md font-bold tracking-wide transition-all duration-300 ${
-            isSignUp ? "bg-blue-500 cursor-pointer rounded-full text-black" : "text-gray-300 hover:text-white cursor-pointer rounded-full hover:bg-zinc-900"
+          onClick={toggleAuthMode}
+          disabled={!!isLoading}
+          className={`flex-1 py-2 px-2 text-sm font-bold tracking-wide transition-all duration-300 ${
+            isSignUp 
+              ? "bg-blue-500 cursor-pointer rounded-full text-black" 
+              : "text-gray-300 hover:text-white cursor-pointer rounded-full hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50"
           }`}
+          aria-label="Switch to sign up"
         >
           SIGN UP
         </button>
@@ -159,14 +279,29 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         </p>
       </motion.div>
 
+      {error && (
+        <motion.div 
+          className="mb-6 p-4 bg-red-950/50 border border-red-500/50 rounded text-sm text-red-300 flex items-start gap-2"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <FaExclamationTriangle className="text-red-400 mt-0.5 flex-shrink-0" />
+          <div>
+            <p>{error.message}</p>
+            {error.code && <p className="text-xs text-red-400 mt-1">Error code: {error.code}</p>}
+          </div>
+        </motion.div>
+      )}
+
       <motion.div className="space-y-4" variants={itemVariants}>
         <motion.button
-          onClick={() => handleSSOSignIn("oauth_github")}
-          disabled={isLoading === "oauth_github" || !isLoaded}
-          className="w-full bg-neutral-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 rounded-full  transition-all duration-300 flex items-center justify-center gap-3  cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+          onClick={handleGitHubAuth}
+          disabled={!!isLoading || !isComponentLoaded}
+          className="w-full bg-neutral-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 rounded-full transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
-          whileHover="hover"
-          whileTap="tap"
+          whileHover={isLoading ? undefined : "hover"}
+          whileTap={isLoading ? undefined : "tap"}
+          aria-label={`${isSignUp ? "Sign up" : "Login"} with GitHub`}
         >
           {isLoading === "oauth_github" ? (
             <FaSpinner className="animate-spin text-lg text-cyan-400" />
@@ -179,12 +314,13 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         </motion.button>
 
         <motion.button
-          onClick={() => handleSSOSignIn("oauth_linkedin")}
-          disabled={isLoading === "oauth_linkedin" || !isLoaded}
-          className="w-full bg-blue-800 text-white  font-semibold py-4 px-6  cursor-pointer rounded-full transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+          onClick={handleLinkedInAuth}
+          disabled={!!isLoading || !isComponentLoaded}
+          className="w-full bg-blue-800 hover:bg-blue-700 text-white font-semibold py-4 px-6 cursor-pointer rounded-full transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
-          whileHover="hover"
-          whileTap="tap"
+          whileHover={isLoading ? undefined : "hover"}
+          whileTap={isLoading ? undefined : "tap"}
+          aria-label={`${isSignUp ? "Sign up" : "Login"} with LinkedIn`}
         >
           {isLoading === "oauth_linkedin" ? (
             <FaSpinner className="animate-spin text-lg text-cyan-400" />
@@ -197,12 +333,13 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
         </motion.button>
 
         <motion.button
-          onClick={() => handleSSOSignIn("oauth_huggingface")}
-          disabled={isLoading === "oauth_huggingface" || !isLoaded}
-          className="w-full bg-zinc-900  text-white font-semibold py-4 px-6  cursor-pointer rounded-full  transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+          onClick={handleHuggingFaceAuth}
+          disabled={!!isLoading || !isComponentLoaded}
+          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 cursor-pointer rounded-full transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
-          whileHover="hover"
-          whileTap="tap"
+          whileHover={isLoading ? undefined : "hover"}
+          whileTap={isLoading ? undefined : "tap"}
+          aria-label={`${isSignUp ? "Sign up" : "Login"} with Hugging Face`}
         >
           {isLoading === "oauth_huggingface" ? (
             <FaSpinner className="animate-spin text-lg text-cyan-400" />
@@ -218,8 +355,21 @@ const Customauth: React.FC<AuthComponentProps> = ({ className = "", redirectTo =
       <motion.div className="mt-8 pt-6 border-t border-zinc-800 text-center" variants={itemVariants}>
         <p className="text-zinc-500 text-xs leading-relaxed">
           By {isSignUp ? "signing up" : "signing in"}, you agree to our{" "}
-          <span className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors">Terms of Service</span>{" "}
-          and <span className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors">Privacy Policy</span>
+          <button 
+            className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors underline"
+            onClick={() => window.open('/terms', '_blank')}
+            aria-label="View Terms of Service"
+          >
+            Terms of Service
+          </button>{" "}
+          and{" "}
+          <button 
+            className="text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors underline"
+            onClick={() => window.open('/privacy', '_blank')}
+            aria-label="View Privacy Policy"
+          >
+            Privacy Policy
+          </button>
         </p>
       </motion.div>
     </motion.div>

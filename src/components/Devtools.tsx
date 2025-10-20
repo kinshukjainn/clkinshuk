@@ -39,8 +39,13 @@ const setupData: SetupSection[] = [
     items: [
       {
         name: "Acer Swift 3",
-        description: "Intel i5 EVO • 8GB RAM • 512GB SSD • Windows 11 Home",
+        description: "Intel i5 EVO • 8GB RAM • 512GB SSD ",
         category: "Primary Machine",
+      },
+      {
+        name:"Windows 11 Home",
+        description: " Windows OS",
+        category: "Primary Operating System",
       },
       {
         name: "Back-Lit Keyboard",
@@ -59,7 +64,7 @@ const setupData: SetupSection[] = [
     icon: Code,
     items: [
       {
-        name: "Visual Studio Code",
+        name: "VS Code",
         description: "Primary code editor with an extensive extension ecosystem.",
         category: "Editor",
       },
@@ -72,6 +77,11 @@ const setupData: SetupSection[] = [
         name: "WSL2 Ubuntu",
         description: "Windows Subsystem for Linux with Ubuntu distribution.",
         category: "Terminal",
+      },
+      {
+        name: "AWS (Amazon Web Services)",
+        description: "Comprehensive cloud computing platform.",
+        category: "Primary Cloud Platform",
       },
     ],
   },
@@ -89,6 +99,11 @@ const setupData: SetupSection[] = [
         description: "Graphic design platform for quick visual content creation.",
         category: "Graphics",
       },
+      {
+        name: "Google Fonts",
+        description: "Library of free and open-source fonts.",
+        category: "Typography",
+      },
     ],
   },
   {
@@ -96,17 +111,17 @@ const setupData: SetupSection[] = [
     icon: Type,
     items: [
       {
-        name: "Menlo & Monaco",
+        name: "Iosevka Ligature",
         description: "Monospace fonts with programming ligature support.",
         category: "Code Font",
       },
       {
-        name: "Rubik | IBM Plex Sans",
+        name: "Verdana",
         description: "Modern sans-serif fonts optimized for UI readability.",
         category: "UI Font",
       },
       {
-        name: "Dark Modern",
+        name: "Copilot Theme",
         description: "A clean, default theme for VS Code by Microsoft.",
         category: "VS Code Theme",
       },
@@ -150,7 +165,7 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ scale: 1.02, y: -4 }}
-      className="bg-black border border-zinc-800 p-6 h-full flex flex-col cursor-pointer transition-all rounded-3xl duration-300 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] group"
+      className="bg-black border border-zinc-800 px-2 py-4 h-full flex flex-col cursor-pointer transition-all rounded-3xl duration-300 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] group"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
@@ -159,24 +174,24 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
         </div>
         <div>
           <h2 className="text-2xl font-semibold  text-white">{section.title}</h2>
-          <p className="text-sm text-zinc-400 uppercase tracking-wider">
+          <p className="text-md text-zinc-400 uppercase tracking-wider">
             {section.items.length} item{section.items.length !== 1 ? "s" : ""}
           </p>
         </div>
       </div>
 
       {/* Items List */}
-      <div className="space-y-6 flex-grow">
+      <div className="space-y-8 flex-grow">
         {section.items.map((item) => (
           <div
             key={item.name}
-            className="border-l-2 border-zinc-800 pl-4 group-hover:border-blue-500 transition-colors duration-300"
+            className="border-l-4 border-white  pl-4 group-hover:border-blue-500 transition-colors duration-300"
           >
             {item.category && (
-              <div className="text-xs text-cyan-500 font-semibold uppercase tracking-wider mb-1">{item.category}</div>
+              <div className="text-md text-cyan-500 font-medium uppercase tracking-wider mb-1">{item.category}</div>
             )}
-            <h3 className="font-semibold text-white text-lg mb-1">{item.name}</h3>
-            <p className="text-sm text-zinc-400 leading-relaxed">{item.description}</p>
+            <h3 className="font-normal text-white text-lg mb-1">{item.name}</h3>
+            <p className="text-sm text-zinc-200 leading-relaxed">{item.description}</p>
           </div>
         ))}
       </div>
@@ -237,19 +252,19 @@ export default function Devtools() {
           className="mt-20 pt-10 border-t border-zinc-800"
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-md  transition-colors duration-300">
+            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-3xl  transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">
                 {setupData.reduce((acc, section) => acc + section.items.length, 0)}
               </div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Total Items</div>
             </div>
 
-            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-md transition-colors duration-300">
+            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-3xl transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">{setupData.length}</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Categories</div>
             </div>
 
-            <div className="bg-[#161616] border  rounded-md border-zinc-800 p-6 text-center col-span-2 hover:border-cyan-500 transition-colors duration-300">
+            <div className="bg-[#161616] border  rounded-3xl border-zinc-800 p-6 text-center col-span-2 hover:border-cyan-500 transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">2025</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Last Updated</div>
             </div>
