@@ -16,17 +16,6 @@ interface RouteInfo {
   features: Array<{ icon: typeof Zap; text: string }>
 }
 
-const styles = `
-  .noise-bg {
-    background: #000000;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
-      radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
-      radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0);
-    background-size: 20px 20px, 30px 30px, 25px 25px;
-    background-position: 0 0, 10px 10px, 15px 5px;
-  }
-`
 
 
 interface LocationState {
@@ -104,18 +93,10 @@ const NewsignIn: React.FC = () => {
   return (
     <>
     
-    <style>{styles}</style>
-    <div className="min-h-screen pt-20 bg-black flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen pt-20 bg-[#181818] flex items-center justify-center relative overflow-hidden">
       {/* Subtle grid overlay */}
        <div className="absolute inset-0 z-0 noise-bg" />
 
-        {/* Grid overlay for visual interest */}
-        <div className="fixed inset-0 pointer-events-none opacity-[0.02] z-0">
-          <div className="absolute inset-0" />
-        </div>
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-      />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile */}
@@ -133,7 +114,7 @@ const NewsignIn: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <div className="space-y-4">
-                <h1 className="text-3xl sm:text-2xl  font-semibold text-blue-500 leading-tight tracking-tight">
+                <h1 className="text-3xl sm:text-2xl  font-semibold text-green-500 leading-tight tracking-tight">
                   {routeInfo.title}
                 </h1>
                 <p className="text-base sm:text-lg text-zinc-100 leading-relaxed font-medium">{routeInfo.subtitle}</p>
@@ -167,7 +148,7 @@ const NewsignIn: React.FC = () => {
           >
             <div className="space-y-6">
               <motion.h1
-                className="text-5xl xl:text-6xl  font-bold text-blue-500 font-mono leading-tight tracking-tight"
+                className="text-5xl xl:text-6xl  font-bold text-green-500 font-mono leading-tight tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -175,7 +156,7 @@ const NewsignIn: React.FC = () => {
                {"<"} {routeInfo.title} {"/>"}
               </motion.h1>
               <motion.p
-                className="text-lg xl:text-xl text-gray-200 leading-relaxed font-normal"
+                className="text-xl xl:text-2xl text-gray-200 leading-relaxed font-normal"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -183,7 +164,7 @@ const NewsignIn: React.FC = () => {
                 {routeInfo.subtitle}
               </motion.p>
               <motion.p
-                className="text-base text-zinc-200 leading-relaxed max-w-lg"
+                className="text-xl text-zinc-200 leading-relaxed max-w-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -210,7 +191,7 @@ const NewsignIn: React.FC = () => {
                   <div className="  transition-all duration-300">
                     <feature.icon className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-base font-medium text-zinc-200 group-hover:text-white transition-colors duration-300">
+                  <span className="text-lg font-medium text-zinc-200 group-hover:text-white transition-colors duration-300">
                     {feature.text}
                   </span>
                 </motion.div>

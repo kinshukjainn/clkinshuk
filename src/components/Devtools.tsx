@@ -5,17 +5,6 @@ import { Laptop, Code, Palette, Type, Monitor } from "lucide-react"
 import { motion, useInView, type Variants } from "framer-motion"
 import { useRef } from "react"
 
-const styles = `
-  .noise-bg {
-    background: #000000;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
-      radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
-      radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0);
-    background-size: 20px 20px, 30px 30px, 25px 25px;
-    background-position: 0 0, 10px 10px, 15px 5px;
-  }
-`
 
 
 // --- TYPE DEFINITIONS ---
@@ -204,15 +193,10 @@ export default function Devtools() {
   return (
 <>
 
-    <style>{styles}</style>
-    <main className="min-h-screen bg-[#1e1f20] text-white relative overflow-hidden">
+    <main className="min-h-screen bg-[#181818] text-white relative overflow-hidden">
       {/* Background grid pattern */}
        <div className="absolute inset-0 z-0 noise-bg" />
 
-        {/* Grid overlay for visual interest */}
-        <div className="fixed inset-0 pointer-events-none opacity-[0.02] z-0">
-          <div className="absolute inset-0" />
-        </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
         {/* Header Section */}

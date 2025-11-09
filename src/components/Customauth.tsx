@@ -243,38 +243,38 @@ const Customauth: React.FC<AuthComponentProps> = ({
       initial="hidden"
       animate="visible"
     >
-      <motion.div className="flex mb-8 bg-zinc-950 p-2 rounded-full" variants={itemVariants}>
+      <motion.div className="flex mb-8 bg-zinc-950 p-2 rounded-md" variants={itemVariants}>
         <button
           aria-label="Switch to sign in"
           onClick={toggleAuthMode}
           disabled={!!isLoading}
-          className={`flex-1 py-2 px-2 text-sm font-bold tracking-wide transition-all duration-300 ${
+          className={`flex-1 py-2 px-2 text-sm font-normal tracking-wide transition-all duration-300 ${
             !isSignUp 
-              ? "bg-blue-500 rounded-full cursor-pointer text-black" 
-              : "text-gray-300 hover:text-white cursor-pointer rounded-full hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50"
+              ? "border-b-4 border-white  cursor-pointer text-white" 
+              : "text-gray-300 hover:text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           }`}
         >
-          LOG IN
+          Log in
         </button>
         <button
           onClick={toggleAuthMode}
           disabled={!!isLoading}
-          className={`flex-1 py-2 px-2 text-sm font-bold tracking-wide transition-all duration-300 ${
+          className={`flex-1 py-2 px-2 text-sm font-normal tracking-wide transition-all duration-300 ${
             isSignUp 
-              ? "bg-blue-500 cursor-pointer rounded-full text-black" 
-              : "text-gray-300 hover:text-white cursor-pointer rounded-full hover:bg-zinc-900 disabled:cursor-not-allowed disabled:opacity-50"
+              ? "border-b-4 border-white  cursor-pointer text-white" 
+              : "text-gray-300 hover:text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           }`}
           aria-label="Switch to sign up"
         >
-          SIGN UP
+          Sign Up
         </button>
       </motion.div>
 
       <motion.div className="text-center mb-8" variants={itemVariants}>
-        <h1 className="text-3xl font-bold text-white mb-3 tracking-tight">
+        <h1 className="text-3xl font-bold text-green-500   mb-3 tracking-tight">
           {isSignUp ? "Create Account" : "Welcome Back"}
         </h1>
-        <p className="text-zinc-400 text-sm">
+        <p className="text-white  text-md">
           {isSignUp ? "Sign up to get started" : "Login to continue with your account"}
         </p>
       </motion.div>
@@ -297,7 +297,7 @@ const Customauth: React.FC<AuthComponentProps> = ({
         <motion.button
           onClick={handleGitHubAuth}
           disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-neutral-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 rounded-full transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-semibold  border-2 border-[#444444]   py-4 px-6 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover={isLoading ? undefined : "hover"}
           whileTap={isLoading ? undefined : "tap"}
@@ -316,7 +316,7 @@ const Customauth: React.FC<AuthComponentProps> = ({
         <motion.button
           onClick={handleLinkedInAuth}
           disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-blue-800 hover:bg-blue-700 text-white font-semibold py-4 px-6 cursor-pointer rounded-full transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-semibold  border-2 border-[#444444]   py-4 px-6 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover={isLoading ? undefined : "hover"}
           whileTap={isLoading ? undefined : "tap"}
@@ -335,7 +335,7 @@ const Customauth: React.FC<AuthComponentProps> = ({
         <motion.button
           onClick={handleHuggingFaceAuth}
           disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-semibold py-4 px-6 cursor-pointer rounded-full transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-[#252525] hover:bg-[#232323] border-2 border-[#444444] text-white font-semibold py-4 px-6 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover={isLoading ? undefined : "hover"}
           whileTap={isLoading ? undefined : "tap"}

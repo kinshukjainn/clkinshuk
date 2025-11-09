@@ -23,10 +23,10 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-4 py-2 transition-all duration-200 flex items-center gap-2 ${
+      className={`relative px-2 py-2 transition-all duration-200 flex items-center gap-4 ${
         isActive
-          ? "text-gray-900 rounded-full font-semibold hover:text-black bg-blue-400"
-          : "text-white hover:bg-blue-400 hover:text-black rounded-full font-semibold"
+          ? "text-white  rounded-md font-semibold hover:text-white  bg-[#303030]"
+          : "text-white hover:bg-[#303030] hover:text-white rounded-md font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -89,7 +89,7 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-black">
+        <motion.div className="relative backdrop-blur-xl bg-[#141414] border-b border-black">
           <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
               {/* Logo Section - Enhanced Horizontal Layout */}
@@ -112,14 +112,13 @@ const Header = () => {
                     
                     {/* Route Badge - Small with Icon */}
                     <motion.div
-                      className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 md:px-3 py-1 sm:py-1.5 bg-blue-600 rounded-md sm:rounded-lg shadow-lg"
-                      whileHover={{ scale: 1.05, backgroundColor: "#2563eb" }}
-                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                      className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-2.5 md:px-3 py-2 sm:py-1.5 bg-[#303030] rounded-md  border border-black sm:rounded-lg shadow-lg"
+                      whileHover={{ scale: 1.05, backgroundColor: "#323232" }}
                     >
                       <span className="text-white flex items-center">
                         {pathInfo.icon}
                       </span>
-                      <span className="text-[10px] sm:text-xs md:text-sm text-white font-semibold whitespace-nowrap">
+                      <span className="text-sm sm:text-sm md:text-md text-white font-normal whitespace-nowrap">
                         {pathInfo.text}
                       </span>
                     </motion.div>
@@ -160,7 +159,7 @@ const Header = () => {
                         />
                         <SignOutButton>
                           <motion.button
-                            className="px-4 py-2 text-black text-base bg-blue-500 transition-all cursor-pointer rounded-full duration-200 font-semibold hover:bg-blue-400"
+                            className="px-3 py-1 text-white text-base bg-[#323232] transition-all cursor-pointer rounded-md duration-200 font-normal hover:bg-[#303030]"
                             whileHover={{ scale: 1.02, y: -1 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -187,7 +186,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-2 sm:p-3 bg-blue-900 text-white outline-none transition-all cursor-pointer rounded-full duration-200"
+                  className="relative p-2 sm:p-3 bg-[#303030] text-white outline-none transition-all cursor-pointer rounded-md duration-200"
                   whileTap={{ scale: 0.95 }}
                   aria-label="Toggle menu"
                 >
@@ -220,7 +219,7 @@ const Header = () => {
 
         {/* Mobile Menu Content */}
         <motion.div
-          className="absolute backdrop-blur-xl top-16 sm:top-20 md:top-24 left-0 right-0 bg-neutral-950 text-white"
+          className="absolute backdrop-blur-xl top-16 sm:top-20 md:top-24 left-0 right-0 bg-[#222222] text-white"
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
@@ -268,11 +267,11 @@ const Header = () => {
                           },
                         }}
                       />
-                      <span className="text-zinc-100 text-sm sm:text-base font-semibold">Signed in</span>
+                      <span className="text-zinc-100 text-sm sm:text-base font-semibold">Blogs</span>
                     </div>
                     <SignOutButton>
                       <motion.button
-                        className="w-full px-3 py-2.5 sm:py-3 text-black text-sm sm:text-base font-semibold bg-green-500 hover:bg-green-400 transition-all cursor-pointer rounded-full duration-200"
+                        className="w-full px-3 py-2.5 sm:py-3 text-black text-sm sm:text-base font-semibold bg-green-500 hover:bg-green-400 transition-all cursor-pointer rounded-md duration-200"
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
                         onClick={closeMenu}
