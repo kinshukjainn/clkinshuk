@@ -245,7 +245,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
   }, [])
 
   return (
-    <article className="group bg-zinc-900/50 backdrop-blur-sm rounded-4xl border border-zinc-800 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 overflow-hidden">
+    <article className="  rounded-md   transition-all duration-300 overflow-hidden">
       {/* Cover Image */}
       <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden bg-zinc-950">
         {post.coverImage && !imageError ? (
@@ -437,7 +437,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setSearchInput(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 bg-zinc-900/50 backdrop-blur-xl py-3 sm:py-3.5 rounded-full   focus:border-cyan-500 text-white outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
+          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border-b-2 border-white  py-2 sm:py-2.5 rounded-sm   text-white outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
         />
         <div className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1.5 sm:gap-2">
           {searchInput && (
@@ -493,18 +493,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     </div>
   )
 }
-
-const styles = `
-  .noise-bg {
-    background: #000000;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
-      radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
-      radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0);
-    background-size: 20px 20px, 30px 30px, 25px 25px;
-    background-position: 0 0, 10px 10px, 15px 5px;
-  }
-`
 
 const BlogPageContent: React.FC = () => {
   const [searchInput, setSearchInput] = useState("")
@@ -562,7 +550,6 @@ const BlogPageContent: React.FC = () => {
 
   return (
     <>
-      <style>{styles}</style>
       <div className="min-h-screen noise-bg text-white relative overflow-x-hidden">
         <div className="relative z-10">
         {/* Hero Section */}

@@ -154,13 +154,11 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ scale: 1.02, y: -4 }}
-      className="bg-black border border-zinc-800 px-2 py-4 h-full flex flex-col cursor-pointer transition-all rounded-3xl duration-300 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] group"
+      className=" px-2 py-4 h-full flex flex-col cursor-pointer"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-3 bg-blue-700  rounded-full transition-colors duration-300">
           <section.icon className="w-6 h-6 text-white" />
-        </div>
         <div>
           <h2 className="text-2xl font-semibold  text-white">{section.title}</h2>
           <p className="text-md text-zinc-400 uppercase tracking-wider">
@@ -193,7 +191,7 @@ export default function Devtools() {
   return (
 <>
 
-    <main className="min-h-screen bg-[#181818] text-white relative overflow-hidden">
+    <main className="min-h-screen bg-black text-white relative overflow-hidden">
       {/* Background grid pattern */}
        <div className="absolute inset-0 z-0 noise-bg" />
 
@@ -206,11 +204,11 @@ export default function Devtools() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center border-blue-500 border-2  rounded-full  px-4 py-2 gap-2 mb-6">
+          <div className="inline-flex items-center  border-b-4 border-blue-500  px-4 py-2 gap-2 mb-6">
             <Monitor className="w-5 h-5 text-blue-500" />
-            <span className="text-md font-medium  text-white  tracking-wider">My Digital Workspace</span>
+            <span className="text-md font-medium   text-white  tracking-wider">My Digital Workspace</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold text-white mb-4">Development Setup</h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold  text-white mb-4">Development Setup</h1>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-zinc-400 leading-relaxed">
             The tools, software, and hardware I use daily to code and design.
           </p>
@@ -236,19 +234,19 @@ export default function Devtools() {
           className="mt-20 pt-10 border-t border-zinc-800"
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-3xl  transition-colors duration-300">
+            <div className=" text-center transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">
                 {setupData.reduce((acc, section) => acc + section.items.length, 0)}
               </div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Total Items</div>
             </div>
 
-            <div className="bg-[#161616] border border-zinc-800 p-6 text-center hover:border-cyan-500 rounded-3xl transition-colors duration-300">
+            <div className=" text-center transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">{setupData.length}</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Categories</div>
             </div>
 
-            <div className="bg-[#161616] border  rounded-3xl border-zinc-800 p-6 text-center col-span-2 hover:border-cyan-500 transition-colors duration-300">
+            <div className=" text-center col-span-2 transition-colors duration-300">
               <div className="text-3xl font-bold text-cyan-500">2025</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Last Updated</div>
             </div>

@@ -89,7 +89,7 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-[#141414] border-b border-black">
+        <motion.div className="relative backdrop-blur-xl bg-black">
           <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
               {/* Logo Section - Enhanced Horizontal Layout */}

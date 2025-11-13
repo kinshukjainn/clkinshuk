@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useCallback, useEffect } from "react"
 import { motion, type Variants } from "framer-motion"
-import { FaGithub, FaSignOutAlt, FaUser, FaSpinner, FaLinkedin, FaExclamationTriangle } from "react-icons/fa"
+import { FaGithub, FaSignOutAlt, FaUser, FaSpinner,  FaExclamationTriangle } from "react-icons/fa"
 import { SiHuggingface } from "react-icons/si"
 import { useAuth, useSignIn, useUser, useClerk } from "@clerk/clerk-react"
 import type { OAuthStrategy } from "@clerk/types"
@@ -109,7 +109,6 @@ const Customauth: React.FC<AuthComponentProps> = ({
   }, [signOut, onSuccess, onError, clearError])
 
   const handleGitHubAuth = useCallback(() => handleSSOSignIn("oauth_github"), [handleSSOSignIn])
-  const handleLinkedInAuth = useCallback(() => handleSSOSignIn("oauth_linkedin"), [handleSSOSignIn])
   const handleHuggingFaceAuth = useCallback(() => handleSSOSignIn("oauth_huggingface"), [handleSSOSignIn])
 
   const toggleAuthMode = useCallback(() => {
@@ -297,7 +296,7 @@ const Customauth: React.FC<AuthComponentProps> = ({
         <motion.button
           onClick={handleGitHubAuth}
           disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-semibold  border-2 border-[#444444]   py-4 px-6 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-normal    py-2 px-4 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover={isLoading ? undefined : "hover"}
           whileTap={isLoading ? undefined : "tap"}
@@ -313,29 +312,11 @@ const Customauth: React.FC<AuthComponentProps> = ({
           </span>
         </motion.button>
 
-        <motion.button
-          onClick={handleLinkedInAuth}
-          disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-semibold  border-2 border-[#444444]   py-4 px-6 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
-          variants={buttonVariants}
-          whileHover={isLoading ? undefined : "hover"}
-          whileTap={isLoading ? undefined : "tap"}
-          aria-label={`${isSignUp ? "Sign up" : "Login"} with LinkedIn`}
-        >
-          {isLoading === "oauth_linkedin" ? (
-            <FaSpinner className="animate-spin text-lg text-cyan-400" />
-          ) : (
-            <FaLinkedin className="text-white text-xl group-hover:text-blue-300 transition-colors" />
-          )}
-          <span className="tracking-wide">
-            {isLoading === "oauth_linkedin" ? "Connecting..." : `${isSignUp ? "Sign up" : "Login"} via LinkedIn`}
-          </span>
-        </motion.button>
 
         <motion.button
           onClick={handleHuggingFaceAuth}
           disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-[#252525] hover:bg-[#232323] border-2 border-[#444444] text-white font-semibold py-4 px-6 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-normal    py-2 px-4 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover={isLoading ? undefined : "hover"}
           whileTap={isLoading ? undefined : "tap"}

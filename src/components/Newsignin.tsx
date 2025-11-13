@@ -93,7 +93,7 @@ const NewsignIn: React.FC = () => {
   return (
     <>
     
-    <div className="min-h-screen pt-20 bg-[#181818] flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen pt-20 bg-black flex items-center justify-center relative overflow-hidden">
       {/* Subtle grid overlay */}
        <div className="absolute inset-0 z-0 noise-bg" />
 

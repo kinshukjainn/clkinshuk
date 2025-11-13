@@ -246,7 +246,7 @@ export default function Home() {
             <span>{CONFIG.personal.location}</span>
           </div>
 
-          <div className="inline-block px-2 sm:px-3 py-1 bg-gray-900 text-green-400 text-xs sm:text-sm rounded">
+          <div className="inline-block px-2 sm:px-3 py-1  bg-red-500/20 text-green-400 text-xs sm:text-sm rounded">
             {CONFIG.personal.status}
           </div>
         </header>
@@ -296,8 +296,8 @@ export default function Home() {
                     </div>
                   </div>
                   <span
-                    className={`px-2 py-1 text-xs rounded whitespace-nowrap ${
-                      project.status === "Live" ? "bg-green-900 text-green-400" : "bg-yellow-900 text-yellow-400"
+                    className={`px-2 py-1 text-xs rounded w-max ${
+                      project.status === "Live" ? "bg-green-900 text-green-400" : "bg-yellow-900  text-yellow-400"
                     }`}
                   >
                     {project.status}
@@ -404,7 +404,7 @@ export default function Home() {
                     </div>
                   </div>
                   <span
-                    className={`px-2 py-1 text-xs rounded whitespace-nowrap ${
+                    className={`px-2 py-1 text-xs rounded w-max whitespace-nowrap ${
                       cert.status === "Completed" ? "bg-yellow-200 text-black" : "bg-yellow-500 text-black"
                     }`}
                   >
@@ -453,7 +453,7 @@ export default function Home() {
                   <p className="text-gray-400">{CONFIG.education.period}</p>
                 </div>
               </div>
-              <span className="px-2 py-1 bg-green-900 text-green-400 text-xs rounded whitespace-nowrap">
+              <span className="px-2 py-1 bg-green-900 text-green-400 text-xs rounded w-max whitespace-nowrap">
                 {CONFIG.education.status}
               </span>
             </div>
