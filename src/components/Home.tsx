@@ -227,8 +227,8 @@ export default function Home() {
         {/* Header */}
         <header className="mb-10 sm:mb-12 md:mb-16 border-b-2 border-[#FFB86C] pb-8">
           <div className="mb-6 sm:mb-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2">KINSHUK JAIN</h1>
-            <div className="text-sm sm:text-base text-gray-400">$ whoami</div>
+            <div className="text-md font-bold sm:text-base text-red-500">$ whoami</div>
+            <h1 className="text-5xl sm:text-6xl text-[#ffb86c] md:text-6xl font-bold mb-2">KINSHUK JAIN</h1>
           </div>
 
           <div className="space-y-3 sm:space-y-4 mb-6">
@@ -252,7 +252,7 @@ export default function Home() {
 
         {/* Connect */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+          <h2 className="text-xl sm:text-2xl text-[#ffb86c] md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ ls -la ~/connect
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
@@ -270,8 +270,8 @@ export default function Home() {
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span className="text-xs sm:text-sm font-bold truncate">{social.platform}</span>
-                    <span className="text-xs sm:text-sm truncate">{social.handle}</span>
+                    <span className="text-sm text-[#ffb86c] sm:text-md font-bold truncate">{social.platform}</span>
+                    <span className="text-sm sm:text-md truncate">{social.handle}</span>
                   </div>
                 </a>
               )
@@ -279,9 +279,10 @@ export default function Home() {
           </div>
         </section>
 
+
         {/* Projects */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ cat ~/projects/*
           </h2>
           <div className="space-y-6 sm:space-y-8">
@@ -289,7 +290,7 @@ export default function Home() {
               <div key={project.title} className="border-2 bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                   <div className="min-w-0">
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">[ {project.title} ]</h3>
+                    <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-2">[ {project.title} ]</h3>
                     <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
                       <span>{project.type}</span>
                       <span>|</span>
@@ -358,13 +359,13 @@ export default function Home() {
 
         {/* Skills */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ grep -r skills ~/
           </h2>
           <div className="space-y-6 border-2 border-[#ffb86c] rounded-lg bg-[#222223] sm:space-y-8">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
               <div key={category} className=" rounded-md  p-4 sm:p-5">
-                <h3 className="text-sm sm:text-base font-bold mb-3 sm:mb-4">
+                <h3 className="text-sm text-[#ffb86c] sm:text-base font-bold mb-3 sm:mb-4">
                   [{category.toUpperCase()}]
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -388,7 +389,7 @@ export default function Home() {
 
         {/* Certifications */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+          <h2 className="text-xl  text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ find ~/certifications -type f
           </h2>
           <div className="space-y-4 sm:space-y-5">
@@ -396,7 +397,7 @@ export default function Home() {
               <div key={cert.title} className="border-2 bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-5">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base sm:text-lg font-bold mb-2">[ {cert.title} ]</h3>
+                    <h3 className="text-base text-[#ffb86c] sm:text-lg font-bold mb-2">[ {cert.title} ]</h3>
                     <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-400">
                       <span>{cert.organization}</span>
                       <span>|</span>
@@ -438,13 +439,13 @@ export default function Home() {
 
         {/* Education */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ more ~/education
           </h2>
           <div className="border-2 rounded-lg bg-[#222223] border-[#FFB86C] p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
               <div className="min-w-0">
-                <h3 className="text-lg sm:text-xl font-bold mb-2">[ {CONFIG.education.degree} ]</h3>
+                <h3 className="text-lg sm:text-xl text-[#ffb86c] font-bold mb-2">[ {CONFIG.education.degree} ]</h3>
                 <p className="text-base sm:text-lg mb-3">{CONFIG.education.field}</p>
                 <div className="space-y-1 text-xs sm:text-sm">
                   <p>{CONFIG.education.institution}</p>

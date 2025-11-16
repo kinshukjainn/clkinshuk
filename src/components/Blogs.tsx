@@ -277,7 +277,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
       {/* Content */}
       <div className="p-4 sm:p-5">
         {/* Title */}
-        <h2 className="text-base sm:text-lg font-bold text-white leading-snug mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors duration-200">
+        <h2 className="text-base sm:text-lg font-bold text-[#ffb86c] leading-snug mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors duration-200">
           {highlightText(post.title, searchQuery)}
         </h2>
 

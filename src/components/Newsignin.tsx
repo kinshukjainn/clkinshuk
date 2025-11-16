@@ -114,7 +114,7 @@ const NewsignIn: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <div className="space-y-4">
-                <h1 className="text-3xl sm:text-2xl  font-semibold text-green-500 leading-tight tracking-tight">
+                <h1 className="text-3xl sm:text-2xl  font-semibold text-[#ffb86c] leading-tight tracking-tight">
                   {routeInfo.title}
                 </h1>
                 <p className="text-base sm:text-lg text-zinc-100 leading-relaxed font-medium">{routeInfo.subtitle}</p>
@@ -148,7 +148,7 @@ const NewsignIn: React.FC = () => {
           >
             <div className="space-y-6">
               <motion.h1
-                className="text-5xl xl:text-6xl  font-bold text-green-500  leading-tight tracking-tight"
+                className="text-5xl xl:text-6xl  font-bold text-[#ffb86c]  leading-tight tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -188,8 +188,8 @@ const NewsignIn: React.FC = () => {
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                   whileHover={{ x: 8 }}
                 >
-                  <div className="  transition-all duration-300">
-                    <feature.icon className="w-5 h-5 text-white" />
+                  <div className="  transition-all bg-[#121212] p-3 rounded-md duration-300">
+                    <feature.icon className="w-5 h-5 text-[#ffb86c]" />
                   </div>
                   <span className="text-lg font-medium text-zinc-200 group-hover:text-white transition-colors duration-300">
                     {feature.text}

@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
 import { FiMenu, FiX, FiHome, FiFileText, FiSettings } from "react-icons/fi"
 import { UserButton, useUser, SignOutButton } from "@clerk/clerk-react"
+import { MdSafetyCheck } from "react-icons/md";
 
 interface NavItem {
   path: string
@@ -55,10 +56,10 @@ const Header = () => {
 
   const getPathInfo = (): { text: string; icon: React.ReactNode } => {
     const { pathname } = location
-    if (pathname.startsWith("/gears")) return { text: "DevTools", icon: <FiSettings className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> }
-    if (pathname.startsWith("/blogs")) return { text: "Blogs", icon: <FiFileText className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> }
-    if (pathname.startsWith("/sign-in")) return { text: "Verify", icon: <FiHome className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> }
-    return { text: "Home", icon: <FiHome className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> }
+    if (pathname.startsWith("/gears")) return { text: "DevTools", icon: <FiSettings className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
+    if (pathname.startsWith("/blogs")) return { text: "Blogs", icon: <FiFileText className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
+    if (pathname.startsWith("/sign-in")) return { text: "Verify", icon: <MdSafetyCheck  className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
+    return { text: "Home", icon: <FiHome className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
   }
 
   const isActiveRoute = (path: string): boolean => location.pathname.startsWith(path) || location.pathname === path
@@ -75,7 +76,7 @@ const Header = () => {
 
   const navItems: NavItem[] = [
     { path: "/blogs", label: "Blogs", icon: <FiFileText /> },
-    { path: "/gears", label: "Dev Setup", icon: <FiSettings /> },
+    { path: "/gears", label: "Devlopment Setup", icon: <FiSettings /> },
   ]
 
   const pathInfo = getPathInfo()
@@ -112,8 +113,7 @@ const Header = () => {
                     
                     {/* Route Badge - Small with Icon */}
                     <motion.div
-                      className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-2.5 md:px-3 py-2 sm:py-1.5   border-2 border-[#FFB86C]  shadow-lg"
-                      whileHover={{ scale: 1.05, backgroundColor: "#323232" }}
+                      className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-2.5 md:px-3 py-2 sm:py-1.5   border-l-3 border-[#FFB86C]"
                     >
                       <span className="text-white flex items-center">
                         {pathInfo.icon}
@@ -186,7 +186,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-2 sm:p-3 bg-[#303030] text-white outline-none transition-all cursor-pointer rounded-md duration-200"
+                  className="relative p-2 sm:p-3 bg-[#222223] text-[#ffb86c] outline-none transition-all cursor-pointer rounded-md duration-200"
                   whileTap={{ scale: 0.95 }}
                   aria-label="Toggle menu"
                 >
@@ -219,7 +219,7 @@ const Header = () => {
 
         {/* Mobile Menu Content */}
         <motion.div
-          className="absolute backdrop-blur-xl top-16 sm:top-20 md:top-24 left-0 right-0 bg-black text-white"
+          className="absolute  top-16 sm:top-20 md:top-24 left-0 right-0 bg-black text-white"
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
