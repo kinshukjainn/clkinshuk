@@ -247,25 +247,25 @@ const Customauth: React.FC<AuthComponentProps> = ({
           aria-label="Switch to sign in"
           onClick={toggleAuthMode}
           disabled={!!isLoading}
-          className={`flex-1 py-2 px-2 text-sm font-normal tracking-wide transition-all duration-300 ${
+          className={`flex-1 py-2 px-2 text-md font-normal tracking-wide transition-all duration-300 ${
             !isSignUp 
               ? "border-b-4 border-white  cursor-pointer text-white" 
               : "text-gray-300 hover:text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           }`}
         >
-          Log in
+          LOG IN
         </button>
         <button
           onClick={toggleAuthMode}
           disabled={!!isLoading}
-          className={`flex-1 py-2 px-2 text-sm font-normal tracking-wide transition-all duration-300 ${
+          className={`flex-1 py-2 px-2 text-md font-normal tracking-wide transition-all duration-300 ${
             isSignUp 
               ? "border-b-4 border-white  cursor-pointer text-white" 
               : "text-gray-300 hover:text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           }`}
           aria-label="Switch to sign up"
         >
-          Sign Up
+          SIGN UP
         </button>
       </motion.div>
 
@@ -296,18 +296,18 @@ const Customauth: React.FC<AuthComponentProps> = ({
         <motion.button
           onClick={handleGitHubAuth}
           disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-normal    py-2 px-4 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-[#ffb86c] text-black font-semibold    py-2 px-4  transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover={isLoading ? undefined : "hover"}
           whileTap={isLoading ? undefined : "tap"}
           aria-label={`${isSignUp ? "Sign up" : "Login"} with GitHub`}
         >
           {isLoading === "oauth_github" ? (
-            <FaSpinner className="animate-spin text-lg text-cyan-400" />
+            <FaSpinner className="animate-spin text-lg text-black" />
           ) : (
-            <FaGithub className="text-white text-xl group-hover:text-cyan-400 transition-colors" />
+            <FaGithub className="text-black text-xl  transition-colors" />
           )}
-          <span className="tracking-wide">
+          <span className="tracking-wide text-black">
             {isLoading === "oauth_github" ? "Connecting..." : `${isSignUp ? "Sign up" : "Login"} via GitHub`}
           </span>
         </motion.button>
@@ -316,18 +316,18 @@ const Customauth: React.FC<AuthComponentProps> = ({
         <motion.button
           onClick={handleHuggingFaceAuth}
           disabled={!!isLoading || !isComponentLoaded}
-          className="w-full bg-[#252525] hover:bg-[#232323] text-white font-normal    py-2 px-4 rounded-md transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
+          className="w-full bg-[#ffb86c] text-black font-semibold    py-2 px-4  transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed group"
           variants={buttonVariants}
           whileHover={isLoading ? undefined : "hover"}
           whileTap={isLoading ? undefined : "tap"}
           aria-label={`${isSignUp ? "Sign up" : "Login"} with Hugging Face`}
         >
           {isLoading === "oauth_huggingface" ? (
-            <FaSpinner className="animate-spin text-lg text-cyan-400" />
+            <FaSpinner className="animate-spin text-lg black" />
           ) : (
-            <SiHuggingface className="text-yellow-400 text-xl group-hover:text-yellow-300 transition-colors" />
+            <SiHuggingface className="text-black text-xl  transition-colors" />
           )}
-          <span className="tracking-wide">
+          <span className="tracking-wide text-black">
             {isLoading === "oauth_huggingface" ? "Connecting..." : `${isSignUp ? "Sign up" : "Login"} via Hugging Face`}
           </span>
         </motion.button>

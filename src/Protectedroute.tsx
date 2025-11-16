@@ -11,7 +11,7 @@ interface ProtectedRouteProps {
 
 
 const LoadingSpinner: React.FC = () => (
-  <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 flex items-center justify-center">
+  <div className="min-h-screen bg-[#18181b] flex items-center justify-center">
     <div className="text-center space-y-6">
       {/* Loading Spinner */}
       <motion.div
@@ -19,7 +19,7 @@ const LoadingSpinner: React.FC = () => (
         animate={{ rotate: 360 }}
         transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
       >
-        <div className="w-full h-full border-4 border-emerald-500/30 border-t-emerald-400 "></div>
+        <div className="w-full h-full  rounded-full border-4 border-emerald-500/30 border-t-emerald-400 "></div>
       </motion.div>
       
       {/* Loading Text */}

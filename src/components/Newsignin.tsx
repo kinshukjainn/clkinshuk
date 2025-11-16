@@ -93,7 +93,7 @@ const NewsignIn: React.FC = () => {
   return (
     <>
     
-    <div className="min-h-screen pt-20 bg-black flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen pt-20 bg-[#18181b] flex items-center justify-center relative overflow-hidden">
       {/* Subtle grid overlay */}
        <div className="absolute inset-0 z-0 noise-bg" />
 
@@ -148,7 +148,7 @@ const NewsignIn: React.FC = () => {
           >
             <div className="space-y-6">
               <motion.h1
-                className="text-5xl xl:text-6xl  font-bold text-green-500 font-mono leading-tight tracking-tight"
+                className="text-5xl xl:text-6xl  font-bold text-green-500  leading-tight tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}

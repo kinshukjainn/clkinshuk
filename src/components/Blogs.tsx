@@ -245,9 +245,9 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
   }, [])
 
   return (
-    <article className="  rounded-md   transition-all duration-300 overflow-hidden">
+    <article className="  rounded-md border-2 border-[#ffb86c]   transition-all duration-300 overflow-hidden">
       {/* Cover Image */}
-      <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden bg-zinc-950">
+      <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
         {post.coverImage && !imageError ? (
           <>
             <img
@@ -317,7 +317,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
             href={post.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-800 hover:bg-blue-700 text-white rounded-full text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-blue-500/20"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 border-2 border-[#ffb86c] sm:py-2  text-white rounded-md text-xs sm:text-sm font-bold tracking-wide transition-all duration-200"
           >
             Read
             <FaExternalLinkAlt className="w-3 h-3" />
@@ -437,7 +437,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setSearchInput(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border-b-2 border-white  py-2 sm:py-2.5 rounded-sm   text-white outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
+          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border-2 border-[#ffb86c]  py-2 sm:py-2.5 rounded-lg   text-white outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
         />
         <div className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1.5 sm:gap-2">
           {searchInput && (
@@ -486,7 +486,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Results indicator */}
       {searchInput && (
-        <div className="absolute -bottom-5 sm:-bottom-6 left-0 text-xs sm:text-sm text-zinc-400 font-mono">
+        <div className="absolute -bottom-5 sm:-bottom-6 left-0 text-xs sm:text-sm text-zinc-400 ">
           {resultsCount} of {totalCount} articles
         </div>
       )}
@@ -550,14 +550,14 @@ const BlogPageContent: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen noise-bg text-white relative overflow-x-hidden">
+      <div className="min-h-screen bg-[#18181b] text-white relative overflow-x-hidden">
         <div className="relative z-10">
         {/* Hero Section */}
         <section className="border-b pt-20 border-zinc-800/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
             <div className="text-center max-w-4xl mx-auto">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-                Read my <span className="text-blue-500 font-mono">Blogs</span>
+                Read my <span className="text-green-500 ">Blogs</span>
               </h1>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto px-4">
                 Exploring cloud computing, DevOps, and React development through curiosity and real-world experience.
@@ -567,7 +567,7 @@ const BlogPageContent: React.FC = () => {
         </section>
 
         {/* Search */}
-        <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-zinc-800/50">
+        <div className="sticky top-0 z-40  border-b border-zinc-800/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
             <SearchBar
               searchInput={searchInput}
@@ -583,7 +583,7 @@ const BlogPageContent: React.FC = () => {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-16 sm:py-20">
-              <FaSpinner className="animate-spin text-cyan-500 text-3xl sm:text-4xl mb-4" />
+              <FaSpinner className="animate-spin text-cyan-500 text-3xl rounded-full sm:text-4xl mb-4" />
               <h3 className="text-lg sm:text-xl text-white mb-2 font-semibold">Loading articles...</h3>
               <p className="text-zinc-400 text-xs sm:text-sm">Fetching the latest insights</p>
             </div>

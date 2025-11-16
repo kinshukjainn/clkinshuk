@@ -154,7 +154,7 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ scale: 1.02, y: -4 }}
-      className=" px-2 py-4 h-full flex flex-col cursor-pointer"
+      className=" px-2 py-4 border-2 border-[#ffb86c] rounded-md bg-[#222223] h-full flex flex-col cursor-pointer"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
@@ -172,10 +172,10 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
         {section.items.map((item) => (
           <div
             key={item.name}
-            className="border-l-4 border-white  pl-4 group-hover:border-blue-500 transition-colors duration-300"
+            className="border-l-4 border-[#ffb86c]  pl-4 group-hover:border-blue-500 transition-colors duration-300"
           >
             {item.category && (
-              <div className="text-md text-cyan-500 font-medium uppercase tracking-wider mb-1">{item.category}</div>
+              <div className="text-md text-white font-medium uppercase tracking-wider mb-1">{item.category}</div>
             )}
             <h3 className="font-normal text-white text-lg mb-1">{item.name}</h3>
             <p className="text-sm text-zinc-200 leading-relaxed">{item.description}</p>
@@ -191,7 +191,7 @@ export default function Devtools() {
   return (
 <>
 
-    <main className="min-h-screen bg-black text-white relative overflow-hidden">
+    <main className="min-h-screen bg-[#18181b] text-white relative overflow-hidden">
       {/* Background grid pattern */}
        <div className="absolute inset-0 z-0 noise-bg" />
 
@@ -204,12 +204,12 @@ export default function Devtools() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center  border-b-4 border-blue-500  px-4 py-2 gap-2 mb-6">
-            <Monitor className="w-5 h-5 text-blue-500" />
-            <span className="text-md font-medium   text-white  tracking-wider">My Digital Workspace</span>
+          <div className="inline-flex items-center  border-b-4 border-[#ffb86c]  px-4 py-2 gap-2 mb-6">
+            <Monitor className="w-5 h-5 text-[#ffb86c] " />
+            <span className="text-md font-medium   text-white tracking-wider">My Digital Workspace</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold  text-white mb-4">Development Setup</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-zinc-400 leading-relaxed">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold  text-white mb-4">{"<"}Development Setup{"/>"}</h1>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-white leading-relaxed">
             The tools, software, and hardware I use daily to code and design.
           </p>
         </motion.div>
@@ -235,19 +235,19 @@ export default function Devtools() {
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
             <div className=" text-center transition-colors duration-300">
-              <div className="text-3xl font-bold text-cyan-500">
+              <div className="text-3xl font-bold text-[#ffb86c]">
                 {setupData.reduce((acc, section) => acc + section.items.length, 0)}
               </div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Total Items</div>
             </div>
 
             <div className=" text-center transition-colors duration-300">
-              <div className="text-3xl font-bold text-cyan-500">{setupData.length}</div>
+              <div className="text-3xl font-bold text-[#ffb86c]">{setupData.length}</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Categories</div>
             </div>
 
             <div className=" text-center col-span-2 transition-colors duration-300">
-              <div className="text-3xl font-bold text-cyan-500">2025</div>
+              <div className="text-3xl font-bold text-[#ffb86c]">2025</div>
               <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Last Updated</div>
             </div>
           </div>

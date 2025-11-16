@@ -23,10 +23,10 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-2 py-2 transition-all duration-200 flex items-center gap-4 ${
+      className={`relative px-2 py-2 transition-all duration-200  flex items-center gap-4 ${
         isActive
-          ? "text-white  rounded-md font-semibold hover:text-white  bg-[#303030]"
-          : "text-white hover:bg-[#303030] hover:text-white rounded-md font-semibold"
+          ? "text-[#ffb86c] rounded-md font-semibold underline"
+          : "text-[#ffb86c] hover:underline hover:text-[#ffb86c]  font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -89,7 +89,7 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-black">
+        <motion.div className="relative backdrop-blur-xl bg-[#18181b]">
           <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
               {/* Logo Section - Enhanced Horizontal Layout */}
@@ -106,13 +106,13 @@ const Header = () => {
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
                     {/* Main Title - Bold and Large */}
-                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white leading-none whitespace-nowrap">
+                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold web-headline text-white leading-none whitespace-nowrap">
                       cloudkinshuk
                     </h1>
                     
                     {/* Route Badge - Small with Icon */}
                     <motion.div
-                      className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-2.5 md:px-3 py-2 sm:py-1.5 bg-[#303030] rounded-md  border border-black sm:rounded-lg shadow-lg"
+                      className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-2.5 md:px-3 py-2 sm:py-1.5   border-2 border-[#FFB86C]  shadow-lg"
                       whileHover={{ scale: 1.05, backgroundColor: "#323232" }}
                     >
                       <span className="text-white flex items-center">
@@ -159,7 +159,7 @@ const Header = () => {
                         />
                         <SignOutButton>
                           <motion.button
-                            className="px-3 py-1 text-white text-base bg-[#323232] transition-all cursor-pointer rounded-md duration-200 font-normal hover:bg-[#303030]"
+                            className="px-3 py-1 text-black text-base bg-[#ffb86c] transition-all cursor-pointer duration-200 font-normal "
                             whileHover={{ scale: 1.02, y: -1 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -219,7 +219,7 @@ const Header = () => {
 
         {/* Mobile Menu Content */}
         <motion.div
-          className="absolute backdrop-blur-xl top-16 sm:top-20 md:top-24 left-0 right-0 bg-[#222222] text-white"
+          className="absolute backdrop-blur-xl top-16 sm:top-20 md:top-24 left-0 right-0 bg-black text-white"
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
