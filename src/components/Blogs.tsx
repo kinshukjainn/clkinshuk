@@ -317,7 +317,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
             href={post.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 border-2 border-[#ffb86c] sm:py-2  text-white rounded-md text-xs sm:text-sm font-bold tracking-wide transition-all duration-200"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 border-2 border-[#ffb86c] sm:py-2  text-gray-200 rounded-md text-xs sm:text-sm font-bold tracking-wide transition-all duration-200"
           >
             Read
             <FaExternalLinkAlt className="w-3 h-3" />
@@ -421,14 +421,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
       case "recent":
         return <FaHistory className="w-3.5 h-3.5" />
       default:
-        return <FaSearch className="w-3.5 h-3.5 text-white " />
+        return <FaSearch className="w-3.5 h-3.5 text-gray-200 " />
     }
   }
 
   return (
     <div className="relative w-full">
       <div className="relative">
-        <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-white  text-base sm:text-lg " />
+        <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-200  text-base sm:text-lg " />
         <input
           ref={inputRef}
           type="text"
@@ -437,7 +437,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setSearchInput(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border-2 border-[#ffb86c]  py-2 sm:py-2.5 rounded-lg   text-white outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
+          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border-2 border-[#ffb86c]  py-2 sm:py-2.5 rounded-lg   text-gray-200 outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
         />
         <div className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1.5 sm:gap-2">
           {searchInput && (
@@ -447,7 +447,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 setSearchInput("")
                 setShowSuggestions(false)
               }}
-              className="text-white hover:text-white transition-colors duration-200 p-1"
+              className="text-gray-200 hover:text-gray-200 transition-colors duration-200 p-1"
             >
               <FaTimes className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
@@ -474,7 +474,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 {getSuggestionIcon(suggestion.type)}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-white text-xs sm:text-sm font-medium truncate">{suggestion.label}</div>
+                <div className="text-gray-200 text-xs sm:text-sm font-medium truncate">{suggestion.label}</div>
                 <div className="text-xs text-zinc-500 capitalize mt-0.5">
                   {suggestion.type === "recent" ? "Recent search" : "Article"}
                 </div>
@@ -530,16 +530,16 @@ const BlogPageContent: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-gray-200 flex items-center justify-center p-4">
         <div className="text-center max-w-md border border-zinc-800 p-6 sm:p-8 bg-zinc-900/50 backdrop-blur-sm rounded-2xl">
           <FaExclamationTriangle className="text-yellow-400 text-4xl sm:text-5xl mx-auto mb-4" />
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">Failed to Load Blog Posts</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-200 mb-3">Failed to Load Blog Posts</h2>
           <p className="text-zinc-400 text-xs sm:text-sm mb-6">
             {error instanceof Error ? error.message : "Unknown error occurred"}
           </p>
           <button
             onClick={() => refetch()}
-            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
+            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-gray-200 font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
           >
             Try Again
           </button>
@@ -550,13 +550,13 @@ const BlogPageContent: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-[#18181b] text-white relative overflow-x-hidden">
+      <div className="min-h-screen bg-[#18181b] text-gray-200 relative overflow-x-hidden">
         <div className="relative z-10">
         {/* Hero Section */}
         <section className="border-b pt-20 border-zinc-800/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-200 mb-4 sm:mb-6 leading-tight">
                 Read my <span className="text-green-500 ">Blogs</span>
               </h1>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto px-4">
@@ -584,17 +584,17 @@ const BlogPageContent: React.FC = () => {
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-16 sm:py-20">
               <FaSpinner className="animate-spin text-cyan-500 text-3xl rounded-full sm:text-4xl mb-4" />
-              <h3 className="text-lg sm:text-xl text-white mb-2 font-semibold">Loading articles...</h3>
+              <h3 className="text-lg sm:text-xl text-gray-200 mb-2 font-semibold">Loading articles...</h3>
               <p className="text-zinc-400 text-xs sm:text-sm">Fetching the latest insights</p>
             </div>
           ) : filteredPosts.length === 0 ? (
             <div className="text-center py-16 sm:py-20 border border-zinc-800 bg-zinc-900/30 backdrop-blur-sm rounded-2xl">
-              <FaSearch className="text-white text-4xl sm:text-5xl mx-auto mb-4" />
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">No articles found</h3>
+              <FaSearch className="text-gray-200 text-4xl sm:text-5xl mx-auto mb-4" />
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-200 mb-3">No articles found</h3>
               <p className="text-zinc-400 text-sm sm:text-base mb-6 sm:mb-8 max-w-md mx-auto px-4">Try different search terms to discover more content</p>
               <button
                 onClick={() => setSearchInput("")}
-                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
+                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-gray-200 font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
               >
                 Clear Search
               </button>

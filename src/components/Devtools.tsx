@@ -42,8 +42,8 @@ const setupData: SetupSection[] = [
         category: "Input Device",
       },
       {
-        name: "RedGear Mouse Turbo Fire",
-        description: "Ergonomic gaming mouse for precise navigation",
+        name: "HP Wired Mouse",
+        description: "Simple mouse for simple usage",
         category: "Input Device",
       },
     ],
@@ -100,17 +100,22 @@ const setupData: SetupSection[] = [
     icon: Type,
     items: [
       {
-        name: "Iosevka Ligature",
+        name: "JetBrains Mono",
         description: "Monospace fonts with programming ligature support.",
         category: "Code Font",
       },
       {
-        name: "Verdana",
+        name: "IBM Plex Sans",
         description: "Modern sans-serif fonts optimized for UI readability.",
-        category: "UI Font",
+        category: "UI/Project Fonts",
       },
       {
-        name: "Copilot Theme",
+        name: "Fira Code",
+        description: "Modern monospaced font which i used for my portfolio",
+        category: "Portfolio Font",
+      },
+      {
+        name: "Github Dark / Monokai Theme",
         description: "A clean, default theme for VS Code by Microsoft.",
         category: "VS Code Theme",
       },
@@ -158,9 +163,9 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-          <section.icon className="w-6 h-6 text-white" />
+          <section.icon className="w-6 h-6 text-gray-200" />
         <div>
-          <h2 className="text-2xl font-semibold  text-white">{section.title}</h2>
+          <h2 className="text-2xl font-semibold  text-gray-200">{section.title}</h2>
           <p className="text-md text-zinc-400 uppercase tracking-wider">
             {section.items.length} item{section.items.length !== 1 ? "s" : ""}
           </p>
@@ -175,9 +180,9 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
             className="border-l-4 border-[#ffb86c]  pl-4 group-hover:border-blue-500 transition-colors duration-300"
           >
             {item.category && (
-              <div className="text-md text-white font-medium uppercase tracking-wider mb-1">{item.category}</div>
+              <div className="text-md text-gray-200 font-medium uppercase tracking-wider mb-1">{item.category}</div>
             )}
-            <h3 className="font-normal text-white text-lg mb-1">{item.name}</h3>
+            <h3 className="font-normal text-gray-200 text-lg mb-1">{item.name}</h3>
             <p className="text-sm text-zinc-200 leading-relaxed">{item.description}</p>
           </div>
         ))}
@@ -191,7 +196,7 @@ export default function Devtools() {
   return (
 <>
 
-    <main className="min-h-screen bg-[#18181b] text-white relative overflow-hidden">
+    <main className="min-h-screen bg-[#18181b] text-gray-200 relative overflow-hidden">
       {/* Background grid pattern */}
        <div className="absolute inset-0 z-0 noise-bg" />
 
@@ -206,10 +211,10 @@ export default function Devtools() {
         >
           <div className="inline-flex items-center  border-b-4 border-[#ffb86c]  px-4 py-2 gap-2 mb-6">
             <Monitor className="w-5 h-5 text-[#ffb86c] " />
-            <span className="text-md font-medium   text-white tracking-wider">My Digital Workspace</span>
+            <span className="text-md font-medium   text-gray-200 tracking-wider">My Digital Workspace</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold  text-white mb-4">{"<"}Development Setup{"/>"}</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-white leading-relaxed">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold  text-gray-200 mb-4">{"<"}Development Setup{"/>"}</h1>
+          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200 leading-relaxed">
             The tools, software, and hardware I use daily to code and design.
           </p>
         </motion.div>

@@ -4,8 +4,7 @@ import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
 import { FiMenu, FiX, FiHome, FiFileText, FiSettings } from "react-icons/fi"
-import { UserButton, useUser, SignOutButton } from "@clerk/clerk-react"
-import { MdSafetyCheck } from "react-icons/md";
+import { MdSafetyCheck } from "react-icons/md"
 
 interface NavItem {
   path: string
@@ -24,10 +23,10 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-2 py-2 transition-all duration-200  flex items-center gap-4 ${
+      className={`relative px-2 py-2 transition-all duration-200 flex items-center gap-4 ${
         isActive
           ? "text-[#ffb86c] rounded-md font-semibold underline"
-          : "text-[#ffb86c] hover:underline hover:text-[#ffb86c]  font-semibold"
+          : "text-[#ffb86c] hover:underline hover:text-[#ffb86c] font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -48,21 +47,20 @@ const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
 const Header = () => {
   const location = useLocation()
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-  const { isSignedIn } = useUser()
-
-  const protectedRoutes: string[] = ["/blogs", "/sources"]
-
-  const isProtectedRoute: boolean = protectedRoutes.some((route: string) => location.pathname.startsWith(route))
 
   const getPathInfo = (): { text: string; icon: React.ReactNode } => {
     const { pathname } = location
-    if (pathname.startsWith("/gears")) return { text: "DevTools", icon: <FiSettings className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
-    if (pathname.startsWith("/blogs")) return { text: "Blogs", icon: <FiFileText className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
-    if (pathname.startsWith("/sign-in")) return { text: "Verify", icon: <MdSafetyCheck  className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
-    return { text: "Home", icon: <FiHome className="w-3.5 h-3.5 sm:w-3.5 sm:h-3.5" /> }
+    if (pathname.startsWith("/gears"))
+      return { text: "DevTools", icon: <FiSettings className="w-3.5 h-3.5" /> }
+    if (pathname.startsWith("/blogs"))
+      return { text: "Blogs", icon: <FiFileText className="w-3.5 h-3.5" /> }
+    if (pathname.startsWith("/sign-in"))
+      return { text: "Verify", icon: <MdSafetyCheck className="w-3.5 h-3.5" /> }
+    return { text: "Home", icon: <FiHome className="w-3.5 h-3.5" /> }
   }
 
-  const isActiveRoute = (path: string): boolean => location.pathname.startsWith(path) || location.pathname === path
+  const isActiveRoute = (path: string): boolean =>
+    location.pathname.startsWith(path) || location.pathname === path
 
   const toggleMenu = (): void => setIsMenuOpen(!isMenuOpen)
   const closeMenu = (): void => setIsMenuOpen(false)
@@ -83,17 +81,17 @@ const Header = () => {
 
   return (
     <>
-      {/* Header */}
       <motion.header
         className="fixed top-0 left-0 right-0 z-[9999]"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+        transition={{ duration: 0.4 }}
       >
         <motion.div className="relative backdrop-blur-xl bg-[#18181b]">
           <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
-              {/* Logo Section - Enhanced Horizontal Layout */}
+
+              {/* Logo */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -104,21 +102,16 @@ const Header = () => {
                   <motion.div
                     className="flex items-center gap-2 sm:gap-3 md:gap-4"
                     whileHover={{ scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
-                    {/* Main Title - Bold and Large */}
-                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold web-headline text-white leading-none whitespace-nowrap">
+                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold web-headline text-gray-200 leading-none whitespace-nowrap">
                       cloudkinshuk
                     </h1>
-                    
-                    {/* Route Badge - Small with Icon */}
-                    <motion.div
-                      className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-2.5 md:px-3 py-2 sm:py-1.5   border-l-3 border-[#FFB86C]"
-                    >
-                      <span className="text-white flex items-center">
+
+                    <motion.div className="flex items-center gap-1 px-3 py-2 border-l-3 border-[#FFB86C]">
+                      <span className="text-gray-200 flex items-center">
                         {pathInfo.icon}
                       </span>
-                      <span className="text-sm sm:text-sm md:text-md text-white font-normal whitespace-nowrap">
+                      <span className="text-sm text-gray-200 font-normal whitespace-nowrap">
                         {pathInfo.text}
                       </span>
                     </motion.div>
@@ -128,70 +121,35 @@ const Header = () => {
 
               {/* Desktop Navigation */}
               <nav className="hidden lg:flex items-center gap-1">
-                {navItems.map((item: NavItem, index: number) => (
+                {navItems.map((item, index) => (
                   <motion.div
                     key={item.path}
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
                   >
-                    <NavLink to={item.path} isActive={isActiveRoute(item.path)} label={item.label} icon={item.icon} />
+                    <NavLink
+                      to={item.path}
+                      isActive={isActiveRoute(item.path)}
+                      label={item.label}
+                      icon={item.icon}
+                    />
                   </motion.div>
                 ))}
-
-                {/* Auth Section - Only on Protected Routes */}
-                {isProtectedRoute && (
-                  <motion.div
-                    className="flex items-center gap-4 ml-6 pl-6 border-l border-zinc-800"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                  >
-                    {isSignedIn ? (
-                      <>
-                        <UserButton
-                          afterSignOutUrl="/"
-                          appearance={{
-                            elements: {
-                              avatarBox: "w-10 h-10 ring-1 ring-zinc-800",
-                            },
-                          }}
-                        />
-                        <SignOutButton>
-                          <motion.button
-                            className="px-3 py-1 text-black text-base bg-[#ffb86c] transition-all cursor-pointer duration-200 font-normal "
-                            whileHover={{ scale: 1.02, y: -1 }}
-                            whileTap={{ scale: 0.98 }}
-                          >
-                            Sign Out
-                          </motion.button>
-                        </SignOutButton>
-                      </>
-                    ) : (
-                      <Link to="/sign-in">
-                        <motion.div
-                          className="px-5 py-2.5 bg-cyan-400 text-black text-sm font-semibold hover:bg-cyan-300 transition-all duration-200 rounded-full"
-                          whileHover={{ scale: 1.02, y: -1 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          Sign In
-                        </motion.div>
-                      </Link>
-                    )}
-                  </motion.div>
-                )}
               </nav>
 
               {/* Mobile Menu Button */}
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-2 sm:p-3 bg-[#222223] text-[#ffb86c] outline-none transition-all cursor-pointer rounded-md duration-200"
+                  className="relative p-2 bg-[#222223] text-[#ffb86c] rounded-md"
                   whileTap={{ scale: 0.95 }}
-                  aria-label="Toggle menu"
                 >
-                  <motion.div animate={{ rotate: isMenuOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
-                    {isMenuOpen ? <FiX size={20} className="sm:w-[22px] sm:h-[22px]" /> : <FiMenu size={20} className="sm:w-[22px] sm:h-[22px]" />}
+                  <motion.div
+                    animate={{ rotate: isMenuOpen ? 90 : 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {isMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
                   </motion.div>
                 </motion.button>
               </div>
@@ -200,7 +158,7 @@ const Header = () => {
         </motion.div>
       </motion.header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       <motion.div
         className="lg:hidden fixed inset-0 z-[9998]"
         initial={{ opacity: 0 }}
@@ -208,27 +166,22 @@ const Header = () => {
         transition={{ duration: 0.2 }}
         style={{ pointerEvents: isMenuOpen ? "auto" : "none" }}
       >
-        {/* Backdrop */}
         <motion.div
           className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isMenuOpen ? 1 : 0 }}
-          transition={{ duration: 0.2 }}
           onClick={closeMenu}
         />
 
-        {/* Mobile Menu Content */}
         <motion.div
-          className="absolute  top-16 sm:top-20 md:top-24 left-0 right-0 bg-black text-white"
+          className="absolute top-16 left-0 right-0 bg-black text-gray-200"
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
             opacity: isMenuOpen ? 1 : 0,
           }}
-          transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.25 }}
         >
-          <div className="px-3 sm:px-4 md:px-6 py-4 sm:py-6 space-y-2">
-            {navItems.map((item: NavItem, index: number) => (
+          <div className="px-4 py-6 space-y-2">
+            {navItems.map((item, index) => (
               <motion.div
                 key={item.path}
                 initial={{ opacity: 0, x: -20 }}
@@ -236,63 +189,17 @@ const Header = () => {
                   opacity: isMenuOpen ? 1 : 0,
                   x: isMenuOpen ? 0 : -20,
                 }}
-                transition={{
-                  duration: 0.2,
-                  delay: isMenuOpen ? index * 0.05 : 0,
-                }}
+                transition={{ duration: 0.2, delay: index * 0.05 }}
               >
-                <NavLink to={item.path} isActive={isActiveRoute(item.path)} label={item.label} icon={item.icon} onClick={closeMenu} />
+                <NavLink
+                  to={item.path}
+                  isActive={isActiveRoute(item.path)}
+                  label={item.label}
+                  icon={item.icon}
+                  onClick={closeMenu}
+                />
               </motion.div>
             ))}
-
-            {/* Mobile Auth Section - Only on Protected Routes */}
-            {isProtectedRoute && (
-              <motion.div
-                className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-zinc-800 space-y-3"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: isMenuOpen ? 1 : 0,
-                  y: isMenuOpen ? 0 : 20,
-                }}
-                transition={{ duration: 0.25, delay: 0.15 }}
-              >
-                {isSignedIn ? (
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <UserButton
-                        afterSignOutUrl="/"
-                        appearance={{
-                          elements: {
-                            avatarBox: "w-8 h-8 sm:w-10 sm:h-10 ring-1 ring-zinc-800",
-                          },
-                        }}
-                      />
-                      <span className="text-zinc-100 text-sm sm:text-base font-semibold">Blogs</span>
-                    </div>
-                    <SignOutButton>
-                      <motion.button
-                        className="w-full px-3 py-2.5 sm:py-3 text-black text-sm sm:text-base font-semibold bg-green-500 hover:bg-green-400 transition-all cursor-pointer rounded-md duration-200"
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        onClick={closeMenu}
-                      >
-                        Sign Out
-                      </motion.button>
-                    </SignOutButton>
-                  </div>
-                ) : (
-                  <Link to="/sign-in" onClick={closeMenu} className="block">
-                    <motion.div
-                      className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-cyan-400 text-black text-sm sm:text-base font-semibold hover:bg-cyan-300 transition-all duration-300 text-center rounded-full"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      Sign In
-                    </motion.div>
-                  </Link>
-                )}
-              </motion.div>
-            )}
           </div>
         </motion.div>
       </motion.div>
@@ -300,4 +207,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default Header
