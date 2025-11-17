@@ -304,7 +304,7 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 sm:p-4 rounded-md bg-[#222223] border-2 border-[#FFB86C]  transition-colors"
+                  className="flex items-center gap-3 p-3 sm:p-4 rounded-md bg-[#222223] border border-[#FFB86C]  transition-colors"
                 >
                   <div className="bg-[#181818] p-2 text-[#ffb86c] rounded-sm">
                     <Icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
@@ -329,7 +329,7 @@ export default function Home() {
           </h2>
 
           <div className="space-y-6 sm:space-y-8">
-            <div className="border-2 bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
+            <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
               <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-2">
                 Subscribe to my blogs on hashnode
               </h3>
@@ -368,12 +368,18 @@ export default function Home() {
           </h2>
 
           <div className="space-y-6 sm:space-y-8">
-            <div className="border-2 bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
+            <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
               <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-2">
                 {
                   "[ UPPCTL : (Uttar Pradesh Power Transmission Corporation Limited) ]"
                 }
               </h3>
+              <div className="mt-2 font-semibold  mb-2 ">
+                <span className="text-lg text-gray-400">Time : </span>
+                <span className="text-lg text-gray-400">{"[ July 2025 - Aug 2025  ] "} </span>
+              </div>
+
+
               <span className="text-gray-400 font-semibold text-lg">
                 Expierience :{" "}
               </span>
@@ -411,7 +417,7 @@ export default function Home() {
             {CONFIG.projects.map((project) => (
               <div
                 key={project.title}
-                className="border-2 bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6"
+                className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                   <div className="min-w-0">
@@ -438,8 +444,8 @@ export default function Home() {
                 </div>
 
                 <div className="mb-4">
-                  <div className="text-xs sm:text-sm mb-2 text-gray-400">
-                    TECH_STACK:
+                  <div className="text-md font-semibold sm:text-sm mb-2 text-gray-400">
+                    TECH STACK:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
@@ -454,7 +460,7 @@ export default function Home() {
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-[#181818] border-2 border-[#FFB86C] p-3 mb-4 overflow-x-auto">
+                  <div className="bg-[#181818] border border-[#FFB86C] p-3 mb-4 overflow-x-auto">
                     <div className="flex items-center justify-between gap-2">
                       <code className="text-xs sm:text-sm whitespace-nowrap">
                         {project.dockerCommand}
@@ -470,7 +476,7 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFB86C] text-black text-xs sm:text-sm font-bold  border-2 border-[#FFB86C] transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFB86C] text-black text-xs sm:text-sm font-bold  border border-[#FFB86C] transition-colors"
                     >
                       VISIT_SITE <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
@@ -480,9 +486,9 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 border-2 border-[#FFB86C] text-xs sm:text-sm font-bold hover:bg-[#FFB86C] hover:text-black transition-colors"
+                      className="inline-flex items-center gap-2 px-6 py-3 border border-[#FFB86C] text-xs sm:text-sm font-bold bg-[#FFB86C] text-black transition-colors"
                     >
-                      <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> VIEW_CODE
+                      <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> VIEW CODE
                     </a>
                   )}
                 </div>
@@ -496,7 +502,7 @@ export default function Home() {
           <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ grep -r skills ~/
           </h2>
-          <div className="space-y-6 border-2 border-[#ffb86c] rounded-lg bg-[#222223] sm:space-y-8">
+          <div className="space-y-6 border border-[#ffb86c] rounded-lg bg-[#222223] sm:space-y-8">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
               <div key={category} className=" rounded-md  p-4 sm:p-5">
                 <h3 className="text-sm text-[#ffb86c] sm:text-base font-bold mb-3 sm:mb-4">
@@ -508,7 +514,7 @@ export default function Home() {
                     return (
                       <div
                         key={skill.name}
-                        className="flex items-center gap-2 px-3 py-2 rounded-md border-2 border-[#FFB86C] text-sm sm:text-md"
+                        className="flex items-center gap-2 px-3 py-2 rounded-md border border-[#FFB86C] text-sm sm:text-md"
                       >
                         <Icon className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                         <span>{skill.name}</span>
@@ -530,7 +536,7 @@ export default function Home() {
             {CONFIG.certifications.map((cert) => (
               <div
                 key={cert.title}
-                className="border-2 bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-5"
+                className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-5"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                   <div className="flex-1 min-w-0">
@@ -569,9 +575,9 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-4 py-2 bg-[#FFB86C] text-black font-bold border-2 border-[#FFB86C] transition-colors"
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-6 py-3 bg-[#FFB86C] text-black font-bold border border-[#FFB86C] transition-colors"
                   >
-                    VIEW_CREDENTIAL <FaExternalLinkAlt className="w-3 h-3" />
+                    VIEW CREDENTIAL <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
                 )}
               </div>
@@ -584,7 +590,7 @@ export default function Home() {
           <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ more ~/education
           </h2>
-          <div className="border-2 rounded-lg bg-[#222223] border-[#FFB86C] p-4 sm:p-6">
+          <div className="border rounded-lg bg-[#222223] border-[#FFB86C] p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
               <div className="min-w-0">
                 <h3 className="text-lg sm:text-xl text-[#ffb86c] font-bold mb-2">

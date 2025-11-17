@@ -283,7 +283,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
 
         {/* Author & Date */}
         <div className="flex items-center gap-2 mb-3 text-xs sm:text-sm flex-wrap">
-          <span className="font-semibold text-cyan-400">{highlightText(post.author.name, searchQuery)}</span>
+          <span className="font-semibold text-[#ffb86cs]">{highlightText(post.author.name, searchQuery)}</span>
           <span className="text-zinc-600">•</span>
           <span className="flex items-center gap-1.5 text-zinc-400">
             <FaCalendarAlt className="w-3 h-3" />
@@ -293,7 +293,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
 
         {/* Meta Info */}
         <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
-          <div className="flex items-center gap-2.5 sm:gap-3 text-xs text-zinc-400 flex-wrap">
+          <div className="flex items-center p-1 gap-2.5 sm:gap-3 text-sm text-zinc-400  flex-wrap">
             {post.readTimeInMinutes && (
               <span className="flex items-center gap-1">
                 <FaClock className="w-3 h-3" />
@@ -308,7 +308,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => 
             )}
             {post.reactionCount && post.reactionCount > 0 && (
               <span className="flex items-center gap-1">
-                <FaHeart className="w-3 h-3" />
+                <FaHeart className="w-3 h-3 " />
                 {formatNumber(post.reactionCount)}
               </span>
             )}
@@ -437,7 +437,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setSearchInput(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border-2 border-[#ffb86c]  py-2 sm:py-2.5 rounded-lg   text-gray-200 outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
+          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border border-[#ffb86c]  py-2 sm:py-2.5 rounded-lg   text-gray-200 outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
         />
         <div className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1.5 sm:gap-2">
           {searchInput && (
