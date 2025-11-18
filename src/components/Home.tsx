@@ -33,6 +33,7 @@ import {
 } from "react-icons/fa";
 import { VscVscodeInsiders } from "react-icons/vsc";
 import { SiHashnode } from "react-icons/si";
+import { RiNextjsLine } from "react-icons/ri";
 
 const CONFIG = {
   personal: {
@@ -152,6 +153,7 @@ const CONFIG = {
     ],
     "Frontend & Build": [
       { name: "Vite / React", icon: SiVite },
+      { name: "Nextjs", icon: RiNextjsLine },
       { name: "TypeScript", icon: SiTypescript },
       { name: "Tailwind CSS", icon: SiTailwindcss },
       { name: "React icons", icon: SiReact },
@@ -243,7 +245,7 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 sm:p-2.5  border border-[#FFB86C] bg-[#FFB86C] text-black transition-colors cursor-pointer"
+      className="p-2 sm:p-2.5  border border-[#FFB86C] bg-[#FFB86C] rounded-sm text-black transition-colors cursor-pointer"
       title="Copy Docker command"
     >
       {copied ? (
@@ -364,6 +366,45 @@ export default function Home() {
 
         <section className="mb-10 sm:mb-12 md:mb-16">
           <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+            $ cat ~/Run this on your terminal /*
+          </h2>
+
+          <div className="space-y-6 sm:space-y-8">
+            <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
+              <h3 className="text-md text-[#ffb86c] sm:text-xl font-bold mb-2">
+                Install Nodejs on your pc 
+              </h3>
+
+              <h3 className="text-md text-gray-400 sm:text-xl font-bold mb-2">
+                Install this package :  
+              </h3>
+
+              <div className="p-3 rounded-md bg-[#171717]">
+                <span className="text-md text-[#ffb86c] font-semibold">
+                  npm install -g hackkinshuk
+
+                </span>
+              </div>
+
+              <h3 className="text-md mt-3 text-gray-400 sm:text-xl font-bold mb-2">
+                Run this command :  
+              </h3>
+
+              <div className="p-3 rounded-md bg-[#171717]">
+                <span className="text-md text-[#ffb86c] font-semibold">
+                  cloudkinshuk
+
+                </span>
+              </div>
+
+
+              <p className="text-md mt-4 ">After running this command you will the see the magic</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
             $ cat ~/Internships
           </h2>
 
@@ -430,7 +471,7 @@ export default function Home() {
                       <span>{project.year}</span>
                     </div>
                   </div>
-                  <span className="bg-[#FFB86C] px-3 py-1 text-black text-xs w-max">
+                  <span className="bg-[#FFB86C] px-3 py-1 font-medium text-black text-sm w-max">
                     {project.status}
                   </span>
                 </div>
@@ -460,9 +501,9 @@ export default function Home() {
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-[#181818] border border-[#FFB86C] p-3 mb-4 overflow-x-auto">
+                  <div className="bg-[#181818] rounded-md p-3 mb-4 overflow-x-auto">
                     <div className="flex items-center justify-between gap-2">
-                      <code className="text-xs sm:text-sm whitespace-nowrap">
+                      <code className="text-md sm:text-sm whitespace-nowrap">
                         {project.dockerCommand}
                       </code>
                       <CopyButton text={project.dockerCommand} />
@@ -476,9 +517,9 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFB86C] text-black text-xs sm:text-sm font-bold  border border-[#FFB86C] transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFB86C] text-black text-md sm:text-sm font-bold  border border-[#FFB86C] transition-colors"
                     >
-                      VISIT_SITE <FaExternalLinkAlt className="w-3 h-3" />
+                      VISIT SITE <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
                   )}
                   {project.links.repo && (
@@ -486,7 +527,7 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 border border-[#FFB86C] text-xs sm:text-sm font-bold bg-[#FFB86C] text-black transition-colors"
+                      className="inline-flex items-center gap-2 px-6 py-3 border border-[#FFB86C] text-md sm:text-sm font-bold bg-[#FFB86C] text-black transition-colors"
                     >
                       <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> VIEW CODE
                     </a>

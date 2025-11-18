@@ -25,8 +25,8 @@ const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
     <motion.div
       className={`relative px-2 py-2 transition-all duration-200 flex items-center gap-4 ${
         isActive
-          ? "text-[#ffb86c] rounded-md font-semibold underline"
-          : "text-[#ffb86c] hover:underline hover:text-[#ffb86c] font-semibold"
+          ? "text-[#ffb86c] text-lg rounded-md font-semibold underline"
+          : "text-[#ffb86c] text-lg hover:underline hover:text-[#ffb86c] font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
