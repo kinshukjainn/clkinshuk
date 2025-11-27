@@ -205,7 +205,8 @@ const CONFIG = {
         "React Icons",
         "Shadcn UI",
         "Lucide React",
-        "Open AI API",
+        "Amazon Bedrock",
+        "Amazon Nova Pro Model",
         "AWS Lambda",
         "AWS Amplify",
         "Aws Route53",
@@ -372,33 +373,32 @@ export default function Home() {
           <div className="space-y-6 sm:space-y-8">
             <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
               <h3 className="text-md text-[#ffb86c] sm:text-xl font-bold mb-2">
-                Install Nodejs on your pc 
+                Install Nodejs on your pc
               </h3>
 
               <h3 className="text-md text-gray-400 sm:text-xl font-bold mb-2">
-                Install this package :  
+                Install this package :
               </h3>
 
               <div className="p-3 rounded-md bg-[#171717]">
                 <span className="text-md text-[#ffb86c] font-semibold">
                   npm install -g hackkinshuk
-
                 </span>
               </div>
 
               <h3 className="text-md mt-3 text-gray-400 sm:text-xl font-bold mb-2">
-                Run this command :  
+                Run this command :
               </h3>
 
               <div className="p-3 rounded-md bg-[#171717]">
                 <span className="text-md text-[#ffb86c] font-semibold">
                   cloudkinshuk
-
                 </span>
               </div>
 
-
-              <p className="text-md mt-4 ">After running this command you will the see the magic</p>
+              <p className="text-md mt-4 ">
+                After running this command you will the see the magic
+              </p>
             </div>
           </div>
         </section>
@@ -417,9 +417,10 @@ export default function Home() {
               </h3>
               <div className="mt-2 font-semibold  mb-2 ">
                 <span className="text-lg text-gray-400">Time : </span>
-                <span className="text-lg text-gray-400">{"[ July 2025 - Aug 2025  ] "} </span>
+                <span className="text-lg text-gray-400">
+                  {"[ July 2025 - Aug 2025  ] "}{" "}
+                </span>
               </div>
-
 
               <span className="text-gray-400 font-semibold text-lg">
                 Expierience :{" "}
