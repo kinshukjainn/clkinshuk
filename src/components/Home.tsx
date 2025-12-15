@@ -30,6 +30,7 @@ import {
   FaAws,
   FaCopy,
   FaCheck,
+  FaFileDownload, // Added this import
 } from "react-icons/fa";
 import { VscVscodeInsiders } from "react-icons/vsc";
 import { SiHashnode } from "react-icons/si";
@@ -323,6 +324,44 @@ export default function Home() {
                 </a>
               );
             })}
+          </div>
+        </section>
+
+        {/* Resume Section - ADDED THIS SECTION */}
+        <section className="mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+            $ wget resume.pdf
+          </h2>
+
+          <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="min-w-0">
+              <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-1">
+                [ Kinshuk Jain Resume ]
+              </h3>
+              <p className="text-sm sm:text-base text-gray-400">
+                Click the button to download my latest resume in PDF format.
+              </p>
+            </div>
+
+            <a
+              href="/kinshukfinalresume.pdf" /* <--- REPLACE THIS WITH YOUR ACTUAL RESUME PATH */
+              download="kinshukfinalresume.pdf"
+              className="
+                mt-2 sm:mt-0
+                bg-[#ffb86c] text-black 
+                font-bold 
+                px-6 py-3 
+                cursor-pointer 
+                flex items-center gap-2 
+                transition 
+                w-full sm:w-auto 
+                justify-center
+                whitespace-nowrap
+              "
+            >
+              <FaFileDownload className="text-lg" />
+              <span>DOWNLOAD RESUME</span>
+            </a>
           </div>
         </section>
 
