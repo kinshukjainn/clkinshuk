@@ -247,7 +247,7 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 sm:p-2.5  border border-[#FFB86C] bg-[#FFB86C] rounded-sm text-black transition-colors cursor-pointer"
+      className="p-2 sm:p-2.5   bg-blue-800 rounded-sm text-white transition-colors cursor-pointer"
       title="Copy Docker command"
     >
       {copied ? (
@@ -261,22 +261,25 @@ const CopyButton = ({ text }: { text: string }) => {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#18181b] text-gray-200  pt-12 sm:pt-16 md:pt-20">
+    <div className="min-h-screen bg-white text-black  pt-12 sm:pt-16 md:pt-20">
       <div className="max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
         {/* Header */}
-        <header className="mb-10 sm:mb-12 md:mb-16 border-b-2 border-[#FFB86C] pb-8">
+        <header className="mb-10 sm:mb-12 md:mb-16  pb-8">
           <div className="mb-6 sm:mb-8">
             <div className="text-md font-bold sm:text-base text-red-500">
               $ whoami
             </div>
-            <h1 className="text-5xl sm:text-6xl text-[#ffb86c] md:text-6xl font-bold mb-2">
-              KINSHUK JAIN
+            <h1 className="text-5xl sm:text-6xl web-headline text-black md:text-6xl font-bold mb-2">
+              Hi , Im Kinshuk
             </h1>
           </div>
 
           <div className="space-y-3 sm:space-y-4 mb-6">
             {CONFIG.personal.bio.map((p, i) => (
-              <p key={i} className="text-sm sm:text-base leading-relaxed">
+              <p
+                key={i}
+                className="text-md sm:text-lg font-semibold leading-relaxed"
+              >
                 <span className="text-gray-500">&gt; </span>
                 {p}
               </p>
@@ -288,16 +291,16 @@ export default function Home() {
               <FaMapMarkerAlt className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
               <span>{CONFIG.personal.location}</span>
             </div>
-            <div className="border border-[#FFB86C] px-3 py-1 inline-block">
-              [AVAILABLE FOR OPPORTUNITIES]
+            <div className=" px-3 py-1 inline-block font-bold">
+              AVAILABLE FOR OPPORTUNITIES
             </div>
           </div>
         </header>
 
         {/* Connect */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl text-[#ffb86c] md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ ls -la ~/connect
+          <h2 className="text-xl sm:text-2xl text-black md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
+            Connect with me
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             {CONFIG.social.map((social) => {
@@ -308,16 +311,16 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 sm:p-4 rounded-md bg-[#222223] border border-[#FFB86C]  transition-colors"
+                  className="flex items-center gap-3 p-3 sm:p-4 rounded-md bg-gray-100 border-1 border-gray-400   transition-colors"
                 >
-                  <div className="bg-[#181818] p-2 text-[#ffb86c] rounded-sm">
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <div className=" p-1 text-black rounded-sm">
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span className="text-sm text-[#ffb86c] sm:text-md font-bold truncate">
+                    <span className="text-sm text-black sm:text-md font-bold truncate">
                       {social.platform}
                     </span>
-                    <span className="text-sm sm:text-md truncate">
+                    <span className="text-sm sm:text-md  truncate">
                       {social.handle}
                     </span>
                   </div>
@@ -329,16 +332,16 @@ export default function Home() {
 
         {/* Resume Section - ADDED THIS SECTION */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ wget resume.pdf
+          <h2 className="text-xl text-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
+            Resume
           </h2>
 
-          <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="min-w-0">
-              <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-1">
-                [ Kinshuk Jain Resume ]
+              <h3 className="text-lg text-black sm:text-xl font-bold mb-1">
+                My Resume
               </h3>
-              <p className="text-sm sm:text-base text-gray-400">
+              <p className="text-sm sm:text-base text-gray-800">
                 Click the button to download my latest resume in PDF format.
               </p>
             </div>
@@ -348,9 +351,9 @@ export default function Home() {
               download="kinshukfinalresume.pdf"
               className="
                 mt-2 sm:mt-0
-                bg-[#ffb86c] text-black 
-                font-bold 
-                px-6 py-3 
+                bg-blue-800 text-white 
+                font-medium rounded-full 
+                px-2 py-2 
                 cursor-pointer 
                 flex items-center gap-2 
                 transition 
@@ -359,21 +362,21 @@ export default function Home() {
                 whitespace-nowrap
               "
             >
-              <FaFileDownload className="text-lg" />
-              <span>DOWNLOAD RESUME</span>
+              <FaFileDownload className="text-md" />
+              <span>Download</span>
             </a>
           </div>
         </section>
 
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ cat ~/Subscribe to my Blogs /*
+          <h2 className="text-xl text-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 pb-2">
+            Subscribe to my Blogs
           </h2>
 
           <div className="space-y-6 sm:space-y-8">
-            <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
-              <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-2">
-                Subscribe to my blogs on hashnode
+            <div className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6">
+              <h3 className="text-lg text-black sm:text-xl font-bold mb-2">
+                Hashnode || Blogs
               </h3>
 
               <button
@@ -386,9 +389,9 @@ export default function Home() {
                 title="Subscribe to my Hashnode Blog"
                 className="
     mt-4 mb-2 
-    bg-[#ffb86c] text-black 
+    bg-blue-800 text-white 
     font-semibold 
-    px-4 py-3 
+    px-2 py-2 rounded-full
     cursor-pointer 
     flex items-center gap-2 
      
@@ -405,32 +408,32 @@ export default function Home() {
         </section>
 
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ cat ~/Run this on your terminal /*
+          <h2 className="text-xl text-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6  pb-2">
+            Run this on your bash/zsh/cmd/pwsh
           </h2>
 
           <div className="space-y-6 sm:space-y-8">
-            <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
-              <h3 className="text-md text-[#ffb86c] sm:text-xl font-bold mb-2">
+            <div className="border bg-gray-100 rounded-lg border-gray-400 p-3 sm:p-6">
+              <h3 className="text-md text-black sm:text-xl font-bold mb-2">
                 Install Nodejs on your pc
               </h3>
 
-              <h3 className="text-md text-gray-400 sm:text-xl font-bold mb-2">
+              <h3 className="text-md text-gray-700 sm:text-xl font-bold mb-2">
                 Install this package :
               </h3>
 
-              <div className="p-3 rounded-md bg-[#171717]">
-                <span className="text-md text-[#ffb86c] font-semibold">
+              <div className="p-3 rounded-md bg-blue-200 border-2 border-gray-400">
+                <span className="text-md code-font text-black font-semibold">
                   npm install -g hackkinshuk
                 </span>
               </div>
 
-              <h3 className="text-md mt-3 text-gray-400 sm:text-xl font-bold mb-2">
+              <h3 className="text-md mt-3 text-gray-700 sm:text-xl font-bold mb-2">
                 Run this command :
               </h3>
 
-              <div className="p-3 rounded-md bg-[#171717]">
-                <span className="text-md text-[#ffb86c] font-semibold">
+              <div className="p-3 rounded-md bg-blue-200 border-2 border-gray-400">
+                <span className="text-md text-black code-font font-semibold">
                   cloudkinshuk
                 </span>
               </div>
@@ -443,25 +446,25 @@ export default function Home() {
         </section>
 
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ cat ~/Internships
+          <h2 className="text-xl ttext-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6  pb-2">
+            Internships
           </h2>
 
           <div className="space-y-6 sm:space-y-8">
-            <div className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6">
-              <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-2">
+            <div className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6">
+              <h3 className="text-lg ttext-black sm:text-xl font-bold mb-2">
                 {
-                  "[ UPPCTL : (Uttar Pradesh Power Transmission Corporation Limited) ]"
+                  "UPPCTL : (Uttar Pradesh Power Transmission Corporation Limited)"
                 }
               </h3>
               <div className="mt-2 font-semibold  mb-2 ">
-                <span className="text-lg text-gray-400">Time : </span>
-                <span className="text-lg text-gray-400">
+                <span className="text-lg text-gray-800">Time : </span>
+                <span className="text-lg text-gray-800">
                   {"[ July 2025 - Aug 2025  ] "}{" "}
                 </span>
               </div>
 
-              <span className="text-gray-400 font-semibold text-lg">
+              <span className="text-gray-black font-bold text-lg">
                 Expierience :{" "}
               </span>
               <p className="mt-2">
@@ -470,7 +473,7 @@ export default function Home() {
                 substations. Studied working principles of power transformers,
                 circuit breakers, busbars, and protection relays.
               </p>
-              <div className="h-0.5 mt-2 w-full bg-white"></div>
+              <div className="h-0.5 mt-2 w-full bg-black rounded-full"></div>
               <p className="mt-2">
                 Observed real-time SCADA dashboards for grid monitoring, load
                 management, and outage reporting. Assisted engineers during
@@ -478,7 +481,7 @@ export default function Home() {
                 PTs, and relays.
               </p>
 
-              <div className="h-0.5 mt-2 w-full bg-white"></div>
+              <div className="h-0.5 mt-2 w-full bg-black rounded-full"></div>
               <p className="mt-2">
                 Prepared technical documentation and maintained logs on
                 equipment performance and safety checks. Improved technical
@@ -491,19 +494,19 @@ export default function Home() {
 
         {/* Projects */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ cat ~/projects/*
+          <h2 className="text-xl ttext-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6  pb-2">
+            Projects
           </h2>
           <div className="space-y-6 sm:space-y-8">
             {CONFIG.projects.map((project) => (
               <div
                 key={project.title}
-                className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-6"
+                className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                   <div className="min-w-0">
-                    <h3 className="text-lg text-[#ffb86c] sm:text-xl font-bold mb-2">
-                      [ {project.title} ]
+                    <h3 className="text-lg ttext-black sm:text-xl font-bold mb-2">
+                      {project.title}
                     </h3>
                     <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
                       <span>{project.type}</span>
@@ -511,28 +514,28 @@ export default function Home() {
                       <span>{project.year}</span>
                     </div>
                   </div>
-                  <span className="bg-[#FFB86C] px-3 py-1 font-medium text-black text-sm w-max">
+                  <span className="bg-green-500 px-3 py-1 font-semibold rounded-full text-black text-sm w-max">
                     {project.status}
                   </span>
                 </div>
 
                 <div className="space-y-2 mb-4">
                   {project.description.map((p, i) => (
-                    <p key={i} className="text-xs sm:text-sm leading-relaxed">
+                    <p key={i} className="text-sm sm:text-sm leading-relaxed">
                       {p}
                     </p>
                   ))}
                 </div>
 
                 <div className="mb-4">
-                  <div className="text-md font-semibold sm:text-sm mb-2 text-gray-400">
+                  <div className="text-md font-semibold sm:text-sm mb-2 text-black">
                     TECH STACK:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="border border-[#FFB86C] rounded-md px-2 py-1 text-xs"
+                        className=" bg-gray-300 border-1 border-gray-500 rounded-md px-2 py-1 text-xs"
                       >
                         {tech}
                       </span>
@@ -541,7 +544,7 @@ export default function Home() {
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-[#181818] rounded-md p-3 mb-4 overflow-x-auto">
+                  <div className="bg-blue-200 border-1 border-gray-400 rounded-md p-3 mb-4 overflow-x-auto">
                     <div className="flex items-center justify-between gap-2">
                       <code className="text-md sm:text-sm whitespace-nowrap">
                         {project.dockerCommand}
@@ -557,9 +560,9 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFB86C] text-black text-md sm:text-sm font-bold  border border-[#FFB86C] transition-colors"
+                      className="inline-flex items-center gap-2 px-2  bg-blue-800 text-white text-md sm:text-sm rounded-full font-bold   transition-colors"
                     >
-                      VISIT SITE <FaExternalLinkAlt className="w-3 h-3" />
+                      Visit site <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
                   )}
                   {project.links.repo && (
@@ -567,7 +570,7 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 border border-[#FFB86C] text-md sm:text-sm font-bold bg-[#FFB86C] text-black transition-colors"
+                      className="inline-flex items-center gap-2 px-2 py-2 rounded-full text-sm sm:text-sm font-bold bg-blue-800 text-white transition-colors"
                     >
                       <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> VIEW CODE
                     </a>
@@ -580,14 +583,14 @@ export default function Home() {
 
         {/* Skills */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ grep -r skills ~/
+          <h2 className="text-xl ttext-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
+            Skills
           </h2>
-          <div className="space-y-6 border border-[#ffb86c] rounded-lg bg-[#222223] sm:space-y-8">
+          <div className="space-y-6 border border-gray-400 rounded-lg bg-gray-100 sm:space-y-8">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
-              <div key={category} className=" rounded-md  p-4 sm:p-5">
-                <h3 className="text-sm text-[#ffb86c] sm:text-base font-bold mb-3 sm:mb-4">
-                  [ {category.toUpperCase()} ]
+              <div key={category} className=" rounded-lg  p-4 sm:p-5">
+                <h3 className="text-sm ttext-black sm:text-base font-bold mb-3 sm:mb-4">
+                  {category.toUpperCase()}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.map((skill) => {
@@ -595,7 +598,7 @@ export default function Home() {
                     return (
                       <div
                         key={skill.name}
-                        className="flex items-center gap-2 px-3 py-2 rounded-md border border-[#FFB86C] text-sm sm:text-md"
+                        className="flex items-center gap-2 px-3 py-2 rounded-md bg-gray-300 text-sm sm:text-md"
                       >
                         <Icon className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                         <span>{skill.name}</span>
@@ -610,40 +613,42 @@ export default function Home() {
 
         {/* Certifications */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl  text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
-            $ find ~/certifications -type f
+          <h2 className="text-xl  ttext-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
+            Certifications
           </h2>
           <div className="space-y-4 sm:space-y-5">
             {CONFIG.certifications.map((cert) => (
               <div
                 key={cert.title}
-                className="border bg-[#222223] rounded-lg border-[#FFB86C] p-4 sm:p-5"
+                className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-5"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base text-[#ffb86c] sm:text-lg font-bold mb-2">
-                      [ {cert.title} ]
+                    <h3 className="text-base ttext-black sm:text-lg font-bold mb-2">
+                      {cert.title}
                     </h3>
-                    <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-gray-400">
+                    <div className="flex flex-wrap font-semibold items-center gap-2 text-xs sm:text-sm text-gray-700">
                       <span>{cert.organization}</span>
                       <span>|</span>
                       <span>{cert.year}</span>
                     </div>
                   </div>
-                  <span className="bg-[#FFB86C] px-3 py-1 text-md  text-black w-max">
+                  <span className="bg-green-500 rounded-full px-2 py-1 text-sm  text-black w-max">
                     {cert.status}
                   </span>
                 </div>
 
-                <p className="text-xs sm:text-sm mb-3">{cert.description}</p>
+                <p className="text-sm sm:text-sm mb-3">{cert.description}</p>
 
                 <div className="mb-3">
-                  <div className="text-xs text-gray-400 mb-2">SKILLS:</div>
+                  <div className="text-xs text-gray-700 font-semibold mb-2">
+                    SKILLS:
+                  </div>
                   <div className="flex flex-wrap gap-2">
                     {cert.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="border border-[#FFB86C] rounded-sm px-2 py-1 text-xs"
+                        className="bg-gray-300 border border-gray-400 rounded-sm px-2 py-1 text-xs"
                       >
                         {skill}
                       </span>
@@ -656,7 +661,7 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-6 py-3 bg-[#FFB86C] text-black font-bold border border-[#FFB86C] transition-colors"
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-2 py-2 rounded-full bg-blue-800 text-white font-semibold transition-colors"
                   >
                     VIEW CREDENTIAL <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
@@ -668,40 +673,33 @@ export default function Home() {
 
         {/* Education */}
         <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-[#ffb86c] sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 border-b-2 border-[#FFB86C] pb-2">
+          <h2 className="text-xl text-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
             $ more ~/education
           </h2>
-          <div className="border rounded-lg bg-[#222223] border-[#FFB86C] p-4 sm:p-6">
+          <div className="border rounded-lg bg-gray-100 border-gray-400 p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
               <div className="min-w-0">
-                <h3 className="text-lg sm:text-xl text-[#ffb86c] font-bold mb-2">
-                  [ {CONFIG.education.degree} ]
+                <h3 className="text-lg sm:text-xl ttext-black font-bold mb-2">
+                  {CONFIG.education.degree}
                 </h3>
                 <p className="text-base sm:text-lg mb-3">
                   {CONFIG.education.field}
                 </p>
                 <div className="space-y-1 text-xs sm:text-sm">
                   <p>{CONFIG.education.institution}</p>
-                  <p className="text-gray-400">{CONFIG.education.location}</p>
-                  <p className="text-gray-400">{CONFIG.education.period}</p>
+                  <p className="text-gray-700">{CONFIG.education.location}</p>
+                  <p className="text-gray-700">{CONFIG.education.period}</p>
                 </div>
               </div>
-              <span className="bg-[#FFB86C] px-3 py-1 text-sm text-black w-max">
+              <span className="bg-green-500 px-3 py-1 font-semibold text-sm text-black rounded-full w-max">
                 {CONFIG.education.status}
               </span>
             </div>
-            <p className="text-xs sm:text-sm leading-relaxed">
+            <p className="text-sm sm:text-sm leading-relaxed">
               {CONFIG.education.description}
             </p>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className="border-t-2 border-[#FFB86C] pt-6 text-center">
-          <div className="text-xs sm:text-sm text-gray-400">
-            $ echo "EOF" && exit
-          </div>
-        </footer>
       </div>
     </div>
   );

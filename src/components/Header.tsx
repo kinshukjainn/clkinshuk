@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { motion } from "framer-motion"
-import { FiMenu, FiX, FiHome, FiFileText, FiSettings } from "react-icons/fi"
-import { MdSafetyCheck } from "react-icons/md"
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { FiMenu, FiX, FiHome, FiFileText, FiSettings } from "react-icons/fi";
+import { MdSafetyCheck } from "react-icons/md";
 
 interface NavItem {
-  path: string
-  label: string
-  icon: React.ReactNode
+  path: string;
+  label: string;
+  icon: React.ReactNode;
 }
 
 interface NavLinkProps {
-  to: string
-  isActive: boolean
-  label: string
-  icon: React.ReactNode
-  onClick?: () => void
+  to: string;
+  isActive: boolean;
+  label: string;
+  icon: React.ReactNode;
+  onClick?: () => void;
 }
 
 const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
@@ -25,8 +25,8 @@ const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
     <motion.div
       className={`relative px-2 py-2 transition-all duration-200 flex items-center gap-4 ${
         isActive
-          ? "text-[#ffb86c] text-lg rounded-md font-semibold underline"
-          : "text-[#ffb86c] text-lg hover:underline hover:text-[#ffb86c] font-semibold"
+          ? "text-black text-lg rounded-md font-semibold underline"
+          : "text-black text-lg hover:underline hover:font-bold font-semibold"
       }`}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
@@ -42,42 +42,45 @@ const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
       <span className="relative z-10 font-medium text-base">{label}</span>
     </motion.div>
   </Link>
-)
+);
 
 const Header = () => {
-  const location = useLocation()
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const getPathInfo = (): { text: string; icon: React.ReactNode } => {
-    const { pathname } = location
+    const { pathname } = location;
     if (pathname.startsWith("/gears"))
-      return { text: "DevTools", icon: <FiSettings className="w-3.5 h-3.5" /> }
+      return { text: "DevTools", icon: <FiSettings className="w-3.5 h-3.5" /> };
     if (pathname.startsWith("/blogs"))
-      return { text: "Blogs", icon: <FiFileText className="w-3.5 h-3.5" /> }
+      return { text: "Blogs", icon: <FiFileText className="w-3.5 h-3.5" /> };
     if (pathname.startsWith("/sign-in"))
-      return { text: "Verify", icon: <MdSafetyCheck className="w-3.5 h-3.5" /> }
-    return { text: "Home", icon: <FiHome className="w-3.5 h-3.5" /> }
-  }
+      return {
+        text: "Verify",
+        icon: <MdSafetyCheck className="w-3.5 h-3.5" />,
+      };
+    return { text: "Home", icon: <FiHome className="w-3.5 h-3.5" /> };
+  };
 
   const isActiveRoute = (path: string): boolean =>
-    location.pathname.startsWith(path) || location.pathname === path
+    location.pathname.startsWith(path) || location.pathname === path;
 
-  const toggleMenu = (): void => setIsMenuOpen(!isMenuOpen)
-  const closeMenu = (): void => setIsMenuOpen(false)
+  const toggleMenu = (): void => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = (): void => setIsMenuOpen(false);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "auto"
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
     return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [isMenuOpen])
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
 
   const navItems: NavItem[] = [
     { path: "/blogs", label: "Blogs", icon: <FiFileText /> },
     { path: "/gears", label: "Devlopment Setup", icon: <FiSettings /> },
-  ]
+  ];
 
-  const pathInfo = getPathInfo()
+  const pathInfo = getPathInfo();
 
   return (
     <>
@@ -87,10 +90,9 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-[#18181b]">
+        <motion.div className="relative backdrop-blur-xl bg-gray-100">
           <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
-
               {/* Logo */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -103,15 +105,15 @@ const Header = () => {
                     className="flex items-center gap-2 sm:gap-3 md:gap-4"
                     whileHover={{ scale: 1.01 }}
                   >
-                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold web-headline text-gray-200 leading-none whitespace-nowrap">
+                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold web-headline text-gray-900 leading-none whitespace-nowrap">
                       cloudkinshuk
                     </h1>
 
-                    <motion.div className="flex items-center gap-1 px-3 py-2 border-l-3 border-[#FFB86C]">
-                      <span className="text-gray-200 flex items-center">
+                    <motion.div className="flex items-center gap-1 px-3 py-2 border-l-3 border-black">
+                      <span className="text-gray-900 flex items-center">
                         {pathInfo.icon}
                       </span>
-                      <span className="text-sm text-gray-200 font-normal whitespace-nowrap">
+                      <span className="text-sm text-gray-900 font-medium whitespace-nowrap">
                         {pathInfo.text}
                       </span>
                     </motion.div>
@@ -142,7 +144,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-2 bg-[#222223] text-[#ffb86c] rounded-md"
+                  className="relative p-2 bg-gray-300 text-black rounded-md"
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
@@ -172,7 +174,7 @@ const Header = () => {
         />
 
         <motion.div
-          className="absolute top-16 left-0 right-0 bg-black text-gray-200"
+          className="absolute top-16 left-0 right-0 bg-gray-100 text-gray-200"
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
@@ -204,7 +206,7 @@ const Header = () => {
         </motion.div>
       </motion.div>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

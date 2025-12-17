@@ -1,5 +1,9 @@
-import React, { useState, useMemo, useCallback, useEffect, useRef } from "react"
-import { useQuery, QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import React, { useState, useMemo, useCallback, useEffect } from "react";
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import {
   FaSearch,
   FaExternalLinkAlt,
@@ -10,123 +14,87 @@ import {
   FaHeart,
   FaClock,
   FaTimes,
-  FaKeyboard,
-  FaHistory,
-} from "react-icons/fa"
+  FaFilter,
+  FaSortAmountDown,
+} from "react-icons/fa";
 
 // Types
 interface BlogPost {
-  id: string
-  title: string
-  brief: string
-  slug: string
-  publishedAt: string
-  updatedAt: string
-  readTimeInMinutes?: number
-  views?: number
-  reactionCount?: number
+  id: string;
+  title: string;
+  brief: string;
+  slug: string;
+  publishedAt: string;
+  updatedAt: string;
+  readTimeInMinutes?: number;
+  views?: number;
+  reactionCount?: number;
   coverImage?: {
-    url: string
-  }
+    url: string;
+  };
   tags: Array<{
-    id: string
-    name: string
-    slug: string
-  }>
+    id: string;
+    name: string;
+    slug: string;
+  }>;
   author: {
-    name: string
-    profilePicture?: string
-  }
-  url?: string
+    name: string;
+    profilePicture?: string;
+  };
+  url?: string;
 }
 
-interface SearchSuggestion {
-  type: "post" | "recent"
-  value: string
-  label: string
-  post?: BlogPost
+type SortOption = "newest" | "oldest" | "mostViewed" | "mostLiked" | "readTime";
+
+interface Filters {
+  tags: string[];
+  readTimeMin: number;
+  readTimeMax: number;
+  sortBy: SortOption;
 }
 
 class SimpleSearchEngine {
-  private posts: BlogPost[] = []
-  private recentSearches: string[] = []
+  private posts: BlogPost[] = [];
 
   constructor(posts: BlogPost[]) {
-    this.posts = posts
-  }
-
-  addRecentSearch(query: string) {
-    if (query.trim().length < 2) return
-    const trimmedQuery = query.trim().toLowerCase()
-    this.recentSearches = [trimmedQuery, ...this.recentSearches.filter((s) => s !== trimmedQuery)].slice(0, 5)
-  }
-
-  getRecentSearches(): string[] {
-    return this.recentSearches
+    this.posts = posts;
   }
 
   search(query: string): BlogPost[] {
-    if (!query.trim()) return this.posts
+    if (!query.trim()) return this.posts;
 
-    const queryLower = query.toLowerCase()
-    const queryWords = queryLower.split(/\s+/).filter((w) => w.length > 0)
+    const queryLower = query.toLowerCase();
+    const queryWords = queryLower.split(/\s+/).filter((w) => w.length > 0);
 
     return this.posts
       .map((post) => {
-        let score = 0
-        const titleLower = post.title.toLowerCase()
-        const briefLower = post.brief.toLowerCase()
-        const authorLower = post.author.name.toLowerCase()
-        const tagsLower = post.tags.map((t) => t.name.toLowerCase()).join(" ")
+        let score = 0;
+        const titleLower = post.title.toLowerCase();
+        const briefLower = post.brief.toLowerCase();
+        const authorLower = post.author.name.toLowerCase();
+        const tagsLower = post.tags.map((t) => t.name.toLowerCase()).join(" ");
 
-        if (titleLower.includes(queryLower)) score += 100
-        if (briefLower.includes(queryLower)) score += 50
-        if (authorLower.includes(queryLower)) score += 30
-        if (tagsLower.includes(queryLower)) score += 20
+        if (titleLower.includes(queryLower)) score += 100;
+        if (briefLower.includes(queryLower)) score += 50;
+        if (authorLower.includes(queryLower)) score += 30;
+        if (tagsLower.includes(queryLower)) score += 20;
 
         queryWords.forEach((word) => {
-          if (titleLower.includes(word)) score += 10
-          if (briefLower.includes(word)) score += 5
-          if (authorLower.includes(word)) score += 3
-          if (tagsLower.includes(word)) score += 2
-        })
+          if (titleLower.includes(word)) score += 10;
+          if (briefLower.includes(word)) score += 5;
+          if (authorLower.includes(word)) score += 3;
+          if (tagsLower.includes(word)) score += 2;
+        });
 
-        return { post, score }
+        return { post, score };
       })
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)
-      .map(({ post }) => post)
-  }
-
-  getSuggestions(query: string): SearchSuggestion[] {
-    if (!query.trim()) {
-      return this.recentSearches.map((search) => ({
-        type: "recent",
-        value: search,
-        label: search,
-      }))
-    }
-
-    const suggestions: SearchSuggestion[] = []
-    const queryLower = query.toLowerCase()
-
-    this.posts
-      .filter((post) => post.title.toLowerCase().includes(queryLower))
-      .slice(0, 5)
-      .forEach((post) => {
-        suggestions.push({
-          type: "post",
-          value: post.title,
-          label: post.title,
-          post,
-        })
-      })
-
-    return suggestions
+      .map(({ post }) => post);
   }
 }
 
-const HASHNODE_API_URL = "https://gql.hashnode.com/"
+const HASHNODE_API_URL = "https://gql.hashnode.com/";
 const BLOG_POSTS_QUERY = `
   query GetUserPosts($host: String!) {
     publication(host: $host) {
@@ -161,7 +129,7 @@ const BLOG_POSTS_QUERY = `
       }
     }
   }
-`
+`;
 
 const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   try {
@@ -177,165 +145,319 @@ const fetchBlogPosts = async (): Promise<BlogPost[]> => {
           host: "blog.cloudkinshuk.in",
         },
       }),
-    })
+    });
 
     if (!response.ok) {
-      const errorText = await response.text()
-      throw new Error(`HTTP error! status: ${response.status} - ${errorText}`)
+      const errorText = await response.text();
+      throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
     }
 
-    const data = await response.json()
+    const data = await response.json();
     if (data.errors) {
-      throw new Error(data.errors[0]?.message || "GraphQL error")
+      throw new Error(data.errors[0]?.message || "GraphQL error");
     }
 
     if (!data.data?.publication?.posts?.edges) {
-      throw new Error("No blog posts found")
+      throw new Error("No blog posts found");
     }
 
-    type Edge = { node: BlogPost }
+    type Edge = { node: BlogPost };
     const posts = (data.data.publication.posts.edges as Edge[]).map((edge) => ({
       ...edge.node,
       url: `https://blog.cloudkinshuk.in/${edge.node.slug}`,
-    }))
+    }));
 
-    return posts
+    return posts;
   } catch (error) {
-    console.error("Detailed error in fetchBlogPosts:", error)
-    throw error
+    console.error("Detailed error in fetchBlogPosts:", error);
+    throw error;
   }
-}
+};
 
 interface BlogCardProps {
-  post: BlogPost
-  searchQuery?: string
+  post: BlogPost;
+  searchQuery?: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = React.memo(({ post, searchQuery }) => {
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const [imageError, setImageError] = useState(false)
+const BlogCard: React.FC<BlogCardProps> = React.memo(
+  ({ post, searchQuery }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageError, setImageError] = useState(false);
 
-  const formatDate = useCallback((dateString: string): string => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    })
-  }, [])
+    const formatDate = useCallback((dateString: string): string => {
+      return new Date(dateString).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    }, []);
 
-  const formatNumber = useCallback((num: number): string => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`
-    return num.toString()
-  }, [])
+    const formatNumber = useCallback((num: number): string => {
+      if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
+      if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+      return num.toString();
+    }, []);
 
-  const highlightText = useCallback((text: string, query?: string) => {
-    if (!query || !query.trim()) return text
-    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi")
-    const parts = text.split(regex)
-    return parts.map((part, i) =>
-      regex.test(part) ? (
-        <mark key={i} className="bg-yellow-400 text-black px-1 rounded">
-          {part}
-        </mark>
-      ) : (
-        part
-      ),
-    )
-  }, [])
+    const highlightText = useCallback((text: string, query?: string) => {
+      if (!query || !query.trim()) return text;
+      const regex = new RegExp(
+        `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+        "gi"
+      );
+      const parts = text.split(regex);
+      return parts.map((part, i) =>
+        regex.test(part) ? (
+          <mark key={i} className="bg-yellow-400 text-black px-1 rounded">
+            {part}
+          </mark>
+        ) : (
+          part
+        )
+      );
+    }, []);
+
+    return (
+      <article className="rounded-md border-2 border-gray-400 transition-all duration-300 overflow-hidden  bg-gray-100 ">
+        <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
+          {post.coverImage && !imageError ? (
+            <>
+              <img
+                src={post.coverImage.url}
+                alt={post.title}
+                className={`w-full h-full object-cover transition-all duration-500 ${
+                  imageLoaded
+                    ? "opacity-100 group-hover:scale-110"
+                    : "opacity-0"
+                }`}
+                loading="lazy"
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+              />
+              {!imageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                  <FaSpinner className="animate-spin text-cyan-500 text-xl" />
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            </>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-200">
+              <FaExternalLinkAlt className="text-gray-400 text-3xl" />
+            </div>
+          )}
+        </div>
+
+        <div className="p-4 sm:p-5">
+          <h2 className="text-base sm:text-lg font-bold text-black leading-snug mb-3 line-clamp-2  transition-colors duration-200">
+            {highlightText(post.title, searchQuery)}
+          </h2>
+
+          <div className="flex items-center gap-2 mb-3 text-xs sm:text-sm flex-wrap">
+            <span className="font-semibold text-gray-700">
+              {highlightText(post.author.name, searchQuery)}
+            </span>
+            <span className="text-gray-400">•</span>
+            <span className="flex items-center gap-1.5 text-gray-500">
+              <FaCalendarAlt className="w-3 h-3" />
+              {formatDate(post.publishedAt)}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between pt-3 border-t border-gray-200">
+            <div className="flex items-center gap-2.5 sm:gap-3 text-sm text-gray-500 flex-wrap">
+              {post.readTimeInMinutes && (
+                <span className="flex items-center gap-1">
+                  <FaClock className="w-3 h-3" />
+                  {post.readTimeInMinutes}m
+                </span>
+              )}
+              {post.views && (
+                <span className="flex items-center gap-1">
+                  <FaEye className="w-3 h-3" />
+                  {formatNumber(post.views)}
+                </span>
+              )}
+              {post.reactionCount && post.reactionCount > 0 && (
+                <span className="flex items-center gap-1">
+                  <FaHeart className="w-3 h-3" />
+                  {formatNumber(post.reactionCount)}
+                </span>
+              )}
+            </div>
+            <a
+              href={post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4  sm:py-2 text-white rounded-full text-sm sm:text-sm font-bold tracking-wide transition-all duration-200 bg-blue-800 hover:text-white"
+            >
+              Read
+              <FaExternalLinkAlt className="w-3 h-3" />
+            </a>
+          </div>
+        </div>
+      </article>
+    );
+  }
+);
+
+BlogCard.displayName = "BlogCard";
+
+interface FilterPanelProps {
+  filters: Filters;
+  setFilters: (filters: Filters) => void;
+  availableTags: string[];
+}
+
+const FilterPanel: React.FC<FilterPanelProps> = ({
+  filters,
+  setFilters,
+  availableTags,
+}) => {
+  const sortOptions: { value: SortOption; label: string }[] = [
+    { value: "newest", label: "Newest First" },
+    { value: "oldest", label: "Oldest First" },
+    { value: "mostViewed", label: "Most Viewed" },
+    { value: "mostLiked", label: "Most Liked" },
+    { value: "readTime", label: "Read Time" },
+  ];
+
+  const toggleTag = (tag: string) => {
+    setFilters({
+      ...filters,
+      tags: filters.tags.includes(tag)
+        ? filters.tags.filter((t) => t !== tag)
+        : [...filters.tags, tag],
+    });
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      tags: [],
+      readTimeMin: 0,
+      readTimeMax: 100,
+      sortBy: "newest",
+    });
+  };
+
+  const activeFiltersCount =
+    filters.tags.length +
+    (filters.readTimeMin > 0 || filters.readTimeMax < 100 ? 1 : 0);
 
   return (
-    <article className="  rounded-md border-2 border-[#ffb86c]   transition-all duration-300 overflow-hidden">
-      {/* Cover Image */}
-      <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
-        {post.coverImage && !imageError ? (
-          <>
-            <img
-              src={post.coverImage.url}
-              alt={post.title}
-              className={`w-full h-full object-cover transition-all duration-500 ${
-                imageLoaded ? "opacity-100 group-hover:scale-110" : "opacity-0"
-              }`}
-              loading="lazy"
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageError(true)}
-            />
-            {!imageLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center bg-zinc-950">
-                <FaSpinner className="animate-spin text-cyan-500 text-xl" />
-              </div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-60" />
-          </>
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-zinc-950">
-            <FaExternalLinkAlt className="text-zinc-700 text-3xl" />
-          </div>
-        )}
+    <div className="w-full bg-white border-2 border-gray-200 rounded-xl p-4 sm:p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+          <FaFilter className="w-4 h-4" />
+          Filters
+          {activeFiltersCount > 0 && (
+            <span className="bg-cyan-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              {activeFiltersCount}
+            </span>
+          )}
+        </h3>
+        <button
+          onClick={resetFilters}
+          className="text-xs sm:text-sm text-cyan-600 hover:text-cyan-700 font-semibold"
+        >
+          Reset All
+        </button>
       </div>
 
-      {/* Content */}
-      <div className="p-4 sm:p-5">
-        {/* Title */}
-        <h2 className="text-base sm:text-lg font-bold text-[#ffb86c] leading-snug mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors duration-200">
-          {highlightText(post.title, searchQuery)}
-        </h2>
-
-        {/* Author & Date */}
-        <div className="flex items-center gap-2 mb-3 text-xs sm:text-sm flex-wrap">
-          <span className="font-semibold text-[#ffb86cs]">{highlightText(post.author.name, searchQuery)}</span>
-          <span className="text-zinc-600">•</span>
-          <span className="flex items-center gap-1.5 text-zinc-400">
-            <FaCalendarAlt className="w-3 h-3" />
-            {formatDate(post.publishedAt)}
-          </span>
-        </div>
-
-        {/* Meta Info */}
-        <div className="flex items-center justify-between pt-3 border-t border-zinc-800">
-          <div className="flex items-center p-1 gap-2.5 sm:gap-3 text-sm text-zinc-400  flex-wrap">
-            {post.readTimeInMinutes && (
-              <span className="flex items-center gap-1">
-                <FaClock className="w-3 h-3" />
-                {post.readTimeInMinutes}m
-              </span>
-            )}
-            {post.views && (
-              <span className="flex items-center gap-1">
-                <FaEye className="w-3 h-3" />
-                {formatNumber(post.views)}
-              </span>
-            )}
-            {post.reactionCount && post.reactionCount > 0 && (
-              <span className="flex items-center gap-1">
-                <FaHeart className="w-3 h-3 " />
-                {formatNumber(post.reactionCount)}
-              </span>
-            )}
-          </div>
-          <a
-            href={post.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 border-2 border-[#ffb86c] sm:py-2  text-gray-200 rounded-md text-xs sm:text-sm font-bold tracking-wide transition-all duration-200"
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        {/* Sort By */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <FaSortAmountDown className="inline w-3.5 h-3.5 mr-1.5" />
+            Sort By
+          </label>
+          <select
+            title="none"
+            value={filters.sortBy}
+            onChange={(e) =>
+              setFilters({ ...filters, sortBy: e.target.value as SortOption })
+            }
+            className="w-full bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-cyan-500 transition-colors"
           >
-            Read
-            <FaExternalLinkAlt className="w-3 h-3" />
-          </a>
+            {sortOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Read Time Range */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <FaClock className="inline w-3.5 h-3.5 mr-1.5" />
+            Read Time (minutes)
+          </label>
+          <div className="flex items-center gap-2">
+            <input
+              title="texting"
+              type="number"
+              min="0"
+              max="100"
+              value={filters.readTimeMin}
+              onChange={(e) =>
+                setFilters({
+                  ...filters,
+                  readTimeMin: parseInt(e.target.value) || 0,
+                })
+              }
+              className="w-full bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-cyan-500"
+            />
+            <span className="text-gray-500 text-sm">to</span>
+            <input
+              title="texting"
+              type="number"
+              min="0"
+              max="100"
+              value={filters.readTimeMax}
+              onChange={(e) =>
+                setFilters({
+                  ...filters,
+                  readTimeMax: parseInt(e.target.value) || 100,
+                })
+              }
+              className="w-full bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-cyan-500"
+            />
+          </div>
+        </div>
+
+        {/* Tags */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Tags ({filters.tags.length} selected)
+          </label>
+          <div className="max-h-32 overflow-y-auto bg-gray-50 border-2 border-gray-300 rounded-lg p-2">
+            <div className="flex flex-wrap gap-1.5">
+              {availableTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => toggleTag(tag)}
+                  className={`px-2.5 py-1.5 rounded-md text-xs transition-all duration-200 ${
+                    filters.tags.includes(tag)
+                      ? "bg-cyan-500 text-white font-semibold"
+                      : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-    </article>
-  )
-})
-
-BlogCard.displayName = "BlogCard"
+    </div>
+  );
+};
 
 interface SearchBarProps {
-  searchInput: string
-  setSearchInput: (value: string) => void
-  resultsCount: number
-  totalCount: number
-  searchEngine: SimpleSearchEngine | null
+  searchInput: string;
+  setSearchInput: (value: string) => void;
+  resultsCount: number;
+  totalCount: number;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -343,160 +465,49 @@ const SearchBar: React.FC<SearchBarProps> = ({
   setSearchInput,
   resultsCount,
   totalCount,
-  searchEngine,
 }) => {
-  const [showSuggestions, setShowSuggestions] = useState(false)
-  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([])
-  const [selectedIndex, setSelectedIndex] = useState(-1)
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    if (searchEngine) {
-      const newSuggestions = searchEngine.getSuggestions(searchInput)
-      setSuggestions(newSuggestions)
-      setSelectedIndex(-1)
-    }
-  }, [searchInput, searchEngine])
-
-  const handleSearch = useCallback(() => {
-    if (searchInput.trim() && searchEngine) {
-      searchEngine.addRecentSearch(searchInput)
-      setShowSuggestions(false)
-    }
-  }, [searchInput, searchEngine])
-
-  const handleSuggestionClick = useCallback(
-    (suggestion: SearchSuggestion) => {
-      setSearchInput(suggestion.value)
-      setShowSuggestions(false)
-      if (searchEngine) {
-        searchEngine.addRecentSearch(suggestion.value)
-      }
-    },
-    [setSearchInput, searchEngine],
-  )
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault()
-        inputRef.current?.focus()
-        setShowSuggestions(true)
-      }
-
-      if (showSuggestions && suggestions.length > 0) {
-        switch (e.key) {
-          case "ArrowDown":
-            e.preventDefault()
-            setSelectedIndex((prev) => Math.min(prev + 1, suggestions.length - 1))
-            break
-          case "ArrowUp":
-            e.preventDefault()
-            setSelectedIndex((prev) => Math.max(prev - 1, -1))
-            break
-          case "Enter":
-            e.preventDefault()
-            if (selectedIndex >= 0 && suggestions[selectedIndex]) {
-              handleSuggestionClick(suggestions[selectedIndex])
-            } else if (searchInput.trim()) {
-              handleSearch()
-            }
-            break
-          case "Escape":
-            setShowSuggestions(false)
-            setSelectedIndex(-1)
-            break
-        }
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown)
-    return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [showSuggestions, suggestions, selectedIndex, searchInput, handleSearch, handleSuggestionClick])
-
-  const getSuggestionIcon = (type: SearchSuggestion["type"]) => {
-    switch (type) {
-      case "post":
-        return <FaSearch className="w-3.5 h-3.5" />
-      case "recent":
-        return <FaHistory className="w-3.5 h-3.5" />
-      default:
-        return <FaSearch className="w-3.5 h-3.5 text-gray-200 " />
-    }
-  }
-
   return (
     <div className="relative w-full">
       <div className="relative">
-        <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-200  text-base sm:text-lg " />
+        <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-base sm:text-lg" />
         <input
-          ref={inputRef}
           type="text"
-          placeholder="Search articles... (⌘K)"
+          placeholder="Search articles by title, content, author, or tags..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          onFocus={() => setShowSuggestions(true)}
-          onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-          className="w-full pl-10  sm:pl-12 pr-20 sm:pr-32 border border-[#ffb86c]  py-2 sm:py-2.5 rounded-lg   text-gray-200 outline-none placeholder-zinc-500 text-md sm:text-base transition-all duration-200"
+          className="w-full pl-10 sm:pl-12 pr-12 border-2 border-gray-300 py-2.5 sm:py-3 rounded-xl text-gray-900 bg-white outline-none placeholder-gray-400 text-sm sm:text-base transition-all duration-200 focus:border-cyan-500 focus:shadow-lg"
         />
-        <div className="absolute right-2 sm:right-3 top-1/2 transform -translate-y-1/2 flex items-center gap-1.5 sm:gap-2">
-          {searchInput && (
-            <button
-              title="Clear search"
-              onClick={() => {
-                setSearchInput("")
-                setShowSuggestions(false)
-              }}
-              className="text-gray-200 hover:text-gray-200 transition-colors duration-200 p-1"
-            >
-              <FaTimes className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            </button>
-          )}
-          <div className="hidden sm:flex items-center gap-1.5 rounded-lg text-xs text-zinc-400 bg-zinc-800/80 px-2.5 py-1.5 border border-zinc-700">
-            <FaKeyboard className="w-3 h-3" />
-            ⌘K
-          </div>
-        </div>
+        {searchInput && (
+          <button
+            title="Clear search"
+            onClick={() => setSearchInput("")}
+            className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors duration-200 p-1.5 hover:bg-gray-100 rounded-lg"
+          >
+            <FaTimes className="w-4 h-4" />
+          </button>
+        )}
       </div>
 
-      {/* Suggestions */}
-      {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 mt-2 rounded-2xl bg-zinc-900/95 backdrop-blur-lg border border-zinc-800 z-50 max-h-60 sm:max-h-80 overflow-y-auto shadow-2xl">
-          {suggestions.map((suggestion, index) => (
-            <button
-              key={`${suggestion.type}-${suggestion.value}`}
-              onClick={() => handleSuggestionClick(suggestion)}
-              className={`w-full flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 cursor-pointer text-left hover:bg-zinc-800/80 transition-colors duration-150 ${
-                index === selectedIndex ? "bg-zinc-800/80" : ""
-              } border-b border-zinc-800 last:border-b-0`}
-            >
-              <div className="p-1.5 sm:p-2 text-cyan-400 bg-cyan-500/10 rounded-lg">
-                {getSuggestionIcon(suggestion.type)}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-gray-200 text-xs sm:text-sm font-medium truncate">{suggestion.label}</div>
-                <div className="text-xs text-zinc-500 capitalize mt-0.5">
-                  {suggestion.type === "recent" ? "Recent search" : "Article"}
-                </div>
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
-
-      {/* Results indicator */}
       {searchInput && (
-        <div className="absolute -bottom-5 sm:-bottom-6 left-0 text-xs sm:text-sm text-zinc-400 ">
+        <div className="mt-2 text-xs sm:text-sm text-gray-600 font-medium">
           {resultsCount} of {totalCount} articles
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 const BlogPageContent: React.FC = () => {
-  const [searchInput, setSearchInput] = useState("")
-  const [searchEngine, setSearchEngine] = useState<SimpleSearchEngine | null>(null)
+  const [searchInput, setSearchInput] = useState("");
+  const [searchEngine, setSearchEngine] = useState<SimpleSearchEngine | null>(
+    null
+  );
+  const [filters, setFilters] = useState<Filters>({
+    tags: [],
+    readTimeMin: 0,
+    readTimeMax: 100,
+    sortBy: "newest",
+  });
 
   const {
     data: posts,
@@ -510,93 +521,159 @@ const BlogPageContent: React.FC = () => {
     gcTime: 30 * 60 * 1000,
     refetchOnWindowFocus: false,
     retry: 3,
-  })
+  });
 
   useEffect(() => {
     if (posts) {
-      setSearchEngine(new SimpleSearchEngine(posts))
+      setSearchEngine(new SimpleSearchEngine(posts));
     }
-  }, [posts])
+  }, [posts]);
+
+  const availableTags = useMemo(() => {
+    if (!posts) return [];
+    const tagsSet = new Set<string>();
+    posts.forEach((post) => {
+      post.tags.forEach((tag) => tagsSet.add(tag.name));
+    });
+    return Array.from(tagsSet).sort();
+  }, [posts]);
 
   const filteredPosts = useMemo(() => {
-    if (!posts || !searchEngine) return []
+    if (!posts || !searchEngine) return [];
 
-    if (!searchInput.trim()) {
-      return [...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    let result = searchInput.trim() ? searchEngine.search(searchInput) : posts;
+
+    // Apply tag filter
+    if (filters.tags.length > 0) {
+      result = result.filter((post) =>
+        post.tags.some((tag) => filters.tags.includes(tag.name))
+      );
     }
 
-    return searchEngine.search(searchInput)
-  }, [posts, searchInput, searchEngine])
+    // Apply read time filter
+    result = result.filter((post) => {
+      const readTime = post.readTimeInMinutes || 0;
+      return readTime >= filters.readTimeMin && readTime <= filters.readTimeMax;
+    });
+
+    // Apply sorting
+    result = [...result].sort((a, b) => {
+      switch (filters.sortBy) {
+        case "newest":
+          return (
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+          );
+        case "oldest":
+          return (
+            new Date(a.publishedAt).getTime() -
+            new Date(b.publishedAt).getTime()
+          );
+        case "mostViewed":
+          return (b.views || 0) - (a.views || 0);
+        case "mostLiked":
+          return (b.reactionCount || 0) - (a.reactionCount || 0);
+        case "readTime":
+          return (a.readTimeInMinutes || 0) - (b.readTimeInMinutes || 0);
+        default:
+          return 0;
+      }
+    });
+
+    return result;
+  }, [posts, searchInput, searchEngine, filters]);
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 text-gray-200 flex items-center justify-center p-4">
-        <div className="text-center max-w-md border border-zinc-800 p-6 sm:p-8 bg-zinc-900/50 backdrop-blur-sm rounded-2xl">
-          <FaExclamationTriangle className="text-yellow-400 text-4xl sm:text-5xl mx-auto mb-4" />
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-200 mb-3">Failed to Load Blog Posts</h2>
-          <p className="text-zinc-400 text-xs sm:text-sm mb-6">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 flex items-center justify-center p-4">
+        <div className="text-center max-w-md border-2 border-gray-300 p-6 sm:p-8 bg-white rounded-2xl shadow-xl">
+          <FaExclamationTriangle className="text-yellow-500 text-4xl sm:text-5xl mx-auto mb-4" />
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+            Failed to Load Blog Posts
+          </h2>
+          <p className="text-gray-600 text-xs sm:text-sm mb-6">
             {error instanceof Error ? error.message : "Unknown error occurred"}
           </p>
           <button
             onClick={() => refetch()}
-            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-gray-200 font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
+            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
           >
             Try Again
           </button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
-    <>
-      <div className="min-h-screen bg-[#18181b] text-gray-200 relative overflow-x-hidden">
-        <div className="relative z-10">
-        {/* Hero Section */}
-        <section className="border-b pt-20 border-zinc-800/50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white text-gray-900">
+      <div className="w-full">
+        <section className="pt-12 sm:pt-16 md:pt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-200 mb-4 sm:mb-6 leading-tight">
-                Read my <span className="text-green-500 ">Blogs</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl web-headline font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
+                Read my <span className="text-green-700">Blogs</span>
               </h1>
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-zinc-400 leading-relaxed max-w-2xl mx-auto px-4">
-                Exploring cloud computing, DevOps, and React development through curiosity and real-world experience.
+              <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                Exploring cloud computing, DevOps, and React development through
+                curiosity and real-world experience.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Search */}
-        <div className="sticky top-0 z-40  border-b border-zinc-800/50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <SearchBar
-              searchInput={searchInput}
-              setSearchInput={setSearchInput}
-              resultsCount={filteredPosts.length}
-              totalCount={posts?.length || 0}
-              searchEngine={searchEngine}
-            />
+        <div className=" top-0 z-40 bg-gradient-to-b from-white to-transparent pb-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex flex-col gap-4">
+              <SearchBar
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+                resultsCount={filteredPosts.length}
+                totalCount={posts?.length || 0}
+              />
+              <FilterPanel
+                filters={filters}
+                setFilters={setFilters}
+                availableTags={availableTags}
+              />
+            </div>
           </div>
         </div>
 
-        {/* Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-16 sm:py-20">
-              <FaSpinner className="animate-spin text-cyan-500 text-3xl rounded-full sm:text-4xl mb-4" />
-              <h3 className="text-lg sm:text-xl text-gray-200 mb-2 font-semibold">Loading articles...</h3>
-              <p className="text-zinc-400 text-xs sm:text-sm">Fetching the latest insights</p>
+              <FaSpinner className="animate-spin text-cyan-600 text-3xl sm:text-4xl mb-4" />
+              <h3 className="text-lg sm:text-xl text-gray-900 mb-2 font-semibold">
+                Loading articles...
+              </h3>
+              <p className="text-gray-600 text-xs sm:text-sm">
+                Fetching the latest insights
+              </p>
             </div>
           ) : filteredPosts.length === 0 ? (
-            <div className="text-center py-16 sm:py-20 border border-zinc-800 bg-zinc-900/30 backdrop-blur-sm rounded-2xl">
-              <FaSearch className="text-gray-200 text-4xl sm:text-5xl mx-auto mb-4" />
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-200 mb-3">No articles found</h3>
-              <p className="text-zinc-400 text-sm sm:text-base mb-6 sm:mb-8 max-w-md mx-auto px-4">Try different search terms to discover more content</p>
+            <div className="text-center py-16 sm:py-20">
+              <FaSearch className="text-gray-400 text-4xl sm:text-5xl mx-auto mb-4" />
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+                No articles found
+              </h3>
+              <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8 max-w-md mx-auto px-4">
+                Try adjusting your search terms or filters to discover more
+                content
+              </p>
               <button
-                onClick={() => setSearchInput("")}
-                className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-gray-200 font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
+                onClick={() => {
+                  setSearchInput("");
+                  setFilters({
+                    tags: [],
+                    readTimeMin: 0,
+                    readTimeMax: 100,
+                    sortBy: "newest",
+                  });
+                }}
+                className="px-6 py-3 bg-cyan-600 text-white font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl hover:bg-cyan-700"
               >
-                Clear Search
+                Clear All Filters
               </button>
             </div>
           ) : (
@@ -609,9 +686,8 @@ const BlogPageContent: React.FC = () => {
         </main>
       </div>
     </div>
-    </>
-  )
-}
+  );
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -623,14 +699,14 @@ const queryClient = new QueryClient({
       refetchOnWindowFocus: false,
     },
   },
-})
+});
 
 const Blogs: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BlogPageContent />
     </QueryClientProvider>
-  )
-}
+  );
+};
 
-export default Blogs
+export default Blogs;

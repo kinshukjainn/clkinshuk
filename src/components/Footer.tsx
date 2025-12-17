@@ -1,25 +1,51 @@
-import type React from "react"
-import { FaCloud, FaGithub, FaTwitter, FaLinkedin, FaInstagram, FaEnvelope } from "react-icons/fa"
+import type React from "react";
+import {
+  FaCloud,
+  FaGithub,
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+  FaEnvelope,
+} from "react-icons/fa";
 
 interface SocialLink {
-  icon: React.ElementType
-  href: string
-  label: string
+  icon: React.ElementType;
+  href: string;
+  label: string;
 }
 
 const Footer = () => {
   const socialLinks: SocialLink[] = [
-    { icon: FaGithub, href: "https://github.com/kinshukjainn", label: "GitHub" },
-    { icon: FaTwitter, href: "https://twitter.com/realkinshuk004", label: "Twitter" },
-    { icon: FaLinkedin, href: "https://linkedin.com/in/kinshukjainn", label: "LinkedIn" },
-    { icon: FaInstagram, href: "https://instagram.com/kinshukjainn", label: "Instagram" },
-    { icon: FaEnvelope, href: "mailto:kinshuk25jan04@gmail.com", label: "Email" },
-  ]
+    {
+      icon: FaGithub,
+      href: "https://github.com/kinshukjainn",
+      label: "GitHub",
+    },
+    {
+      icon: FaTwitter,
+      href: "https://twitter.com/realkinshuk004",
+      label: "Twitter",
+    },
+    {
+      icon: FaLinkedin,
+      href: "https://linkedin.com/in/kinshukjainn",
+      label: "LinkedIn",
+    },
+    {
+      icon: FaInstagram,
+      href: "https://instagram.com/kinshukjainn",
+      label: "Instagram",
+    },
+    {
+      icon: FaEnvelope,
+      href: "mailto:kinshuk25jan04@gmail.com",
+      label: "Email",
+    },
+  ];
 
   return (
-    <footer className="bg-[#18181b] text-gray-100 relative overflow-hidden  backdrop-blur-xl">
+    <footer className="bg-white text-gray-100 relative overflow-hidden  backdrop-blur-xl">
       {/* Windows 11 style background blur overlay */}
-      
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Main content */}
@@ -28,22 +54,28 @@ const Footer = () => {
           <div className="text-center space-y-6">
             <div className="flex items-center justify-center gap-3 sm:gap-4">
               <div className="relative p-3 backdrop-blur-sm  shadow-lg">
-                <span className="text-[#ffb86c]">
-                  <FaCloud size={40} className="sm:w-12 sm:h-12 lg:w-14 lg:h-14 drop-shadow-sm" />
+                <span className="text-black">
+                  <FaCloud
+                    size={40}
+                    className="sm:w-12 sm:h-12 lg:w-14 lg:h-14 drop-shadow-sm"
+                  />
                 </span>
                 {/* Subtle glow effect */}
-                <div className="absolute inset-0 text-blue-600/20 animate-pulse opacity-50 ">
-                  <FaCloud size={40} className="sm:w-12 sm:h-12 lg:w-14 lg:h-14 mt-3 ml-3" />
+                <div className="absolute inset-0 text-black animate-pulse opacity-50 ">
+                  <FaCloud
+                    size={40}
+                    className="sm:w-12 sm:h-12 lg:w-14 lg:h-14 mt-3 ml-3"
+                  />
                 </div>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-semibold text-gray-200">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl web-headline font-semibold text-gray-900">
                 CloudKinshuk
               </h2>
             </div>
 
             {/* Subtitle */}
-            <p className="text-gray-200 text-sm sm:text-base lg:text-lg max-w-md mx-auto font-semibold">
+            <p className="text-gray-800 text-sm sm:text-base lg:text-lg max-w-md mx-auto font-semibold">
               Building the future, one cloud at a time
             </p>
           </div>
@@ -55,8 +87,7 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className={`group relative p-3 sm:p-4 text-gray-100   shadow-sm transition-all duration-300  hover:scale-105`}
-                  
+                  className={`group relative p-3 sm:p-4 text-gray-900    transition-all duration-300  hover:scale-105`}
                   aria-label={link.label}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -67,10 +98,10 @@ const Footer = () => {
                   />
 
                   {/* Windows 11 style tooltip */}
-                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-[#222223] text-gray-200 text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-300 text-gray-900 text-xs px-3 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
                     {link.label}
                     {/* Tooltip arrow */}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900/90"></div>
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
                   </span>
 
                   <span className="sr-only">{link.label}</span>
@@ -86,13 +117,17 @@ const Footer = () => {
 
           {/* Copyright section */}
           <div className="text-center space-y-2">
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-500 font-light">
+            <div className="flex items-center justify-center gap-2 text-sm sm:text-md text-gray-900 font-light">
               <span className="animate-pulse animation-delay-1600">☁️</span>
-              <span>© {new Date().getFullYear()} Kinshuk Jain. All rights reserved.</span>
+              <span>
+                © {new Date().getFullYear()} Kinshuk Jain. All rights reserved.
+              </span>
               <span className="animate-pulse animation-delay-1800">☁️</span>
             </div>
 
-            <p className="text-xs text-gray-400 font-light">Made with ❤️ and lots of ☕</p>
+            <p className="text-sm text-gray-900 font-light">
+              Made with ❤️ and lots of ☕
+            </p>
           </div>
         </div>
       </div>
@@ -100,7 +135,7 @@ const Footer = () => {
       {/* Windows 11 style accent line */}
       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500/60 via-indigo-500/60 to-blue-500/60"></div>
     </footer>
-  )
-}
+  );
+};
 
 export default Footer;

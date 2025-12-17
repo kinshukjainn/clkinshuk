@@ -1,23 +1,21 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { Laptop, Code, Palette, Type, Monitor } from "lucide-react"
-import { motion, useInView, type Variants } from "framer-motion"
-import { useRef } from "react"
-
-
+import type React from "react";
+import { Laptop, Code, Palette, Type, Monitor } from "lucide-react";
+import { motion, useInView, type Variants } from "framer-motion";
+import { useRef } from "react";
 
 // --- TYPE DEFINITIONS ---
 interface SetupItem {
-  name: string
-  description: string
-  category?: string
+  name: string;
+  description: string;
+  category?: string;
 }
 
 interface SetupSection {
-  title: string
-  icon: React.ComponentType<{ className?: string }>
-  items: SetupItem[]
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  items: SetupItem[];
 }
 
 // --- DATA SOURCE ---
@@ -32,7 +30,7 @@ const setupData: SetupSection[] = [
         category: "Primary Machine",
       },
       {
-        name:"Windows 11 Home",
+        name: "Windows 11 Home",
         description: " Windows OS",
         category: "Primary Operating System",
       },
@@ -54,7 +52,8 @@ const setupData: SetupSection[] = [
     items: [
       {
         name: "VS Code",
-        description: "Primary code editor with an extensive extension ecosystem.",
+        description:
+          "Primary code editor with an extensive extension ecosystem.",
         category: "Editor",
       },
       {
@@ -85,7 +84,8 @@ const setupData: SetupSection[] = [
       },
       {
         name: "Canva",
-        description: "Graphic design platform for quick visual content creation.",
+        description:
+          "Graphic design platform for quick visual content creation.",
         category: "Graphics",
       },
       {
@@ -121,7 +121,7 @@ const setupData: SetupSection[] = [
       },
     ],
   },
-]
+];
 
 // --- ANIMATION VARIANTS ---
 const containerVariants = {
@@ -132,7 +132,7 @@ const containerVariants = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -145,12 +145,12 @@ const itemVariants: Variants = {
       damping: 12,
     },
   },
-}
+};
 
 // --- REUSABLE AnimatedCard COMPONENT ---
 const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <motion.div
@@ -159,14 +159,16 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ scale: 1.02, y: -4 }}
-      className=" px-2 py-4 border-2 border-[#ffb86c] rounded-md bg-[#222223] h-full flex flex-col cursor-pointer"
+      className=" px-2 py-4 border-2 border-gray-400 rounded-md bg-gray-100 h-full flex flex-col cursor-pointer"
     >
       {/* Section Header */}
       <div className="flex items-center gap-4 mb-6">
-          <section.icon className="w-6 h-6 text-gray-200" />
+        <section.icon className="w-6 h-6 text-black" />
         <div>
-          <h2 className="text-2xl font-semibold  text-gray-200">{section.title}</h2>
-          <p className="text-md text-zinc-400 uppercase tracking-wider">
+          <h2 className="text-2xl font-semibold  text-black">
+            {section.title}
+          </h2>
+          <p className="text-md text-black uppercase tracking-wider">
             {section.items.length} item{section.items.length !== 1 ? "s" : ""}
           </p>
         </div>
@@ -177,88 +179,105 @@ const AnimatedCard: React.FC<{ section: SetupSection }> = ({ section }) => {
         {section.items.map((item) => (
           <div
             key={item.name}
-            className="border-l-4 border-[#ffb86c]  pl-4 group-hover:border-blue-500 transition-colors duration-300"
+            className="border-l-4 border-black  pl-4 group-hover:border-blue-500 transition-colors duration-300"
           >
             {item.category && (
-              <div className="text-md text-gray-200 font-medium uppercase tracking-wider mb-1">{item.category}</div>
+              <div className="text-md text-black font-medium uppercase tracking-wider mb-1">
+                {item.category}
+              </div>
             )}
-            <h3 className="font-normal text-gray-200 text-lg mb-1">{item.name}</h3>
-            <p className="text-sm text-zinc-200 leading-relaxed">{item.description}</p>
+            <h3 className="font-normal text-black text-lg mb-1">{item.name}</h3>
+            <p className="text-sm text-black leading-relaxed">
+              {item.description}
+            </p>
           </div>
         ))}
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 // --- MAIN COMPONENT ---
 export default function Devtools() {
   return (
-<>
+    <>
+      <main className="min-h-screen bg-white text-black relative overflow-hidden">
+        {/* Background grid pattern */}
+        <div className="absolute inset-0 z-0 noise-bg" />
 
-    <main className="min-h-screen bg-[#18181b] text-gray-200 relative overflow-hidden">
-      {/* Background grid pattern */}
-       <div className="absolute inset-0 z-0 noise-bg" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
+          {/* Header Section */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center  border-b-4 border-black  px-4 py-2 gap-2 mb-6">
+              <Monitor className="w-5 h-5 text-black " />
+              <span className="text-md font-medium   text-black tracking-wider">
+                My Digital Workspace
+              </span>
+            </div>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold web-headline  text-black mb-4">
+              DevSetup
+            </h1>
+            <p className="mt-4 max-w-2xl mx-auto text-lg text-black leading-relaxed">
+              The tools, software, and hardware I use daily to code and design.
+            </p>
+          </motion.div>
 
+          {/* Setup Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-20"
+          >
+            {setupData.map((section) => (
+              <AnimatedCard key={section.title} section={section} />
+            ))}
+          </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center  border-b-4 border-[#ffb86c]  px-4 py-2 gap-2 mb-6">
-            <Monitor className="w-5 h-5 text-[#ffb86c] " />
-            <span className="text-md font-medium   text-gray-200 tracking-wider">My Digital Workspace</span>
-          </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold  text-gray-200 mb-4">{"<"}Development Setup{"/>"}</h1>
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-200 leading-relaxed">
-            The tools, software, and hardware I use daily to code and design.
-          </p>
-        </motion.div>
-
-        {/* Setup Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-20"
-        >
-          {setupData.map((section) => (
-            <AnimatedCard key={section.title} section={section} />
-          ))}
-        </motion.div>
-
-        {/* Footer Stats */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
-          className="mt-20 pt-10 border-t border-zinc-800"
-        >
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            <div className=" text-center transition-colors duration-300">
-              <div className="text-3xl font-bold text-[#ffb86c]">
-                {setupData.reduce((acc, section) => acc + section.items.length, 0)}
+          {/* Footer Stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
+            className="mt-20 pt-10 border-t border-zinc-800"
+          >
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              <div className=" text-center transition-colors duration-300">
+                <div className="text-3xl font-bold text-black">
+                  {setupData.reduce(
+                    (acc, section) => acc + section.items.length,
+                    0
+                  )}
+                </div>
+                <div className="text-sm text-black uppercase tracking-wider mt-2">
+                  Total Items
+                </div>
               </div>
-              <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Total Items</div>
-            </div>
 
-            <div className=" text-center transition-colors duration-300">
-              <div className="text-3xl font-bold text-[#ffb86c]">{setupData.length}</div>
-              <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Categories</div>
-            </div>
+              <div className=" text-center transition-colors duration-300">
+                <div className="text-3xl font-bold text-black">
+                  {setupData.length}
+                </div>
+                <div className="text-sm text-black uppercase tracking-wider mt-2">
+                  Categories
+                </div>
+              </div>
 
-            <div className=" text-center col-span-2 transition-colors duration-300">
-              <div className="text-3xl font-bold text-[#ffb86c]">2025</div>
-              <div className="text-sm text-zinc-400 uppercase tracking-wider mt-2">Last Updated</div>
+              <div className=" text-center col-span-2 transition-colors duration-300">
+                <div className="text-3xl font-bold text-black">2025</div>
+                <div className="text-sm text-black uppercase tracking-wider mt-2">
+                  Last Updated
+                </div>
+              </div>
             </div>
-          </div>
-        </motion.div>
-      </div>
-    </main>
-</>
-  )
+          </motion.div>
+        </div>
+      </main>
+    </>
+  );
 }
