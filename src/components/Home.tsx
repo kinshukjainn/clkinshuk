@@ -674,7 +674,7 @@ export default function Home() {
         {/* Education */}
         <section className="mb-10 sm:mb-12 md:mb-16">
           <h2 className="text-xl text-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
-            $ more ~/education
+            Education
           </h2>
           <div className="border rounded-lg bg-gray-100 border-gray-400 p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
