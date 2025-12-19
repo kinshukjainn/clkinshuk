@@ -98,7 +98,7 @@ const Footer = () => {
                   />
 
                   {/* Windows 11 style tooltip */}
-                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-300 text-gray-900 text-xs px-3 py-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-300 text-gray-900 text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
                     {link.label}
                     {/* Tooltip arrow */}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>

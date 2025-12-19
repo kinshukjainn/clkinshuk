@@ -352,7 +352,7 @@ export default function Home() {
               className="
                 mt-2 sm:mt-0
                 bg-blue-800 text-white 
-                font-medium rounded-full 
+                font-medium rounded-lg 
                 px-2 py-2 
                 cursor-pointer 
                 flex items-center gap-2 
@@ -391,7 +391,7 @@ export default function Home() {
     mt-4 mb-2 
     bg-blue-800 text-white 
     font-semibold 
-    px-2 py-2 rounded-full
+    px-2 py-2 rounded-lg
     cursor-pointer 
     flex items-center gap-2 
      
@@ -473,7 +473,7 @@ export default function Home() {
                 substations. Studied working principles of power transformers,
                 circuit breakers, busbars, and protection relays.
               </p>
-              <div className="h-0.5 mt-2 w-full bg-black rounded-full"></div>
+              <div className="h-0.5 mt-2 w-full bg-black rounded-lg"></div>
               <p className="mt-2">
                 Observed real-time SCADA dashboards for grid monitoring, load
                 management, and outage reporting. Assisted engineers during
@@ -481,7 +481,7 @@ export default function Home() {
                 PTs, and relays.
               </p>
 
-              <div className="h-0.5 mt-2 w-full bg-black rounded-full"></div>
+              <div className="h-0.5 mt-2 w-full bg-black rounded-lg"></div>
               <p className="mt-2">
                 Prepared technical documentation and maintained logs on
                 equipment performance and safety checks. Improved technical
@@ -514,7 +514,7 @@ export default function Home() {
                       <span>{project.year}</span>
                     </div>
                   </div>
-                  <span className="bg-green-500 px-3 py-1 font-semibold rounded-full text-black text-sm w-max">
+                  <span className="bg-green-500 px-3 py-1 font-semibold rounded-lg text-black text-sm w-max">
                     {project.status}
                   </span>
                 </div>
@@ -560,7 +560,7 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2  bg-blue-800 text-white text-md sm:text-sm rounded-full font-bold   transition-colors"
+                      className="inline-flex items-center gap-2 px-2  bg-blue-800 text-white text-md sm:text-sm rounded-lg font-bold   transition-colors"
                     >
                       Visit site <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
@@ -570,9 +570,9 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2 py-2 rounded-full text-sm sm:text-sm font-bold bg-blue-800 text-white transition-colors"
+                      className="inline-flex items-center gap-2 px-2 py-2 rounded-lg text-sm sm:text-sm font-bold bg-blue-800 text-white transition-colors"
                     >
-                      <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> VIEW CODE
+                      <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> View code
                     </a>
                   )}
                 </div>
@@ -633,7 +633,7 @@ export default function Home() {
                       <span>{cert.year}</span>
                     </div>
                   </div>
-                  <span className="bg-green-500 rounded-full px-2 py-1 text-sm  text-black w-max">
+                  <span className="bg-green-500 rounded-lg px-2 py-1 text-sm  text-black w-max">
                     {cert.status}
                   </span>
                 </div>
@@ -661,9 +661,9 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-2 py-2 rounded-full bg-blue-800 text-white font-semibold transition-colors"
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-2 py-2 rounded-lg bg-blue-800 text-white font-semibold transition-colors"
                   >
-                    VIEW CREDENTIAL <FaExternalLinkAlt className="w-3 h-3" />
+                    View Creds <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
                 )}
               </div>
@@ -691,7 +691,7 @@ export default function Home() {
                   <p className="text-gray-700">{CONFIG.education.period}</p>
                 </div>
               </div>
-              <span className="bg-green-500 px-3 py-1 font-semibold text-sm text-black rounded-full w-max">
+              <span className="bg-green-500 px-3 py-1 font-semibold text-sm text-black rounded-lg w-max">
                 {CONFIG.education.status}
               </span>
             </div>

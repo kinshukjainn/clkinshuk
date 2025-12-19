@@ -288,7 +288,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4  sm:py-2 text-white rounded-full text-sm sm:text-sm font-bold tracking-wide transition-all duration-200 bg-blue-800 hover:text-white"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4  sm:py-2 text-white rounded-lg text-sm sm:text-sm font-bold tracking-wide transition-all duration-200 bg-blue-800 hover:text-white"
             >
               Read
               <FaExternalLinkAlt className="w-3 h-3" />
@@ -350,7 +350,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           <FaFilter className="w-4 h-4" />
           Filters
           {activeFiltersCount > 0 && (
-            <span className="bg-cyan-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            <span className="bg-cyan-500 text-white text-xs font-bold rounded-lg w-5 h-5 flex items-center justify-center">
               {activeFiltersCount}
             </span>
           )}
