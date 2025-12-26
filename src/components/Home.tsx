@@ -390,7 +390,7 @@ export default function Home() {
                 className="
     mt-4 mb-2 
     bg-blue-800 text-white 
-    font-semibold 
+    font-medium 
     px-2 py-2 rounded-lg
     cursor-pointer 
     flex items-center gap-2 
@@ -560,7 +560,7 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2  bg-blue-800 text-white text-md sm:text-sm rounded-lg font-bold   transition-colors"
+                      className="inline-flex items-center gap-2 px-2  bg-blue-800 text-white text-md sm:text-sm rounded-lg font-medium   transition-colors"
                     >
                       Visit site <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
@@ -570,7 +570,7 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2 py-2 rounded-lg text-sm sm:text-sm font-bold bg-blue-800 text-white transition-colors"
+                      className="inline-flex items-center gap-2 px-2 py-2 rounded-lg text-sm sm:text-sm font-medium bg-blue-800 text-white transition-colors"
                     >
                       <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> View code
                     </a>
