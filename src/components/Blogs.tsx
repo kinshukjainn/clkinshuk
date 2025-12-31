@@ -11,7 +11,6 @@ import {
   FaExclamationTriangle,
   FaCalendarAlt,
   FaEye,
-  FaHeart,
   FaClock,
   FaTimes,
   FaFilter,
@@ -217,7 +216,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
     }, []);
 
     return (
-      <article className="rounded-md border-2 border-gray-400 transition-all duration-300 overflow-hidden  bg-gray-100 ">
+      <article className="rounded-2xl border-2 border-gray-400 transition-all duration-300 overflow-hidden  bg-gray-100 ">
         <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
           {post.coverImage && !imageError ? (
             <>
@@ -253,34 +252,32 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
           </h2>
 
           <div className="flex items-center gap-2 mb-3 text-xs sm:text-sm flex-wrap">
-            <span className="font-semibold text-gray-700">
+            <span className="font-semibold text-black">
               {highlightText(post.author.name, searchQuery)}
             </span>
             <span className="text-gray-400">•</span>
-            <span className="flex items-center gap-1.5 text-gray-500">
-              <FaCalendarAlt className="w-3 h-3" />
-              {formatDate(post.publishedAt)}
+            <span className="flex items-center gap-1 text-black font-semibold">
+              <div className="p-2.5 bg-blue-300 rounded-l-full ">
+                <FaCalendarAlt className="w-3 h-3 text-black" />
+              </div>
+              <div className="p-2 bg-blue-300 rounded-r-full">
+                {formatDate(post.publishedAt)}
+              </div>
             </span>
           </div>
 
           <div className="flex items-center justify-between pt-3 border-t border-gray-200">
-            <div className="flex items-center gap-2.5 sm:gap-3 text-sm text-gray-500 flex-wrap">
+            <div className="flex items-center gap-1 sm:gap-3 text-sm font-semibold  text-gray-900 flex-wrap">
               {post.readTimeInMinutes && (
-                <span className="flex items-center gap-1">
+                <span className="flex p-2 rounded-l-full bg-blue-300 items-center gap-1">
                   <FaClock className="w-3 h-3" />
                   {post.readTimeInMinutes}m
                 </span>
               )}
               {post.views && (
-                <span className="flex items-center gap-1">
+                <span className="flex items-center bg-blue-300 rounded-r-full p-2 gap-1">
                   <FaEye className="w-3 h-3" />
                   {formatNumber(post.views)}
-                </span>
-              )}
-              {post.reactionCount && post.reactionCount > 0 && (
-                <span className="flex items-center gap-1">
-                  <FaHeart className="w-3 h-3" />
-                  {formatNumber(post.reactionCount)}
                 </span>
               )}
             </div>
@@ -288,7 +285,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4  sm:py-2 text-white rounded-lg text-sm sm:text-sm font-bold tracking-wide transition-all duration-200 bg-blue-800 hover:text-white"
+              className="inline-flex items-center gap-1.5 px-5 py-2 sm:px-4  sm:py-2 text-white rounded-full text-sm sm:text-sm font-bold tracking-wide transition-all duration-200 bg-blue-800 hover:text-white"
             >
               Read
               <FaExternalLinkAlt className="w-3 h-3" />
@@ -357,7 +354,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         </h3>
         <button
           onClick={resetFilters}
-          className="text-xs sm:text-sm text-cyan-600 hover:text-cyan-700 font-semibold"
+          className="text-sm p-2 rounded-full bg-blue-800 px-5 cursor-pointer sm:text-sm text-white  font-semibold"
         >
           Reset All
         </button>
@@ -430,16 +427,16 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Tags ({filters.tags.length} selected)
           </label>
-          <div className="max-h-32 overflow-y-auto bg-gray-50 border-2 border-gray-300 rounded-lg p-2">
+          <div className="max-h-32 overflow-y-auto bg-white  p-4">
             <div className="flex flex-wrap gap-1.5">
               {availableTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => toggleTag(tag)}
-                  className={`px-2.5 py-1.5 rounded-md text-xs transition-all duration-200 ${
+                  className={`px-3 py-2.5 rounded-full text-sm transition-all cursor-pointer duration-200 ${
                     filters.tags.includes(tag)
-                      ? "bg-cyan-500 text-white font-semibold"
-                      : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
+                      ? "bg-cyan-800 text-white font-semibold"
+                      : "bg-blue-100 text-black "
                   }`}
                 >
                   {tag}
@@ -469,13 +466,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className="relative w-full">
       <div className="relative">
-        <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-base sm:text-lg" />
+        <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-black text-base sm:text-lg" />
         <input
           type="text"
           placeholder="Search articles by title, content, author, or tags..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className="w-full pl-10 sm:pl-12 pr-12 border-2 border-gray-300 py-2.5 sm:py-3 rounded-xl text-gray-900 bg-white outline-none placeholder-gray-400 text-sm sm:text-base transition-all duration-200 focus:border-cyan-500 focus:shadow-lg"
+          className="w-full pl-10 sm:pl-12 pr-12  py-4 sm:py-5 rounded-full text-gray-900 bg-gray-200 outline-none placeholder-gray-600 text-md sm:text-base"
         />
         {searchInput && (
           <button

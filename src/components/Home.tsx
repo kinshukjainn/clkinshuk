@@ -247,13 +247,13 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 sm:p-2.5   bg-blue-800 rounded-sm text-white transition-colors cursor-pointer"
+      className="p-2 sm:p-2.5 bg-blue-400 rounded-full text-black transition-colors cursor-pointer"
       title="Copy Docker command"
     >
       {copied ? (
-        <FaCheck className="w-3 h-3 sm:w-4 sm:h-4" />
+        <FaCheck className="w-4 h-4 sm:w-4 sm:h-4" />
       ) : (
-        <FaCopy className="w-3 h-3 sm:w-4 sm:h-4" />
+        <FaCopy className="w-4 h-4 sm:w-4 sm:h-4" />
       )}
     </button>
   );
@@ -278,7 +278,7 @@ export default function Home() {
             {CONFIG.personal.bio.map((p, i) => (
               <p
                 key={i}
-                className="text-md sm:text-lg font-semibold leading-relaxed"
+                className="text-md sm:text-lg font-normal leading-relaxed"
               >
                 <span className="text-gray-500">&gt; </span>
                 {p}
@@ -287,9 +287,13 @@ export default function Home() {
           </div>
 
           <div className="space-y-2 text-sm sm:text-base">
-            <div className="flex items-center gap-2">
-              <FaMapMarkerAlt className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-              <span>{CONFIG.personal.location}</span>
+            <div className="flex items-center gap-1">
+              <div className="p-2 bg-gray-200 rounded-l-full">
+                <FaMapMarkerAlt className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0" />
+              </div>
+              <div className="bg-gray-200 rounded-r-full p-1.5 px-3">
+                <span className="font-medium">{CONFIG.personal.location}</span>
+              </div>
             </div>
             <div className=" px-3 py-1 inline-block font-bold">
               AVAILABLE FOR OPPORTUNITIES
@@ -352,8 +356,8 @@ export default function Home() {
               className="
                 mt-2 sm:mt-0
                 bg-blue-800 text-white 
-                font-medium rounded-lg 
-                px-2 py-2 
+                font-medium w-max rounded-full 
+                px-4 py-2 
                 cursor-pointer 
                 flex items-center gap-2 
                 transition 
@@ -390,8 +394,8 @@ export default function Home() {
                 className="
     mt-4 mb-2 
     bg-blue-800 text-white 
-    font-medium 
-    px-2 py-2 rounded-lg
+    font-medium w-max 
+    px-4 py-2 rounded-full
     cursor-pointer 
     flex items-center gap-2 
      
@@ -458,8 +462,8 @@ export default function Home() {
                 }
               </h3>
               <div className="mt-2 font-semibold  mb-2 ">
-                <span className="text-lg text-gray-800">Time : </span>
-                <span className="text-lg text-gray-800">
+                <span className="text-lg text-gray-600">Time : </span>
+                <span className="text-lg text-gray-600">
                   {"[ July 2025 - Aug 2025  ] "}{" "}
                 </span>
               </div>
@@ -505,16 +509,16 @@ export default function Home() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
                   <div className="min-w-0">
-                    <h3 className="text-lg ttext-black sm:text-xl font-bold mb-2">
+                    <h3 className="text-2xl ttext-black sm:text-xl font-bold mb-2">
                       {project.title}
                     </h3>
-                    <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+                    <div className="flex flex-wrap items-center gap-2 font-bold text-xs sm:text-sm">
                       <span>{project.type}</span>
                       <span>|</span>
                       <span>{project.year}</span>
                     </div>
                   </div>
-                  <span className="bg-green-500 px-3 py-1 font-semibold rounded-lg text-black text-sm w-max">
+                  <span className="bg-green-500 px-3 py-1 font-semibold rounded-full text-black text-sm w-max">
                     {project.status}
                   </span>
                 </div>
@@ -535,7 +539,7 @@ export default function Home() {
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className=" bg-gray-300 border-1 border-gray-500 rounded-md px-2 py-1 text-xs"
+                        className=" bg-gray-300  rounded-full px-3 py-2 text-sm"
                       >
                         {tech}
                       </span>
@@ -560,7 +564,7 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2  bg-blue-800 text-white text-md sm:text-sm rounded-lg font-medium   transition-colors"
+                      className="inline-flex items-center gap-2 px-3  bg-blue-800 text-white text-md sm:text-sm rounded-full font-medium   transition-colors"
                     >
                       Visit site <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
@@ -570,7 +574,7 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2 py-2 rounded-lg text-sm sm:text-sm font-medium bg-blue-800 text-white transition-colors"
+                      className="inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm sm:text-sm font-medium bg-blue-800 text-white transition-colors"
                     >
                       <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> View code
                     </a>
@@ -586,21 +590,23 @@ export default function Home() {
           <h2 className="text-xl ttext-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
             Skills
           </h2>
-          <div className="space-y-6 border border-gray-400 rounded-lg bg-gray-100 sm:space-y-8">
+          <div className="space-y-6 border border-gray-400 rounded-xl bg-gray-100 sm:space-y-8">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
-              <div key={category} className=" rounded-lg  p-4 sm:p-5">
+              <div key={category} className=" rounded-lg  p-2 sm:p-3">
                 <h3 className="text-sm ttext-black sm:text-base font-bold mb-3 sm:mb-4">
                   {category.toUpperCase()}
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {skills.map((skill) => {
                     const Icon = skill.icon;
                     return (
                       <div
                         key={skill.name}
-                        className="flex items-center gap-2 px-3 py-2 rounded-md bg-gray-300 text-sm sm:text-md"
+                        className="flex items-center gap-2 px-3 py-2 font-medium rounded-full bg-gray-300 text-sm sm:text-md"
                       >
-                        <Icon className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                        <div className="p-1.5 bg-gray-100 rounded-full">
+                          <Icon className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0" />
+                        </div>
                         <span>{skill.name}</span>
                       </div>
                     );
@@ -624,16 +630,16 @@ export default function Home() {
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-base ttext-black sm:text-lg font-bold mb-2">
+                    <h3 className="text-base text-black sm:text-xl font-bold mb-2">
                       {cert.title}
                     </h3>
-                    <div className="flex flex-wrap font-semibold items-center gap-2 text-xs sm:text-sm text-gray-700">
+                    <div className="flex flex-wrap font-semibold items-center gap-2 text-sm sm:text-sm text-gray-700">
                       <span>{cert.organization}</span>
                       <span>|</span>
                       <span>{cert.year}</span>
                     </div>
                   </div>
-                  <span className="bg-green-500 rounded-lg px-2 py-1 text-sm  text-black w-max">
+                  <span className="bg-green-500 rounded-full px-2 py-1 text-sm  text-black w-max">
                     {cert.status}
                   </span>
                 </div>
@@ -641,14 +647,14 @@ export default function Home() {
                 <p className="text-sm sm:text-sm mb-3">{cert.description}</p>
 
                 <div className="mb-3">
-                  <div className="text-xs text-gray-700 font-semibold mb-2">
+                  <div className="text-xs text-gray-900 font-semibold mb-2">
                     SKILLS:
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {cert.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="bg-gray-300 border border-gray-400 rounded-sm px-2 py-1 text-xs"
+                        className="bg-gray-300  rounded-full px-3 py-2 font-medium text-xs"
                       >
                         {skill}
                       </span>
@@ -661,7 +667,7 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-2 py-2 rounded-lg bg-blue-800 text-white font-semibold transition-colors"
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-4 py-2 rounded-full bg-blue-800 text-white font-semibold transition-colors"
                   >
                     View Creds <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
@@ -691,7 +697,7 @@ export default function Home() {
                   <p className="text-gray-700">{CONFIG.education.period}</p>
                 </div>
               </div>
-              <span className="bg-green-500 px-3 py-1 font-semibold text-sm text-black rounded-lg w-max">
+              <span className="bg-green-500 px-3 py-1 font-semibold text-sm text-black rounded-full w-max">
                 {CONFIG.education.status}
               </span>
             </div>
