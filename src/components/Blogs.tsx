@@ -257,10 +257,10 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
             </span>
             <span className="text-gray-400">•</span>
             <span className="flex items-center gap-1 text-black font-semibold">
-              <div className="p-2.5 bg-blue-300 rounded-l-full ">
+              <div className="p-3 bg-gray-300 rounded-l-full ">
                 <FaCalendarAlt className="w-3 h-3 text-black" />
               </div>
-              <div className="p-2 bg-blue-300 rounded-r-full">
+              <div className="p-2 bg-gray-300 rounded-r-full">
                 {formatDate(post.publishedAt)}
               </div>
             </span>
@@ -269,13 +269,13 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
           <div className="flex items-center justify-between pt-3 border-t border-gray-200">
             <div className="flex items-center gap-1 sm:gap-3 text-sm font-semibold  text-gray-900 flex-wrap">
               {post.readTimeInMinutes && (
-                <span className="flex p-2 rounded-l-full bg-blue-300 items-center gap-1">
+                <span className="flex p-2 rounded-l-full bg-gray-300 items-center gap-1">
                   <FaClock className="w-3 h-3" />
                   {post.readTimeInMinutes}m
                 </span>
               )}
               {post.views && (
-                <span className="flex items-center bg-blue-300 rounded-r-full p-2 gap-1">
+                <span className="flex items-center bg-gray-300 rounded-r-full p-2 gap-1">
                   <FaEye className="w-3 h-3" />
                   {formatNumber(post.views)}
                 </span>

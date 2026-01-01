@@ -288,7 +288,7 @@ export default function Home() {
 
           <div className="space-y-2 text-sm sm:text-base">
             <div className="flex items-center gap-1">
-              <div className="p-2 bg-gray-200 rounded-l-full">
+              <div className="p-2.5 bg-gray-200 rounded-l-full">
                 <FaMapMarkerAlt className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0" />
               </div>
               <div className="bg-gray-200 rounded-r-full p-1.5 px-3">
@@ -317,7 +317,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 sm:p-4 rounded-md bg-gray-100 border-1 border-gray-400   transition-colors"
                 >
-                  <div className=" p-1 text-black rounded-sm">
+                  <div className=" text-black rounded-full">
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
                   </div>
                   <div className="flex flex-col min-w-0">
@@ -426,7 +426,7 @@ export default function Home() {
                 Install this package :
               </h3>
 
-              <div className="p-3 rounded-md bg-blue-200 border-2 border-gray-400">
+              <div className="p-3 rounded-md bg-gray-200">
                 <span className="text-md code-font text-black font-semibold">
                   npm install -g hackkinshuk
                 </span>
@@ -436,7 +436,7 @@ export default function Home() {
                 Run this command :
               </h3>
 
-              <div className="p-3 rounded-md bg-blue-200 border-2 border-gray-400">
+              <div className="p-3 rounded-md bg-gray-200">
                 <span className="text-md text-black code-font font-semibold">
                   cloudkinshuk
                 </span>
