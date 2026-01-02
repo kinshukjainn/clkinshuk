@@ -269,8 +269,35 @@ export default function Home() {
             <div className="text-md font-bold sm:text-base text-red-500">
               $ whoami
             </div>
-            <h1 className="text-5xl sm:text-6xl web-headline text-black md:text-6xl font-bold mb-2">
-              Hi , Im Kinshuk
+            <style>{`
+        @keyframes text-shimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+        
+        .text-shimmer {
+          background: linear-gradient(
+            90deg,
+            #000000 0%,
+            #000000 40%,
+            #666666 50%,
+            #000000 60%,
+            #000000 100%
+          );
+          background-size: 200% 100%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: text-shimmer 3s infinite linear;
+        }
+      `}</style>
+
+            <h1 className="text-5xl sm:text-6xl md:text-6xl web-headline font-bold mb-2 text-shimmer">
+              Hi, I'm Kinshuk
             </h1>
           </div>
 
@@ -315,7 +342,7 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 sm:p-4 rounded-md bg-gray-100 border-1 border-gray-400   transition-colors"
+                  className="flex items-center gap-3 p-3 sm:p-4 rounded-xl hover:shadow-gray-400 shadow-md bg-gray-100 border-1 border-gray-400   transition-all"
                 >
                   <div className=" text-black rounded-full">
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
@@ -383,6 +410,41 @@ export default function Home() {
                 Hashnode || Blogs
               </h3>
 
+              <style>{`
+        @keyframes button-shimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+        
+        .button-shimmer {
+          background: linear-gradient(
+            110deg,
+            #1e40af 0%,
+            #1e40af 35%,
+            #3b82f6 45%,
+            #60a5fa 50%,
+            #3b82f6 55%,
+            #1e40af 65%,
+            #1e40af 100%
+          );
+          background-size: 200% 100%;
+          animation: button-shimmer 4s infinite ease-in-out;
+        }
+        
+        .button-shimmer:hover {
+          animation: button-shimmer 2.5s infinite ease-in-out;
+        }
+        
+        .text-glow {
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                       0 0 20px rgba(255, 255, 255, 0.3);
+        }
+      `}</style>
+
               <button
                 onClick={() =>
                   window.open(
@@ -392,20 +454,24 @@ export default function Home() {
                 }
                 title="Subscribe to my Hashnode Blog"
                 className="
-    mt-4 mb-2 
-    bg-blue-800 text-white 
-    font-medium w-max 
-    px-4 py-2 rounded-full
-    cursor-pointer 
-    flex items-center gap-2 
-     
-    transition 
-    w-full sm:w-auto 
-    justify-center
-  "
+          mt-4 mb-2 
+          button-shimmer
+          text-white 
+          font-medium w-max 
+          px-4 py-2 rounded-full
+          cursor-pointer 
+          flex items-center gap-2 
+          transition-all
+          w-full sm:w-auto 
+          justify-center
+          hover:shadow-lg
+          hover:scale-105
+        "
               >
                 <SiHashnode className="text-xl" />
-                <span className="text-base sm:text-lg">Subscribe</span>
+                <span className="text-base sm:text-lg text-glow">
+                  Subscribe
+                </span>
               </button>
             </div>
           </div>

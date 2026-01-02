@@ -213,11 +213,63 @@ export default function Devtools() {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center  border-b-4 border-black  px-4 py-2 gap-2 mb-6">
-              <Monitor className="w-5 h-5 text-black " />
-              <span className="text-md font-medium   text-black tracking-wider">
-                My Digital Workspace
-              </span>
+            <style>{`
+        @keyframes shimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
+        
+        .shimmer-effect {
+          background: linear-gradient(
+            90deg,
+            #f3f4f6 0%,
+            #f3f4f6 40%,
+            #ffffff 50%,
+            #f3f4f6 60%,
+            #f3f4f6 100%
+          );
+          background-size: 200% 100%;
+          animation: shimmer 2.5s infinite linear;
+        }
+        
+        .shimmer-border {
+          background: linear-gradient(
+            90deg,
+            #e5e7eb 0%,
+            #e5e7eb 40%,
+            #f9fafb 50%,
+            #e5e7eb 60%,
+            #e5e7eb 100%
+          );
+          background-size: 200% 100%;
+          animation: shimmer 2.5s infinite linear;
+          padding: 2px;
+          border-radius: 9999px;
+        }
+        
+        .shimmer-border-inner {
+          width: 100%;
+          height: 100%;
+          background: white;
+          border-radius: 9999px;
+        }
+      `}</style>
+
+            <div className="relative inline-flex items-center rounded-full">
+              <div className="absolute inset-0 shimmer-border">
+                <div className="shimmer-border-inner"></div>
+              </div>
+
+              <div className="relative inline-flex items-center shimmer-effect rounded-full px-4 py-2 gap-2">
+                <Monitor className="w-5 h-5 text-gray-700" />
+                <span className="text-sm font-medium text-gray-900 tracking-wide">
+                  My Digital Workspace
+                </span>
+              </div>
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold web-headline  text-black mb-4">
               DevSetup

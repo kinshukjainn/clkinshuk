@@ -109,11 +109,11 @@ const Header = () => {
                       cloudkinshuk
                     </h1>
 
-                    <motion.div className="flex items-center gap-1 px-3 py-2 border-l-3 border-black">
+                    <motion.div className="flex items-center gap-1 px-3 py-2 border-l-2 border-black">
                       <span className="text-gray-900 flex items-center">
                         {pathInfo.icon}
                       </span>
-                      <span className="text-sm text-gray-900 font-medium whitespace-nowrap">
+                      <span className="text-md text-gray-900 font-normal whitespace-nowrap">
                         {pathInfo.text}
                       </span>
                     </motion.div>
@@ -144,7 +144,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative p-2 bg-gray-300 text-black rounded-md"
+                  className="relative cursor-pointer p-3 bg-gray-300 text-black rounded-full"
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
