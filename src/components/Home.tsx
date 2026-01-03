@@ -30,10 +30,9 @@ import {
   FaAws,
   FaCopy,
   FaCheck,
-  FaFileDownload, // Added this import
+  FaFileDownload,
 } from "react-icons/fa";
 import { VscVscodeInsiders } from "react-icons/vsc";
-import { SiHashnode } from "react-icons/si";
 import { RiNextjsLine } from "react-icons/ri";
 
 const CONFIG = {
@@ -47,7 +46,7 @@ const CONFIG = {
     ],
     availability: "Available for opportunities",
     status:
-      "Completed an internship at UPPTCL (Uttar Pradesh Power Transmission Corporation Limited), where I gained hands-on experience in power systems and transmission network operations.)",
+      "Completed an internship at UPPTCL (Uttar Pradesh Power Transmission Corporation Limited), where I gained hands-on experience in power systems and transmission network operations.",
   },
   social: [
     {
@@ -247,13 +246,13 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 sm:p-2.5 bg-blue-400 rounded-full text-black transition-colors cursor-pointer"
-      title="Copy Docker command"
+      className="p-2 hover:bg-gray-100 rounded transition-colors"
+      title="Copy to clipboard"
     >
       {copied ? (
-        <FaCheck className="w-4 h-4 sm:w-4 sm:h-4" />
+        <FaCheck className="w-4 h-4 text-green-600" />
       ) : (
-        <FaCopy className="w-4 h-4 sm:w-4 sm:h-4" />
+        <FaCopy className="w-4 h-4 text-gray-900" />
       )}
     </button>
   );
@@ -261,79 +260,42 @@ const CopyButton = ({ text }: { text: string }) => {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-black  pt-12 sm:pt-16 md:pt-20">
-      <div className="max-w-2xl sm:max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 md:py-16">
-        {/* Header */}
-        <header className="mb-10 sm:mb-12 md:mb-16  pb-8">
-          <div className="mb-6 sm:mb-8">
-            <div className="text-md font-bold sm:text-base text-red-500">
-              $ whoami
-            </div>
-            <style>{`
-        @keyframes text-shimmer {
-          0% {
-            background-position: -200% center;
-          }
-          100% {
-            background-position: 200% center;
-          }
-        }
-        
-        .text-shimmer {
-          background: linear-gradient(
-            90deg,
-            #000000 0%,
-            #000000 40%,
-            #666666 50%,
-            #000000 60%,
-            #000000 100%
-          );
-          background-size: 200% 100%;
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: text-shimmer 3s infinite linear;
-        }
-      `}</style>
+    <div className="min-h-screen bg-white pt-10 ">
+      {/* Top accent line */}
 
-            <h1 className="text-5xl sm:text-6xl md:text-6xl web-headline font-bold mb-2 text-shimmer">
-              Hi, I'm Kinshuk
-            </h1>
-          </div>
+      <div className="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+        {/* Header - Minimal & Professional */}
+        <header className="mb-20 border-b border-gray-200 pb-12">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-black mb-8 leading-tight">
+            Kinshuk Jain
+          </h1>
 
-          <div className="space-y-3 sm:space-y-4 mb-6">
+          <div className="space-y-4 mb-8 text-gray-900 leading-relaxed">
             {CONFIG.personal.bio.map((p, i) => (
-              <p
-                key={i}
-                className="text-md sm:text-lg font-normal leading-relaxed"
-              >
-                <span className="text-gray-500">&gt; </span>
+              <p key={i} className="text-base">
                 {p}
               </p>
             ))}
           </div>
 
-          <div className="space-y-2 text-sm sm:text-base">
-            <div className="flex items-center gap-1">
-              <div className="p-2.5 bg-gray-200 rounded-l-full">
-                <FaMapMarkerAlt className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0" />
-              </div>
-              <div className="bg-gray-200 rounded-r-full p-1.5 px-3">
-                <span className="font-medium">{CONFIG.personal.location}</span>
-              </div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm text-gray-900">
+            <div className="flex items-center gap-2">
+              <FaMapMarkerAlt className="w-3.5 h-3.5" />
+              <span>{CONFIG.personal.location}</span>
             </div>
-            <div className=" px-3 py-1 inline-block font-bold">
-              AVAILABLE FOR OPPORTUNITIES
-            </div>
+            <span className="hidden sm:inline text-gray-300">|</span>
+            <span className="font-medium text-black">
+              Available for opportunities
+            </span>
           </div>
         </header>
 
-        {/* Connect */}
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl text-black md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
-            Connect with me
+        {/* Contact Links - Minimal Grid */}
+        <section className="mb-20 border-b border-gray-200 pb-12">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+            Contact
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {CONFIG.social.map((social) => {
               const Icon = social.icon;
               return (
@@ -342,281 +304,144 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 sm:p-4 rounded-xl hover:shadow-gray-400 shadow-md bg-gray-100 border-1 border-gray-400   transition-all"
+                  className="flex items-center gap-3 text-sm hover:text-black text-gray-900 transition-colors group"
                 >
-                  <div className=" text-black rounded-full">
-                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
-                  </div>
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-sm text-black sm:text-md font-bold truncate">
-                      {social.platform}
-                    </span>
-                    <span className="text-sm sm:text-md  truncate">
-                      {social.handle}
-                    </span>
-                  </div>
+                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <span className="group-hover:underline underline-offset-4">
+                    {social.platform}
+                  </span>
                 </a>
               );
             })}
           </div>
         </section>
 
-        {/* Resume Section - ADDED THIS SECTION */}
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
+        {/* Resume Download */}
+        <section className="mb-20 border-b border-gray-200 pb-12">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
             Resume
           </h2>
-
-          <div className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="min-w-0">
-              <h3 className="text-lg text-black sm:text-xl font-bold mb-1">
-                My Resume
-              </h3>
-              <p className="text-sm sm:text-base text-gray-800">
-                Click the button to download my latest resume in PDF format.
-              </p>
+          <div className="flex items-center justify-between bg-gray-50 border border-gray-200 p-5">
+            <div>
+              <h3 className="font-medium text-black mb-1">My Resume</h3>
+              <p className="text-sm text-gray-900">PDF Format</p>
             </div>
-
             <a
-              href="/kinshukfinalresume.pdf" /* <--- REPLACE THIS WITH YOUR ACTUAL RESUME PATH */
+              href="/kinshukfinalresume.pdf"
               download="kinshukfinalresume.pdf"
-              className="
-                mt-2 sm:mt-0
-                bg-blue-800 text-white 
-                font-medium w-max rounded-full 
-                px-4 py-2 
-                cursor-pointer 
-                flex items-center gap-2 
-                transition 
-                w-full sm:w-auto 
-                justify-center
-                whitespace-nowrap
-              "
+              className="flex items-center gap-2 text-sm font-medium text-black hover:text-gray-900 transition-colors"
             >
-              <FaFileDownload className="text-md" />
-              <span>Download</span>
+              <FaFileDownload className="w-4 h-4" />
+              Download
             </a>
           </div>
         </section>
 
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6 pb-2">
-            Subscribe to my Blogs
+        {/* Publications/Blog */}
+        <section className="mb-20 border-b border-gray-200 pb-12">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+            Publications
           </h2>
-
-          <div className="space-y-6 sm:space-y-8">
-            <div className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6">
-              <h3 className="text-lg text-black sm:text-xl font-bold mb-2">
-                Hashnode || Blogs
-              </h3>
-
-              <style>{`
-        @keyframes button-shimmer {
-          0% {
-            background-position: -200% center;
-          }
-          100% {
-            background-position: 200% center;
-          }
-        }
-        
-        .button-shimmer {
-          background: linear-gradient(
-            110deg,
-            #1e40af 0%,
-            #1e40af 35%,
-            #3b82f6 45%,
-            #60a5fa 50%,
-            #3b82f6 55%,
-            #1e40af 65%,
-            #1e40af 100%
-          );
-          background-size: 200% 100%;
-          animation: button-shimmer 4s infinite ease-in-out;
-        }
-        
-        .button-shimmer:hover {
-          animation: button-shimmer 2.5s infinite ease-in-out;
-        }
-        
-        .text-glow {
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
-                       0 0 20px rgba(255, 255, 255, 0.3);
-        }
-      `}</style>
-
-              <button
-                onClick={() =>
-                  window.open(
-                    "https://blog.cloudkinshuk.in/newsletter",
-                    "_blank"
-                  )
-                }
-                title="Subscribe to my Hashnode Blog"
-                className="
-          mt-4 mb-2 
-          button-shimmer
-          text-white 
-          font-medium w-max 
-          px-4 py-2 rounded-full
-          cursor-pointer 
-          flex items-center gap-2 
-          transition-all
-          w-full sm:w-auto 
-          justify-center
-          hover:shadow-lg
-          hover:scale-105
-        "
-              >
-                <SiHashnode className="text-xl" />
-                <span className="text-base sm:text-lg text-glow">
-                  Subscribe
-                </span>
-              </button>
+          <div className="bg-gray-50 border border-gray-200 p-5">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="font-medium text-black mb-2">Technical Blog</h3>
+                <p className="text-sm text-gray-900 mb-4">
+                  Research notes, security findings, and technical deep-dives on
+                  cloud infrastructure and systems architecture.
+                </p>
+                <a
+                  href="https://blog.cloudkinshuk.in/newsletter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
+                >
+                  Subscribe to Newsletter
+                  <FaExternalLinkAlt className="w-3 h-3" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6  pb-2">
-            Run this on your bash/zsh/cmd/pwsh
+        {/* Experience */}
+        <section className="mb-20 border-b border-gray-200 pb-12">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+            Experience
           </h2>
-
-          <div className="space-y-6 sm:space-y-8">
-            <div className="border bg-gray-100 rounded-lg border-gray-400 p-3 sm:p-6">
-              <h3 className="text-md text-black sm:text-xl font-bold mb-2">
-                Install Nodejs on your pc
-              </h3>
-
-              <h3 className="text-md text-gray-700 sm:text-xl font-bold mb-2">
-                Install this package :
-              </h3>
-
-              <div className="p-3 rounded-md bg-gray-200">
-                <span className="text-md code-font text-black font-semibold">
-                  npm install -g hackkinshuk
+          <div className="space-y-8">
+            <div>
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
+                <h3 className="font-medium text-black">UPPTCL</h3>
+                <span className="text-sm text-gray-900">
+                  July 2025 - Aug 2025
                 </span>
               </div>
-
-              <h3 className="text-md mt-3 text-gray-700 sm:text-xl font-bold mb-2">
-                Run this command :
-              </h3>
-
-              <div className="p-3 rounded-md bg-gray-200">
-                <span className="text-md text-black code-font font-semibold">
-                  cloudkinshuk
-                </span>
+              <p className="text-sm text-gray-900 mb-4">
+                Uttar Pradesh Power Transmission Corporation Limited
+              </p>
+              <div className="space-y-3 text-sm text-gray-900 leading-relaxed">
+                <p>
+                  Worked with the transmission division to understand the
+                  operation, protection, and maintenance of 132kV and 220kV
+                  substations. Studied working principles of power transformers,
+                  circuit breakers, busbars, and protection relays.
+                </p>
+                <p>
+                  Observed real-time SCADA dashboards for grid monitoring, load
+                  management, and outage reporting. Assisted engineers during
+                  shutdown procedures, equipment inspections, and testing of
+                  CTs, PTs, and relays.
+                </p>
+                <p>
+                  Prepared technical documentation and maintained logs on
+                  equipment performance and safety checks. Improved technical
+                  workflows by creating well-organized digital reports using
+                  cloud and web tools.
+                </p>
               </div>
-
-              <p className="text-md mt-4 ">
-                After running this command you will the see the magic
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl ttext-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6  pb-2">
-            Internships
-          </h2>
-
-          <div className="space-y-6 sm:space-y-8">
-            <div className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6">
-              <h3 className="text-lg ttext-black sm:text-xl font-bold mb-2">
-                {
-                  "UPPCTL : (Uttar Pradesh Power Transmission Corporation Limited)"
-                }
-              </h3>
-              <div className="mt-2 font-semibold  mb-2 ">
-                <span className="text-lg text-gray-600">Time : </span>
-                <span className="text-lg text-gray-600">
-                  {"[ July 2025 - Aug 2025  ] "}{" "}
-                </span>
-              </div>
-
-              <span className="text-gray-black font-bold text-lg">
-                Expierience :{" "}
-              </span>
-              <p className="mt-2">
-                Worked with the transmission division to understand the
-                operation, protection, and maintenance of 132kV and 220kV
-                substations. Studied working principles of power transformers,
-                circuit breakers, busbars, and protection relays.
-              </p>
-              <div className="h-0.5 mt-2 w-full bg-black rounded-lg"></div>
-              <p className="mt-2">
-                Observed real-time SCADA dashboards for grid monitoring, load
-                management, and outage reporting. Assisted engineers during
-                shutdown procedures, equipment inspections, and testing of CTs,
-                PTs, and relays.
-              </p>
-
-              <div className="h-0.5 mt-2 w-full bg-black rounded-lg"></div>
-              <p className="mt-2">
-                Prepared technical documentation and maintained logs on
-                equipment performance and safety checks. Improved technical
-                workflows by creating well-organized digital reports using cloud
-                and web tools.
-              </p>
             </div>
           </div>
         </section>
 
         {/* Projects */}
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl ttext-black sm:text-2xl md:text-3xl  font-bold mb-4 sm:mb-6  pb-2">
-            Projects
+        <section className="mb-20 border-b border-gray-200 pb-12">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+            Selected Projects
           </h2>
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-10">
             {CONFIG.projects.map((project) => (
-              <div
-                key={project.title}
-                className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-6"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-                  <div className="min-w-0">
-                    <h3 className="text-2xl ttext-black sm:text-xl font-bold mb-2">
-                      {project.title}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-2 font-bold text-xs sm:text-sm">
-                      <span>{project.type}</span>
-                      <span>|</span>
-                      <span>{project.year}</span>
-                    </div>
+              <div key={project.title}>
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
+                  <h3 className="font-medium text-black text-lg">
+                    {project.title}
+                  </h3>
+                  <div className="flex items-center gap-3 text-sm text-gray-900">
+                    <span>{project.type}</span>
+                    <span>•</span>
+                    <span>{project.year}</span>
                   </div>
-                  <span className="bg-green-500 px-3 py-1 font-semibold rounded-full text-black text-sm w-max">
-                    {project.status}
-                  </span>
                 </div>
 
-                <div className="space-y-2 mb-4">
+                <div className="space-y-3 mb-4 text-sm text-gray-900 leading-relaxed">
                   {project.description.map((p, i) => (
-                    <p key={i} className="text-sm sm:text-sm leading-relaxed">
-                      {p}
-                    </p>
+                    <p key={i}>{p}</p>
                   ))}
                 </div>
 
                 <div className="mb-4">
-                  <div className="text-md font-semibold sm:text-sm mb-2 text-black">
-                    TECH STACK:
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className=" bg-gray-300  rounded-full px-3 py-2 text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  <span className="text-xs text-gray-900 uppercase tracking-wider">
+                    Technologies:{" "}
+                  </span>
+                  <span className="text-sm text-gray-900">
+                    {project.technologies.join(", ")}
+                  </span>
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-blue-200 border-1 border-gray-400 rounded-md p-3 mb-4 overflow-x-auto">
-                    <div className="flex items-center justify-between gap-2">
-                      <code className="text-md sm:text-sm whitespace-nowrap">
+                  <div className="bg-gray-50 border border-gray-200 p-4 mb-4 font-mono text-xs">
+                    <div className="flex items-center justify-between gap-4">
+                      <code className="text-gray-900 break-all">
                         {project.dockerCommand}
                       </code>
                       <CopyButton text={project.dockerCommand} />
@@ -624,15 +449,15 @@ export default function Home() {
                   </div>
                 )}
 
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-4 text-sm">
                   {project.links.live && (
                     <a
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3  bg-blue-800 text-white text-md sm:text-sm rounded-full font-medium   transition-colors"
+                      className="inline-flex items-center gap-2 text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
                     >
-                      Visit site <FaExternalLinkAlt className="w-3 h-3" />
+                      View Project <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
                   )}
                   {project.links.repo && (
@@ -640,9 +465,9 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm sm:text-sm font-medium bg-blue-800 text-white transition-colors"
+                      className="inline-flex items-center gap-2 text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
                     >
-                      <FaGithub className="w-3 h-3 sm:w-4 sm:h-4" /> View code
+                      <FaGithub className="w-3.5 h-3.5" /> Source Code
                     </a>
                   )}
                 </div>
@@ -651,32 +476,24 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills */}
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl ttext-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
-            Skills
+        {/* Technical Skills */}
+        <section className="mb-20 border-b border-gray-200 pb-12">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+            Technical Proficiencies
           </h2>
-          <div className="space-y-6 border border-gray-400 rounded-xl bg-gray-100 sm:space-y-8">
+          <div className="space-y-6">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
-              <div key={category} className=" rounded-lg  p-2 sm:p-3">
-                <h3 className="text-sm ttext-black sm:text-base font-bold mb-3 sm:mb-4">
-                  {category.toUpperCase()}
+              <div key={category}>
+                <h3 className="text-sm font-medium text-black mb-3">
+                  {category}
                 </h3>
-                <div className="flex flex-wrap gap-3">
-                  {skills.map((skill) => {
-                    const Icon = skill.icon;
-                    return (
-                      <div
-                        key={skill.name}
-                        className="flex items-center gap-2 px-3 py-2 font-medium rounded-full bg-gray-300 text-sm sm:text-md"
-                      >
-                        <div className="p-1.5 bg-gray-100 rounded-full">
-                          <Icon className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0" />
-                        </div>
-                        <span>{skill.name}</span>
-                      </div>
-                    );
-                  })}
+                <div className="text-sm text-gray-900">
+                  {skills.map((skill, i) => (
+                    <span key={skill.name}>
+                      {skill.name}
+                      {i < skills.length - 1 ? " • " : ""}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}
@@ -684,58 +501,34 @@ export default function Home() {
         </section>
 
         {/* Certifications */}
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl  ttext-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
+        <section className="mb-20 border-b border-gray-200 pb-12">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
             Certifications
           </h2>
-          <div className="space-y-4 sm:space-y-5">
+          <div className="space-y-6">
             {CONFIG.certifications.map((cert) => (
-              <div
-                key={cert.title}
-                className="border bg-gray-100 rounded-lg border-gray-400 p-4 sm:p-5"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-base text-black sm:text-xl font-bold mb-2">
-                      {cert.title}
-                    </h3>
-                    <div className="flex flex-wrap font-semibold items-center gap-2 text-sm sm:text-sm text-gray-700">
-                      <span>{cert.organization}</span>
-                      <span>|</span>
-                      <span>{cert.year}</span>
-                    </div>
-                  </div>
-                  <span className="bg-green-500 rounded-full px-2 py-1 text-sm  text-black w-max">
-                    {cert.status}
-                  </span>
+              <div key={cert.title}>
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+                  <h3 className="font-medium text-black">{cert.title}</h3>
+                  <span className="text-sm text-gray-900">{cert.year}</span>
                 </div>
-
-                <p className="text-sm sm:text-sm mb-3">{cert.description}</p>
-
-                <div className="mb-3">
-                  <div className="text-xs text-gray-900 font-semibold mb-2">
-                    SKILLS:
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {cert.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="bg-gray-300  rounded-full px-3 py-2 font-medium text-xs"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                <p className="text-sm text-gray-900 mb-2">
+                  {cert.organization}
+                </p>
+                <p className="text-sm text-gray-900 mb-3 leading-relaxed">
+                  {cert.description}
+                </p>
+                <div className="text-xs text-gray-900 mb-3">
+                  {cert.skills.join(" • ")}
                 </div>
-
                 {cert.url && (
                   <a
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm px-4 py-2 rounded-full bg-blue-800 text-white font-semibold transition-colors"
+                    className="inline-flex items-center gap-2 text-sm text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
                   >
-                    View Creds <FaExternalLinkAlt className="w-3 h-3" />
+                    View Credential <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
                 )}
               </div>
@@ -744,35 +537,55 @@ export default function Home() {
         </section>
 
         {/* Education */}
-        <section className="mb-10 sm:mb-12 md:mb-16">
-          <h2 className="text-xl text-black sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6  pb-2">
+        <section className="mb-20">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
             Education
           </h2>
-          <div className="border rounded-lg bg-gray-100 border-gray-400 p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-              <div className="min-w-0">
-                <h3 className="text-lg sm:text-xl ttext-black font-bold mb-2">
-                  {CONFIG.education.degree}
-                </h3>
-                <p className="text-base sm:text-lg mb-3">
-                  {CONFIG.education.field}
-                </p>
-                <div className="space-y-1 text-xs sm:text-sm">
-                  <p>{CONFIG.education.institution}</p>
-                  <p className="text-gray-700">{CONFIG.education.location}</p>
-                  <p className="text-gray-700">{CONFIG.education.period}</p>
-                </div>
-              </div>
-              <span className="bg-green-500 px-3 py-1 font-semibold text-sm text-black rounded-full w-max">
-                {CONFIG.education.status}
+          <div>
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
+              <h3 className="font-medium text-black">
+                {CONFIG.education.degree}
+              </h3>
+              <span className="text-sm text-gray-900">
+                {CONFIG.education.period}
               </span>
             </div>
-            <p className="text-sm sm:text-sm leading-relaxed">
+            <p className="text-sm text-gray-900 mb-2">
+              {CONFIG.education.field}
+            </p>
+            <p className="text-sm text-gray-900 mb-3">
+              {CONFIG.education.institution}, {CONFIG.education.location}
+            </p>
+            <p className="text-sm text-gray-900 leading-relaxed">
               {CONFIG.education.description}
             </p>
           </div>
         </section>
+
+        {/* CLI Command - Minimal Version */}
+        <section className="mb-20">
+          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+            CLI Tool
+          </h2>
+          <div className="bg-gray-50 border border-gray-200 p-5">
+            <p className="text-sm text-gray-900 mb-4">
+              Interactive command-line portfolio viewer built with Node.js
+            </p>
+            <div className="space-y-3 font-mono text-xs">
+              <div className="bg-white border border-gray-200 p-3">
+                <span className="text-gray-900">$</span> npm install -g
+                hackkinshuk
+              </div>
+              <div className="bg-white border border-gray-200 p-3">
+                <span className="text-gray-900">$</span> cloudkinshuk
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
+
+      {/* Footer accent line */}
+      <div className="h-0.5 bg-black"></div>
     </div>
   );
 }
