@@ -69,7 +69,7 @@ const Footer = () => {
                 </div>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl web-headline font-semibold text-gray-900">
+              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl  font-semibold text-gray-900">
                 CloudKinshuk
               </h2>
             </div>

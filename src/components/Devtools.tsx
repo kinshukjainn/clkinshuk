@@ -271,7 +271,7 @@ export default function Devtools() {
                 </span>
               </div>
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold web-headline  text-black mb-4">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl  font-bold   text-black mb-4">
               DevSetup
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-black leading-relaxed">

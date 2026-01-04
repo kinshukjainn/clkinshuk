@@ -47,6 +47,7 @@ const CONFIG = {
     availability: "Available for opportunities",
     status:
       "Completed an internship at UPPTCL (Uttar Pradesh Power Transmission Corporation Limited), where I gained hands-on experience in power systems and transmission network operations.",
+    photoUrl: "/profile.jpg", // Add your photo path here
   },
   social: [
     {
@@ -266,9 +267,16 @@ export default function Home() {
       <div className="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
         {/* Header - Minimal & Professional */}
         <header className="mb-20 border-b border-gray-200 pb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-black mb-8 leading-tight">
-            Kinshuk Jain
-          </h1>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 mb-8">
+            <img
+              src={CONFIG.personal.photoUrl}
+              alt="Kinshuk Jain"
+              className="w-32 h-32 rounded-full object-cover border-2 border-gray-200"
+            />
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-black leading-tight">
+              Kinshuk Jain
+            </h1>
+          </div>
 
           <div className="space-y-4 mb-8 text-gray-900 leading-relaxed">
             {CONFIG.personal.bio.map((p, i) => (
@@ -292,7 +300,7 @@ export default function Home() {
 
         {/* Contact Links - Minimal Grid */}
         <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md  uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Contact
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -304,7 +312,7 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm hover:text-black text-gray-900 transition-colors group"
+                  className="flex items-center gap-3 text-md hover:text-black text-gray-900 transition-colors group"
                 >
                   <Icon className="w-4 h-4 flex-shrink-0" />
                   <span className="group-hover:underline underline-offset-4">
@@ -318,7 +326,7 @@ export default function Home() {
 
         {/* Resume Download */}
         <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Resume
           </h2>
           <div className="flex items-center justify-between bg-gray-50 border border-gray-200 p-5">
@@ -329,7 +337,7 @@ export default function Home() {
             <a
               href="/kinshukfinalresume.pdf"
               download="kinshukfinalresume.pdf"
-              className="flex items-center gap-2 text-sm font-medium text-black hover:text-gray-900 transition-colors"
+              className="flex items-center gap-2 text-sm font-bold text-black hover:text-gray-900 transition-colors"
             >
               <FaFileDownload className="w-4 h-4" />
               Download
@@ -339,7 +347,7 @@ export default function Home() {
 
         {/* Publications/Blog */}
         <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Publications
           </h2>
           <div className="bg-gray-50 border border-gray-200 p-5">
@@ -366,7 +374,7 @@ export default function Home() {
 
         {/* Experience */}
         <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Experience
           </h2>
           <div className="space-y-8">
@@ -377,7 +385,7 @@ export default function Home() {
                   July 2025 - Aug 2025
                 </span>
               </div>
-              <p className="text-sm text-gray-900 mb-4">
+              <p className="text-sm text-gray-800 underline font-semibold mb-4">
                 Uttar Pradesh Power Transmission Corporation Limited
               </p>
               <div className="space-y-3 text-sm text-gray-900 leading-relaxed">
@@ -406,7 +414,7 @@ export default function Home() {
 
         {/* Projects */}
         <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Selected Projects
           </h2>
           <div className="space-y-10">
@@ -430,7 +438,7 @@ export default function Home() {
                 </div>
 
                 <div className="mb-4">
-                  <span className="text-xs text-gray-900 uppercase tracking-wider">
+                  <span className="text-md text-gray-900 uppercase tracking-wider">
                     Technologies:{" "}
                   </span>
                   <span className="text-sm text-gray-900">
@@ -439,7 +447,7 @@ export default function Home() {
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-gray-50 border border-gray-200 p-4 mb-4 font-mono text-xs">
+                  <div className="bg-gray-50 border border-gray-200 p-4 mb-4 font-mono text-md">
                     <div className="flex items-center justify-between gap-4">
                       <code className="text-gray-900 break-all">
                         {project.dockerCommand}
@@ -455,7 +463,7 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
+                      className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-800 transition-colors border-b font-semibold hover:font-bold border-black hover:border-gray-600"
                     >
                       View Project <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
@@ -465,7 +473,7 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
+                      className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-800 transition-colors font-semibold hover:font-bold border-b border-black hover:border-gray-600"
                     >
                       <FaGithub className="w-3.5 h-3.5" /> Source Code
                     </a>
@@ -478,7 +486,7 @@ export default function Home() {
 
         {/* Technical Skills */}
         <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Technical Proficiencies
           </h2>
           <div className="space-y-6">
@@ -502,7 +510,7 @@ export default function Home() {
 
         {/* Certifications */}
         <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Certifications
           </h2>
           <div className="space-y-6">
@@ -518,7 +526,7 @@ export default function Home() {
                 <p className="text-sm text-gray-900 mb-3 leading-relaxed">
                   {cert.description}
                 </p>
-                <div className="text-xs text-gray-900 mb-3">
+                <div className="text-md text-gray-900 mb-3">
                   {cert.skills.join(" • ")}
                 </div>
                 {cert.url && (
@@ -526,7 +534,7 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
+                    className="inline-flex items-center gap-2 text-sm text-blue-900 hover:text-blue-800 transition-colors font-semibold hover:font-bold border-b border-black hover:border-gray-600"
                   >
                     View Credential <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
@@ -538,7 +546,7 @@ export default function Home() {
 
         {/* Education */}
         <section className="mb-20">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             Education
           </h2>
           <div>
@@ -564,14 +572,14 @@ export default function Home() {
 
         {/* CLI Command - Minimal Version */}
         <section className="mb-20">
-          <h2 className="text-xs uppercase tracking-widest text-gray-900 mb-6 font-medium">
+          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
             CLI Tool
           </h2>
           <div className="bg-gray-50 border border-gray-200 p-5">
             <p className="text-sm text-gray-900 mb-4">
               Interactive command-line portfolio viewer built with Node.js
             </p>
-            <div className="space-y-3 font-mono text-xs">
+            <div className="space-y-3 font-mono text-md">
               <div className="bg-white border border-gray-200 p-3">
                 <span className="text-gray-900">$</span> npm install -g
                 hackkinshuk

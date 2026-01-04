@@ -4,18 +4,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import {
-  FaSearch,
-  FaExternalLinkAlt,
-  FaSpinner,
-  FaExclamationTriangle,
-  FaCalendarAlt,
-  FaEye,
-  FaClock,
-  FaTimes,
-  FaFilter,
-  FaSortAmountDown,
-} from "react-icons/fa";
 
 // Types
 interface BlogPost {
@@ -173,28 +161,19 @@ const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   }
 };
 
-interface BlogCardProps {
+interface BlogItemProps {
   post: BlogPost;
   searchQuery?: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = React.memo(
+const BlogItem: React.FC<BlogItemProps> = React.memo(
   ({ post, searchQuery }) => {
-    const [imageLoaded, setImageLoaded] = useState(false);
-    const [imageError, setImageError] = useState(false);
-
     const formatDate = useCallback((dateString: string): string => {
       return new Date(dateString).toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "numeric",
       });
-    }, []);
-
-    const formatNumber = useCallback((num: number): string => {
-      if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-      if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
-      return num.toString();
     }, []);
 
     const highlightText = useCallback((text: string, query?: string) => {
@@ -206,7 +185,7 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
       const parts = text.split(regex);
       return parts.map((part, i) =>
         regex.test(part) ? (
-          <mark key={i} className="bg-yellow-400 text-black px-1 rounded">
+          <mark key={i} className="bg-yellow-200 px-0.5">
             {part}
           </mark>
         ) : (
@@ -216,88 +195,39 @@ const BlogCard: React.FC<BlogCardProps> = React.memo(
     }, []);
 
     return (
-      <article className="rounded-2xl border-2 border-gray-400 transition-all duration-300 overflow-hidden  bg-gray-100 ">
-        <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden">
-          {post.coverImage && !imageError ? (
-            <>
-              <img
-                src={post.coverImage.url}
-                alt={post.title}
-                className={`w-full h-full object-cover transition-all duration-500 ${
-                  imageLoaded
-                    ? "opacity-100 group-hover:scale-110"
-                    : "opacity-0"
-                }`}
-                loading="lazy"
-                onLoad={() => setImageLoaded(true)}
-                onError={() => setImageError(true)}
-              />
-              {!imageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
-                  <FaSpinner className="animate-spin text-cyan-500 text-xl" />
-                </div>
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            </>
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gray-200">
-              <FaExternalLinkAlt className="text-gray-400 text-3xl" />
-            </div>
-          )}
-        </div>
-
-        <div className="p-4 sm:p-5">
-          <h2 className="text-base sm:text-lg font-bold text-black leading-snug mb-3 line-clamp-2  transition-colors duration-200">
-            {highlightText(post.title, searchQuery)}
-          </h2>
-
-          <div className="flex items-center gap-2 mb-3 text-xs sm:text-sm flex-wrap">
-            <span className="font-semibold text-black">
-              {highlightText(post.author.name, searchQuery)}
-            </span>
-            <span className="text-gray-400">•</span>
-            <span className="flex items-center gap-1 text-black font-semibold">
-              <div className="p-3 bg-gray-300 rounded-l-full ">
-                <FaCalendarAlt className="w-3 h-3 text-black" />
-              </div>
-              <div className="p-2 bg-gray-300 rounded-r-full">
-                {formatDate(post.publishedAt)}
-              </div>
-            </span>
-          </div>
-
-          <div className="flex items-center justify-between pt-3 border-t border-gray-200">
-            <div className="flex items-center gap-1 sm:gap-3 text-sm font-semibold  text-gray-900 flex-wrap">
+      <div className="border-b border-gray-200 py-4 hover:bg-gray-50 transition-colors">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              {highlightText(post.title, searchQuery)}
+            </h3>
+            <div className="flex items-center gap-3 text-sm text-gray-600 flex-wrap">
+              <span>{highlightText(post.author.name, searchQuery)}</span>
+              <span>•</span>
+              <span>{formatDate(post.publishedAt)}</span>
               {post.readTimeInMinutes && (
-                <span className="flex p-2 rounded-l-full bg-gray-300 items-center gap-1">
-                  <FaClock className="w-3 h-3" />
-                  {post.readTimeInMinutes}m
-                </span>
-              )}
-              {post.views && (
-                <span className="flex items-center bg-gray-300 rounded-r-full p-2 gap-1">
-                  <FaEye className="w-3 h-3" />
-                  {formatNumber(post.views)}
-                </span>
+                <>
+                  <span>•</span>
+                  <span>{post.readTimeInMinutes} min read</span>
+                </>
               )}
             </div>
-            <a
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-5 py-2 sm:px-4  sm:py-2 text-white rounded-full text-sm sm:text-sm font-bold tracking-wide transition-all duration-200 bg-blue-800 hover:text-white"
-            >
-              Read
-              <FaExternalLinkAlt className="w-3 h-3" />
-            </a>
           </div>
+          <a
+            href={post.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-shrink-0 px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded transition-colors"
+          >
+            Read →
+          </a>
         </div>
-      </article>
+      </div>
     );
   }
 );
 
-BlogCard.displayName = "BlogCard";
+BlogItem.displayName = "BlogItem";
 
 interface FilterPanelProps {
   filters: Filters;
@@ -341,39 +271,36 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     (filters.readTimeMin > 0 || filters.readTimeMax < 100 ? 1 : 0);
 
   return (
-    <div className="w-full bg-white border-2 border-gray-200 rounded-xl p-4 sm:p-5">
+    <div className="bg-white border border-gray-200 rounded p-4 mb-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
-          <FaFilter className="w-4 h-4" />
+        <h3 className="text-sm font-semibold text-gray-900">
           Filters
           {activeFiltersCount > 0 && (
-            <span className="bg-cyan-500 text-white text-xs font-bold rounded-lg w-5 h-5 flex items-center justify-center">
+            <span className="ml-2 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-blue-600 rounded-full">
               {activeFiltersCount}
             </span>
           )}
         </h3>
         <button
           onClick={resetFilters}
-          className="text-sm p-2 rounded-full bg-blue-800 px-5 cursor-pointer sm:text-sm text-white  font-semibold"
+          className="text-sm text-blue-600 hover:text-blue-800 font-medium"
         >
-          Reset All
+          Reset
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-        {/* Sort By */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            <FaSortAmountDown className="inline w-3.5 h-3.5 mr-1.5" />
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Sort By
           </label>
           <select
-            title="none"
+            title="Sort By"
             value={filters.sortBy}
             onChange={(e) =>
               setFilters({ ...filters, sortBy: e.target.value as SortOption })
             }
-            className="w-full bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-cyan-500 transition-colors"
+            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             {sortOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -383,15 +310,13 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           </select>
         </div>
 
-        {/* Read Time Range */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
-            <FaClock className="inline w-3.5 h-3.5 mr-1.5" />
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Read Time (minutes)
           </label>
           <div className="flex items-center gap-2">
             <input
-              title="texting"
+              title="Minimum Read Time"
               type="number"
               min="0"
               max="100"
@@ -402,11 +327,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   readTimeMin: parseInt(e.target.value) || 0,
                 })
               }
-              className="w-full bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-cyan-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <span className="text-gray-500 text-sm">to</span>
+            <span className="text-sm text-gray-500">-</span>
             <input
-              title="texting"
+              title="Maximum Read Time"
               type="number"
               min="0"
               max="100"
@@ -417,26 +342,25 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   readTimeMax: parseInt(e.target.value) || 100,
                 })
               }
-              className="w-full bg-white border-2 border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 outline-none focus:border-cyan-500"
+              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
 
-        {/* Tags */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Tags ({filters.tags.length} selected)
           </label>
-          <div className="max-h-32 overflow-y-auto bg-white  p-4">
+          <div className="max-h-32 overflow-y-auto border border-gray-200 rounded p-2">
             <div className="flex flex-wrap gap-1.5">
               {availableTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => toggleTag(tag)}
-                  className={`px-3 py-2.5 rounded-full text-sm transition-all cursor-pointer duration-200 ${
+                  className={`px-2 py-1 text-xs rounded transition-colors ${
                     filters.tags.includes(tag)
-                      ? "bg-cyan-800 text-white font-semibold"
-                      : "bg-blue-100 text-black "
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   {tag}
@@ -464,30 +388,27 @@ const SearchBar: React.FC<SearchBarProps> = ({
   totalCount,
 }) => {
   return (
-    <div className="relative w-full">
+    <div className="mb-6">
       <div className="relative">
-        <FaSearch className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-black text-base sm:text-lg" />
         <input
           type="text"
-          placeholder="Search articles by title, content, author, or tags..."
+          placeholder="Search articles..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className="w-full pl-10 sm:pl-12 pr-12  py-4 sm:py-5 rounded-full text-gray-900 bg-gray-200 outline-none placeholder-gray-600 text-md sm:text-base"
+          className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {searchInput && (
           <button
-            title="Clear search"
             onClick={() => setSearchInput("")}
-            className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors duration-200 p-1.5 hover:bg-gray-100 rounded-lg"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
           >
-            <FaTimes className="w-4 h-4" />
+            ×
           </button>
         )}
       </div>
-
       {searchInput && (
-        <div className="mt-2 text-xs sm:text-sm text-gray-600 font-medium">
-          {resultsCount} of {totalCount} articles
+        <div className="mt-2 text-sm text-gray-600">
+          Showing {resultsCount} of {totalCount} articles
         </div>
       )}
     </div>
@@ -540,20 +461,17 @@ const BlogPageContent: React.FC = () => {
 
     let result = searchInput.trim() ? searchEngine.search(searchInput) : posts;
 
-    // Apply tag filter
     if (filters.tags.length > 0) {
       result = result.filter((post) =>
         post.tags.some((tag) => filters.tags.includes(tag.name))
       );
     }
 
-    // Apply read time filter
     result = result.filter((post) => {
       const readTime = post.readTimeInMinutes || 0;
       return readTime >= filters.readTimeMin && readTime <= filters.readTimeMax;
     });
 
-    // Apply sorting
     result = [...result].sort((a, b) => {
       switch (filters.sortBy) {
         case "newest":
@@ -582,18 +500,17 @@ const BlogPageContent: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 flex items-center justify-center p-4">
-        <div className="text-center max-w-md border-2 border-gray-300 p-6 sm:p-8 bg-white rounded-2xl shadow-xl">
-          <FaExclamationTriangle className="text-yellow-500 text-4xl sm:text-5xl mx-auto mb-4" />
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+      <div className="min-h-screen bg-white pt-20 flex items-center justify-center p-4">
+        <div className="text-center max-w-md border border-gray-300 p-8 rounded">
+          <h2 className="text-xl font-bold text-gray-900 mb-3">
             Failed to Load Blog Posts
           </h2>
-          <p className="text-gray-600 text-xs sm:text-sm mb-6">
+          <p className="text-gray-600 text-sm mb-6">
             {error instanceof Error ? error.message : "Unknown error occurred"}
           </p>
           <button
             onClick={() => refetch()}
-            className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition-colors"
           >
             Try Again
           </button>
@@ -603,60 +520,44 @@ const BlogPageContent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white text-gray-900">
-      <div className="w-full">
-        <section className="pt-12 sm:pt-16 md:pt-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-            <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl web-headline font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
-                Read my <span className="text-green-700">Blogs</span>
-              </h1>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                Exploring cloud computing, DevOps, and React development through
-                curiosity and real-world experience.
-              </p>
-            </div>
-          </div>
-        </section>
+    <div className="min-h-screen pt-20 bg-white">
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <header className="mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">
+            Technical Blog
+          </h1>
+          <p className="text-gray-600">
+            Articles on cloud computing, DevOps, security, and infrastructure
+            engineering
+          </p>
+        </header>
 
-        <div className=" top-0 z-40 bg-gradient-to-b from-white to-transparent pb-4">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex flex-col gap-4">
-              <SearchBar
-                searchInput={searchInput}
-                setSearchInput={setSearchInput}
-                resultsCount={filteredPosts.length}
-                totalCount={posts?.length || 0}
-              />
-              <FilterPanel
-                filters={filters}
-                setFilters={setFilters}
-                availableTags={availableTags}
-              />
-            </div>
-          </div>
-        </div>
+        <SearchBar
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          resultsCount={filteredPosts.length}
+          totalCount={posts?.length || 0}
+        />
 
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <FilterPanel
+          filters={filters}
+          setFilters={setFilters}
+          availableTags={availableTags}
+        />
+
+        <main>
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-16 sm:py-20">
-              <FaSpinner className="animate-spin text-cyan-600 text-3xl sm:text-4xl mb-4" />
-              <h3 className="text-lg sm:text-xl text-gray-900 mb-2 font-semibold">
-                Loading articles...
-              </h3>
-              <p className="text-gray-600 text-xs sm:text-sm">
-                Fetching the latest insights
-              </p>
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mb-4"></div>
+              <p className="text-gray-600">Loading articles...</p>
             </div>
           ) : filteredPosts.length === 0 ? (
-            <div className="text-center py-16 sm:py-20">
-              <FaSearch className="text-gray-400 text-4xl sm:text-5xl mx-auto mb-4" />
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+            <div className="text-center py-20">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
                 No articles found
               </h3>
-              <p className="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8 max-w-md mx-auto px-4">
-                Try adjusting your search terms or filters to discover more
-                content
+              <p className="text-gray-600 mb-6">
+                Try adjusting your search or filters
               </p>
               <button
                 onClick={() => {
@@ -668,15 +569,15 @@ const BlogPageContent: React.FC = () => {
                     sortBy: "newest",
                   });
                 }}
-                className="px-6 py-3 bg-cyan-600 text-white font-bold rounded-xl transition-all duration-200 uppercase tracking-wide shadow-lg hover:shadow-xl hover:bg-cyan-700"
+                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded transition-colors"
               >
-                Clear All Filters
+                Clear Filters
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+            <div className="bg-white border border-gray-200 rounded">
               {filteredPosts.map((post) => (
-                <BlogCard key={post.id} post={post} searchQuery={searchInput} />
+                <BlogItem key={post.id} post={post} searchQuery={searchInput} />
               ))}
             </div>
           )}

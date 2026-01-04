@@ -105,7 +105,7 @@ const Header = () => {
                     className="flex items-center gap-2 sm:gap-3 md:gap-4"
                     whileHover={{ scale: 1.01 }}
                   >
-                    <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold web-headline text-gray-900 leading-none whitespace-nowrap">
+                    <h1 className="text-md sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold  text-gray-900 leading-none whitespace-nowrap">
                       cloudkinshuk
                     </h1>
 
