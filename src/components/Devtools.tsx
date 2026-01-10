@@ -100,18 +100,20 @@ const setupData: SetupSection[] = [
     icon: Type,
     items: [
       {
-        name: "JetBrains Mono",
-        description: "Monospace fonts with programming ligature support.",
+        name: "Lucida Console",
+        description:
+          "Classic monospaced font favored for coding due to its clarity.",
         category: "Code Font",
       },
       {
-        name: "IBM Plex Sans",
-        description: "Modern sans-serif fonts optimized for UI readability.",
+        name: "Google Sans",
+        description:
+          "Clean and modern font used across various Google products.",
         category: "UI/Project Fonts",
       },
       {
-        name: "Fira Code",
-        description: "Modern monospaced font which i used for my portfolio",
+        name: "Google Sans",
+        description: "Primary font for my portfolio and personal branding.",
         category: "Portfolio Font",
       },
       {
