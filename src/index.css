@@ -28,3 +28,105 @@ html {
   }
 }
 
+
+.premium-cta {
+  /* Base */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  transition: background-color 0.25s ease;
+}
+
+/* Text above effects */
+.premium-cta > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Shimmer reflection ===== */
+.premium-cta::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    125deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 60%
+  );
+  transform: translateX(-120%);
+  animation: shimmer-sweep 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ===== Animated border ===== */
+.premium-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.45) 90deg,
+    transparent 180deg,
+    transparent 360deg
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-travel 7s linear infinite;
+  pointer-events: none;
+}
+
+/* Hover — darker base, calmer motion */
+.premium-cta:hover {
+  background: #2563eb;
+}
+
+.premium-cta:hover::before {
+  opacity: 0.4;
+  animation-duration: 6s;
+}
+
+.premium-cta:hover::after {
+  animation-duration: 10s;
+}
+
+/* ===== Keyframes ===== */
+@keyframes shimmer-sweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  45% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}
+
+@keyframes border-travel {
+  to {
+    transform: rotate(360deg);
+  }
+}

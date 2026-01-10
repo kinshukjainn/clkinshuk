@@ -9,13 +9,11 @@ export default function App() {
   return (
     <>
       <Header />
-
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/gears" element={<Devtools />} />
         <Route path="/blogs" element={<Blogs />} />
-
       </Routes>
 
       <Footer />

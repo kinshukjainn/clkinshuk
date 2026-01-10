@@ -47,7 +47,7 @@ const CONFIG = {
     availability: "Available for opportunities",
     status:
       "Completed an internship at UPPTCL (Uttar Pradesh Power Transmission Corporation Limited), where I gained hands-on experience in power systems and transmission network operations.",
-    photoUrl: "/profile.jpg", // Add your photo path here
+    photoUrl: "/profile.jpg",
   },
   social: [
     {
@@ -247,13 +247,13 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 hover:bg-gray-100 rounded transition-colors"
+      className="p-2 hover:bg-white/5 rounded-lg transition-colors"
       title="Copy to clipboard"
     >
       {copied ? (
-        <FaCheck className="w-4 h-4 text-green-600" />
+        <FaCheck className="w-4 h-4 text-emerald-400" />
       ) : (
-        <FaCopy className="w-4 h-4 text-gray-900" />
+        <FaCopy className="w-4 h-4 text-gray-400" />
       )}
     </button>
   );
@@ -261,24 +261,24 @@ const CopyButton = ({ text }: { text: string }) => {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white pt-10 ">
-      {/* Top accent line */}
-
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
-        {/* Header - Minimal & Professional */}
-        <header className="mb-20 border-b border-gray-200 pb-12">
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-20">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+        {/* Header */}
+        <header className="mb-20 pb-12 border-b border-white/10">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 mb-8">
-            <img
-              src={CONFIG.personal.photoUrl}
-              alt="Kinshuk Jain"
-              className="w-32 h-32 rounded-full object-cover border-2 border-gray-200"
-            />
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-black leading-tight">
+            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
+              <img
+                src={CONFIG.personal.photoUrl}
+                alt="Kinshuk Jain"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
               Kinshuk Jain
             </h1>
           </div>
 
-          <div className="space-y-4 mb-8 text-gray-900 leading-relaxed">
+          <div className="space-y-4 mb-8 text-gray-300 leading-relaxed">
             {CONFIG.personal.bio.map((p, i) => (
               <p key={i} className="text-base">
                 {p}
@@ -286,21 +286,21 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm text-gray-900">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <FaMapMarkerAlt className="w-3.5 h-3.5" />
               <span>{CONFIG.personal.location}</span>
             </div>
-            <span className="hidden sm:inline text-gray-300">|</span>
-            <span className="font-medium text-black">
+            <span className="hidden sm:inline text-gray-700">|</span>
+            <span className="text-emerald-400 font-medium">
               Available for opportunities
             </span>
           </div>
         </header>
 
-        {/* Contact Links - Minimal Grid */}
-        <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-md  uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        {/* Contact Links */}
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Contact
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -312,12 +312,10 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-md hover:text-black text-gray-900 transition-colors group"
+                  className="flex items-center gap-3 text-sm hover:text-white text-gray-400 transition-colors group bg-white/5 hover:bg-white/10 rounded-4xl p-3 border border-white/10"
                 >
                   <Icon className="w-4 h-4 flex-shrink-0" />
-                  <span className="group-hover:underline underline-offset-4">
-                    {social.platform}
-                  </span>
+                  <span>{social.platform}</span>
                 </a>
               );
             })}
@@ -325,19 +323,19 @@ export default function Home() {
         </section>
 
         {/* Resume Download */}
-        <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Resume
           </h2>
-          <div className="flex items-center justify-between bg-gray-50 border border-gray-200 p-5">
+          <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-4xl p-5">
             <div>
-              <h3 className="font-medium text-black mb-1">My Resume</h3>
-              <p className="text-sm text-gray-900">PDF Format</p>
+              <h3 className="font-medium text-white mb-1">My Resume</h3>
+              <p className="text-sm text-gray-400">PDF Format</p>
             </div>
             <a
               href="/kinshukfinalresume.pdf"
               download="kinshukfinalresume.pdf"
-              className="flex items-center gap-2 text-sm font-bold text-black hover:text-gray-900 transition-colors"
+              className="flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <FaFileDownload className="w-4 h-4" />
               Download
@@ -346,15 +344,15 @@ export default function Home() {
         </section>
 
         {/* Publications/Blog */}
-        <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Publications
           </h2>
-          <div className="bg-gray-50 border border-gray-200 p-5">
+          <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="font-medium text-black mb-2">Technical Blog</h3>
-                <p className="text-sm text-gray-900 mb-4">
+                <h3 className="font-medium text-white mb-2">Technical Blog</h3>
+                <p className="text-sm text-gray-400 mb-4">
                   Research notes, security findings, and technical deep-dives on
                   cloud infrastructure and systems architecture.
                 </p>
@@ -362,10 +360,10 @@ export default function Home() {
                   href="https://blog.cloudkinshuk.in/newsletter"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-black hover:text-gray-900 transition-colors border-b border-black hover:border-gray-600"
+                  className="premium-cta"
                 >
-                  Subscribe to Newsletter
-                  <FaExternalLinkAlt className="w-3 h-3" />
+                  <span>Subscribe to Newsletter</span>
+                  <FaExternalLinkAlt />
                 </a>
               </div>
             </div>
@@ -373,22 +371,22 @@ export default function Home() {
         </section>
 
         {/* Experience */}
-        <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Experience
           </h2>
           <div className="space-y-8">
-            <div>
+            <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
-                <h3 className="font-medium text-black">UPPTCL</h3>
-                <span className="text-sm text-gray-900">
+                <h3 className="font-semibold text-white text-lg">UPPTCL</h3>
+                <span className="text-sm text-gray-400">
                   July 2025 - Aug 2025
                 </span>
               </div>
-              <p className="text-sm text-gray-800 underline font-semibold mb-4">
+              <p className="text-sm text-gray-400 mb-4">
                 Uttar Pradesh Power Transmission Corporation Limited
               </p>
-              <div className="space-y-3 text-sm text-gray-900 leading-relaxed">
+              <div className="space-y-3 text-sm text-gray-300 leading-relaxed">
                 <p>
                   Worked with the transmission division to understand the
                   operation, protection, and maintenance of 132kV and 220kV
@@ -413,43 +411,46 @@ export default function Home() {
         </section>
 
         {/* Projects */}
-        <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Selected Projects
           </h2>
-          <div className="space-y-10">
+          <div className="space-y-6">
             {CONFIG.projects.map((project) => (
-              <div key={project.title}>
+              <div
+                key={project.title}
+                className="bg-white/5 border border-white/10 rounded-4xl p-6"
+              >
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
-                  <h3 className="font-medium text-black text-lg">
+                  <h3 className="font-semibold text-white text-lg">
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-900">
+                  <div className="flex items-center gap-3 text-sm text-gray-400">
                     <span>{project.type}</span>
                     <span>•</span>
                     <span>{project.year}</span>
                   </div>
                 </div>
 
-                <div className="space-y-3 mb-4 text-sm text-gray-900 leading-relaxed">
+                <div className="space-y-3 mb-4 text-sm text-gray-300 leading-relaxed">
                   {project.description.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
                 </div>
 
                 <div className="mb-4">
-                  <span className="text-md text-gray-900 uppercase tracking-wider">
+                  <span className="text-md text-gray-500 uppercase tracking-wider">
                     Technologies:{" "}
                   </span>
-                  <span className="text-sm text-gray-900">
+                  <span className="text-sm text-gray-400">
                     {project.technologies.join(", ")}
                   </span>
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-gray-50 border border-gray-200 p-4 mb-4 font-mono text-md">
+                  <div className="bg-black/40 border border-white/10 rounded-lg p-4 mb-4 font-mono text-sm">
                     <div className="flex items-center justify-between gap-4">
-                      <code className="text-gray-900 break-all">
+                      <code className="text-emerald-400 break-all">
                         {project.dockerCommand}
                       </code>
                       <CopyButton text={project.dockerCommand} />
@@ -463,7 +464,7 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-800 transition-colors border-b font-semibold hover:font-bold border-black hover:border-gray-600"
+                      className="inline-flex items-center gap-2 px-2 py-1 text-emerald-500 bg-white/5 border border-white/10 rounded-xl text-md transition-colors font-medium"
                     >
                       View Project <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
@@ -473,7 +474,7 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-blue-900 hover:text-blue-800 transition-colors font-semibold hover:font-bold border-b border-black hover:border-gray-600"
+                      className="inline-flex items-center gap-2 px-2 py-1 text-white bg-white/5 border border-white/10 rounded-xl text-md transition-colors font-medium"
                     >
                       <FaGithub className="w-3.5 h-3.5" /> Source Code
                     </a>
@@ -485,23 +486,32 @@ export default function Home() {
         </section>
 
         {/* Technical Skills */}
-        <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Technical Proficiencies
           </h2>
           <div className="space-y-6">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
-              <div key={category}>
-                <h3 className="text-sm font-medium text-black mb-3">
+              <div
+                key={category}
+                className="bg-white/5 border border-white/10 rounded-4xl p-6"
+              >
+                <h3 className="text-sm font-semibold text-white mb-4">
                   {category}
                 </h3>
-                <div className="text-sm text-gray-900">
-                  {skills.map((skill, i) => (
-                    <span key={skill.name}>
-                      {skill.name}
-                      {i < skills.length - 1 ? " • " : ""}
-                    </span>
-                  ))}
+                <div className="flex flex-wrap gap-2">
+                  {skills.map((skill) => {
+                    const Icon = skill.icon;
+                    return (
+                      <span
+                        key={skill.name}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300"
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                        {skill.name}
+                      </span>
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -509,32 +519,42 @@ export default function Home() {
         </section>
 
         {/* Certifications */}
-        <section className="mb-20 border-b border-gray-200 pb-12">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Certifications
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {CONFIG.certifications.map((cert) => (
-              <div key={cert.title}>
+              <div
+                key={cert.title}
+                className="bg-white/5 border border-white/10 rounded-4xl p-6"
+              >
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                  <h3 className="font-medium text-black">{cert.title}</h3>
-                  <span className="text-sm text-gray-900">{cert.year}</span>
+                  <h3 className="font-semibold text-white">{cert.title}</h3>
+                  <span className="text-sm text-gray-400">{cert.year}</span>
                 </div>
-                <p className="text-sm text-gray-900 mb-2">
+                <p className="text-sm text-gray-400 mb-2">
                   {cert.organization}
                 </p>
-                <p className="text-sm text-gray-900 mb-3 leading-relaxed">
+                <p className="text-sm text-gray-300 mb-3 leading-relaxed">
                   {cert.description}
                 </p>
-                <div className="text-md text-gray-900 mb-3">
-                  {cert.skills.join(" • ")}
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {cert.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-2 py-1 bg-white/5 border border-white/10 rounded-xl text-md text-gray-400"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
                 {cert.url && (
                   <a
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-blue-900 hover:text-blue-800 transition-colors font-semibold hover:font-bold border-b border-black hover:border-gray-600"
+                    className="inline-flex items-center gap-2 px-2 py-1 text-emerald-500 bg-white/5 border border-white/10 rounded-xl text-md transition-colors font-medium"
                   >
                     View Credential <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
@@ -545,55 +565,55 @@ export default function Home() {
         </section>
 
         {/* Education */}
-        <section className="mb-20">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+        <section className="mb-20 pb-12 border-b border-white/10">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             Education
           </h2>
-          <div>
+          <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-              <h3 className="font-medium text-black">
+              <h3 className="font-semibold text-white text-lg">
                 {CONFIG.education.degree}
               </h3>
-              <span className="text-sm text-gray-900">
+              <span className="text-sm text-gray-400">
                 {CONFIG.education.period}
               </span>
             </div>
-            <p className="text-sm text-gray-900 mb-2">
+            <p className="text-sm text-gray-400 mb-2">
               {CONFIG.education.field}
             </p>
-            <p className="text-sm text-gray-900 mb-3">
+            <p className="text-sm text-gray-400 mb-3">
               {CONFIG.education.institution}, {CONFIG.education.location}
             </p>
-            <p className="text-sm text-gray-900 leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed">
               {CONFIG.education.description}
             </p>
           </div>
         </section>
 
-        {/* CLI Command - Minimal Version */}
+        {/* CLI Tool */}
         <section className="mb-20">
-          <h2 className="text-md uppercase tracking-widest text-gray-900 mb-6 font-bold">
+          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
             CLI Tool
           </h2>
-          <div className="bg-gray-50 border border-gray-200 p-5">
-            <p className="text-sm text-gray-900 mb-4">
+          <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
+            <p className="text-sm text-gray-300 mb-4">
               Interactive command-line portfolio viewer built with Node.js
             </p>
-            <div className="space-y-3 font-mono text-md">
-              <div className="bg-white border border-gray-200 p-3">
-                <span className="text-gray-900">$</span> npm install -g
-                hackkinshuk
+            <div className="space-y-3 font-mono text-sm">
+              <div className="bg-black/40 border border-white/10 rounded-xl p-3">
+                <span className="text-emerald-400">$</span>{" "}
+                <span className="text-gray-300">
+                  npm install -g hackkinshuk
+                </span>
               </div>
-              <div className="bg-white border border-gray-200 p-3">
-                <span className="text-gray-900">$</span> cloudkinshuk
+              <div className="bg-black/40 border border-white/10 rounded-xl p-3">
+                <span className="text-emerald-400">$</span>{" "}
+                <span className="text-gray-300">cloudkinshuk</span>
               </div>
             </div>
           </div>
         </section>
       </div>
-
-      {/* Footer accent line */}
-      <div className="h-0.5 bg-black"></div>
     </div>
   );
 }

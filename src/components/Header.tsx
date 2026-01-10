@@ -23,23 +23,16 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-2 py-2 transition-all duration-200 flex items-center gap-4 ${
+      className={`relative px-4 py-2.5 transition-all duration-200 flex items-center gap-2 rounded-full ${
         isActive
-          ? "text-black text-lg rounded-md font-semibold underline"
-          : "text-black text-lg hover:underline hover:font-bold font-semibold"
+          ? "bg-white/20 text-white backdrop-blur-sm"
+          : "text-gray-300 hover:text-white hover:bg-white/10"
       }`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
-      {isActive && (
-        <motion.div
-          className="absolute inset-0"
-          layoutId="activeBackground"
-          transition={{ type: "spring", bounce: 0.1, duration: 0.3 }}
-        />
-      )}
-      <span className="relative z-10 text-lg">{icon}</span>
-      <span className="relative z-10 font-medium text-base">{label}</span>
+      <span className="text-base">{icon}</span>
+      <span className="font-medium text-sm whitespace-nowrap">{label}</span>
     </motion.div>
   </Link>
 );
@@ -85,14 +78,14 @@ const Header = () => {
   return (
     <>
       <motion.header
-        className="fixed top-0 left-0 right-0 z-[9999]"
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-[9999] w-[95%] max-w-5xl"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-gray-100">
-          <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
+        <motion.div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-full shadow-2xl">
+          <div className="relative px-4 sm:px-6">
+            <div className="flex items-center justify-between h-16 sm:h-18">
               {/* Logo */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -102,18 +95,18 @@ const Header = () => {
               >
                 <Link to="/" onClick={closeMenu} className="flex items-center">
                   <motion.div
-                    className="flex items-center gap-2 sm:gap-3 md:gap-4"
-                    whileHover={{ scale: 1.01 }}
+                    className="flex items-center gap-3 sm:gap-4"
+                    whileHover={{ scale: 1.02 }}
                   >
-                    <h1 className="text-md sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold  text-gray-900 leading-none whitespace-nowrap">
+                    <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-none whitespace-nowrap">
                       cloudkinshuk
                     </h1>
 
-                    <motion.div className="flex items-center gap-1 px-3 py-2 border-l-2 border-black">
-                      <span className="text-gray-900 flex items-center">
+                    <motion.div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/10">
+                      <span className="text-emerald-400 flex items-center">
                         {pathInfo.icon}
                       </span>
-                      <span className="text-md text-gray-900 font-normal whitespace-nowrap">
+                      <span className="text-sm text-gray-300 font-medium whitespace-nowrap">
                         {pathInfo.text}
                       </span>
                     </motion.div>
@@ -122,7 +115,7 @@ const Header = () => {
               </motion.div>
 
               {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center gap-1">
+              <nav className="hidden lg:flex items-center gap-2 bg-white/5 rounded-full px-2 py-2">
                 {navItems.map((item, index) => (
                   <motion.div
                     key={item.path}
@@ -144,7 +137,7 @@ const Header = () => {
               <div className="lg:hidden">
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative cursor-pointer p-3 bg-gray-300 text-black rounded-full"
+                  className="relative cursor-pointer p-3 bg-white/10 hover:bg-white/20 text-white rounded-full border border-white/10"
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
@@ -169,12 +162,12 @@ const Header = () => {
         style={{ pointerEvents: isMenuOpen ? "auto" : "none" }}
       >
         <motion.div
-          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/60 backdrop-blur-md"
           onClick={closeMenu}
         />
 
         <motion.div
-          className="absolute top-16 left-0 right-0 bg-gray-100 text-gray-200"
+          className="absolute top-24 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
@@ -182,7 +175,17 @@ const Header = () => {
           }}
           transition={{ duration: 0.25 }}
         >
-          <div className="px-4 py-6 space-y-2">
+          <div className="p-6 space-y-2">
+            {/* Current Path Indicator */}
+            <motion.div className="flex items-center gap-2 px-4 py-3 bg-white/10 rounded-2xl border border-white/10 mb-4">
+              <span className="text-emerald-400 flex items-center">
+                {pathInfo.icon}
+              </span>
+              <span className="text-sm text-gray-300 font-medium">
+                {pathInfo.text}
+              </span>
+            </motion.div>
+
             {navItems.map((item, index) => (
               <motion.div
                 key={item.path}
