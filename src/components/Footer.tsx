@@ -44,24 +44,22 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white text-gray-100 relative overflow-hidden  backdrop-blur-xl">
-      {/* Windows 11 style background blur overlay */}
-
+    <footer className="bg-gradient-to-br from-zinc-950 via-neutral-950 to-black text-gray-100 relative overflow-hidden border-t border-white/10">
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         {/* Main content */}
         <div className="flex flex-col items-center space-y-8 lg:space-y-12">
           {/* Logo and brand section */}
           <div className="text-center space-y-6">
             <div className="flex items-center justify-center gap-3 sm:gap-4">
-              <div className="relative p-3 backdrop-blur-sm  shadow-lg">
-                <span className="text-black">
+              <div className="relative p-3 bg-white/5 border border-white/10 rounded-xl shadow-lg">
+                <span className="text-emerald-400">
                   <FaCloud
                     size={40}
                     className="sm:w-12 sm:h-12 lg:w-14 lg:h-14 drop-shadow-sm"
                   />
                 </span>
                 {/* Subtle glow effect */}
-                <div className="absolute inset-0 text-black animate-pulse opacity-50 ">
+                <div className="absolute inset-0 text-emerald-400/50 animate-pulse opacity-50">
                   <FaCloud
                     size={40}
                     className="sm:w-12 sm:h-12 lg:w-14 lg:h-14 mt-3 ml-3"
@@ -69,13 +67,13 @@ const Footer = () => {
                 </div>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl  font-semibold text-gray-900">
+              <h2 className="text-3xl heading-fontsm:text-4xl lg:text-6xl xl:text-7xl font-semibold text-white tracking-tight">
                 CloudKinshuk
               </h2>
             </div>
 
             {/* Subtitle */}
-            <p className="text-gray-800 text-sm sm:text-base lg:text-lg max-w-md mx-auto font-semibold">
+            <p className="text-gray-400 text-sm sm:text-base lg:text-lg max-w-md mx-auto font-medium">
               Building the future, one cloud at a time
             </p>
           </div>
@@ -87,7 +85,7 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className={`group relative p-3 sm:p-4 text-gray-900    transition-all duration-300  hover:scale-105`}
+                  className="group relative p-3 sm:p-4 text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-105 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg"
                   aria-label={link.label}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -97,11 +95,11 @@ const Footer = () => {
                     className="sm:w-6 sm:h-6 relative z-10 transition-transform duration-200"
                   />
 
-                  {/* Windows 11 style tooltip */}
-                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-300 text-gray-900 text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+                  {/* Tooltip */}
+                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
                     {link.label}
                     {/* Tooltip arrow */}
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20"></div>
                   </span>
 
                   <span className="sr-only">{link.label}</span>
@@ -112,12 +110,12 @@ const Footer = () => {
 
           {/* Divider */}
           <div className="w-full max-w-4xl">
-            <div className="h-px bg-gradient-to-r from-transparent via-gray-300/50 to-transparent"></div>
+            <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
           </div>
 
           {/* Copyright section */}
           <div className="text-center space-y-2">
-            <div className="flex items-center justify-center gap-2 text-sm sm:text-md text-gray-900 font-light">
+            <div className="flex items-center justify-center gap-2 text-sm sm:text-md text-gray-400 font-light">
               <span className="animate-pulse animation-delay-1600">☁️</span>
               <span>
                 © {new Date().getFullYear()} Kinshuk Jain. All rights reserved.
@@ -125,15 +123,15 @@ const Footer = () => {
               <span className="animate-pulse animation-delay-1800">☁️</span>
             </div>
 
-            <p className="text-sm text-gray-900 font-light">
+            <p className="text-sm text-gray-500 font-light">
               Made with ❤️ and lots of ☕
             </p>
           </div>
         </div>
       </div>
 
-      {/* Windows 11 style accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500/60 via-indigo-500/60 to-blue-500/60"></div>
+      {/* Accent line */}
+      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500/60 via-emerald-400/60 to-emerald-500/60"></div>
     </footer>
   );
 };

@@ -98,8 +98,8 @@ const Header = () => {
                     className="flex items-center gap-3 sm:gap-4"
                     whileHover={{ scale: 1.02 }}
                   >
-                    <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-none whitespace-nowrap">
-                      cloudkinshuk
+                    <h1 className="brand-glow text-2xl heading-font">
+                      CLOUDKINSHUK<span>.in</span>
                     </h1>
 
                     <motion.div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full border border-white/10">

@@ -261,7 +261,7 @@ const CopyButton = ({ text }: { text: string }) => {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-20">
+    <div className="min-h-screen  bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-20">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
         {/* Header */}
         <header className="mb-20 pb-12 border-b border-white/10">
@@ -273,7 +273,7 @@ export default function Home() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+            <h1 className="text-4xl heading-font sm:text-5xl font-bold tracking-tight text-white leading-tight">
               Kinshuk Jain
             </h1>
           </div>
@@ -300,7 +300,7 @@ export default function Home() {
 
         {/* Contact Links */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Contact
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -312,7 +312,7 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm hover:text-white text-gray-400 transition-colors group bg-white/5 hover:bg-white/10 rounded-4xl p-3 border border-white/10"
+                  className="flex items-center gap-3 text-sm hover:text-white text-gray-200 transition-colors group bg-white/5 hover:bg-white/10 rounded-4xl p-3 border border-white/10"
                 >
                   <Icon className="w-4 h-4 flex-shrink-0" />
                   <span>{social.platform}</span>
@@ -324,7 +324,7 @@ export default function Home() {
 
         {/* Resume Download */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Resume
           </h2>
           <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-4xl p-5">
@@ -345,7 +345,7 @@ export default function Home() {
 
         {/* Publications/Blog */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Publications
           </h2>
           <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
@@ -372,7 +372,7 @@ export default function Home() {
 
         {/* Experience */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Experience
           </h2>
           <div className="space-y-8">
@@ -412,7 +412,7 @@ export default function Home() {
 
         {/* Projects */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Selected Projects
           </h2>
           <div className="space-y-6">
@@ -439,10 +439,10 @@ export default function Home() {
                 </div>
 
                 <div className="mb-4">
-                  <span className="text-md text-gray-500 uppercase tracking-wider">
+                  <span className="text-md font-semibold text-blue-200 tracking-wider">
                     Technologies:{" "}
                   </span>
-                  <span className="text-sm text-gray-400">
+                  <span className="text-sm   text-gray-400">
                     {project.technologies.join(", ")}
                   </span>
                 </div>
@@ -487,7 +487,7 @@ export default function Home() {
 
         {/* Technical Skills */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Technical Proficiencies
           </h2>
           <div className="space-y-6">
@@ -505,9 +505,11 @@ export default function Home() {
                     return (
                       <span
                         key={skill.name}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-100"
                       >
-                        <Icon className="w-3.5 h-3.5" />
+                        <div className="flex items-center justify-center p-2 bg-white/10 rounded-full">
+                          <Icon className="w-5 h-5" />
+                        </div>
                         {skill.name}
                       </span>
                     );
@@ -520,7 +522,7 @@ export default function Home() {
 
         {/* Certifications */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Certifications
           </h2>
           <div className="space-y-4">
@@ -566,7 +568,7 @@ export default function Home() {
 
         {/* Education */}
         <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Education
           </h2>
           <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
@@ -592,7 +594,7 @@ export default function Home() {
 
         {/* CLI Tool */}
         <section className="mb-20">
-          <h2 className="text-md uppercase tracking-widest text-gray-500 mb-6 font-semibold">
+          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             CLI Tool
           </h2>
           <div className="bg-white/5 border border-white/10 rounded-4xl p-6">

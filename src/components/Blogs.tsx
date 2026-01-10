@@ -532,7 +532,7 @@ const BlogPageContent: React.FC = () => {
     <div className="min-h-screen pt-20 bg-gradient-to-br from-zinc-950 via-neutral-950 to-black">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
         <header className="mb-12 pb-12 border-b border-white/10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-3 leading-tight tracking-tight">
+          <h1 className="text-4xl brand-glow md:text-5xl heading-font font-bold text-white mb-3 leading-tight tracking-tight">
             Technical Blog
           </h1>
           <p className="text-gray-400 text-lg">

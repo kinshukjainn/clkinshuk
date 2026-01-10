@@ -245,7 +245,7 @@ export default function Devtools() {
             </motion.div>
 
             {/* Title with gradient */}
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r heading-font brand-glow from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
               DevSetup
             </h1>
 
