@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FiMenu, FiX, FiHome, FiFileText, FiSettings } from "react-icons/fi";
-import { MdSafetyCheck } from "react-icons/md";
+import { MdTipsAndUpdates } from "react-icons/md";
 
 interface NavItem {
   path: string;
@@ -47,10 +47,10 @@ const Header = () => {
       return { text: "DevTools", icon: <FiSettings className="w-3.5 h-3.5" /> };
     if (pathname.startsWith("/blogs"))
       return { text: "Blogs", icon: <FiFileText className="w-3.5 h-3.5" /> };
-    if (pathname.startsWith("/sign-in"))
+    if (pathname.startsWith("/latest"))
       return {
-        text: "Verify",
-        icon: <MdSafetyCheck className="w-3.5 h-3.5" />,
+        text: "Current Workings",
+        icon: <MdTipsAndUpdates className="w-3.5 h-3.5" />,
       };
     return { text: "Home", icon: <FiHome className="w-3.5 h-3.5" /> };
   };
@@ -71,6 +71,7 @@ const Header = () => {
   const navItems: NavItem[] = [
     { path: "/blogs", label: "Blogs", icon: <FiFileText /> },
     { path: "/gears", label: "Devlopment Setup", icon: <FiSettings /> },
+    { path: "/latest", label: "Current", icon: <MdTipsAndUpdates /> },
   ];
 
   const pathInfo = getPathInfo();

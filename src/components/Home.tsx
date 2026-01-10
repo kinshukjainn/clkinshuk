@@ -34,7 +34,7 @@ import {
 } from "react-icons/fa";
 import { VscVscodeInsiders } from "react-icons/vsc";
 import { RiNextjsLine } from "react-icons/ri";
-
+import { RecommendedRoutes } from "./RecommendedRoutes";
 const CONFIG = {
   personal: {
     email: "kinshuk25jan04@gmail.com",
@@ -265,6 +265,8 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
         {/* Header */}
         <header className="mb-20 pb-12 border-b border-white/10">
+          <RecommendedRoutes />
+
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 mb-8">
             <div className="w-32 h-32 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
               <img
