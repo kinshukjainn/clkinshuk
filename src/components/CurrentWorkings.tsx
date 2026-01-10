@@ -103,8 +103,8 @@ export default function CurrentWorkings() {
         {/* Header */}
         <header className="mb-16 pb-12 border-b border-white/10">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-              Now
+            <h1 className="text-4xl heading-font brand-glow sm:text-5xl font-bold text-white tracking-tight">
+              Current Workings
             </h1>
             <div className="flex items-center gap-2 text-sm text-gray-400">
               <FaCalendar className="w-3.5 h-3.5" />
