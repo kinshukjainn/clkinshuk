@@ -3,7 +3,14 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FiMenu, FiX, FiHome, FiFileText, FiSettings } from "react-icons/fi";
+import {
+  FiMenu,
+  FiX,
+  FiHome,
+  FiFileText,
+  FiSettings,
+  FiGithub,
+} from "react-icons/fi";
 import { MdTipsAndUpdates } from "react-icons/md";
 
 interface NavItem {
@@ -116,26 +123,75 @@ const Header = () => {
               </motion.div>
 
               {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center gap-2 bg-white/5 rounded-full px-2 py-2">
-                {navItems.map((item, index) => (
-                  <motion.div
-                    key={item.path}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-                  >
-                    <NavLink
-                      to={item.path}
-                      isActive={isActiveRoute(item.path)}
-                      label={item.label}
-                      icon={item.icon}
-                    />
-                  </motion.div>
-                ))}
-              </nav>
+              <div className="hidden lg:flex items-center gap-3">
+                <nav className="flex items-center gap-2 bg-white/5 rounded-full px-2 py-2">
+                  {navItems.map((item, index) => (
+                    <motion.div
+                      key={item.path}
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
+                    >
+                      <NavLink
+                        to={item.path}
+                        isActive={isActiveRoute(item.path)}
+                        label={item.label}
+                        icon={item.icon}
+                      />
+                    </motion.div>
+                  ))}
+                </nav>
+
+                {/* Desktop GitHub Button */}
+                <motion.a
+                  href="https://github.com/kinshukjainn/clkinshuk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+    relative p-3 rounded-full
+    bg-neutral-950/80
+    border border-white/10
+    backdrop-blur-xl
+    shadow-[inset_0_0_0.5px_rgba(255,255,255,0.12),0_8px_20px_rgba(0,0,0,0.6)]
+    overflow-hidden
+  "
+                  whileHover={{ y: -2, scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 18 }}
+                >
+                  {/* subtle top highlight */}
+                  <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                  {/* icon */}
+                  <FiGithub
+                    size={20}
+                    className="relative z-10 text-gray-300 group-hover:text-white transition-colors"
+                  />
+                </motion.a>
+              </div>
 
               {/* Mobile Menu Button */}
-              <div className="lg:hidden">
+              <div className="lg:hidden flex items-center gap-2">
+                {/* Mobile GitHub Button */}
+                <motion.a
+                  href="https://github.com/kinshukjainn/clkinshuk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+    relative p-2.5 rounded-full
+    bg-neutral-950/80
+    border border-white/10
+    backdrop-blur-xl
+    shadow-[inset_0_0_0.5px_rgba(255,255,255,0.12),0_6px_16px_rgba(0,0,0,0.6)]
+    overflow-hidden
+  "
+                  whileHover={{ y: -1, scale: 1.03 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  <FiGithub size={18} className="text-gray-300" />
+                </motion.a>
+
                 <motion.button
                   onClick={toggleMenu}
                   className="relative cursor-pointer p-3 bg-white/10 hover:bg-white/20 text-white rounded-full border border-white/10"
