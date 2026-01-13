@@ -12,6 +12,7 @@ import {
   FiGithub,
 } from "react-icons/fi";
 import { MdTipsAndUpdates } from "react-icons/md";
+import { TbSeo } from "react-icons/tb";
 
 interface NavItem {
   path: string;
@@ -54,6 +55,11 @@ const Header = () => {
       return { text: "DevTools", icon: <FiSettings className="w-3.5 h-3.5" /> };
     if (pathname.startsWith("/blogs"))
       return { text: "Blogs", icon: <FiFileText className="w-3.5 h-3.5" /> };
+    if (pathname.startsWith("/seo-insights"))
+      return {
+        text: "SEO Insights",
+        icon: <TbSeo className="w-3.5 h-3.5" />,
+      };
     if (pathname.startsWith("/latest"))
       return {
         text: "Current Workings",
@@ -79,6 +85,7 @@ const Header = () => {
     { path: "/blogs", label: "Blogs", icon: <FiFileText /> },
     { path: "/gears", label: "Devlopment Setup", icon: <FiSettings /> },
     { path: "/latest", label: "Current", icon: <MdTipsAndUpdates /> },
+    { path: "/seo-insights", label: "SEO Insights", icon: <TbSeo /> },
   ];
 
   const pathInfo = getPathInfo();
