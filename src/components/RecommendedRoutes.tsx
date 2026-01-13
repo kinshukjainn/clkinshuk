@@ -20,6 +20,11 @@ const RECOMMENDED_ROUTES = [
     label: "Latest Workings",
     description: "Check out my newest projects and current learnings",
   },
+  {
+    route: "/seo-insights",
+    label: "SEO Insights",
+    description: "Check out my SEO performance and insights",
+  },
 ];
 
 export function RecommendedRoutes() {
@@ -29,7 +34,7 @@ export function RecommendedRoutes() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % RECOMMENDED_ROUTES.length);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
