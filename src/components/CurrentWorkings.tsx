@@ -106,7 +106,7 @@ export default function CurrentWorkings() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl heading-font brand-glow font-bold text-white tracking-tight break-words">
               Current Workings
             </h1>
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-400 flex-shrink-0">
+            <div className="flex items-center p-2 rounded-full border-[#444444] bg-green-700 gap-2 text-xs sm:text-sm text-white flex-shrink-0">
               <FaCalendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
               <span className="whitespace-nowrap">
                 Updated {NOW_CONFIG.lastUpdated}
