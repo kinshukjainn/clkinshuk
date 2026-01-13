@@ -222,7 +222,7 @@ const AnimatedCard: React.FC<{ section: SetupSection; index: number }> = ({
 export default function Devtools() {
   return (
     <>
-      <main className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 to-black text-white relative overflow-hidden">
+      <main className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 pt-15 to-black text-white relative overflow-hidden">
         {/* Animated background gradient orbs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -237,7 +237,7 @@ export default function Devtools() {
           >
             {/* Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8 backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 shadow-md shadow-emerald-500 border-2 border-emerald-500 rounded-full mb-8 backdrop-blur-sm"
               whileHover={{ scale: 1.05 }}
             >
               <Monitor className="w-4 h-4 text-emerald-400" />

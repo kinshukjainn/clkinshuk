@@ -37,7 +37,7 @@ export function RecommendedRoutes() {
   const current = RECOMMENDED_ROUTES[currentIndex];
 
   return (
-    <div className="mb-8 bg-white/5 border border-white/10 rounded-4xl p-6">
+    <div className="mb-8 bg-gradient-to-t from-transparent to-white/5 shadow-lg shadow-white/10 rounded-4xl p-6">
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
           <p className="mb-4 flex items-center gap-2 text-lg font-bold heading-font text-orange-500 ">

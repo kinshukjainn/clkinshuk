@@ -98,7 +98,7 @@ const NOW_CONFIG = {
 
 export default function CurrentWorkings() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-12 sm:pt-16 md:pt-20 lg:pt-20">
+    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-20 sm:pt-20 md:pt-20 lg:pt-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
         {/* Header */}
         <header className="mb-8 sm:mb-12 md:mb-16 pb-6 sm:pb-8 md:pb-12 border-b border-white/10">
