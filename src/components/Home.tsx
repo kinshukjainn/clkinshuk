@@ -247,13 +247,13 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+      className="p-3 bg-blue-700 cursor-pointer rounded-md transition-colors"
       title="Copy to clipboard"
     >
       {copied ? (
-        <FaCheck className="w-4 h-4 text-emerald-400" />
+        <FaCheck className="w-4 h-4 text-white" />
       ) : (
-        <FaCopy className="w-4 h-4 text-gray-400" />
+        <FaCopy className="w-4 h-4 text-white" />
       )}
     </button>
   );
@@ -268,7 +268,7 @@ export default function Home() {
           <RecommendedRoutes />
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 mb-8">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
+            <div className="w-32 h-32 rounded-md bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
               <img
                 src={CONFIG.personal.photoUrl}
                 alt="Kinshuk Jain"
@@ -314,7 +314,7 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm hover:text-white text-gray-200 transition-colors group bg-white/5 hover:bg-white/10 rounded-4xl p-3 border border-white/10"
+                  className="flex items-center gap-3 text-sm hover:text-white text-gray-200 transition-colors group bg-white/5 hover:bg-white/10 rounded-md p-3 border border-white/10"
                 >
                   <Icon className="w-4 h-4 flex-shrink-0" />
                   <span>{social.platform}</span>
@@ -329,7 +329,7 @@ export default function Home() {
           <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Resume
           </h2>
-          <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-4xl p-5">
+          <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-md p-5">
             <div>
               <h3 className="font-medium text-white mb-1">My Resume</h3>
               <p className="text-sm text-gray-400">PDF Format</p>
@@ -350,7 +350,7 @@ export default function Home() {
           <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Publications
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
+          <div className="bg-white/5 border border-white/10 rounded-md p-6">
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="font-medium text-white mb-2">Technical Blog</h3>
@@ -378,7 +378,7 @@ export default function Home() {
             Experience
           </h2>
           <div className="space-y-8">
-            <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
+            <div className="bg-white/5 border border-white/10 rounded-md p-6">
               <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
                 <h3 className="font-semibold text-white text-lg">UPPTCL</h3>
                 <span className="text-sm text-gray-400">
@@ -421,7 +421,7 @@ export default function Home() {
             {CONFIG.projects.map((project) => (
               <div
                 key={project.title}
-                className="bg-white/5 border border-white/10 rounded-4xl p-6"
+                className="bg-white/5 border border-white/10 rounded-md p-6"
               >
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
                   <h3 className="font-semibold text-white text-lg">
@@ -450,7 +450,7 @@ export default function Home() {
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-black/40 border border-white/10 rounded-lg p-4 mb-4 font-mono text-sm">
+                  <div className="bg-black/40 border border-white/10 rounded-md p-4 mb-4 font-mono text-sm">
                     <div className="flex items-center justify-between gap-4">
                       <code className="text-emerald-400 break-all">
                         {project.dockerCommand}
@@ -466,7 +466,7 @@ export default function Home() {
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2 py-1 text-emerald-500 bg-white/5 border border-white/10 rounded-xl text-md transition-colors font-medium"
+                      className="inline-flex items-center gap-2 px-3 py-2 text-black bg-[#ff9100] rounded-md text-md transition-colors font-medium"
                     >
                       View Project <FaExternalLinkAlt className="w-3 h-3" />
                     </a>
@@ -476,7 +476,7 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2 py-1 text-white bg-white/5 border border-white/10 rounded-xl text-md transition-colors font-medium"
+                      className="inline-flex items-center gap-2 px-2 py-2 text-white bg-black  rounded-md text-md transition-colors font-medium"
                     >
                       <FaGithub className="w-3.5 h-3.5" /> Source Code
                     </a>
@@ -496,7 +496,7 @@ export default function Home() {
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
               <div
                 key={category}
-                className="bg-white/5 border border-white/10 rounded-4xl p-6"
+                className="bg-white/5 border border-white/10 rounded-md p-6"
               >
                 <h3 className="text-sm font-semibold text-white mb-4">
                   {category}
@@ -507,9 +507,9 @@ export default function Home() {
                     return (
                       <span
                         key={skill.name}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-100"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-sm text-gray-100"
                       >
-                        <div className="flex items-center justify-center p-2 bg-white/10 rounded-full">
+                        <div className="flex items-center justify-center p-2 bg-white/10 rounded-md">
                           <Icon className="w-5 h-5" />
                         </div>
                         {skill.name}
@@ -531,7 +531,7 @@ export default function Home() {
             {CONFIG.certifications.map((cert) => (
               <div
                 key={cert.title}
-                className="bg-white/5 border border-white/10 rounded-4xl p-6"
+                className="bg-white/5 border border-white/10 rounded-md p-6"
               >
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
                   <h3 className="font-semibold text-white">{cert.title}</h3>
@@ -547,7 +547,7 @@ export default function Home() {
                   {cert.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2 py-1 bg-white/5 border border-white/10 rounded-xl text-md text-gray-400"
+                      className="px-2 py-1 bg-white/5 border border-white/10 rounded-md text-md text-gray-400"
                     >
                       {skill}
                     </span>
@@ -558,7 +558,7 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-2 py-1 text-emerald-500 bg-white/5 border border-white/10 rounded-xl text-md transition-colors font-medium"
+                    className="inline-flex items-center gap-2 px-4 py-2 text-white bg-blue-700  rounded-md text-md transition-colors font-medium"
                   >
                     View Credential <FaExternalLinkAlt className="w-3 h-3" />
                   </a>
@@ -573,7 +573,7 @@ export default function Home() {
           <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             Education
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
+          <div className="bg-white/5 border border-white/10 rounded-md p-6">
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
               <h3 className="font-semibold text-white text-lg">
                 {CONFIG.education.degree}
@@ -599,18 +599,18 @@ export default function Home() {
           <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
             CLI Tool
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-4xl p-6">
+          <div className="bg-white/5 border border-white/10 rounded-md p-6">
             <p className="text-sm text-gray-300 mb-4">
               Interactive command-line portfolio viewer built with Node.js
             </p>
             <div className="space-y-3 font-mono text-sm">
-              <div className="bg-black/40 border border-white/10 rounded-xl p-3">
+              <div className="bg-black/40 border border-white/10 rounded-md p-3">
                 <span className="text-emerald-400">$</span>{" "}
                 <span className="text-gray-300">
                   npm install -g hackkinshuk
                 </span>
               </div>
-              <div className="bg-black/40 border border-white/10 rounded-xl p-3">
+              <div className="bg-black/40 border border-white/10 rounded-md p-3">
                 <span className="text-emerald-400">$</span>{" "}
                 <span className="text-gray-300">cloudkinshuk</span>
               </div>
