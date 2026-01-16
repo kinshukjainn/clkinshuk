@@ -106,7 +106,7 @@ export default function CurrentWorkings() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl heading-font brand-glow font-bold text-white tracking-tight break-words">
               Current Workings
             </h1>
-            <div className="flex items-center p-2 rounded-md border-[#444444] bg-green-700 gap-2 text-xs w-max sm:text-sm text-white flex-shrink-0">
+            <div className="flex items-center p-2 rounded-3xl border-[#444444] bg-green-700 gap-2 text-xs w-max sm:text-sm text-white flex-shrink-0">
               <FaCalendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
               <span className="whitespace-nowrap">
                 Updated {NOW_CONFIG.lastUpdated}
@@ -135,10 +135,10 @@ export default function CurrentWorkings() {
               return (
                 <div
                   key={index}
-                  className="bg-white/5 border border-white/10 rounded-md sm:rounded-md md:rounded-md p-4 sm:p-5 md:p-6 hover:bg-white/10 transition-all duration-300"
+                  className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6 hover:bg-white/10 transition-all duration-300"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                    <div className="p-2.5 sm:p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-md w-fit">
+                    <div className="p-2.5 sm:p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl w-fit">
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -146,7 +146,7 @@ export default function CurrentWorkings() {
                         <h3 className="text-base sm:text-lg font-semibold text-white break-words">
                           {project.title}
                         </h3>
-                        <span className="text-xs text-emerald-400 font-medium px-2 py-1 bg-emerald-500/10 rounded-md w-fit flex-shrink-0">
+                        <span className="text-xs text-emerald-400 font-medium px-2 py-1 bg-emerald-500/10 rounded-3xl w-fit flex-shrink-0">
                           {project.status}
                         </span>
                       </div>
@@ -157,7 +157,7 @@ export default function CurrentWorkings() {
                         {project.technologies.map((tech, i) => (
                           <span
                             key={i}
-                            className="text-xs px-2 py-1 bg-white/5 border border-white/10 rounded-md text-gray-300 whitespace-nowrap"
+                            className="text-xs px-2 py-1 bg-white/5 border border-white/10 rounded-3xl text-gray-300 whitespace-nowrap"
                           >
                             {tech}
                           </span>
@@ -173,8 +173,8 @@ export default function CurrentWorkings() {
                               {project.progress}
                             </span>
                           </div>
-                          <div className="w-full bg-white/5 rounded-md h-1.5">
-                            <div className="bg-emerald-500 h-1.5 rounded-md transition-all duration-500"></div>
+                          <div className="w-full bg-white/5 rounded-3xl h-1.5">
+                            <div className="bg-emerald-500 h-1.5 rounded-3xl transition-all duration-500"></div>
                           </div>
                         </div>
                       )}
@@ -197,10 +197,10 @@ export default function CurrentWorkings() {
               return (
                 <div
                   key={index}
-                  className="bg-white/5 border border-white/10 rounded-md sm:rounded-md md:rounded-md p-4 sm:p-5 md:p-6"
+                  className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                    <div className="p-2.5 sm:p-3 bg-blue-500/10 border border-blue-500/20 rounded-md w-fit">
+                    <div className="p-2.5 sm:p-3 bg-blue-500/10 border border-blue-500/20 rounded-3xl w-fit">
                       <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -227,7 +227,7 @@ export default function CurrentWorkings() {
           <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-emerald-400 mb-4 sm:mb-6 font-semibold">
             Current Interests
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-md sm:rounded-md md:rounded-md p-4 sm:p-5 md:p-6">
+          <div className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6">
             <ul className="space-y-2.5 sm:space-y-3">
               {NOW_CONFIG.interests.map((interest, index) => (
                 <li
@@ -255,10 +255,10 @@ export default function CurrentWorkings() {
             {NOW_CONFIG.consuming.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-md sm:rounded-md md:rounded-md p-3 sm:p-4"
+                className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-3 sm:p-4"
               >
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-3">
-                  <span className="text-xs text-emerald-400 font-semibold px-2 py-1 bg-emerald-500/10 rounded-md w-fit">
+                  <span className="text-xs text-emerald-400 font-semibold px-2 py-1 bg-emerald-500/10 rounded-3xl w-fit">
                     {item.type}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -280,7 +280,7 @@ export default function CurrentWorkings() {
           <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-emerald-400 mb-4 sm:mb-6 font-semibold">
             Current Goals
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-md sm:rounded-md md:rounded-md p-4 sm:p-5 md:p-6">
+          <div className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6">
             <ul className="space-y-2.5 sm:space-y-3">
               {NOW_CONFIG.goals.map((goal, index) => (
                 <li key={index} className="flex items-start gap-2 sm:gap-3">
@@ -302,7 +302,7 @@ export default function CurrentWorkings() {
             <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-gray-500 mb-4 sm:mb-6 font-semibold">
               Not Doing Right Now
             </h2>
-            <div className="bg-white/5 border border-white/10 rounded-md sm:rounded-md md:rounded-md p-4 sm:p-5 md:p-6">
+            <div className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6">
               <p className="text-xs text-gray-500 mb-3 sm:mb-4 leading-relaxed">
                 Being intentional about what to focus on also means being clear
                 about what to avoid.

@@ -31,7 +31,7 @@ interface NavLinkProps {
 const NavLink = ({ to, isActive, label, icon, onClick }: NavLinkProps) => (
   <Link to={to} onClick={onClick}>
     <motion.div
-      className={`relative px-4 py-2.5 transition-all duration-200 flex items-center gap-2 rounded-md ${
+      className={`relative px-4 py-2.5 transition-all duration-200 flex items-center gap-2 rounded-3xl ${
         isActive
           ? "bg-white/20 text-white backdrop-blur-sm"
           : "text-gray-300 hover:text-white hover:bg-white/10"
@@ -98,7 +98,7 @@ const Header = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <motion.div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-md shadow-2xl">
+        <motion.div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl shadow-2xl">
           <div className="relative px-4 sm:px-6">
             <div className="flex items-center justify-between h-16 sm:h-18">
               {/* Logo */}
@@ -117,7 +117,7 @@ const Header = () => {
                       CLOUDKINSHUK<span>.in</span>
                     </h1>
 
-                    <motion.div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-md border border-white/10">
+                    <motion.div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-3xl border border-white/10">
                       <span className="text-emerald-400 flex items-center">
                         {pathInfo.icon}
                       </span>
@@ -131,7 +131,7 @@ const Header = () => {
 
               {/* Desktop Navigation */}
               <div className="hidden lg:flex items-center gap-3">
-                <nav className="flex items-center gap-2 bg-white/5 rounded-md px-2 py-2">
+                <nav className="flex items-center gap-2 bg-white/5 rounded-3xl px-2 py-2">
                   {navItems.map((item, index) => (
                     <motion.div
                       key={item.path}
@@ -155,7 +155,7 @@ const Header = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
-    relative p-3 rounded-md
+    relative p-3 rounded-3xl
     bg-neutral-950/80
     border border-white/10
     backdrop-blur-xl
@@ -185,7 +185,7 @@ const Header = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="
-    relative p-2.5 rounded-md
+    relative p-2.5 rounded-3xl
     bg-neutral-950/80
     border border-white/10
     backdrop-blur-xl
@@ -201,7 +201,7 @@ const Header = () => {
 
                 <motion.button
                   onClick={toggleMenu}
-                  className="relative cursor-pointer p-3 bg-white/10 hover:bg-white/20 text-white rounded-md border border-white/10"
+                  className="relative cursor-pointer p-3 bg-white/10 hover:bg-white/20 text-white rounded-3xl border border-white/10"
                   whileTap={{ scale: 0.95 }}
                 >
                   <motion.div
@@ -231,7 +231,7 @@ const Header = () => {
         />
 
         <motion.div
-          className="absolute top-24 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-md shadow-2xl"
+          className="absolute top-24 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl"
           initial={{ y: -50, opacity: 0 }}
           animate={{
             y: isMenuOpen ? 0 : -50,
@@ -241,7 +241,7 @@ const Header = () => {
         >
           <div className="p-6 space-y-2">
             {/* Current Path Indicator */}
-            <motion.div className="flex items-center gap-2 px-4 py-3 bg-blue-500/10 shadow-sm border-3 border-blue-500/10 shadow-blue-500/10 rounded-md mb-4">
+            <motion.div className="flex items-center gap-2 px-4 py-3 bg-blue-500/10 shadow-sm border-3 border-blue-500/10 shadow-blue-500/10 rounded-3xl mb-4">
               <span className="text-white flex items-center">
                 {pathInfo.icon}
               </span>

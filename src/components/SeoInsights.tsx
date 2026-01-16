@@ -243,7 +243,7 @@ const CollapsibleSection = ({
           {title}
         </h2>
         {badge && (
-          <span className="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded-md border border-blue-500/30">
+          <span className="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded-3xl border border-blue-500/30">
             {badge}
           </span>
         )}
@@ -354,7 +354,7 @@ export default function SeoInsights() {
         <header className="space-y-4 border-b border-white/10 pb-6">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl heading-font brand-glow font-bold text-white leading-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                 SEO & Performance Insights
               </h1>
               <p className="text-sm text-gray-400 mt-2">
@@ -365,14 +365,14 @@ export default function SeoInsights() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-md text-white text-sm transition-colors"
+                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-3xl text-white text-sm transition-colors"
               >
                 <FaFilter className="w-4 h-4" />
                 Filters
               </button>
               <button
                 onClick={exportReport}
-                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-blue-500/20 hover:bg-blue-500/30  rounded-md text-blue-400 text-sm transition-colors"
+                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-blue-500/20 hover:bg-blue-500/30  rounded-3xl text-blue-400 text-sm transition-colors"
               >
                 <FaDownload className="w-4 h-4" />
                 Export
@@ -382,7 +382,7 @@ export default function SeoInsights() {
 
           {/* Filters Panel */}
           {showFilters && (
-            <div className="bg-white/5 border border-white/10 rounded-md p-4 space-y-3 animate-fadeIn">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-4 space-y-3 animate-fadeIn">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-white">
                   Filter Options
@@ -390,7 +390,7 @@ export default function SeoInsights() {
                 <button
                   title="Close Filters"
                   onClick={() => setShowFilters(false)}
-                  className="text-white p-2 bg-blue-500 cursor-pointer rounded-md hover:text-white"
+                  className="text-white p-2 bg-blue-500 cursor-pointer rounded-3xl hover:text-white"
                 >
                   <FaTimes className="w-4 h-4" />
                 </button>
@@ -402,7 +402,7 @@ export default function SeoInsights() {
                   onChange={(e) =>
                     setFilters({ ...filters, priorityFilter: e.target.value })
                   }
-                  className="px-4 py-3 bg-white/5 border border-white/10 rounded-md text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-4 py-3 bg-white/5 border border-white/10 rounded-3xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="all">All Priorities</option>
                   <option value="high">High Priority</option>
@@ -416,7 +416,7 @@ export default function SeoInsights() {
 
         {/* Quick Stats Summary */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-md p-4">
+          <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-3xl p-4">
             <FaChartLine className="text-blue-400 w-6 h-6 mb-2" />
             <p className="text-2xl font-bold text-white">
               {Math.round(
@@ -429,14 +429,14 @@ export default function SeoInsights() {
             </p>
             <p className="text-xs text-gray-400 mt-1">Average Score</p>
           </div>
-          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-md p-4">
+          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-3xl p-4">
             <FaCheckCircle className="text-emerald-400 w-6 h-6 mb-2" />
             <p className="text-2xl font-bold text-white">
               {Object.values(AUDIT_DATA.scores).filter((s) => s >= 90).length}
             </p>
             <p className="text-xs text-gray-400 mt-1">Perfect Scores</p>
           </div>
-          <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-md p-4">
+          <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-3xl p-4">
             <FaExclamationTriangle className="text-yellow-400 w-6 h-6 mb-2" />
             <p className="text-2xl font-bold text-white">
               {AUDIT_DATA.insights.performanceImprovements.length +
@@ -444,7 +444,7 @@ export default function SeoInsights() {
             </p>
             <p className="text-xs text-gray-400 mt-1">Issues Found</p>
           </div>
-          <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-md p-4">
+          <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-3xl p-4">
             <FaLightbulb className="text-purple-400 w-6 h-6 mb-2" />
             <p className="text-2xl font-bold text-white">
               {
@@ -464,7 +464,7 @@ export default function SeoInsights() {
           onToggle={() => toggleSection("environment")}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-white/5 border border-white/10 rounded-md p-5 hover:bg-white/10 transition-colors">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors">
               <div className="flex items-center gap-3 mb-3">
                 <FaMobileAlt className="text-blue-400 w-5 h-5" />
                 <span className="text-xs text-gray-400 uppercase tracking-widest">
@@ -475,7 +475,7 @@ export default function SeoInsights() {
                 {AUDIT_DATA.auditMeta.environment.device}
               </p>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-md p-5 hover:bg-white/10 transition-colors">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors">
               <div className="flex items-center gap-3 mb-3">
                 <FaBolt className="text-yellow-400 w-5 h-5" />
                 <span className="text-xs text-gray-400 uppercase tracking-widest">
@@ -486,7 +486,7 @@ export default function SeoInsights() {
                 {AUDIT_DATA.auditMeta.environment.network}
               </p>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-md p-5 hover:bg-white/10 transition-colors">
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors">
               <div className="flex items-center gap-3 mb-3">
                 <FaInfoCircle className="text-purple-400 w-5 h-5" />
                 <span className="text-xs text-gray-400 uppercase tracking-widest">
@@ -534,7 +534,7 @@ export default function SeoInsights() {
             {Object.entries(AUDIT_DATA.coreWebVitals).map(([key, vital]) => (
               <div
                 key={key}
-                className={`border rounded-md p-5 hover:scale-105 transition-transform ${getVitalStatusColor(
+                className={`border rounded-3xl p-5 hover:scale-105 transition-transform ${getVitalStatusColor(
                   vital.status
                 )}`}
               >
@@ -544,7 +544,7 @@ export default function SeoInsights() {
                 <p className="text-3xl font-bold text-white mb-4">
                   {vital.value}
                 </p>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-md">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl">
                   <FaArrowUp className="text-emerald-400 w-3 h-3" />
                   <span className="text-emerald-400 text-xs font-medium">
                     {vital.scoreImpact}
@@ -566,7 +566,7 @@ export default function SeoInsights() {
             {filteredOpportunities.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-md p-5 hover:bg-white/10 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors"
               >
                 <div className="flex items-start gap-4">
                   <FaClock className="text-orange-400 w-5 h-5 mt-1 flex-shrink-0" />
@@ -574,7 +574,7 @@ export default function SeoInsights() {
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <h3 className="text-white font-medium">{item.title}</h3>
                       <span
-                        className={`px-2 py-1 text-xs rounded-md border ${getPriorityColor(
+                        className={`px-2 py-1 text-xs rounded-3xl border ${getPriorityColor(
                           item.priority
                         )} uppercase tracking-wider whitespace-nowrap`}
                       >
@@ -586,13 +586,13 @@ export default function SeoInsights() {
                     </p>
                     <div className="flex flex-wrap gap-3">
                       {item.estimatedSavingsMs && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-gray-400">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
                           <FaClock className="w-3 h-3" />
                           Saves {item.estimatedSavingsMs}ms
                         </span>
                       )}
                       {item.estimatedSavingsKiB && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-gray-400">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
                           <FaArrowDown className="w-3 h-3" />
                           Saves {item.estimatedSavingsKiB}KiB
                         </span>
@@ -616,17 +616,17 @@ export default function SeoInsights() {
             {filteredDiagnostics.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-md p-5 hover:bg-white/10 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-md bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-3xl bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
                     <FaExclamationTriangle className="text-yellow-400 w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <h3 className="text-white font-medium">{item.issue}</h3>
                       <span
-                        className={`px-2 py-1 text-xs rounded-md border ${getPriorityColor(
+                        className={`px-2 py-1 text-xs rounded-3xl border ${getPriorityColor(
                           item.priority
                         )} uppercase tracking-wider whitespace-nowrap`}
                       >
@@ -635,13 +635,13 @@ export default function SeoInsights() {
                     </div>
                     <div className="flex flex-wrap gap-3">
                       {item.estimatedSavingsKiB && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-gray-400">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
                           <FaArrowDown className="w-3 h-3" />
                           Savings: {item.estimatedSavingsKiB}KiB
                         </span>
                       )}
                       {item.count && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-md text-xs text-gray-400">
+                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
                           Count: {item.count}
                         </span>
                       )}
@@ -659,7 +659,7 @@ export default function SeoInsights() {
           isExpanded={expandedSections.accessibility}
           onToggle={() => toggleSection("accessibility")}
         >
-          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-md p-5 mb-5">
+          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-3xl p-5 mb-5">
             <div className="flex items-center gap-4">
               <div className="text-4xl font-bold text-emerald-400">
                 {AUDIT_DATA.accessibility.score}
@@ -678,7 +678,7 @@ export default function SeoInsights() {
               ([category, issues]) => (
                 <div
                   key={category}
-                  className="bg-white/5 border border-white/10 rounded-md p-5"
+                  className="bg-white/5 border border-white/10 rounded-3xl p-5"
                 >
                   <h3 className="text-white font-medium mb-4 capitalize">
                     {category.replace(/([A-Z])/g, " $1").trim()}
@@ -706,7 +706,7 @@ export default function SeoInsights() {
           isExpanded={expandedSections.security}
           onToggle={() => toggleSection("security")}
         >
-          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-md p-5 mb-5">
+          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-3xl p-5 mb-5">
             <div className="flex items-center gap-4">
               <FaShieldAlt className="text-emerald-400 w-8 h-8" />
               <div>
@@ -723,7 +723,7 @@ export default function SeoInsights() {
             {AUDIT_DATA.bestPractices.security.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-md p-4 flex items-center gap-4 hover:bg-white/10 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-3xl p-4 flex items-center gap-4 hover:bg-white/10 transition-colors"
               >
                 <FaCheckCircle className="text-emerald-400 w-5 h-5 flex-shrink-0" />
                 <span className="text-sm text-gray-300">{item}</span>
@@ -731,7 +731,7 @@ export default function SeoInsights() {
             ))}
           </div>
           {AUDIT_DATA.bestPractices.notes.length > 0 && (
-            <div className="mt-5 bg-yellow-500/5 border border-yellow-500/20 rounded-md p-5">
+            <div className="mt-5 bg-yellow-500/5 border border-yellow-500/20 rounded-3xl p-5">
               <div className="flex items-start gap-4">
                 <FaInfoCircle className="text-yellow-400 w-5 h-5 flex-shrink-0 mt-0.5" />
                 <div className="flex-1">
@@ -756,7 +756,7 @@ export default function SeoInsights() {
           onToggle={() => toggleSection("seo")}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-md p-5 hover:scale-105 transition-transform">
+            <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-3xl p-5 hover:scale-105 transition-transform">
               <div className="flex items-center gap-3 mb-4">
                 <FaSearch className="text-yellow-400 w-6 h-6" />
                 <h3 className="text-white font-medium">SEO Score</h3>
@@ -768,7 +768,7 @@ export default function SeoInsights() {
                 {AUDIT_DATA.seo.passedAudits} audits passed
               </p>
             </div>
-            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-md p-5 hover:scale-105 transition-transform">
+            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-3xl p-5 hover:scale-105 transition-transform">
               <div className="flex items-center gap-3 mb-4">
                 <FaEye className="text-purple-400 w-6 h-6" />
                 <h3 className="text-white font-medium">Structured Data</h3>

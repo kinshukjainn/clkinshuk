@@ -42,11 +42,11 @@ export function RecommendedRoutes() {
   const current = RECOMMENDED_ROUTES[currentIndex];
 
   return (
-    <div className="mb-8 bg-gradient-to-t from-transparent to-white/5 shadow-lg shadow-white/10 rounded-md p-6">
+    <div className="mb-8 bg-gradient-to-t from-transparent to-white/5  rounded-3xl p-6">
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
           <p className="mb-4 flex items-center gap-2 text-lg font-bold heading-font text-orange-500 ">
-            <div className="text-[#ff9100] border-2 border-[#ff9100]  p-2 bg-white/10 rounded-md flex items-center justify-center">
+            <div className="text-[#ff9100]   p-2 bg-white/10 rounded-3xl flex items-center justify-center">
               <TbArrowBadgeUpFilled className=" h-6 w-6" />
             </div>
             <span>Suggested Pages</span>
@@ -57,7 +57,7 @@ export function RecommendedRoutes() {
         </div>
         <button
           onClick={() => navigate(current.route)}
-          className="px-4 py-2 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/30 rounded-md cursor-pointer font-medium text-sm transition-colors flex-shrink-0"
+          className="px-4 py-2 bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/30 rounded-3xl cursor-pointer font-medium text-sm transition-colors flex-shrink-0"
         >
           {current.label}
         </button>
@@ -66,7 +66,7 @@ export function RecommendedRoutes() {
         {RECOMMENDED_ROUTES.map((_, idx) => (
           <div
             key={idx}
-            className={`h-1 rounded-md transition-all ${
+            className={`h-1 rounded-3xl transition-all ${
               idx === currentIndex ? "bg-emerald-500 w-6" : "bg-white/10 w-3"
             }`}
           />

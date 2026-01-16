@@ -51,7 +51,7 @@ const Footer = () => {
           {/* Logo and brand section */}
           <div className="text-center space-y-6">
             <div className="flex items-center justify-center gap-3 sm:gap-4">
-              <div className="relative p-3 bg-white/5 border border-white/10 rounded-md shadow-lg">
+              <div className="relative p-3 bg-white/5 border border-white/10 rounded-3xl shadow-lg">
                 <span className="text-emerald-400">
                   <FaCloud
                     size={40}
@@ -85,7 +85,7 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="group relative p-3 sm:p-4 text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-105 bg-white/5 hover:bg-white/10 border border-white/10 rounded-md"
+                  className="group relative p-3 sm:p-4 text-gray-400 hover:text-emerald-400 transition-all duration-300 hover:scale-105 bg-white/5 hover:bg-white/10 border border-white/10 rounded-3xl"
                   aria-label={link.label}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -96,7 +96,7 @@ const Footer = () => {
                   />
 
                   {/* Tooltip */}
-                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs px-3 py-2 rounded-md opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+                  <span className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs px-3 py-2 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
                     {link.label}
                     {/* Tooltip arrow */}
                     <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-white/20"></div>
