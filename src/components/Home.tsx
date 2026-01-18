@@ -251,7 +251,7 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-1 cursor-pointer hover:text-blue-600 transition-colors"
+      className="p-1 cursor-pointer hover:text-blue-600 transition-colors flex-shrink-0"
       title="Copy to clipboard"
     >
       {copied ? (
@@ -265,29 +265,29 @@ const CopyButton = ({ text }: { text: string }) => {
 
 export default function Home() {
   return (
-    <div className="min-h-screen pt-30 bg-white">
-      <div className="max-w-4xl mx-auto px-6 py-12">
+    <div className="min-h-screen pt-8 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-30 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Header Section */}
-        <header className="mb-8 pb-8 border-b border-gray-200">
-          <div className="flex gap-6 mb-6">
-            <div className="flex-shrink-0">
+        <header className="mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-4 sm:mb-6">
+            <div className="flex-shrink-0 mx-auto sm:mx-0">
               <img
                 src={CONFIG.personal.photoUrl || "/placeholder.svg"}
                 alt="Kinshuk Jain"
-                className="w-32 h-32 rounded-full border-2 border-gray-300"
+                className="w-24 h-24 sm:w-32 sm:h-32 rounded-full border-2 border-gray-300"
               />
             </div>
 
-            <div className="flex-1">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            <div className="flex-1 text-center sm:text-left">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
                 Kinshuk Jain
               </h1>
-              <p className="text-lg text-gray-700 mb-4">
+              <p className="text-base sm:text-lg text-gray-700 mb-4">
                 Student first. Builder always.
               </p>
 
               {/* Social Media Icons Row */}
-              <div className="flex gap-3 mb-4">
+              <div className="flex gap-2 sm:gap-3 mb-4 justify-center sm:justify-start flex-wrap">
                 {CONFIG.social.map((social) => {
                   const Icon = social.icon;
                   return (
@@ -305,12 +305,12 @@ export default function Home() {
                 })}
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap items-center gap-2 sm:gap-3 text-sm text-gray-600 justify-center sm:justify-start">
                 <div className="flex items-center gap-1.5">
                   <FaMapMarkerAlt className="w-4 h-4" />
                   <span>{CONFIG.personal.location}</span>
                 </div>
-                <span className="text-gray-400">•</span>
+                <span className="hidden sm:inline text-gray-400">•</span>
                 <div className="flex items-center gap-1.5 text-green-600">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <span>Available for opportunities</span>
@@ -319,7 +319,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-base text-gray-700 leading-relaxed space-y-3 max-w-2xl">
+          <div className="text-sm sm:text-base text-gray-700 leading-relaxed space-y-3 max-w-2xl">
             <p>
               I am currently pursuing my Bachelor's in Electrical Engineering
               learning how systems work, how they fail, and how they evolve.
@@ -331,11 +331,11 @@ export default function Home() {
         </header>
 
         {/* Contact Links */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Contact
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3">
             {CONFIG.social.map((social) => {
               const Icon = social.icon;
               return (
@@ -346,8 +346,8 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 p-3 text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors border-b-2 border-transparent hover:border-blue-600"
                 >
-                  <Icon className="w-4 h-4" />
-                  <span>{social.platform}</span>
+                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <span className="truncate">{social.platform}</span>
                 </a>
               );
             })}
@@ -355,11 +355,11 @@ export default function Home() {
         </section>
 
         {/* Resume Download */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Resume
           </h2>
-          <div className="flex items-center justify-between p-4 border-b-2 border-gray-200">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 border-b-2 border-gray-200">
             <div>
               <h3 className="font-semibold text-gray-900 text-base">
                 My Resume
@@ -378,7 +378,7 @@ export default function Home() {
         </section>
 
         {/* Publications/Blog */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Publications
           </h2>
@@ -386,7 +386,7 @@ export default function Home() {
             <h3 className="font-semibold text-gray-900 text-base mb-2">
               Technical Blog
             </h3>
-            <p className="text-base text-gray-700 mb-4 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-700 mb-4 leading-relaxed">
               Research notes, security findings, and technical deep-dives on
               cloud infrastructure and systems architecture.
             </p>
@@ -394,7 +394,7 @@ export default function Home() {
               href="https://blog.cloudkinshuk.in/newsletter"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors text-sm sm:text-base"
             >
               Subscribe to Newsletter
               <FaExternalLinkAlt className="w-3.5 h-3.5" />
@@ -403,21 +403,23 @@ export default function Home() {
         </section>
 
         {/* Experience */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Experience
           </h2>
           <div className="p-4 border-b-2 border-gray-200">
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
-              <h3 className="font-bold text-gray-900 text-lg">UPPTCL</h3>
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+              <h3 className="font-bold text-gray-900 text-base sm:text-lg">
+                UPPTCL
+              </h3>
               <span className="text-sm text-gray-600">
                 July 2025 - Aug 2025
               </span>
             </div>
-            <p className="text-base text-gray-700 mb-4 font-semibold">
+            <p className="text-sm sm:text-base text-gray-700 mb-4 font-semibold">
               Uttar Pradesh Power Transmission Corporation Limited
             </p>
-            <div className="space-y-3 text-base text-gray-700 leading-relaxed">
+            <div className="space-y-3 text-sm sm:text-base text-gray-700 leading-relaxed">
               <p>
                 Worked with the transmission division to understand the
                 operation, protection, and maintenance of 132kV and 220kV
@@ -441,7 +443,7 @@ export default function Home() {
         </section>
 
         {/* Projects */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Selected Projects
           </h2>
@@ -451,8 +453,8 @@ export default function Home() {
                 key={project.title}
                 className="p-4 border-b-2 border-gray-200"
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
-                  <h3 className="font-bold text-gray-900 text-lg">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+                  <h3 className="font-bold text-gray-900 text-base sm:text-lg">
                     {project.title}
                   </h3>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -462,24 +464,24 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="space-y-3 mb-4 text-base text-gray-700 leading-relaxed">
+                <div className="space-y-3 mb-4 text-sm sm:text-base text-gray-700 leading-relaxed">
                   {project.description.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
                 </div>
 
                 <div className="mb-4">
-                  <span className="text-sm font-semibold text-gray-600 uppercase">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-600 uppercase">
                     Technologies:{" "}
                   </span>
-                  <span className="text-base text-gray-700">
+                  <span className="text-sm sm:text-base text-gray-700">
                     {project.technologies.join(", ")}
                   </span>
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-gray-50 rounded p-3 mb-4 font-mono text-sm border border-gray-200">
-                    <div className="flex items-center justify-between gap-2">
+                  <div className="bg-gray-50 rounded p-3 mb-4 font-mono text-xs sm:text-sm border border-gray-200">
+                    <div className="flex items-start sm:items-center justify-between gap-2">
                       <code className="text-gray-800 break-all">
                         {project.dockerCommand}
                       </code>
@@ -488,15 +490,16 @@ export default function Home() {
                   </div>
                 )}
 
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4">
                   {project.links.live && (
                     <a
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors text-sm sm:text-base"
                     >
-                      View Project <FaExternalLinkAlt className="w-4 h-4" />
+                      View Project{" "}
+                      <FaExternalLinkAlt className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                     </a>
                   )}
                   {project.links.repo && (
@@ -504,9 +507,10 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors text-sm sm:text-base"
                     >
-                      <FaGithub className="w-4 h-4" /> Source Code
+                      <FaGithub className="w-3.5 sm:w-4 h-3.5 sm:h-4" /> Source
+                      Code
                     </a>
                   )}
                 </div>
@@ -516,26 +520,26 @@ export default function Home() {
         </section>
 
         {/* Technical Skills */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Technical Proficiencies
           </h2>
           <div className="space-y-5">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
               <div key={category} className="p-4 border-b-2 border-gray-200">
-                <h3 className="text-sm font-bold text-gray-700 mb-3 uppercase tracking-wide">
+                <h3 className="text-xs sm:text-sm font-bold text-gray-700 mb-3 uppercase tracking-wide">
                   {category}
                 </h3>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {skills.map((skill) => {
                     const Icon = skill.icon;
                     return (
                       <span
                         key={skill.name}
-                        className="inline-flex items-center gap-2 px-3 py-2 text-sm text-gray-700 font-medium"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-700 font-medium"
                       >
-                        <Icon className="w-4 h-4 text-gray-600" />
-                        {skill.name}
+                        <Icon className="w-3.5 sm:w-4 h-3.5 sm:h-4 text-gray-600 flex-shrink-0" />
+                        <span className="whitespace-nowrap">{skill.name}</span>
                       </span>
                     );
                   })}
@@ -546,15 +550,15 @@ export default function Home() {
         </section>
 
         {/* Certifications */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Certifications
           </h2>
           <div className="space-y-5">
             {CONFIG.certifications.map((cert) => (
               <div key={cert.title} className="p-4 border-b-2 border-gray-200">
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                  <h3 className="font-bold text-gray-900 text-base">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2 gap-1">
+                  <h3 className="font-bold text-gray-900 text-sm sm:text-base">
                     {cert.title}
                   </h3>
                   <span className="text-sm text-gray-600">{cert.year}</span>
@@ -565,14 +569,14 @@ export default function Home() {
                     {cert.organization}
                   </span>
                 </div>
-                <p className="text-base text-gray-700 mb-3 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-700 mb-3 leading-relaxed">
                   {cert.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {cert.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1 text-sm text-gray-700 font-medium"
+                      className="px-2 sm:px-3 py-1 text-xs sm:text-sm text-gray-700 font-medium"
                     >
                       {skill}
                     </span>
@@ -583,9 +587,10 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors text-sm sm:text-base"
                   >
-                    View Credential <FaExternalLinkAlt className="w-4 h-4" />
+                    View Credential{" "}
+                    <FaExternalLinkAlt className="w-3.5 sm:w-4 h-3.5 sm:h-4" />
                   </a>
                 )}
               </div>
@@ -594,48 +599,48 @@ export default function Home() {
         </section>
 
         {/* Education */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Education
           </h2>
           <div className="p-4 border-b-2 border-gray-200">
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
-              <h3 className="font-bold text-gray-900 text-base">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3 gap-1">
+              <h3 className="font-bold text-gray-900 text-sm sm:text-base">
                 {CONFIG.education.degree}
               </h3>
               <span className="text-sm text-gray-600">
                 {CONFIG.education.period}
               </span>
             </div>
-            <p className="text-base font-semibold text-gray-800 mb-1">
+            <p className="text-sm sm:text-base font-semibold text-gray-800 mb-1">
               {CONFIG.education.field}
             </p>
-            <p className="text-base text-gray-700 mb-3">
+            <p className="text-sm sm:text-base text-gray-700 mb-3">
               {CONFIG.education.institution}, {CONFIG.education.location}
             </p>
-            <p className="text-base text-gray-700 leading-relaxed">
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
               {CONFIG.education.description}
             </p>
           </div>
         </section>
 
         {/* CLI Tool */}
-        <section className="mb-8">
+        <section className="mb-6 sm:mb-8">
           <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             CLI Tool
           </h2>
           <div className="bg-gray-900 p-4 border border-gray-700">
-            <p className="text-base text-gray-300 mb-4">
+            <p className="text-sm sm:text-base text-gray-300 mb-4">
               Interactive command-line portfolio viewer built with Node.js
             </p>
-            <div className="space-y-2 font-mono text-sm">
-              <div className="bg-gray-800 p-2">
+            <div className="space-y-2 font-mono text-xs sm:text-sm overflow-x-auto">
+              <div className="bg-gray-800 p-2 whitespace-nowrap">
                 <span className="text-green-400">$</span>{" "}
                 <span className="text-gray-200">
                   npm install -g hackkinshuk
                 </span>
               </div>
-              <div className="bg-gray-800 p-2">
+              <div className="bg-gray-800 p-2 whitespace-nowrap">
                 <span className="text-green-400">$</span>{" "}
                 <span className="text-gray-200">cloudkinshuk</span>
               </div>
