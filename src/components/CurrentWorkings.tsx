@@ -1,12 +1,10 @@
 "use client";
 
-import { FaCode, FaAws, FaRocket, FaCalendar } from "react-icons/fa";
+import { FaCode, FaAws, FaRocket, FaCalendar } from "react-icons/fa6";
+import { HiSparkles, HiBookOpen, HiLightBulb } from "react-icons/hi2";
 
-// ============================================
-// CONFIGURATION - Edit this section to update your Now page
-// ============================================
 const NOW_CONFIG = {
-  lastUpdated: "January 2026", // Update this when you change content
+  lastUpdated: "January 2026",
 
   intro: {
     title: "What I'm Focused On Right Now",
@@ -14,7 +12,6 @@ const NOW_CONFIG = {
       "A snapshot of my current activities, projects, and learning journey. This page follows the /now movement started by Derek Sivers—a simple way to share what I'm actively working on today, not my full biography.",
   },
 
-  // Current Projects - Add/remove/edit as needed
   projects: [
     {
       title: "AI-Powered Fault Detection System",
@@ -36,7 +33,6 @@ const NOW_CONFIG = {
     },
   ],
 
-  // Current Learning - What you're studying
   learning: [
     {
       topic: "AWS Cloud Practitioner Certification",
@@ -54,7 +50,6 @@ const NOW_CONFIG = {
     },
   ],
 
-  // Current Interests - What excites you
   interests: [
     "Cloud security and IAM best practices",
     "Serverless Infrastructure and architecture",
@@ -62,7 +57,6 @@ const NOW_CONFIG = {
     "Technical writing and knowledge sharing",
   ],
 
-  // Current Reading/Consuming
   consuming: [
     {
       type: "Reading",
@@ -76,7 +70,6 @@ const NOW_CONFIG = {
     },
   ],
 
-  // Current Goals - Short-term objectives
   goals: [
     "Complete AWS Cloud Practitioner certification by Q1 2026",
     "Launch the Fault Detection System MVP",
@@ -84,7 +77,6 @@ const NOW_CONFIG = {
     "Write 2 technical blog posts per month",
   ],
 
-  // Not Doing - Optional: What you've decided to pause or avoid
   notDoing: [
     "Taking on freelance projects (focusing on learning/building/certifications)",
     "Learning new programming languages outside my current stack",
@@ -92,89 +84,91 @@ const NOW_CONFIG = {
   ],
 };
 
-// ============================================
-// COMPONENT - UI Logic (No need to edit below unless changing design)
-// ============================================
-
 export default function CurrentWorkings() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-20 sm:pt-20 md:pt-20 lg:pt-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
+    <div className="min-h-screen pt-10 bg-white text-foreground">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         {/* Header */}
-        <header className="mb-8 sm:mb-12 md:mb-16 pb-6 sm:pb-8 md:pb-12 border-b border-white/10">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl heading-font brand-glow font-bold text-white tracking-tight break-words">
-              Current Workings
-            </h1>
-            <div className="flex items-center p-2 rounded-3xl border-[#444444] bg-green-700 gap-2 text-xs w-max sm:text-sm text-white flex-shrink-0">
-              <FaCalendar className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
-              <span className="whitespace-nowrap">
-                Updated {NOW_CONFIG.lastUpdated}
-              </span>
+        <header className="mb-12 sm:mb-16 lg:mb-20 pb-8 sm:pb-10 lg:pb-12 border-b border-muted">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+            <div className="flex-1">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-foreground leading-tight mb-2">
+                Current Workings
+              </h1>
+              <p className="text-sm sm:text-base text-muted-foreground font-light">
+                My focus and progress in real-time
+              </p>
+            </div>
+            <div className="flex items-center px-4 py-2 rounded-full w-max border border-border bg-secondary gap-2 text-xs sm:text-sm text-foreground flex-shrink-0 whitespace-nowrap">
+              <FaCalendar className="w-3.5 h-3.5 text-muted-foreground" />
+              <span>{NOW_CONFIG.lastUpdated}</span>
             </div>
           </div>
 
           <div className="space-y-3 sm:space-y-4">
-            <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 font-medium">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-light text-foreground">
               {NOW_CONFIG.intro.title}
             </h2>
-            <p className="text-sm sm:text-base text-gray-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-3xl font-light">
               {NOW_CONFIG.intro.description}
             </p>
           </div>
         </header>
 
         {/* Current Projects */}
-        <section className="mb-8 sm:mb-12 md:mb-16 pb-6 sm:pb-8 md:pb-12 border-b border-white/10">
-          <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-emerald-400 mb-4 sm:mb-6 font-semibold">
-            Current Projects
-          </h2>
+        <section className="mb-12 sm:mb-16 lg:mb-20 pb-8 sm:pb-10 lg:pb-12 border-b border-muted">
+          <div className="flex items-center gap-2 mb-6 sm:mb-8">
+            <HiSparkles className="w-5 h-5 text-foreground" />
+            <h2 className="text-xs sm:text-sm uppercase tracking-widest text-foreground font-semibold">
+              Current Projects
+            </h2>
+          </div>
           <div className="space-y-4 sm:space-y-6">
             {NOW_CONFIG.projects.map((project, index) => {
               const Icon = project.icon;
               return (
                 <div
                   key={index}
-                  className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6 hover:bg-white/10 transition-all duration-300"
+                  className="group bg-white border border-border rounded-lg p-5 sm:p-6 lg:p-7 hover:border-muted-foreground/30 hover:bg-secondary/40 transition-all duration-300"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                    <div className="p-2.5 sm:p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl w-fit">
-                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
+                  <div className="flex gap-4 sm:gap-5">
+                    <div className="p-3 bg-secondary rounded-lg w-fit h-fit flex-shrink-0">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-2">
-                        <h3 className="text-base sm:text-lg font-semibold text-white break-words">
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-3">
+                        <h3 className="text-base sm:text-lg font-medium text-foreground break-words">
                           {project.title}
                         </h3>
-                        <span className="text-xs text-emerald-400 font-medium px-2 py-1 bg-emerald-500/10 rounded-3xl w-fit flex-shrink-0">
+                        <span className="text-xs font-medium px-3 py-1 bg-secondary text-foreground rounded-full w-fit flex-shrink-0 whitespace-nowrap">
                           {project.status}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm text-gray-400 mb-3 leading-relaxed">
+                      <p className="text-sm sm:text-base text-muted-foreground mb-4 leading-relaxed font-light">
                         {project.description}
                       </p>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
+                      <div className="flex flex-wrap gap-2 mb-4">
                         {project.technologies.map((tech, i) => (
                           <span
                             key={i}
-                            className="text-xs px-2 py-1 bg-white/5 border border-white/10 rounded-3xl text-gray-300 whitespace-nowrap"
+                            className="text-xs px-3 py-1.5 bg-muted/40 border border-border rounded-full text-foreground whitespace-nowrap font-light"
                           >
                             {tech}
                           </span>
                         ))}
                       </div>
                       {project.progress && (
-                        <div className="mt-3">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs text-gray-500">
+                        <div className="mt-4 pt-4 border-t border-border">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                               Progress
                             </span>
-                            <span className="text-xs text-gray-400">
+                            <span className="text-xs font-medium text-foreground">
                               {project.progress}
                             </span>
                           </div>
-                          <div className="w-full bg-white/5 rounded-3xl h-1.5">
-                            <div className="bg-emerald-500 h-1.5 rounded-3xl transition-all duration-500"></div>
+                          <div className="w-full bg-muted/30 rounded-full h-1.5 overflow-hidden">
+                            <div className="bg-foreground h-1.5 rounded-full transition-all duration-500" />
                           </div>
                         </div>
                       )}
@@ -187,31 +181,36 @@ export default function CurrentWorkings() {
         </section>
 
         {/* Current Learning */}
-        <section className="mb-8 sm:mb-12 md:mb-16 pb-6 sm:pb-8 md:pb-12 border-b border-white/10">
-          <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-emerald-400 mb-4 sm:mb-6 font-semibold">
-            Currently Learning
-          </h2>
+        <section className="mb-12 sm:mb-16 lg:mb-20 pb-8 sm:pb-10 lg:pb-12 border-b border-muted">
+          <div className="flex items-center gap-2 mb-6 sm:mb-8">
+            <HiBookOpen className="w-5 h-5 text-foreground" />
+            <h2 className="text-xs sm:text-sm uppercase tracking-widest text-foreground font-semibold">
+              Currently Learning
+            </h2>
+          </div>
           <div className="space-y-4 sm:space-y-6">
             {NOW_CONFIG.learning.map((item, index) => {
               const Icon = item.icon;
               return (
                 <div
                   key={index}
-                  className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6"
+                  className="bg-white border border-border rounded-lg p-5 sm:p-6 lg:p-7 hover:border-muted-foreground/30 hover:bg-secondary/40 transition-all duration-300"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
-                    <div className="p-2.5 sm:p-3 bg-blue-500/10 border border-blue-500/20 rounded-3xl w-fit">
-                      <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
+                  <div className="flex gap-4 sm:gap-5">
+                    <div className="p-3 bg-secondary rounded-lg w-fit h-fit flex-shrink-0">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base sm:text-lg font-semibold text-white mb-2 break-words">
+                      <h3 className="text-base sm:text-lg font-medium text-foreground mb-2 break-words">
                         {item.topic}
                       </h3>
-                      <p className="text-xs sm:text-sm text-gray-400 mb-2 leading-relaxed">
+                      <p className="text-sm sm:text-base text-muted-foreground mb-3 leading-relaxed font-light">
                         {item.description}
                       </p>
-                      <p className="text-xs text-gray-500 break-words">
-                        <span className="text-gray-400">Resource:</span>{" "}
+                      <p className="text-xs sm:text-sm text-muted-foreground font-light break-words">
+                        <span className="font-medium text-foreground">
+                          Resource:
+                        </span>{" "}
                         {item.resource}
                       </p>
                     </div>
@@ -223,21 +222,21 @@ export default function CurrentWorkings() {
         </section>
 
         {/* Current Interests */}
-        <section className="mb-8 sm:mb-12 md:mb-16 pb-6 sm:pb-8 md:pb-12 border-b border-white/10">
-          <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-emerald-400 mb-4 sm:mb-6 font-semibold">
-            Current Interests
-          </h2>
-          <div className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6">
-            <ul className="space-y-2.5 sm:space-y-3">
+        <section className="mb-12 sm:mb-16 lg:mb-20 pb-8 sm:pb-10 lg:pb-12 border-b border-muted">
+          <div className="flex items-center gap-2 mb-6 sm:mb-8">
+            <HiLightBulb className="w-5 h-5 text-foreground" />
+            <h2 className="text-xs sm:text-sm uppercase tracking-widest text-foreground font-semibold">
+              Current Interests
+            </h2>
+          </div>
+          <div className="bg-white border border-border rounded-lg p-5 sm:p-6 lg:p-7">
+            <ul className="space-y-3 sm:space-y-4">
               {NOW_CONFIG.interests.map((interest, index) => (
-                <li
-                  key={index}
-                  className="flex items-start gap-2 sm:gap-3 text-gray-300"
-                >
-                  <span className="text-emerald-400 mt-0.5 sm:mt-1 flex-shrink-0">
+                <li key={index} className="flex items-start gap-3 sm:gap-4">
+                  <span className="text-foreground font-light mt-0.5 flex-shrink-0">
                     →
                   </span>
-                  <span className="text-xs sm:text-sm break-words">
+                  <span className="text-sm sm:text-base text-muted-foreground break-words font-light">
                     {interest}
                   </span>
                 </li>
@@ -247,25 +246,28 @@ export default function CurrentWorkings() {
         </section>
 
         {/* Currently Consuming */}
-        <section className="mb-8 sm:mb-12 md:mb-16 pb-6 sm:pb-8 md:pb-12 border-b border-white/10">
-          <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-emerald-400 mb-4 sm:mb-6 font-semibold">
-            Currently Reading/Following
-          </h2>
+        <section className="mb-12 sm:mb-16 lg:mb-20 pb-8 sm:pb-10 lg:pb-12 border-b border-muted">
+          <div className="flex items-center gap-2 mb-6 sm:mb-8">
+            <HiBookOpen className="w-5 h-5 text-foreground" />
+            <h2 className="text-xs sm:text-sm uppercase tracking-widest text-foreground font-semibold">
+              Reading & Following
+            </h2>
+          </div>
           <div className="space-y-3 sm:space-y-4">
             {NOW_CONFIG.consuming.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-3 sm:p-4"
+                className="bg-white border border-border rounded-lg p-4 sm:p-5 lg:p-6 hover:border-muted-foreground/30 hover:bg-secondary/40 transition-all duration-300"
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-3">
-                  <span className="text-xs text-emerald-400 font-semibold px-2 py-1 bg-emerald-500/10 rounded-3xl w-fit">
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-4">
+                  <span className="text-xs font-medium px-3 py-1 bg-secondary text-foreground rounded-full w-fit whitespace-nowrap flex-shrink-0 uppercase tracking-wide">
                     {item.type}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs sm:text-sm text-white font-medium break-words">
+                    <p className="text-sm sm:text-base text-foreground font-medium break-words mb-1">
                       {item.title}
                     </p>
-                    <p className="text-xs text-gray-400 mt-0.5 break-words">
+                    <p className="text-xs sm:text-sm text-muted-foreground break-words font-light">
                       {item.author}
                     </p>
                   </div>
@@ -276,18 +278,17 @@ export default function CurrentWorkings() {
         </section>
 
         {/* Current Goals */}
-        <section className="mb-8 sm:mb-12 md:mb-16 pb-6 sm:pb-8 md:pb-12 border-b border-white/10">
-          <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-emerald-400 mb-4 sm:mb-6 font-semibold">
-            Current Goals
-          </h2>
-          <div className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6">
-            <ul className="space-y-2.5 sm:space-y-3">
+        <section className="mb-12 sm:mb-16 lg:mb-20 pb-8 sm:pb-10 lg:pb-12 border-b border-muted">
+          <div className="flex items-center gap-2 mb-6 sm:mb-8">
+            <h2 className="text-xs sm:text-sm uppercase tracking-widest text-foreground font-semibold">
+              Current Goals
+            </h2>
+          </div>
+          <div className="bg-white border border-border rounded-lg p-5 sm:p-6 lg:p-7">
+            <ul className="space-y-3 sm:space-y-4">
               {NOW_CONFIG.goals.map((goal, index) => (
-                <li key={index} className="flex items-start gap-2 sm:gap-3">
-                  <span className="text-emerald-400 mt-0.5 sm:mt-1 flex-shrink-0">
-                    ✓
-                  </span>
-                  <span className="text-xs sm:text-sm text-gray-300 break-words">
+                <li key={index} className="flex items-start gap-3 sm:gap-4">
+                  <span className="text-sm sm:text-base text-muted-foreground break-words font-light">
                     {goal}
                   </span>
                 </li>
@@ -296,25 +297,27 @@ export default function CurrentWorkings() {
           </div>
         </section>
 
-        {/* Not Doing (Optional) */}
+        {/* Not Doing */}
         {NOW_CONFIG.notDoing && NOW_CONFIG.notDoing.length > 0 && (
-          <section className="mb-8 sm:mb-12 md:mb-16">
-            <h2 className="text-xs sm:text-sm md:text-md uppercase tracking-widest text-gray-500 mb-4 sm:mb-6 font-semibold">
-              Not Doing Right Now
-            </h2>
-            <div className="bg-white/5 border border-white/10 rounded-3xl sm:rounded-3xl md:rounded-3xl p-4 sm:p-5 md:p-6">
-              <p className="text-xs text-gray-500 mb-3 sm:mb-4 leading-relaxed">
+          <section className="mb-12 sm:mb-16 lg:mb-20">
+            <div className="flex items-center gap-2 mb-6 sm:mb-8">
+              <h2 className="text-xs sm:text-sm uppercase tracking-widest text-muted-foreground font-semibold">
+                Not Doing Right Now
+              </h2>
+            </div>
+            <div className="bg-white border border-border rounded-lg p-5 sm:p-6 lg:p-7">
+              <p className="text-sm sm:text-base text-muted-foreground mb-5 leading-relaxed font-light">
                 Being intentional about what to focus on also means being clear
                 about what to avoid.
               </p>
-              <ul className="space-y-2.5 sm:space-y-3">
+              <ul className="space-y-3 sm:space-y-4">
                 {NOW_CONFIG.notDoing.map((item, index) => (
                   <li
                     key={index}
-                    className="flex items-start gap-2 sm:gap-3 text-gray-400"
+                    className="flex items-start gap-3 sm:gap-4 text-muted-foreground"
                   >
-                    <span className="mt-0.5 sm:mt-1 flex-shrink-0">✗</span>
-                    <span className="text-xs sm:text-sm break-words">
+                    <span className="font-light mt-0.5 flex-shrink-0">✗</span>
+                    <span className="text-sm sm:text-base break-words font-light">
                       {item}
                     </span>
                   </li>
@@ -325,21 +328,20 @@ export default function CurrentWorkings() {
         )}
 
         {/* Footer Note */}
-        <footer className="text-center py-6 sm:py-8">
-          <p className="text-xs sm:text-sm text-gray-500 leading-relaxed px-4">
+        <footer className="text-center py-8 sm:py-12 border-t border-muted">
+          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed px-4 font-light">
             This page is inspired by the{" "}
             <a
               href="https://nownownow.com/about"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-emerald-400 hover:text-emerald-300 transition-colors underline break-words"
+              className="text-foreground hover:text-muted-foreground font-medium transition-colors underline decoration-border underline-offset-2"
             >
               /now movement
             </a>
             . It's a living document that changes as my focus shifts.
             <br className="hidden sm:block" />
-            <span className="block sm:inline mt-1 sm:mt-0">
-              {" "}
+            <span className="block sm:inline mt-2 sm:mt-0">
               Last updated: {NOW_CONFIG.lastUpdated}
             </span>
           </p>

@@ -1,327 +1,314 @@
 "use client";
 
-import type React from "react";
-import { Laptop, Code, Palette, Type, Monitor } from "lucide-react";
-import { motion, useInView, type Variants } from "framer-motion";
-import { useRef } from "react";
+import React from "react";
 
-// --- TYPE DEFINITIONS ---
-interface SetupItem {
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+import {
+  Monitor,
+  Settings,
+  Code2,
+  FileCode,
+  Palette,
+  Zap,
+  Shield,
+  Server,
+} from "lucide-react";
+import {
+  FaFigma,
+  FaDocker,
+  FaAws,
+  FaWindows,
+  FaLinux,
+  FaGithub,
+  FaKeyboard,
+} from "react-icons/fa6";
+
+interface ToolItem {
   name: string;
   description: string;
-  category?: string;
+  category: string;
+  icon: React.ReactNode;
 }
 
-interface SetupSection {
+interface ToolSection {
   title: string;
-  icon: React.ComponentType<{ className?: string }>;
-  items: SetupItem[];
+  icon: React.ReactNode;
+  items: ToolItem[];
+  color: string;
 }
 
-// --- DATA SOURCE ---
-const setupData: SetupSection[] = [
+const setupData: ToolSection[] = [
   {
     title: "Hardware",
-    icon: Laptop,
+    icon: <Monitor className="w-5 h-5" />,
+    color: "text-slate-700",
     items: [
       {
         name: "Acer Swift 3",
-        description: "Intel i5 EVO • 8GB RAM • 512GB SSD ",
+        description: "Intel i5 EVO • 8GB RAM • 512GB SSD",
         category: "Primary Machine",
+        icon: <Monitor className="w-4 h-4" />,
       },
       {
         name: "Windows 11 Home",
-        description: " Windows OS",
+        description: "Windows OS",
         category: "Primary Operating System",
+        icon: <FaWindows className="w-4 h-4" />,
       },
       {
-        name: "Back-Lit Keyboard",
-        description: "Standard laptop keyboard for comfortable typing sessions",
+        name: "Mechanical Keyboard",
+        description: "Premium mechanical keyboard for extended coding sessions",
         category: "Input Device",
+        icon: <FaKeyboard className="w-4 h-4" />,
       },
       {
-        name: "HP Wired Mouse",
-        description: "Simple mouse for simple usage",
+        name: "Wired Mouse",
+        description: "High-precision mouse for precise interactions",
         category: "Input Device",
+        icon: <Settings className="w-4 h-4" />,
       },
     ],
   },
   {
     title: "Development",
-    icon: Code,
+    icon: <Code2 className="w-5 h-5" />,
+    color: "text-slate-700",
     items: [
       {
         name: "VS Code",
         description:
-          "Primary code editor with an extensive extension ecosystem.",
-        category: "Editor",
+          "Primary editor with an extensive ecosystem of extensions for productivity",
+        category: "Code Editor",
+        icon: <FileCode className="w-4 h-4" />,
       },
       {
         name: "Git & GitHub",
-        description: "Version control system with web interface and CLI tools.",
-        category: "VCS",
+        description: "Version control system with distributed workflows",
+        category: "Version Control",
+        icon: <FaGithub className="w-4 h-4" />,
       },
       {
         name: "WSL2 Ubuntu",
-        description: "Windows Subsystem for Linux with Ubuntu distribution.",
-        category: "Terminal",
+        description: "Windows Subsystem for Linux with Ubuntu environment",
+        category: "Development Shell",
+        icon: <FaLinux className="w-4 h-4" />,
       },
       {
-        name: "AWS (Amazon Web Services)",
-        description: "Comprehensive cloud computing platform.",
-        category: "Primary Cloud Platform",
+        name: "AWS (EC2, RDS)",
+        description: "Cloud infrastructure for scalable applications",
+        category: "Cloud Services",
+        icon: <FaAws className="w-4 h-4" />,
+      },
+      {
+        name: "Docker",
+        description: "Containerization platform for consistent deployments",
+        category: "DevOps",
+        icon: <FaDocker className="w-4 h-4" />,
       },
     ],
   },
   {
-    title: "Design",
-    icon: Palette,
+    title: "Design & Prototyping",
+    icon: <Palette className="w-5 h-5" />,
+    color: "text-slate-700",
     items: [
       {
         name: "Figma",
-        description: "Collaborative interface design and prototyping platform.",
-        category: "UI/UX",
-      },
-      {
-        name: "Canva",
-        description:
-          "Graphic design platform for quick visual content creation.",
-        category: "Graphics",
+        description: "Collaborative interface design and prototyping platform",
+        category: "UI/UX Design",
+        icon: <FaFigma className="w-4 h-4" />,
       },
       {
         name: "Google Fonts",
-        description: "Library of free and open-source fonts.",
+        description: "Open-source typography library for web projects",
         category: "Typography",
+        icon: <FileCode className="w-4 h-4" />,
+      },
+      {
+        name: "Tailwind CSS",
+        description: "Utility-first CSS framework for rapid UI development",
+        category: "Styling",
+        icon: <Zap className="w-4 h-4" />,
       },
     ],
   },
   {
-    title: "Typography",
-    icon: Type,
+    title: "Security & Monitoring",
+    icon: <Shield className="w-5 h-5" />,
+    color: "text-slate-700",
     items: [
       {
-        name: "Lucida Console",
-        description:
-          "Classic monospaced font favored for coding due to its clarity.",
-        category: "Code Font",
+        name: "GitHub Security",
+        description: "Dependabot and security scanning for vulnerabilities",
+        category: "Code Security",
+        icon: <Shield className="w-4 h-4" />,
       },
       {
-        name: "Google Sans",
-        description:
-          "Clean and modern font used across various Google products.",
-        category: "UI/Project Fonts",
-      },
-      {
-        name: "Google Sans",
-        description: "Primary font for my portfolio and personal branding.",
-        category: "Portfolio Font",
-      },
-      {
-        name: "Github Dark / Monokai Theme",
-        description: "A clean, default theme for VS Code by Microsoft.",
-        category: "VS Code Theme",
+        name: "SSL/TLS Certificates",
+        description: "End-to-end encryption for secure communications",
+        category: "Network Security",
+        icon: <Server className="w-4 h-4" />,
       },
     ],
   },
 ];
 
-// --- ANIMATION VARIANTS ---
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 80,
-      damping: 15,
-    },
-  },
-};
-
-// --- REUSABLE AnimatedCard COMPONENT ---
-const AnimatedCard: React.FC<{ section: SetupSection; index: number }> = ({
-  section,
-}) => {
+const AnimatedCard = ({ section }: { section: ToolSection }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      variants={itemVariants}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      whileHover={{ y: -8 }}
-      className="group relative"
+      className={`group relative opacity-0 transition-opacity duration-700 ${
+        isInView ? "opacity-100" : "opacity-0"
+      }`}
     >
-      {/* Gradient border effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/5 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-      <div className="relative bg-white/5 border border-white/10 rounded-3xl p-8 h-full flex flex-col backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-        {/* Icon with gradient background */}
-        <div className="mb-6 inline-flex">
-          <div className="p-4 bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 rounded-3xl border border-emerald-500/20 group-hover:border-emerald-500/40 transition-colors duration-300">
-            <section.icon className="w-7 h-7 text-emerald-400" />
-          </div>
-        </div>
-
-        {/* Section Header */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-white mb-2">
-            {section.title}
-          </h2>
-          <div className="flex items-center gap-2">
-            <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-3xl" />
-            <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">
-              {section.items.length} item{section.items.length !== 1 ? "s" : ""}
-            </p>
-          </div>
-        </div>
-
-        {/* Items List */}
-        <div className="space-y-6 flex-grow">
-          {section.items.map((item, idx) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ delay: 0.1 + idx * 0.1 }}
-              className="relative pl-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-gradient-to-b before:from-emerald-500/50 before:via-emerald-500/20 before:to-transparent hover:before:from-emerald-500 hover:before:via-emerald-500/50 before:transition-all before:duration-300"
+      {/* Card */}
+      <div className="relative p-6 sm:p-8 border border-slate-200 rounded-none hover:border-slate-300 transition-all duration-300 bg-white hover:bg-slate-50/50 group">
+        {/* Icon header */}
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div
+              className={`${section.color} opacity-80 group-hover:opacity-100 transition-opacity`}
             >
-              {item.category && (
-                <div className="text-xs text-emerald-400 font-semibold uppercase tracking-wider mb-1.5">
-                  {item.category}
+              {section.icon}
+            </div>
+            <h2 className="text-lg sm:text-xl font-medium text-slate-900">
+              {section.title}
+            </h2>
+          </div>
+          <span className="text-xs text-slate-500 font-medium">
+            {section.items.length} tools
+          </span>
+        </div>
+
+        {/* Divider */}
+        <div className="w-8 h-px bg-slate-200 mb-6 group-hover:w-12 transition-all duration-300" />
+
+        {/* Items */}
+        <div className="space-y-5">
+          {section.items.map((item) => (
+            <div
+              key={item.name}
+              className="group/item cursor-pointer transition-all duration-200 hover:translate-x-1"
+            >
+              <div className="flex items-start gap-3">
+                <div className="mt-1 text-slate-400 group-hover/item:text-slate-600 transition-colors flex-shrink-0">
+                  {item.icon}
                 </div>
-              )}
-              <h3 className="font-semibold text-white text-base mb-1.5">
-                {item.name}
-              </h3>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                {item.description}
-              </p>
-            </motion.div>
+                <div className="flex-grow min-w-0">
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <h3 className="text-sm font-medium text-slate-900">
+                      {item.name}
+                    </h3>
+                    <span className="text-xs text-slate-500 uppercase tracking-wide">
+                      {item.category}
+                    </span>
+                  </div>
+                  <p className="text-sm text-slate-600 mt-1 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
-// --- MAIN COMPONENT ---
-export default function Devtools() {
+export default function DevTools() {
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { once: true });
+
   return (
-    <>
-      <main className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 pt-15 to-black text-white relative overflow-hidden">
-        {/* Animated background gradient orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-3xl blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-3xl blur-3xl animate-pulse delay-1000" />
+    <main className="min-h-screen bg-white text-slate-900 relative">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none bg-grid-pattern" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 relative z-10">
-          {/* Header Section */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-center mb-20"
-          >
-            {/* Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 shadow-md shadow-emerald-500 border-2 border-emerald-500 rounded-3xl mb-8 backdrop-blur-sm"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Monitor className="w-4 h-4 text-emerald-400" />
-              <span className="text-sm font-medium text-gray-300 tracking-wide">
-                My Digital Workspace
-              </span>
-            </motion.div>
+      <div className="relative z-10">
+        {/* Header */}
+        <div
+          ref={headerRef}
+          className={`pt-16 sm:pt-24 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto opacity-0 transition-opacity duration-700 ${
+            isHeaderInView ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {/* Badge */}
+          <div className="inline-block mb-6 text-xs font-medium text-slate-600 uppercase tracking-wider">
+            Professional Development Environment
+          </div>
 
-            {/* Title with gradient */}
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r heading-font brand-glow from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-              DevSetup
+          {/* Title */}
+          <div className="mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium heading-font text-slate-900 leading-tight mb-4">
+              My
+              <br />
+              Development Stack
             </h1>
-
-            <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-400 leading-relaxed">
-              The tools, software, and hardware I use daily to code and design.
+            <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+              Here's what I use to build projects and collaborate with others.
+              Always learning and exploring new tools.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Setup Grid - Staggered layout */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-20"
-          >
-            {setupData.map((section, index) => (
-              <AnimatedCard
-                key={section.title}
-                section={section}
-                index={index}
-              />
+          {/* Divider */}
+          <div className="w-16 h-px bg-gradient-to-r from-slate-400 to-slate-100 mt-8" />
+        </div>
+
+        {/* Grid */}
+        <div className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto pb-24 sm:pb-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {setupData.map((section) => (
+              <div key={section.title} className="animation-delay">
+                <AnimatedCard section={section} />
+              </div>
             ))}
-          </motion.div>
+          </div>
+        </div>
 
-          {/* Footer Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1, ease: "easeOut" }}
-            className="mt-24 pt-12 border-t border-white/10"
-          >
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              <motion.div
-                className="text-center p-6 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
-                whileHover={{ y: -4 }}
-              >
-                <div className="text-4xl font-bold bg-gradient-to-br from-emerald-400 to-emerald-600 bg-clip-text text-transparent mb-2">
+        {/* Footer Stats */}
+        <div className="border-t border-slate-200 px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8">
+              <div className="group cursor-pointer">
+                <div className="text-3xl sm:text-4xl font-light text-slate-900 mb-2">
                   {setupData.reduce(
                     (acc, section) => acc + section.items.length,
-                    0
+                    0,
                   )}
                 </div>
-                <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
-                  Total Items
+                <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
+                  Total Tools
                 </div>
-              </motion.div>
-
-              <motion.div
-                className="text-center p-6 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
-                whileHover={{ y: -4 }}
-              >
-                <div className="text-4xl font-bold bg-gradient-to-br from-emerald-400 to-emerald-600 bg-clip-text text-transparent mb-2">
+              </div>
+              <div className="group cursor-pointer">
+                <div className="text-3xl sm:text-4xl font-light text-slate-900 mb-2">
                   {setupData.length}
                 </div>
-                <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
+                <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
                   Categories
                 </div>
-              </motion.div>
-
-              <motion.div
-                className="text-center p-6 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-all duration-300 col-span-2"
-                whileHover={{ y: -4 }}
-              >
-                <div className="text-4xl font-bold bg-gradient-to-br from-emerald-400 to-emerald-600 bg-clip-text text-transparent mb-2">
+              </div>
+              <div className="group cursor-pointer col-span-2 sm:col-span-2">
+                <div className="text-3xl sm:text-4xl font-light text-slate-900 mb-2">
                   2025
                 </div>
-                <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
+                <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">
                   Last Updated
                 </div>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </main>
-    </>
+
+        {/* Bottom accent */}
+        <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+      </div>
+    </main>
   );
 }

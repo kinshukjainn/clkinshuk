@@ -1,16 +1,17 @@
+"use client";
+
+import React from "react";
+
 import { useState } from "react";
 import {
   FaCheckCircle,
   FaExclamationTriangle,
   FaInfoCircle,
   FaShieldAlt,
-  FaSearch,
   FaMobileAlt,
   FaClock,
   FaBolt,
-  FaEye,
   FaArrowUp,
-  FaArrowDown,
   FaChevronDown,
   FaChevronUp,
   FaDownload,
@@ -148,15 +149,15 @@ const AUDIT_DATA = {
 
 const ScoreCircle = ({ score, label }: { score: number; label: string }) => {
   const getColor = (score: number) => {
-    if (score >= 90) return "text-emerald-400";
-    if (score >= 50) return "text-yellow-400";
-    return "text-red-400";
+    if (score >= 90) return "text-emerald-600";
+    if (score >= 50) return "text-amber-600";
+    return "text-red-600";
   };
 
   const getStrokeColor = (score: number) => {
-    if (score >= 90) return "#34d399";
-    if (score >= 50) return "#fbbf24";
-    return "#f87171";
+    if (score >= 90) return "#059669";
+    if (score >= 50) return "#b45309";
+    return "#dc2626";
   };
 
   const getStatus = (score: number) => {
@@ -181,7 +182,7 @@ const ScoreCircle = ({ score, label }: { score: number; label: string }) => {
             cx="56"
             cy="56"
             r="45"
-            stroke="rgba(255,255,255,0.1)"
+            stroke="rgba(0,0,0,0.08)"
             strokeWidth="8"
             fill="none"
           />
@@ -209,7 +210,7 @@ const ScoreCircle = ({ score, label }: { score: number; label: string }) => {
         </div>
       </div>
       <div className="text-center mt-3">
-        <span className="text-sm md:text-base text-white font-medium block">
+        <span className="text-sm md:text-base text-foreground font-medium block">
           {label}
         </span>
         <span className={`text-xs ${getColor(score)} block mt-1`}>
@@ -233,25 +234,25 @@ const CollapsibleSection = ({
   badge?: string;
   children: React.ReactNode;
 }) => (
-  <section className="space-y-4 pb-6 sm:pb-8 border-b border-white/10">
+  <section className="space-y-4 pb-6 sm:pb-8 ">
     <button
       onClick={onToggle}
-      className="w-full flex items-center justify-between group hover:opacity-80 transition-opacity"
+      className="w-full flex items-center justify-between group hover:opacity-70 transition-opacity"
     >
       <div className="flex items-center gap-3">
-        <h2 className="text-xs sm:text-sm uppercase tracking-widest text-blue-500 font-semibold">
+        <h2 className="text-xs sm:text-sm uppercase tracking-widest text-accent font-semibold">
           {title}
         </h2>
         {badge && (
-          <span className="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded-3xl border border-blue-500/30">
+          <span className="px-2 py-1 text-xs bg-secondary text-accent rounded-full">
             {badge}
           </span>
         )}
       </div>
       {isExpanded ? (
-        <FaChevronUp className="text-gray-400 w-4 h-4" />
+        <FaChevronUp className="text-muted-foreground w-4 h-4" />
       ) : (
-        <FaChevronDown className="text-gray-400 w-4 h-4" />
+        <FaChevronDown className="text-muted-foreground w-4 h-4" />
       )}
     </button>
     {isExpanded && <div className="space-y-4 sm:space-y-5">{children}</div>}
@@ -311,26 +312,13 @@ export default function SeoInsights() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "high":
-        return "text-red-400 bg-red-500/10 border-red-500/20";
+        return "text-red-600 bg-red-50 border-red-200";
       case "medium":
-        return "text-yellow-400 bg-yellow-500/10 border-yellow-500/20";
+        return "text-amber-600 bg-amber-50 border-amber-200";
       case "low":
-        return "text-blue-400 bg-blue-500/10 border-blue-500/20";
+        return "text-blue-600 bg-blue-50 border-blue-200";
       default:
-        return "text-gray-400 bg-gray-500/10 border-gray-500/20";
-    }
-  };
-
-  const getVitalStatusColor = (status: string) => {
-    switch (status) {
-      case "good":
-        return "border-emerald-500/20 bg-emerald-500/10";
-      case "needs-improvement":
-        return "border-yellow-500/20 bg-yellow-500/10";
-      case "poor":
-        return "border-red-500/20 bg-red-500/10";
-      default:
-        return "border-white/10 bg-white/5";
+        return "text-slate-600 bg-slate-50 border-slate-200";
     }
   };
 
@@ -348,31 +336,31 @@ export default function SeoInsights() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-black to-zinc-900 px-4 py-6 pt-40 sm:px-6 md:px-8 lg:px-10">
+    <div className="min-h-screen pt-20 bg-white text-foreground px-4 py-6 sm:px-6 md:px-8 lg:px-10">
       <main className="w-full max-w-7xl mx-auto space-y-8">
         {/* Header with Actions */}
-        <header className="space-y-4 border-b border-white/10 pb-6">
+        <header className="space-y-4  pb-6 pt-6 sm:pt-10">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-            <div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl heading-font brand-glow font-bold text-white leading-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            <div className="flex-1">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-light text-foreground leading-tight mb-2">
                 SEO & Performance Insights
               </h1>
-              <p className="text-sm text-gray-400 mt-2">
+              <p className="text-sm text-muted-foreground font-light">
                 Lighthouse Audit Report •{" "}
                 {formatDate(AUDIT_DATA.auditMeta.capturedAt)}
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 flex-shrink-0">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-white/5 hover:bg-white/10 border border-white/10 rounded-3xl text-white text-sm transition-colors"
+                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-secondary hover:bg-muted border border-border rounded-lg text-foreground text-sm transition-colors font-light whitespace-nowrap"
               >
                 <FaFilter className="w-4 h-4" />
                 Filters
               </button>
               <button
                 onClick={exportReport}
-                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-blue-500/20 hover:bg-blue-500/30  rounded-3xl text-blue-400 text-sm transition-colors"
+                className="flex items-center gap-2 px-4 py-2 cursor-pointer bg-accent hover:bg-accent/90 rounded-lg text-white text-sm transition-colors font-light whitespace-nowrap"
               >
                 <FaDownload className="w-4 h-4" />
                 Export
@@ -382,15 +370,15 @@ export default function SeoInsights() {
 
           {/* Filters Panel */}
           {showFilters && (
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-4 space-y-3 animate-fadeIn">
+            <div className="bg-secondary border border-border rounded-lg p-4 space-y-3 animate-fadeIn">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-white">
+                <span className="text-sm font-medium text-foreground">
                   Filter Options
                 </span>
                 <button
                   title="Close Filters"
                   onClick={() => setShowFilters(false)}
-                  className="text-white p-2 bg-blue-500 cursor-pointer rounded-3xl hover:text-white"
+                  className="text-foreground p-2 bg-muted cursor-pointer rounded-lg hover:opacity-80"
                 >
                   <FaTimes className="w-4 h-4" />
                 </button>
@@ -402,7 +390,7 @@ export default function SeoInsights() {
                   onChange={(e) =>
                     setFilters({ ...filters, priorityFilter: e.target.value })
                   }
-                  className="px-4 py-3 bg-white/5 border border-white/10 rounded-3xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-4 py-3 bg-white border border-border rounded-lg text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent font-light"
                 >
                   <option value="all">All Priorities</option>
                   <option value="high">High Priority</option>
@@ -416,9 +404,9 @@ export default function SeoInsights() {
 
         {/* Quick Stats Summary */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-3xl p-4">
-            <FaChartLine className="text-blue-400 w-6 h-6 mb-2" />
-            <p className="text-2xl font-bold text-white">
+          <div className="bg-white rounded-lg p-4 sm:p-5 hover:bg-secondary transition-colors">
+            <FaChartLine className="text-accent w-6 h-6 mb-3" />
+            <p className="text-2xl sm:text-3xl font-bold text-foreground">
               {Math.round(
                 (AUDIT_DATA.scores.performance +
                   AUDIT_DATA.scores.accessibility +
@@ -427,33 +415,41 @@ export default function SeoInsights() {
                   4,
               )}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Average Score</p>
+            <p className="text-xs text-muted-foreground mt-2 font-light uppercase tracking-wide">
+              Average Score
+            </p>
           </div>
-          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-3xl p-4">
-            <FaCheckCircle className="text-emerald-400 w-6 h-6 mb-2" />
-            <p className="text-2xl font-bold text-white">
+          <div className="bg-white rounded-lg p-4 sm:p-5 hover:bg-secondary transition-colors">
+            <FaCheckCircle className="text-emerald-600 w-6 h-6 mb-3" />
+            <p className="text-2xl sm:text-3xl font-bold text-foreground">
               {Object.values(AUDIT_DATA.scores).filter((s) => s >= 90).length}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Perfect Scores</p>
+            <p className="text-xs text-muted-foreground mt-2 font-light uppercase tracking-wide">
+              Perfect Scores
+            </p>
           </div>
-          <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-3xl p-4">
-            <FaExclamationTriangle className="text-yellow-400 w-6 h-6 mb-2" />
-            <p className="text-2xl font-bold text-white">
+          <div className="bg-white rounded-lg p-4 sm:p-5 hover:bg-secondary transition-colors">
+            <FaExclamationTriangle className="text-amber-600 w-6 h-6 mb-3" />
+            <p className="text-2xl sm:text-3xl font-bold text-foreground">
               {AUDIT_DATA.insights.performanceImprovements.length +
                 AUDIT_DATA.insights.diagnostics.length}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Issues Found</p>
+            <p className="text-xs text-muted-foreground mt-2 font-light uppercase tracking-wide">
+              Issues Found
+            </p>
           </div>
-          <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-3xl p-4">
-            <FaLightbulb className="text-purple-400 w-6 h-6 mb-2" />
-            <p className="text-2xl font-bold text-white">
+          <div className="bg-white rounded-lg p-4 sm:p-5 hover:bg-secondary transition-colors">
+            <FaLightbulb className="text-accent w-6 h-6 mb-3" />
+            <p className="text-2xl sm:text-3xl font-bold text-foreground">
               {
                 AUDIT_DATA.insights.performanceImprovements.filter(
                   (i) => i.priority === "high",
                 ).length
               }
             </p>
-            <p className="text-xs text-gray-400 mt-1">High Priority</p>
+            <p className="text-xs text-muted-foreground mt-2 font-light uppercase tracking-wide">
+              High Priority
+            </p>
           </div>
         </div>
 
@@ -464,36 +460,36 @@ export default function SeoInsights() {
           onToggle={() => toggleSection("environment")}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors">
+            <div className="bg-white rounded-lg p-5 hover:bg-secondary transition-colors">
               <div className="flex items-center gap-3 mb-3">
-                <FaMobileAlt className="text-blue-400 w-5 h-5" />
-                <span className="text-xs text-gray-400 uppercase tracking-widest">
+                <FaMobileAlt className="text-accent w-5 h-5" />
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
                   Device
                 </span>
               </div>
-              <p className="text-white font-medium">
+              <p className="text-foreground font-medium">
                 {AUDIT_DATA.auditMeta.environment.device}
               </p>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors">
+            <div className="bg-white rounded-lg p-5 hover:bg-secondary transition-colors">
               <div className="flex items-center gap-3 mb-3">
-                <FaBolt className="text-yellow-400 w-5 h-5" />
-                <span className="text-xs text-gray-400 uppercase tracking-widest">
+                <FaBolt className="text-amber-600 w-5 h-5" />
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
                   Network
                 </span>
               </div>
-              <p className="text-white font-medium">
+              <p className="text-foreground font-medium">
                 {AUDIT_DATA.auditMeta.environment.network}
               </p>
             </div>
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors">
+            <div className="bg-white rounded-lg p-5 hover:bg-secondary transition-colors">
               <div className="flex items-center gap-3 mb-3">
-                <FaInfoCircle className="text-purple-400 w-5 h-5" />
-                <span className="text-xs text-gray-400 uppercase tracking-widest">
+                <FaInfoCircle className="text-accent w-5 h-5" />
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
                   Version
                 </span>
               </div>
-              <p className="text-white font-medium">
+              <p className="text-foreground font-medium">
                 v{AUDIT_DATA.auditMeta.environment.lighthouseVersion}
               </p>
             </div>
@@ -534,19 +530,25 @@ export default function SeoInsights() {
             {Object.entries(AUDIT_DATA.coreWebVitals).map(([key, vital]) => (
               <div
                 key={key}
-                className={`border rounded-3xl p-5 hover:scale-105 transition-transform ${getVitalStatusColor(
-                  vital.status,
-                )}`}
+                className={`rounded-lg p-5 hover:scale-105 transition-transform ${
+                  vital.status === "good"
+                    ? "bg-emerald-50"
+                    : vital.status === "needs-improvement"
+                      ? "bg-amber-50"
+                      : vital.status === "poor"
+                        ? "bg-red-50"
+                        : "bg-secondary"
+                }`}
               >
-                <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">
+                <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2 font-medium">
                   {vital.label}
                 </p>
-                <p className="text-3xl font-bold text-white mb-4">
+                <p className="text-3xl font-bold text-foreground mb-4">
                   {vital.value}
                 </p>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-3xl">
-                  <FaArrowUp className="text-emerald-400 w-3 h-3" />
-                  <span className="text-emerald-400 text-xs font-medium">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 rounded-lg">
+                  <FaArrowUp className="text-emerald-600 w-3 h-3" />
+                  <span className="text-emerald-600 text-xs font-medium">
                     {vital.scoreImpact}
                   </span>
                 </div>
@@ -566,35 +568,35 @@ export default function SeoInsights() {
             {filteredOpportunities.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors"
+                className="bg-white rounded-lg p-5 hover:bg-secondary transition-colors"
               >
                 <div className="flex items-start gap-4">
-                  <FaClock className="text-orange-400 w-5 h-5 mt-1 flex-shrink-0" />
+                  <FaClock className="text-amber-600 w-5 h-5 mt-1 flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-3 mb-2">
-                      <h3 className="text-white font-medium">{item.title}</h3>
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                      <h3 className="text-foreground font-medium">
+                        {item.title}
+                      </h3>
                       <span
-                        className={`px-2 py-1 text-xs rounded-3xl border ${getPriorityColor(
-                          item.priority,
-                        )} uppercase tracking-wider whitespace-nowrap`}
+                        className={`px-2 py-1 text-xs rounded-lg ${
+                          getPriorityColor(item.priority).split(" border ")[0]
+                        } uppercase tracking-wider whitespace-nowrap text-center flex-shrink-0 font-medium`}
                       >
                         {item.priority}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-400 mb-3">
+                    <p className="text-sm text-muted-foreground mb-3 leading-relaxed font-light">
                       {item.description}
                     </p>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
                       {item.estimatedSavingsMs && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
-                          <FaClock className="w-3 h-3" />
-                          Saves {item.estimatedSavingsMs}ms
+                        <span className="font-medium">
+                          Potential savings: {item.estimatedSavingsMs}ms
                         </span>
                       )}
                       {item.estimatedSavingsKiB && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
-                          <FaArrowDown className="w-3 h-3" />
-                          Saves {item.estimatedSavingsKiB}KiB
+                        <span className="font-medium">
+                          Potential savings: {item.estimatedSavingsKiB}KiB
                         </span>
                       )}
                     </div>
@@ -616,36 +618,28 @@ export default function SeoInsights() {
             {filteredDiagnostics.map((item, index) => (
               <div
                 key={index}
-                className="bg-white/5 border border-white/10 rounded-3xl p-5 hover:bg-white/10 transition-colors"
+                className="bg-white rounded-lg p-5 hover:bg-secondary transition-colors"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-3xl bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
-                    <FaExclamationTriangle className="text-yellow-400 w-5 h-5" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-3 mb-3">
-                      <h3 className="text-white font-medium">{item.issue}</h3>
+                  <FaExclamationTriangle className="text-amber-600 w-5 h-5 mt-1 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-2">
+                      <h3 className="text-foreground font-medium">
+                        {item.issue}
+                      </h3>
                       <span
-                        className={`px-2 py-1 text-xs rounded-3xl border ${getPriorityColor(
-                          item.priority,
-                        )} uppercase tracking-wider whitespace-nowrap`}
+                        className={`px-2 py-1 text-xs rounded-lg whitespace-nowrap flex-shrink-0 font-medium ${
+                          getPriorityColor(item.priority).split(" border ")[0]
+                        }`}
                       >
                         {item.priority}
                       </span>
                     </div>
-                    <div className="flex flex-wrap gap-3">
-                      {item.estimatedSavingsKiB && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
-                          <FaArrowDown className="w-3 h-3" />
-                          Savings: {item.estimatedSavingsKiB}KiB
-                        </span>
-                      )}
-                      {item.count && (
-                        <span className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-3xl text-xs text-gray-400">
-                          Count: {item.count}
-                        </span>
-                      )}
-                    </div>
+                    <p className="text-sm text-muted-foreground font-light">
+                      {("estimatedSavingsKiB" in item &&
+                        `Potential savings: ${item.estimatedSavingsKiB}KiB`) ||
+                        ("count" in item && `Instances found: ${item.count}`)}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -653,50 +647,59 @@ export default function SeoInsights() {
           </div>
         </CollapsibleSection>
 
-        {/* Accessibility Details */}
+        {/* Accessibility */}
         <CollapsibleSection
-          title="Accessibility Details"
+          title="Accessibility"
           isExpanded={expandedSections.accessibility}
           onToggle={() => toggleSection("accessibility")}
+          badge={`${AUDIT_DATA.accessibility.passedAudits} passed`}
         >
-          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-3xl p-5 mb-5">
-            <div className="flex items-center gap-4">
-              <div className="text-4xl font-bold text-emerald-400">
-                {AUDIT_DATA.accessibility.score}
+          <div className="space-y-5">
+            <div className="bg-white rounded-lg p-5">
+              <h3 className="text-foreground font-medium mb-3">Issues Found</h3>
+              <div className="space-y-4">
+                {Object.entries(AUDIT_DATA.accessibility.issues).map(
+                  ([category, issues]) => (
+                    <div key={category}>
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-2">
+                        {category}
+                      </p>
+                      <ul className="space-y-2">
+                        {issues.map((issue, i) => (
+                          <li
+                            key={i}
+                            className="text-sm text-muted-foreground flex items-start gap-2 font-light"
+                          >
+                            <span className="text-red-600 mt-0.5 flex-shrink-0">
+                              •
+                            </span>
+                            <span>{issue}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ),
+                )}
               </div>
-              <div>
-                <p className="text-white font-medium text-lg">Perfect Score!</p>
-                <p className="text-sm text-gray-400">
-                  {AUDIT_DATA.accessibility.passedAudits} audits passed •{" "}
-                  {AUDIT_DATA.accessibility.manualChecksRequired} manual checks
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-white rounded-lg p-5">
+                <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-2">
+                  Passed Audits
+                </p>
+                <p className="text-3xl font-bold text-emerald-600">
+                  {AUDIT_DATA.accessibility.passedAudits}
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-5">
+                <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-2">
+                  Manual Checks
+                </p>
+                <p className="text-3xl font-bold text-accent">
+                  {AUDIT_DATA.accessibility.manualChecksRequired}
                 </p>
               </div>
             </div>
-          </div>
-          <div className="space-y-4">
-            {Object.entries(AUDIT_DATA.accessibility.issues).map(
-              ([category, issues]) => (
-                <div
-                  key={category}
-                  className="bg-white/5 border border-white/10 rounded-3xl p-5"
-                >
-                  <h3 className="text-white font-medium mb-4 capitalize">
-                    {category.replace(/([A-Z])/g, " $1").trim()}
-                  </h3>
-                  <ul className="space-y-3">
-                    {issues.map((issue, index) => (
-                      <li
-                        key={index}
-                        className="flex items-start gap-3 text-sm text-gray-300"
-                      >
-                        <FaInfoCircle className="text-yellow-400 flex-shrink-0 mt-1 w-4 h-4" />
-                        <span>{issue}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ),
-            )}
           </div>
         </CollapsibleSection>
 
@@ -705,93 +708,94 @@ export default function SeoInsights() {
           title="Security & Best Practices"
           isExpanded={expandedSections.security}
           onToggle={() => toggleSection("security")}
+          badge={`${AUDIT_DATA.bestPractices.score}`}
         >
-          <div className="bg-gradient-to-br from-emerald-500/10 to-green-500/10 border border-emerald-500/20 rounded-3xl p-5 mb-5">
-            <div className="flex items-center gap-4">
-              <FaShieldAlt className="text-emerald-400 w-8 h-8" />
-              <div>
-                <p className="text-white font-medium text-lg">
-                  Score: {AUDIT_DATA.bestPractices.score}/100
-                </p>
-                <p className="text-sm text-gray-400">
-                  All security checks passed
-                </p>
-              </div>
+          <div className="space-y-5">
+            <div className="bg-white rounded-lg p-5">
+              <h3 className="text-foreground font-medium mb-4 flex items-center gap-2">
+                <FaShieldAlt className="text-emerald-600 w-5 h-5" />
+                Security Features
+              </h3>
+              <ul className="space-y-3">
+                {AUDIT_DATA.bestPractices.security.map((item, index) => (
+                  <li
+                    key={index}
+                    className="text-sm text-muted-foreground flex items-start gap-3 font-light"
+                  >
+                    <FaCheckCircle className="text-emerald-600 w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-white rounded-lg p-5">
+              <h3 className="text-foreground font-medium mb-4">Notes</h3>
+              <ul className="space-y-2">
+                {AUDIT_DATA.bestPractices.notes.map((note, index) => (
+                  <li
+                    key={index}
+                    className="text-sm text-muted-foreground flex items-start gap-2 font-light"
+                  >
+                    <span className="text-amber-600 mt-0.5 flex-shrink-0">
+                      ⚠
+                    </span>
+                    <span>{note}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-          <div className="space-y-3">
-            {AUDIT_DATA.bestPractices.security.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white/5 border border-white/10 rounded-3xl p-4 flex items-center gap-4 hover:bg-white/10 transition-colors"
-              >
-                <FaCheckCircle className="text-emerald-400 w-5 h-5 flex-shrink-0" />
-                <span className="text-sm text-gray-300">{item}</span>
-              </div>
-            ))}
-          </div>
-          {AUDIT_DATA.bestPractices.notes.length > 0 && (
-            <div className="mt-5 bg-yellow-500/5 border border-yellow-500/20 rounded-3xl p-5">
-              <div className="flex items-start gap-4">
-                <FaInfoCircle className="text-yellow-400 w-5 h-5 flex-shrink-0 mt-0.5" />
-                <div className="flex-1">
-                  <h4 className="text-yellow-400 font-medium mb-3">Notes</h4>
-                  <ul className="space-y-2">
-                    {AUDIT_DATA.bestPractices.notes.map((note, index) => (
-                      <li key={index} className="text-sm text-gray-300">
-                        {note}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          )}
         </CollapsibleSection>
 
-        {/* SEO Analysis */}
+        {/* SEO */}
         <CollapsibleSection
-          title="SEO Analysis"
+          title="SEO"
           isExpanded={expandedSections.seo}
           onToggle={() => toggleSection("seo")}
+          badge={`${AUDIT_DATA.seo.score}`}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-500/20 rounded-3xl p-5 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-3 mb-4">
-                <FaSearch className="text-yellow-400 w-6 h-6" />
-                <h3 className="text-white font-medium">SEO Score</h3>
-              </div>
-              <p className="text-4xl font-bold text-yellow-400 mb-2">
-                {AUDIT_DATA.seo.score}/100
+          <div className="grid grid-cols-3 gap-4 mb-5">
+            <div className="bg-white rounded-lg p-5">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-2">
+                Score
               </p>
-              <p className="text-sm text-gray-400">
-                {AUDIT_DATA.seo.passedAudits} audits passed
+              <p className="text-3xl font-bold text-accent">
+                {AUDIT_DATA.seo.score}
               </p>
             </div>
-            <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-3xl p-5 hover:scale-105 transition-transform">
-              <div className="flex items-center gap-3 mb-4">
-                <FaEye className="text-purple-400 w-6 h-6" />
-                <h3 className="text-white font-medium">Structured Data</h3>
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <FaCheckCircle className="text-emerald-400 w-5 h-5" />
-                <p className="text-sm text-gray-300">
-                  {AUDIT_DATA.seo.structuredData}
-                </p>
-              </div>
-              <p className="text-sm text-gray-400">
-                {AUDIT_DATA.seo.manualChecksRequired} manual check required
+            <div className="bg-white rounded-lg p-5">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-2">
+                Passed Audits
+              </p>
+              <p className="text-3xl font-bold text-emerald-600">
+                {AUDIT_DATA.seo.passedAudits}
               </p>
             </div>
+            <div className="bg-white rounded-lg p-5">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-2">
+                Structured Data
+              </p>
+              <p className="text-lg font-bold text-foreground">
+                {AUDIT_DATA.seo.structuredData}
+              </p>
+            </div>
+          </div>
+          <div className="bg-white rounded-lg p-5">
+            <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-3">
+              Manual Checks Required: {AUDIT_DATA.seo.manualChecksRequired}
+            </p>
+            <p className="text-sm text-muted-foreground font-light">
+              Review additional manual checks to ensure SEO optimization is
+              complete.
+            </p>
           </div>
         </CollapsibleSection>
 
         {/* Footer */}
-        <footer className="pt-8 pb-4 text-center">
-          <p className="text-xs text-gray-500">
-            Generated by Lighthouse v
-            {AUDIT_DATA.auditMeta.environment.lighthouseVersion} • Report Date:{" "}
-            {formatDate(AUDIT_DATA.auditMeta.capturedAt)}
+        <footer className="py-8 text-center">
+          <p className="text-xs sm:text-sm text-muted-foreground font-light">
+            Report generated using Lighthouse v
+            {AUDIT_DATA.auditMeta.environment.lighthouseVersion}
           </p>
         </footer>
       </main>
