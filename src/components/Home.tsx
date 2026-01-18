@@ -251,7 +251,7 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-1 hover:text-blue-600 transition-colors"
+      className="p-1 cursor-pointer hover:text-blue-600 transition-colors"
       title="Copy to clipboard"
     >
       {copied ? (

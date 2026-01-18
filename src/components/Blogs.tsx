@@ -180,32 +180,30 @@ const BlogItem: React.FC<BlogItemProps> = React.memo(
       if (!query || !query.trim()) return text;
       const regex = new RegExp(
         `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-        "gi"
+        "gi",
       );
       const parts = text.split(regex);
       return parts.map((part, i) =>
         regex.test(part) ? (
-          <mark key={i} className="bg-emerald-500/20 text-emerald-300 px-0.5">
+          <mark key={i} className="bg-emerald-500/20 text-black px-0.5">
             {part}
           </mark>
         ) : (
           part
-        )
+        ),
       );
     }, []);
 
     return (
-      <div className="border-b border-white/10 py-6 px-4 hover:bg-white/5 transition-all duration-300">
+      <div className=" py-6 px-4 hover:bg-white/5 transition-all border-b border-black duration-300">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
-            <h3 className="text-lg font-semibold text-white mb-2 leading-tight">
+            <h3 className="text-lg font-semibold text-black mb-2 leading-tight">
               {highlightText(post.title, searchQuery)}
             </h3>
-            <p className="text-sm text-gray-400 mb-3 line-clamp-2">
-              {post.brief}
-            </p>
-            <div className="flex items-center gap-3 text-sm text-gray-500 flex-wrap">
-              <span className="text-gray-400">
+            <p className="text-sm text-black mb-3 line-clamp-2">{post.brief}</p>
+            <div className="flex items-center gap-3 text-sm text-black flex-wrap">
+              <span className="text-black">
                 {highlightText(post.author.name, searchQuery)}
               </span>
               <span className="text-gray-700">•</span>
@@ -222,14 +220,14 @@ const BlogItem: React.FC<BlogItemProps> = React.memo(
             href={post.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-shrink-0 px-6 py-2.5 text-sm font-semibold text-white bg-blue-700 hover:bg-emerald-500 rounded-3xl transition-all duration-300"
+            className="flex-shrink-0 text-md font-semibold hover:font-bold cursor-pointer underline text-blue-700  transition-all duration-300"
           >
             Read More
           </a>
         </div>
       </div>
     );
-  }
+  },
 );
 
 BlogItem.displayName = "BlogItem";
@@ -276,19 +274,19 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     (filters.readTimeMin > 0 || filters.readTimeMax < 100 ? 1 : 0);
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-3xl p-6 mb-8">
+    <div className="bg-white/5 rounded-md p-6 mb-8">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-sm uppercase tracking-widest text-blue-500 font-semibold">
           Filters
           {activeFiltersCount > 0 && (
-            <span className="ml-3 inline-flex items-center justify-center w-7 h-7 text-sm font-bold text-white bg-white/10 rounded-3xl">
+            <span className="ml-3 inline-flex items-center justify-center w-7 h-7 text-sm font-bold text-black bg-white/10 rounded-md">
               {activeFiltersCount}
             </span>
           )}
         </h3>
         <button
           onClick={resetFilters}
-          className="text-sm text-emerald-400 hover:text-emerald-300 font-semibold transition-colors"
+          className="text-sm text-black hover:text-black font-semibold transition-colors"
         >
           Reset
         </button>
@@ -296,7 +294,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">
+          <label className="block text-sm font-medium text-black mb-2">
             Sort By
           </label>
           <select
@@ -305,7 +303,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             onChange={(e) =>
               setFilters({ ...filters, sortBy: e.target.value as SortOption })
             }
-            className="w-full bg-white/5 border border-white/10 rounded-3xl px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+            className="w-full bg-gray-100  rounded-md px-3 py-2.5 text-sm text-black"
           >
             {sortOptions.map((option) => (
               <option
@@ -320,7 +318,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">
+          <label className="block text-sm font-medium text-black mb-2">
             Read Time (minutes)
           </label>
           <div className="flex items-center gap-2">
@@ -336,9 +334,9 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   readTimeMin: parseInt(e.target.value) || 0,
                 })
               }
-              className="w-full bg-white/5 border border-white/10 rounded-3xl px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="w-full bg-white/5  rounded-md px-3 py-2.5 text-sm text-black focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
             />
-            <span className="text-sm text-gray-500">-</span>
+            <span className="text-sm text-black">-</span>
             <input
               title="Maximum Read Time"
               type="number"
@@ -351,25 +349,25 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   readTimeMax: parseInt(e.target.value) || 100,
                 })
               }
-              className="w-full bg-white/5 border border-white/10 rounded-3xl px-3 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+              className="w-full bg-white/5    rounded-md px-3 py-2.5 text-sm text-black focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-400 mb-2">
+          <label className="block text-sm font-medium text-black mb-2">
             Tags ({filters.tags.length} selected)
           </label>
-          <div className="max-h-32 overflow-y-auto border border-white/10 rounded-3xl p-2 bg-black/40">
+          <div className="max-h-32 overflow-y-auto  rounded-md p-2 bg-white">
             <div className="flex flex-wrap gap-1.5">
               {availableTags.map((tag) => (
                 <button
                   key={tag}
                   onClick={() => toggleTag(tag)}
-                  className={`px-5 py-2 text-sm font-medium rounded-3xl cursor-pointer transition-all duration-300 ${
+                  className={`px-2 py-1 text-xs font-medium rounded-md cursor-pointer transition-all duration-300 ${
                     filters.tags.includes(tag)
-                      ? "bg-green-500 font-bold text-black"
-                      : "bg-white/5  text-gray-400 hover:bg-white/10 "
+                      ? "bg-blue-200 font-bold text-black"
+                      : "bg-blue-50  text-black hover:bg-white/10 "
                   }`}
                 >
                   {tag}
@@ -404,19 +402,19 @@ const SearchBar: React.FC<SearchBarProps> = ({
           placeholder="Search articles..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          className="w-full px-5 py-3.5 bg-white/5 border border-white/10 rounded-3xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-white placeholder-gray-500"
+          className="w-full px-4 py-1.5 bg-gray-100 border-b-2 border-black outline-none rounded-t-md text-black placeholder-gray-500"
         />
         {searchInput && (
           <button
             onClick={() => setSearchInput("")}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 text-2xl font-light"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black hover:text-gray-300 text-2xl font-light"
           >
             ×
           </button>
         )}
       </div>
       {searchInput && (
-        <div className="mt-3 text-sm text-gray-400 font-medium">
+        <div className="mt-3 text-sm text-black font-medium">
           Showing {resultsCount} of {totalCount} articles
         </div>
       )}
@@ -427,7 +425,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 const BlogPageContent: React.FC = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchEngine, setSearchEngine] = useState<SimpleSearchEngine | null>(
-    null
+    null,
   );
   const [filters, setFilters] = useState<Filters>({
     tags: [],
@@ -472,7 +470,7 @@ const BlogPageContent: React.FC = () => {
 
     if (filters.tags.length > 0) {
       result = result.filter((post) =>
-        post.tags.some((tag) => filters.tags.includes(tag.name))
+        post.tags.some((tag) => filters.tags.includes(tag.name)),
       );
     }
 
@@ -509,17 +507,17 @@ const BlogPageContent: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-20 flex items-center justify-center p-4">
-        <div className="text-center max-w-md bg-white/5 border border-white/10 p-8 rounded-3xl">
-          <h2 className="text-xl font-bold text-white mb-3">
+      <div className="min-h-screen bg-white pt-20 flex items-center justify-center p-4">
+        <div className="text-center max-w-md bg-white  p-8 rounded-md">
+          <h2 className="text-xl font-bold text-black mb-3">
             Failed to Load Blog Posts
           </h2>
-          <p className="text-gray-400 text-sm mb-6">
+          <p className="text-black text-sm mb-6">
             {error instanceof Error ? error.message : "Unknown error occurred"}
           </p>
           <button
             onClick={() => refetch()}
-            className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-3xl transition-all duration-300"
+            className="px-8 py-3 bg-blue-500 hover:bg-blue-500 text-black font-semibold rounded-md transition-all duration-300"
           >
             Try Again
           </button>
@@ -529,15 +527,19 @@ const BlogPageContent: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-zinc-950 via-neutral-950 to-black">
+    <div className="min-h-screen pt-20 bg-white">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
-        <header className="mb-12 pb-12 border-b border-white/10">
-          <h1 className="text-4xl brand-glow md:text-5xl heading-font font-bold text-white mb-3 leading-tight tracking-tight">
-            Technical Blog
+        <header className="mb-12 pb-12 border-b border-black">
+          <h1 className="text-5xl  md:text-5xl heading-font font-bold text-black mb-3 leading-tight tracking-tight">
+            Blogs
           </h1>
-          <p className="text-gray-400 text-lg">
-            Articles on cloud computing, DevOps, security, and infrastructure
-            engineering
+          <p className="text-black text-lg">
+            Hi <span className="font-bold text-blue-800">@everyone</span> here i
+            am sharing my learning journey in cloud computing, DevOps, security,
+            and infrastructure engineering. I write about AWS services,
+            serverless and container-based systems, CI/CD basics, Terraform, and
+            AI-powered projects, focusing on understanding concepts through
+            hands-on practice, experiments, and real academic projects.
           </p>
         </header>
 
@@ -557,15 +559,15 @@ const BlogPageContent: React.FC = () => {
         <main>
           {isLoading ? (
             <div className="text-center py-20">
-              <div className="inline-block animate-spin rounded-3xl h-10 w-10 border-4 border-white/10 border-t-emerald-500 mb-4"></div>
-              <p className="text-gray-400 font-medium">Loading articles...</p>
+              <div className="inline-block animate-spin rounded-full h-10 w-10 border-4 border-black border-t-black mb-4"></div>
+              <p className="text-black font-medium">Loading articles...</p>
             </div>
           ) : filteredPosts.length === 0 ? (
-            <div className="text-center py-20 bg-white/5 border border-white/10 rounded-3xl p-8">
-              <h3 className="text-xl font-semibold text-white mb-3">
+            <div className="text-center py-20 bg-white/5  rounded-md p-8">
+              <h3 className="text-xl font-semibold text-black mb-3">
                 No articles found
               </h3>
-              <p className="text-gray-400 mb-6">
+              <p className="text-black mb-6">
                 Try adjusting your search or filters
               </p>
               <button
@@ -578,13 +580,13 @@ const BlogPageContent: React.FC = () => {
                     sortBy: "newest",
                   });
                 }}
-                className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-3xl transition-all duration-300"
+                className="px-8 py-3 bg-emerald-600 hover:bg-emerald-500 text-black font-semibold rounded-md transition-all duration-300"
               >
                 Clear Filters
               </button>
             </div>
           ) : (
-            <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden">
+            <div className="bg-white/5  rounded-md overflow-hidden">
               {filteredPosts.map((post) => (
                 <BlogItem key={post.id} post={post} searchQuery={searchInput} />
               ))}
