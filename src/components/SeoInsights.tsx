@@ -201,7 +201,7 @@ const ScoreCircle = ({ score, label }: { score: number; label: string }) => {
         <div className="absolute inset-0 flex items-center justify-center">
           <span
             className={`text-2xl sm:text-3xl md:text-4xl font-bold ${getColor(
-              score
+              score,
             )}`}
           >
             {score}
@@ -338,13 +338,13 @@ export default function SeoInsights() {
     AUDIT_DATA.insights.performanceImprovements.filter(
       (item) =>
         filters.priorityFilter === "all" ||
-        item.priority === filters.priorityFilter
+        item.priority === filters.priorityFilter,
     );
 
   const filteredDiagnostics = AUDIT_DATA.insights.diagnostics.filter(
     (item) =>
       filters.priorityFilter === "all" ||
-      item.priority === filters.priorityFilter
+      item.priority === filters.priorityFilter,
   );
 
   return (
@@ -424,7 +424,7 @@ export default function SeoInsights() {
                   AUDIT_DATA.scores.accessibility +
                   AUDIT_DATA.scores.bestPractices +
                   AUDIT_DATA.scores.seo) /
-                  4
+                  4,
               )}
             </p>
             <p className="text-xs text-gray-400 mt-1">Average Score</p>
@@ -449,7 +449,7 @@ export default function SeoInsights() {
             <p className="text-2xl font-bold text-white">
               {
                 AUDIT_DATA.insights.performanceImprovements.filter(
-                  (i) => i.priority === "high"
+                  (i) => i.priority === "high",
                 ).length
               }
             </p>
@@ -535,7 +535,7 @@ export default function SeoInsights() {
               <div
                 key={key}
                 className={`border rounded-3xl p-5 hover:scale-105 transition-transform ${getVitalStatusColor(
-                  vital.status
+                  vital.status,
                 )}`}
               >
                 <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">
@@ -575,7 +575,7 @@ export default function SeoInsights() {
                       <h3 className="text-white font-medium">{item.title}</h3>
                       <span
                         className={`px-2 py-1 text-xs rounded-3xl border ${getPriorityColor(
-                          item.priority
+                          item.priority,
                         )} uppercase tracking-wider whitespace-nowrap`}
                       >
                         {item.priority}
@@ -627,7 +627,7 @@ export default function SeoInsights() {
                       <h3 className="text-white font-medium">{item.issue}</h3>
                       <span
                         className={`px-2 py-1 text-xs rounded-3xl border ${getPriorityColor(
-                          item.priority
+                          item.priority,
                         )} uppercase tracking-wider whitespace-nowrap`}
                       >
                         {item.priority}
@@ -695,7 +695,7 @@ export default function SeoInsights() {
                     ))}
                   </ul>
                 </div>
-              )
+              ),
             )}
           </div>
         </CollapsibleSection>

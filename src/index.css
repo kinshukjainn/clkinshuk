@@ -17,7 +17,7 @@ body {
 .brand-glow {
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: #ffffff;
+  color: black;
   line-height: 1;
   white-space: nowrap;
 
@@ -29,7 +29,7 @@ body {
 }
 
 .brand-glow span {
-  color: #3b82f6;
+  color: blue;
 
   /* Stronger glow only on .in */
   text-shadow:

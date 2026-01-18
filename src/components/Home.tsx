@@ -34,7 +34,7 @@ import {
 } from "react-icons/fa";
 import { VscVscodeInsiders } from "react-icons/vsc";
 import { RiNextjsLine } from "react-icons/ri";
-import { RecommendedRoutes } from "./RecommendedRoutes";
+
 const CONFIG = {
   personal: {
     email: "kinshuk25jan04@gmail.com",
@@ -91,6 +91,7 @@ const CONFIG = {
     {
       title: "AWS Getting started with storage services",
       organization: "AWS",
+      icon: FaAws,
       status: "Completed",
       year: "2025 July",
       url: "https://www.credly.com/badges/a4406a81-77da-4003-b153-9e36582f7877/public_url",
@@ -99,8 +100,9 @@ const CONFIG = {
       skills: ["Amazon S3", "Amazon EBS", "Amazon EFS", "AWS Storage Gateway"],
     },
     {
-      title: "AWS Cloud Practioner Exam - CLF-02",
+      title: "AWS Cloud Practitioner Exam - CLF-02",
       organization: "AWS",
+      icon: FaAws,
       status: "Preparing",
       year: "2025",
       progress: "Re-Attempting",
@@ -111,6 +113,7 @@ const CONFIG = {
     {
       title: "AWS Serverless Badge",
       organization: "AWS",
+      icon: FaAws,
       status: "Completed",
       year: "2024",
       url: "https://www.credly.com/badges/0bcd1190-2d68-45ff-91d9-32b65aa93ed8/public_url",
@@ -126,6 +129,7 @@ const CONFIG = {
     {
       title: "AWS Machine Learning Badge",
       organization: "AWS",
+      icon: FaAws,
       status: "Completed",
       year: "2025",
       url: "https://www.credly.com/badges/a0042ec2-cc6e-4a99-84de-a1516ee5775a/public_url",
@@ -247,13 +251,13 @@ const CopyButton = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="p-3 bg-blue-700 cursor-pointer rounded-3xl transition-colors"
+      className="p-1 hover:text-blue-600 transition-colors"
       title="Copy to clipboard"
     >
       {copied ? (
-        <FaCheck className="w-4 h-4 text-white" />
+        <FaCheck className="w-4 h-4 text-green-600" />
       ) : (
-        <FaCopy className="w-4 h-4 text-white" />
+        <FaCopy className="w-4 h-4 text-gray-600" />
       )}
     </button>
   );
@@ -261,51 +265,77 @@ const CopyButton = ({ text }: { text: string }) => {
 
 export default function Home() {
   return (
-    <div className="min-h-screen  bg-gradient-to-br from-zinc-950 via-neutral-950 to-black pt-20">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
-        {/* Header */}
-        <header className="mb-20 pb-12 border-b border-white/10">
-          <RecommendedRoutes />
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 mb-8">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen pt-30 bg-white">
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        {/* Header Section */}
+        <header className="mb-8 pb-8 border-b border-gray-200">
+          <div className="flex gap-6 mb-6">
+            <div className="flex-shrink-0">
               <img
-                src={CONFIG.personal.photoUrl}
+                src={CONFIG.personal.photoUrl || "/placeholder.svg"}
                 alt="Kinshuk Jain"
-                className="w-full h-full object-cover"
+                className="w-32 h-32 rounded-full border-2 border-gray-300"
               />
             </div>
-            <h1 className="text-4xl heading-font sm:text-5xl font-bold tracking-tight text-white leading-tight">
-              Kinshuk Jain
-            </h1>
-          </div>
 
-          <div className="space-y-4 mb-8 text-gray-300 leading-relaxed">
-            {CONFIG.personal.bio.map((p, i) => (
-              <p key={i} className="text-base">
-                {p}
+            <div className="flex-1">
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                Kinshuk Jain
+              </h1>
+              <p className="text-lg text-gray-700 mb-4">
+                Student first. Builder always.
               </p>
-            ))}
+
+              {/* Social Media Icons Row */}
+              <div className="flex gap-3 mb-4">
+                {CONFIG.social.map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <a
+                      key={social.platform}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-7 h-7 flex items-center justify-center bg-gray-900 hover:bg-blue-600 text-white rounded-full transition-colors"
+                      title={social.handle}
+                    >
+                      <Icon className="w-3.5 h-3.5" />
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
+                <div className="flex items-center gap-1.5">
+                  <FaMapMarkerAlt className="w-4 h-4" />
+                  <span>{CONFIG.personal.location}</span>
+                </div>
+                <span className="text-gray-400">•</span>
+                <div className="flex items-center gap-1.5 text-green-600">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>Available for opportunities</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm  text-gray-100">
-            <div className="flex bg-neutral-800 p-2  rounded-full items-center gap-2">
-              <FaMapMarkerAlt className="w-3.5 h-3.5" />
-              <span>{CONFIG.personal.location}</span>
-            </div>
-            <span className="hidden sm:inline text-gray-100 font-bold ">/</span>
-            <span className="text-emerald-400 font-medium">
-              Available for opportunities
-            </span>
+          <div className="text-base text-gray-700 leading-relaxed space-y-3 max-w-2xl">
+            <p>
+              I am currently pursuing my Bachelor's in Electrical Engineering
+              learning how systems work, how they fail, and how they evolve.
+              Alongside that, I am exploring the cloud, building small things
+              that might someday scale, experimenting with infrastructure, and
+              understanding how technology connects people.
+            </p>
           </div>
         </header>
 
         {/* Contact Links */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Contact
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {CONFIG.social.map((social) => {
               const Icon = social.icon;
               return (
@@ -314,9 +344,9 @@ export default function Home() {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm hover:text-white text-gray-200 transition-colors group bg-white/5 hover:bg-white/10 rounded-3xl p-3 border border-white/10"
+                  className="flex items-center gap-2 p-3 text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors border-b-2 border-transparent hover:border-blue-600"
                 >
-                  <Icon className="w-4 h-4 flex-shrink-0" />
+                  <Icon className="w-4 h-4" />
                   <span>{social.platform}</span>
                 </a>
               );
@@ -325,19 +355,21 @@ export default function Home() {
         </section>
 
         {/* Resume Download */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Resume
           </h2>
-          <div className="flex items-center justify-between bg-white/5 border border-white/10 rounded-3xl p-5">
+          <div className="flex items-center justify-between p-4 border-b-2 border-gray-200">
             <div>
-              <h3 className="font-medium text-white mb-1">My Resume</h3>
-              <p className="text-sm text-gray-400">PDF Format</p>
+              <h3 className="font-semibold text-gray-900 text-base">
+                My Resume
+              </h3>
+              <p className="text-sm text-gray-600">PDF Format</p>
             </div>
             <a
               href="/kinshukfinalresume.pdf"
               download="kinshukfinalresume.pdf"
-              className="flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
             >
               <FaFileDownload className="w-4 h-4" />
               Download
@@ -346,113 +378,109 @@ export default function Home() {
         </section>
 
         {/* Publications/Blog */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Publications
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6">
-            <div className="flex items-start justify-between">
-              <div>
-                <h3 className="font-medium text-white mb-2">Technical Blog</h3>
-                <p className="text-sm text-gray-400 mb-4">
-                  Research notes, security findings, and technical deep-dives on
-                  cloud infrastructure and systems architecture.
-                </p>
-                <a
-                  href="https://blog.cloudkinshuk.in/newsletter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="premium-cta"
-                >
-                  <span>Subscribe to Newsletter</span>
-                  <FaExternalLinkAlt />
-                </a>
-              </div>
-            </div>
+          <div className="p-4 border-b-2 border-gray-200">
+            <h3 className="font-semibold text-gray-900 text-base mb-2">
+              Technical Blog
+            </h3>
+            <p className="text-base text-gray-700 mb-4 leading-relaxed">
+              Research notes, security findings, and technical deep-dives on
+              cloud infrastructure and systems architecture.
+            </p>
+            <a
+              href="https://blog.cloudkinshuk.in/newsletter"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+            >
+              Subscribe to Newsletter
+              <FaExternalLinkAlt className="w-3.5 h-3.5" />
+            </a>
           </div>
         </section>
 
         {/* Experience */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Experience
           </h2>
-          <div className="space-y-8">
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-6">
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
-                <h3 className="font-semibold text-white text-lg">UPPTCL</h3>
-                <span className="text-sm text-gray-400">
-                  July 2025 - Aug 2025
-                </span>
-              </div>
-              <p className="text-sm text-gray-400 mb-4">
-                Uttar Pradesh Power Transmission Corporation Limited
+          <div className="p-4 border-b-2 border-gray-200">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
+              <h3 className="font-bold text-gray-900 text-lg">UPPTCL</h3>
+              <span className="text-sm text-gray-600">
+                July 2025 - Aug 2025
+              </span>
+            </div>
+            <p className="text-base text-gray-700 mb-4 font-semibold">
+              Uttar Pradesh Power Transmission Corporation Limited
+            </p>
+            <div className="space-y-3 text-base text-gray-700 leading-relaxed">
+              <p>
+                Worked with the transmission division to understand the
+                operation, protection, and maintenance of 132kV and 220kV
+                substations. Studied working principles of power transformers,
+                circuit breakers, busbars, and protection relays.
               </p>
-              <div className="space-y-3 text-sm text-gray-300 leading-relaxed">
-                <p>
-                  Worked with the transmission division to understand the
-                  operation, protection, and maintenance of 132kV and 220kV
-                  substations. Studied working principles of power transformers,
-                  circuit breakers, busbars, and protection relays.
-                </p>
-                <p>
-                  Observed real-time SCADA dashboards for grid monitoring, load
-                  management, and outage reporting. Assisted engineers during
-                  shutdown procedures, equipment inspections, and testing of
-                  CTs, PTs, and relays.
-                </p>
-                <p>
-                  Prepared technical documentation and maintained logs on
-                  equipment performance and safety checks. Improved technical
-                  workflows by creating well-organized digital reports using
-                  cloud and web tools.
-                </p>
-              </div>
+              <p>
+                Observed real-time SCADA dashboards for grid monitoring, load
+                management, and outage reporting. Assisted engineers during
+                shutdown procedures, equipment inspections, and testing of CTs,
+                PTs, and relays.
+              </p>
+              <p>
+                Prepared technical documentation and maintained logs on
+                equipment performance and safety checks. Improved technical
+                workflows by creating well-organized digital reports using cloud
+                and web tools.
+              </p>
             </div>
           </div>
         </section>
 
         {/* Projects */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Selected Projects
           </h2>
           <div className="space-y-6">
             {CONFIG.projects.map((project) => (
               <div
                 key={project.title}
-                className="bg-white/5 border border-white/10 rounded-3xl p-6"
+                className="p-4 border-b-2 border-gray-200"
               >
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
-                  <h3 className="font-semibold text-white text-lg">
+                  <h3 className="font-bold text-gray-900 text-lg">
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-3 text-sm text-gray-400">
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
                     <span>{project.type}</span>
                     <span>•</span>
                     <span>{project.year}</span>
                   </div>
                 </div>
 
-                <div className="space-y-3 mb-4 text-sm text-gray-300 leading-relaxed">
+                <div className="space-y-3 mb-4 text-base text-gray-700 leading-relaxed">
                   {project.description.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
                 </div>
 
                 <div className="mb-4">
-                  <span className="text-md font-semibold text-blue-200 tracking-wider">
+                  <span className="text-sm font-semibold text-gray-600 uppercase">
                     Technologies:{" "}
                   </span>
-                  <span className="text-sm   text-gray-400">
+                  <span className="text-base text-gray-700">
                     {project.technologies.join(", ")}
                   </span>
                 </div>
 
                 {project.dockerCommand !== "Image is not available" && (
-                  <div className="bg-black/40 border border-white/10 rounded-3xl p-4 mb-4 font-mono text-sm">
-                    <div className="flex items-center justify-between gap-4">
-                      <code className="text-emerald-400 break-all">
+                  <div className="bg-gray-50 rounded p-3 mb-4 font-mono text-sm border border-gray-200">
+                    <div className="flex items-center justify-between gap-2">
+                      <code className="text-gray-800 break-all">
                         {project.dockerCommand}
                       </code>
                       <CopyButton text={project.dockerCommand} />
@@ -460,15 +488,15 @@ export default function Home() {
                   </div>
                 )}
 
-                <div className="flex flex-wrap gap-4 text-sm">
+                <div className="flex flex-wrap gap-4">
                   {project.links.live && (
                     <a
                       href={project.links.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3 py-2 text-black bg-[#ff9100] rounded-3xl text-md transition-colors font-medium"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
                     >
-                      View Project <FaExternalLinkAlt className="w-3 h-3" />
+                      View Project <FaExternalLinkAlt className="w-4 h-4" />
                     </a>
                   )}
                   {project.links.repo && (
@@ -476,9 +504,9 @@ export default function Home() {
                       href={project.links.repo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-2 py-2 text-white bg-black  rounded-3xl text-md transition-colors font-medium"
+                      className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
                     >
-                      <FaGithub className="w-3.5 h-3.5" /> Source Code
+                      <FaGithub className="w-4 h-4" /> Source Code
                     </a>
                   )}
                 </div>
@@ -488,30 +516,25 @@ export default function Home() {
         </section>
 
         {/* Technical Skills */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Technical Proficiencies
           </h2>
-          <div className="space-y-6">
+          <div className="space-y-5">
             {Object.entries(CONFIG.skills).map(([category, skills]) => (
-              <div
-                key={category}
-                className="bg-white/5 border border-white/10 rounded-3xl p-6"
-              >
-                <h3 className="text-sm font-semibold text-white mb-4">
+              <div key={category} className="p-4 border-b-2 border-gray-200">
+                <h3 className="text-sm font-bold text-gray-700 mb-3 uppercase tracking-wide">
                   {category}
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-3">
                   {skills.map((skill) => {
                     const Icon = skill.icon;
                     return (
                       <span
                         key={skill.name}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-3xl text-sm text-gray-100"
+                        className="inline-flex items-center gap-2 px-3 py-2 text-sm text-gray-700 font-medium"
                       >
-                        <div className="flex items-center justify-center p-2 bg-white/10 rounded-3xl">
-                          <Icon className="w-5 h-5" />
-                        </div>
+                        <Icon className="w-4 h-4 text-gray-600" />
                         {skill.name}
                       </span>
                     );
@@ -523,31 +546,33 @@ export default function Home() {
         </section>
 
         {/* Certifications */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Certifications
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-5">
             {CONFIG.certifications.map((cert) => (
-              <div
-                key={cert.title}
-                className="bg-white/5 border border-white/10 rounded-3xl p-6"
-              >
+              <div key={cert.title} className="p-4 border-b-2 border-gray-200">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                  <h3 className="font-semibold text-white">{cert.title}</h3>
-                  <span className="text-sm text-gray-400">{cert.year}</span>
+                  <h3 className="font-bold text-gray-900 text-base">
+                    {cert.title}
+                  </h3>
+                  <span className="text-sm text-gray-600">{cert.year}</span>
                 </div>
-                <p className="text-sm text-gray-400 mb-2">
-                  {cert.organization}
-                </p>
-                <p className="text-sm text-gray-300 mb-3 leading-relaxed">
+                <div className="inline-flex items-center gap-2 px-2 py-1 text-sm mb-3">
+                  {cert.icon && <cert.icon className="w-4 h-4 text-gray-700" />}
+                  <span className="font-semibold text-gray-800">
+                    {cert.organization}
+                  </span>
+                </div>
+                <p className="text-base text-gray-700 mb-3 leading-relaxed">
                   {cert.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-3">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {cert.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2 py-1 bg-white/5 border border-white/10 rounded-3xl text-md text-gray-400"
+                      className="px-3 py-1 text-sm text-gray-700 font-medium"
                     >
                       {skill}
                     </span>
@@ -558,9 +583,9 @@ export default function Home() {
                     href={cert.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 text-white bg-blue-700  rounded-3xl text-md transition-colors font-medium"
+                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors"
                   >
-                    View Credential <FaExternalLinkAlt className="w-3 h-3" />
+                    View Credential <FaExternalLinkAlt className="w-4 h-4" />
                   </a>
                 )}
               </div>
@@ -569,50 +594,50 @@ export default function Home() {
         </section>
 
         {/* Education */}
-        <section className="mb-20 pb-12 border-b border-white/10">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             Education
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6">
-            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-              <h3 className="font-semibold text-white text-lg">
+          <div className="p-4 border-b-2 border-gray-200">
+            <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-3">
+              <h3 className="font-bold text-gray-900 text-base">
                 {CONFIG.education.degree}
               </h3>
-              <span className="text-sm text-gray-400">
+              <span className="text-sm text-gray-600">
                 {CONFIG.education.period}
               </span>
             </div>
-            <p className="text-sm text-gray-400 mb-2">
+            <p className="text-base font-semibold text-gray-800 mb-1">
               {CONFIG.education.field}
             </p>
-            <p className="text-sm text-gray-400 mb-3">
+            <p className="text-base text-gray-700 mb-3">
               {CONFIG.education.institution}, {CONFIG.education.location}
             </p>
-            <p className="text-sm text-gray-300 leading-relaxed">
+            <p className="text-base text-gray-700 leading-relaxed">
               {CONFIG.education.description}
             </p>
           </div>
         </section>
 
         {/* CLI Tool */}
-        <section className="mb-20">
-          <h2 className="text-md uppercase tracking-widest text-blue-500 mb-6 font-semibold">
+        <section className="mb-8">
+          <h2 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-4">
             CLI Tool
           </h2>
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6">
-            <p className="text-sm text-gray-300 mb-4">
+          <div className="bg-gray-900 p-4 border border-gray-700">
+            <p className="text-base text-gray-300 mb-4">
               Interactive command-line portfolio viewer built with Node.js
             </p>
-            <div className="space-y-3 font-mono text-sm">
-              <div className="bg-black/40 border border-white/10 rounded-3xl p-3">
-                <span className="text-emerald-400">$</span>{" "}
-                <span className="text-gray-300">
+            <div className="space-y-2 font-mono text-sm">
+              <div className="bg-gray-800 p-2">
+                <span className="text-green-400">$</span>{" "}
+                <span className="text-gray-200">
                   npm install -g hackkinshuk
                 </span>
               </div>
-              <div className="bg-black/40 border border-white/10 rounded-3xl p-3">
-                <span className="text-emerald-400">$</span>{" "}
-                <span className="text-gray-300">cloudkinshuk</span>
+              <div className="bg-gray-800 p-2">
+                <span className="text-green-400">$</span>{" "}
+                <span className="text-gray-200">cloudkinshuk</span>
               </div>
             </div>
           </div>
